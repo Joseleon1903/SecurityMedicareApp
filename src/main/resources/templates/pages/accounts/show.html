@@ -1,0 +1,435 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+      xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+    <link th:href="@{/css/styles_A.css}" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <title>Getting Started: Serving Web Content</title> 
+</head>
+<body>
+<div id="app">
+
+    <div class="banner" style="margin: 0.3em;" >
+        <img th:src="@{/img/afdigital20.png}" style="border-radius: 10% 10% 5% 5% / 5% 5% 5% 5% ; border: solid 2px black;">
+    </div>
+
+    <div class="grids-unit-details pure-u-1" style="margin: 0.5em;">
+        <div class="pure-g">
+            <div class="grids-unit-bar pure-u-5-5" id="filter-row">
+
+                <div class="pure-form" id="vertical-filter">
+                    <fieldset class="inline-form">
+                        <input type="number" name="cedula" v-model="cedula" placeholder="Cedula" />
+                        <input type="number" name="nss" v-model="nss" placeholder="NSS" />
+                        <input type="text" name="key" v-model="key" placeholder="Palabra Clave" />
+                        <label for="stacked-state" style="color: white;"> Genero</label>
+                        <select id="stacked-state" v-model="genero">
+                            <option>Todos</option>
+                            <option>Masculino</option>
+                            <option >Femenino</option>
+                        </select>
+                        <button class="pure-button pure-button-primary" v-on:click="getUsuariosRequestFilters">Aplicar</button>
+                        <p class="counter">total registros: {{rowCounter}}</p>
+
+                    </fieldset>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="pure-g" >
+
+        <div class="pure-u-1-3" th:each="userBean : ${usuarioListBean}" >
+
+            <div class="pricing-tables pure-g" >
+                <div class="pure-u-1 pure-u-md-1-3" >
+                    <div class="pricing-table pricing-table-free" style="padding: 0px; border:solid 2px;  box-shadow: 5px 5px #21242a87;">
+
+                        <div class="pricing-table-header">
+                            <h2 th:text="${userBean.codigo}">cod.</h2>
+                            </br>
+                            <h4 th:text="${userBean.posicion}">pos.</h4>
+                            </br>
+                            <center><img id="tv" class="img-pure" th:src="@{${userBean.getUrlLogo()}}" style="height: 5em; width: 15em"></center>
+                            <h1>Información Personal</h1>
+                            </br>
+                        </div>
+
+                        <ul class="pricing-table-list">
+                           <li>
+                                <div class="pure-u-2-5">
+                                    <div class="l-box">
+                                        <h4 class="information-head" >Correo Corporativo</h4>
+                                    </div>
+                                </div>
+                                <div class="pure-u-2-5">
+
+                                    <p th:text="${userBean.correoCorporativo}">user.correoCorporativo</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="pure-u-2-5">
+                                    <div class="l-box">
+                                        <h4 class="information-head">Cedula</h4>
+                                    </div>
+                                </div>
+                                <div class="pure-u-2-5">
+                                    <div class="l-box">
+                                        <span th:text="${userBean.cedula}"></span>
+                                    </div>
+                                </div>
+                            </li>
+                          <li>
+                                <div class="pure-u-2-5">
+                                    <div class="l-box">
+                                        <h4 class="information-head">NSS</h4>
+                                    </div>
+                                </div>
+                                <div class="pure-u-2-5">
+                                    <div class="l-box">
+                                        <span th:text="${userBean.nss}">user.nss</span>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li>
+                                <div class="pure-u-2-5">
+                                    <div class="l-box">
+                                        <h4 class="information-head">Nombre</h4>
+                                    </div>
+                                </div>
+                                <div class="pure-u-2-5">
+                                    <div class="l-box">
+                                        <span th:text="${userBean.nombre}" >user.nombre</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="pure-u-2-5">
+                                    <div class="l-box">
+                                        <h4 class="information-head">Apellidos</h4>
+                                    </div>
+                                </div>
+                                <div class="pure-u-2-5">
+                                    <div class="l-box">
+                                        <span th:text="${userBean.primerApellido}" ></span>
+                                        <span th:text="${userBean.segundoApellido}"></span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="pure-u-2-5">
+                                    <div class="l-box">
+                                        <h4 class="information-head">Fecha Nacimiento</h4>
+                                    </div>
+                                </div>
+                                <div class="pure-u-2-5">
+                                    <div class="l-box">
+                                        <span th:text="${#calendars.format(user?.fechaNacimiento,'dd MMMM yyyy')}">user.fechaNacimiento</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="pure-u-2-5">
+                                    <div class="l-box">
+                                        <h4 class="information-head">Genero</h4>
+                                    </div>
+                                </div>
+                                <div class="pure-u-2-5">
+                                    <div class="l-box">
+                                        <span th:text="${userBean.genero}" >user.genero</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="pure-u-2-5">
+                                    <div class="l-box">
+                                        <h4 class="information-head">Nacionalidad</h4>
+                                    </div>
+                                </div>
+                                <div class="pure-u-2-5">
+                                    <div class="l-box">
+                                        <span th:text="${userBean.nacionalidad}">user.descripcion</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <button class="button-choose pure-button" >Done</button>
+                                <div class="footer l-box" style="margin-bottom:0px;">
+                                    <p>
+                                        © 2021 UNIPAGO, S.A. - Todos los derechos reservados.
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="page-footer l-box">
+        <p>
+            for 14 days. No credit card required. Header image courtesy.
+        </p>
+    </div>
+</div>
+<script th:inline="javascript">
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    usuariosInfo:[ {
+      codigo: "ABRODRIGUEZ",posicion: "Auxiliar", correoCorporativo: "arodriguez@arssenasa.gob.do",cedula: "06100235214",nss: "47946820",
+      nombre: "ABRAHAM MELQUISEDEC",
+      primerApellido: "RODRIGUEZ",
+      segundoApellido: "ROSARIO",
+      fechaNacimiento: "19-SEP-83",
+      genero: "M",
+      descripcion: "DOMINICANA"
+      },
+      {
+      codigo: "ADGOMERA",
+      posicion: "Asistente Administrativa",
+      correoCorporativo: "agomera@dida.gov.do",
+      cedula: "00103756607",
+      nss: "8772072",
+      nombre: "ADELAIDA DE LA ALTAGRACIA",
+      primerApellido: "GOMERA",
+      segundoApellido: "LEGER",
+      fechaNacimiento: "24-JAN-67",
+      genero: "F",
+      descripcion: "DOMINICANA",
+      },
+      {
+      codigo: "ADNINA",
+      posicion: "Analista Programador",
+      correoCorporativo: "a.nina@arsyunen.com",
+      cedula: "00118956218",
+      nss: "82661870",
+      nombre: "ADRIAN NORMAN",
+      primerApellido: "NINA",
+      segundoApellido: "WRIGHT",
+      fechaNacimiento: "17-JUL-85",
+      genero: "M",
+      descripcion: "DOMINICANA",
+      }
+      ],
+      cedula: '',
+      nss: '',
+      genero: '',
+      key: '',
+      rowCounter: 0
+  },
+   created: function () {
+    // `this` points to the vm instance
+    console.log('a is: ' + this.messageTitle);
+    this.getUsuariosRequest();
+  },
+  methods: {
+    async getUsuariosRequest () {
+
+     const response = await fetch("http://localhost:8080/xml/users");
+     const data = await response.json();
+     console.log(data);
+     this.usuariosInfo = data;
+     this.rowCounter = data.length;
+   },
+   async getUsuariosRequestFilters(){
+     console.log("entering in method getUsuariosRequestFilters");
+     var params = "";
+     if(this.cedula){
+      console.log("param : cedula "+ this.cedula);
+      params = params +"?cedula="+this.cedula;
+     }
+     if(this.nss){
+      console.log("param : nss "+ this.nss);
+      params = params +"?nss="+this.nss;
+     }
+     if(this.key){
+      console.log("param : key "+ this.key);
+      params = params +"?key="+this.key;
+     }
+     if(this.genero){
+      console.log("param : genero "+ this.genero);
+      if(this.genero == 'Masculino' ){
+            params = params +"?genero=M";
+      }else if (this.genero == 'Femenino' ){
+        params = params +"?genero=F";
+      }
+     }
+     var url = "http://localhost:8080/xml/users/filters"+ params;
+     console.log("URL : "+ url);
+     const response = await fetch(url);
+     const data = await response.json();
+     console.log(data);
+     this.usuariosInfo = data;
+     this.rowCounter = data.length;
+   },
+   logoInformationChooser(correo){
+
+       if(correo.includes("arssenasa")){
+         return 'img/logo_ars-senasa.png';
+       }
+
+       if(correo.includes('arsyunen')){
+         return 'img/logos-png-ars-yunen.png';
+       }
+
+       if(correo.includes('scotiabank')){
+         return 'img/logo_scotiaBank.png';
+       }
+
+       if(correo.includes('dida')){
+         return 'img/dida_insituticona.png';
+       }
+
+       if(correo.includes('sisalril')){
+         return 'img/sisalril_logo.jpg';
+       }
+
+       if(correo.includes('humano')){
+         return 'img/ars_humano.png';
+       }
+
+       if(correo.includes('afppopular')){
+         return 'img/afp_popular.png';
+       }
+
+       if(correo.includes('SIPEN')){
+         return 'img/Sipen_logo.png';
+       }
+       if(correo.includes('sipen')){
+         return 'img/Sipen_logo.png';
+       }
+
+       if(correo.includes('bancocaribe')){
+         return 'img/bancoCaribe_logo.png';
+       }
+
+       if(correo.includes('arsasemap')){
+         return 'img/ars_asemap.png';
+       }
+
+       if(correo.includes('afpatlantico')){
+         return 'img/afp-atlantico.png';
+       }
+
+       if(correo.includes('arssaludsegura')){
+         return 'img/ars_saludsegura.png';
+       }
+
+       if(correo.includes('aps')){
+         return 'img/aps-logo.png';
+       }
+
+       if(correo.includes('unipago') || correo.includes('UNIPAGO')){
+         return 'img/unipago_logo.png';
+       }
+
+       if(correo.includes('tss')){
+         return 'img/tss_logo.png';
+       }
+
+       if(correo.includes('afpsiembra')){
+         return 'img/AFP-Siembra.png';
+       }
+
+       if(correo.includes('arsgma')){
+         return 'img/arsGma.png';
+       }
+
+       if(correo.includes('universal')){
+         return 'img/ars-universal.png';
+       }
+
+       if(correo.includes('afpreservas')){
+         return 'img/AFP-Reservas.png';
+       }
+
+       if(correo.includes('afpcrecer')){
+         return 'img/afp-Crecer.png';
+       }
+
+       if(correo.includes('bancentral')){
+         return 'img/banco-central.jpg';
+       }
+
+       if(correo.includes('arsfuturo')){
+         return 'img/ars_futuro.png';
+       }
+
+       if(correo.includes('inabima')){
+         return 'img/Logo_Lema_inabima.png';
+       }
+
+       if(correo.includes('arsreservas')){
+         return 'img/ars_reserva.png';
+       }
+
+       if(correo.includes('arspalic')){
+         return 'img/Logo-ARS-Palic.png';
+       }
+
+       if(correo.includes('arssemma')){
+         return 'img/ars_semma.png';
+       }
+
+       if(correo.includes('jmmb')){
+         return 'img/jmmb_logo.jpg';
+       }
+
+       if(correo.includes('arssimag')){
+         return 'img/ars_png';
+       }
+
+       if(correo.includes('hacienda')){
+         return 'img/hacienda_gov.jpg';
+       }
+
+       if(correo.includes('arsmetasalud')){
+         return 'img/ars_metasalud_logo.png';
+       }
+
+       if(correo.includes('arsrenacer')){
+         return 'img/ARS-Renacer.png';
+       }
+
+       if(correo.includes('arscmd')){
+         return 'img/ARS-CMD.png';
+       }
+
+       if(correo.includes('banesco')){
+         return 'img/logo-banco-banesco.jpg';
+       }
+
+       if(correo.includes('bhdleon')){
+         return 'img/bhdLeon_logo.png';
+       }
+
+       if(correo.includes('vimenca')){
+         return 'img/banco_vimenca_logo.png';
+       }
+       return 'img/slider_pc_A.png';
+   }
+
+  }
+
+
+})
+</script>
+</body>
+</html>
