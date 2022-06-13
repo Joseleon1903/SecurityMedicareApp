@@ -1,0 +1,62 @@
+body{
+ background-color: #c3dbe687;
+}
+
+div .row{
+    text-align: center;
+    padding: 0.5em;
+}
+
+#tv {
+  position: relative;
+  width: 350px;
+  height: 550px;
+  background: white;
+  border-radius: 0% 0% 0% 0% / 0% 0% 0% 0% ;
+  color: white;
+  box-shadow: 20px 20px rgba(0,0,0,.15);
+  transition: all .4s ease;
+}
+
+#tv:hover {
+  border-radius: 0% 0% 50% 50% / 0% 0% 5% 5% ;
+  box-shadow: 10px 10px rgba(0,0,0,.25);
+}
+
+.inline-form {
+ height:100%
+}
+
+.inline-form input, label , select, button {
+   margin-left: 1.0em;
+}
+
+.inline-form label {
+   margin-left: 1.0em;
+}
+
+.inline-form button  {
+ width: 10em;
+ border-radius: 0% 0% 50% 50% / 0% 0% 5% 5% ;
+ background-color: #21242A;
+}
+
+#filter-row{
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #83A5C2;
+    height: 3.5em;
+}
+
+#vertical-filter{
+    position: relative;
+    top: 60%;
+    transform: translateY(-50%);
+}
+.counter {
+    float: right;
+    margin-top: 0px;
+    margin-right: 1em;
+    color: white;
+    text-weight: bold;
+}

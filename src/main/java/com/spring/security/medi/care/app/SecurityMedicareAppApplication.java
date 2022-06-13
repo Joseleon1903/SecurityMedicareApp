@@ -1,4 +1,4 @@
-package com.spring.security.medi.care.SecurityMedicareApp;
+package com.spring.security.medi.care.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

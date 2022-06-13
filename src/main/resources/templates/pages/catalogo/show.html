@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+      xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+
+    <link th:href="@{/css/pure-min.css}" rel="stylesheet">
+    <link th:href="@{/css/grids-responsive-min.css}" rel="stylesheet">
+    <link th:href="@{/css/layouts-blog-styles.css}" rel="stylesheet">
+
+    <link th:href="@{/css/styles_A.css}" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <title>Usuario: Serving Web Content</title>
+
+    <style>
+        .material-symbols-rounded {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 500,
+          'GRAD' 0,
+          'opsz' 48
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-6">
+        <div class="header">
+            <h1 class="brand-title">Soporte Técnico. UNIPAGO S. A.</h1>
+            <h2 class="brand-tagline">This system is intended only for the person or entity authorized.</h2>
+
+            <nav class="nav">
+                <ul class="nav-list">
+
+                    <li class="nav-item">
+                        <a class="pure-button" th:href="@{/usuario}" >Account Page</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="pure-button" th:href="@{/entidad}" >Entidad</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="pure-button" th:href="@{/afi_titular}" >Afiliacion Titular</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="pure-button" th:href="@{/afi_dependiente}" >Afiliacion Dependientes</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="pure-button" th:href="@{/catalogo}" >Catalogos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="pure-button" th:href="@{/gestion/usuario}" >Gestion Usuario</a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            <!-- A wrapper for all the blog posts -->
+            <div class="posts">
+                <h1 th:text="${SystemInfoBean.pageName}" class="content-subhead">Usuario </h1>
+                <h1 th:text="${#dates.format(SystemInfoBean.sysDate,'dd MMMM yyyy')}" class="content-subhead">Fecha </h1>
+
+                <!-- A single blog post -->
+                <section class="post">
+                    <header class="post-header">
+                        <img alt="Unipago" class="post-avatar" th:src="@{/img/unipago_logo.png}" width="48" height="48">
+
+                        <div>
+
+                            <form method="post" class="pure-form" action="#" th:action="@{/parentesco/filter}" th:object="${parentescoFilterBean}">
+                                <fieldset>
+
+                                    <select id="tipoDependiente" th:field="*{tipoDependiente}" th:value="${parentescoFilterBean.tipoDependiente}">
+                                        <option value="T">Todos</option>
+                                        <option value="D">Directo</option>
+                                        <option value="A">Adiccional</option>
+                                    </select>
+
+                                    <select id="estado" th:field="*{genero}" th:value="${parentescoFilterBean.genero}">
+                                        <option value="T" >Todos</option>
+                                        <option value="M" >Hombre</option>
+                                        <option value="F" >Mujer</option>
+                                    </select>
+
+                                    <button type="submit" class="pure-button pure-button-primary" >Buscar </button>
+
+                                    <select id="rowCountParentesco" th:field="*{rowCounter}" th:value="${parentescoFilterBean.rowCounter}" style="float: right;">
+                                        <option value="5" >DEFAULT</option>
+                                        <option value="25" >25</option>
+                                        <option value="50" >50</option>
+                                        <option value="500" >500</option>
+                                    </select>
+
+                                </fieldset>
+                            </form>
+
+                        </div>
+
+                    </header>
+
+                    <div class="post-description">
+                        <table class="pure-table"  style="height">
+                            <thead>
+                            <tr>
+                                <th><span class="material-symbols-rounded">workspace_premium</span></th>
+                                <th>PARENTESCO ID</th>
+                                <th>DESCRIPCION</th>
+                                <th>TIPO DEPENDIENTE</th>
+                                <th>GENERO</th>
+                                <th>GRADO CONSANGUINIDAD</th>
+                                <th>ESTADO</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr  th:each="pare : ${listadoParentescoBean}" th:if="${not #lists.isEmpty(listadoParentescoBean)}">
+                                <td><span class="material-symbols-rounded">diversity_2</span></td>
+                                <td th:text="${pare.parentescoId}"> 1 </td>
+                                <td th:text="${pare.descripcionParentesco}"> 1 </td>
+                                <td th:text="${pare.tipoDependiente}"> D </td>
+                                <td th:text="${pare.genero}"> M </td>
+                                <td th:text="${pare.gradoConsanguinidad}"> 1 </td>
+                                <td th:text="${pare.estado}"> 1 </td>
+                            </tr>
+
+                            <tr th:if="${#lists.isEmpty(listadoParentescoBean)}" >
+                                <td colspan="4">
+                                    <h1> <span class="material-symbols-rounded">report_off</span>
+                                        No existe registros con los criterios proporcionados
+                                    </h1>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="post">
+
+                    <header class="post-header">
+
+                        <div>
+
+                            <form method="post" class="pure-form" action="#" th:action="@{/motivo/filter}" th:object="${motivoFilterBean}">
+                                <fieldset>
+
+                                    <input type="text" th:field="*{motivoId}" th:value="${motivoFilterBean.motivoId}" placeholder="motivo Id" />
+
+                                    <input type="text" th:field="*{descripcion}" th:value="${motivoFilterBean.descripcion}" placeholder="Descripcion" />
+
+                                    <button type="submit" class="pure-button pure-button-primary" >Buscar </button>
+
+                                    <select id="rowCountMotivoEstado" th:field="*{rowCounter}" th:value="${motivoFilterBean.rowCounter}" style="float: right;">
+                                        <option value="5">DEFAULT</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="500">500</option>
+                                    </select>
+                                </fieldset>
+                            </form>
+
+                        </div>
+
+                    </header>
+
+                    <div class="post-description">
+                        <table class="pure-table"  style="height">
+                            <thead>
+                            <tr>
+                                <th><span class="material-symbols-rounded">workspace_premium</span></th>
+                                <th>MOTIVO ID</th>
+                                <th>DESCRIPCION</th>
+                                <th>ESTADO</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr  th:each="motivo : ${listadoMotivosBean}" th:if="${not #lists.isEmpty(listadoMotivosBean)}">
+                                <td><span class="material-symbols-rounded">receipt_long</span></td>
+                                <td th:text="${motivo.motivoId}"> 1 </td>
+                                <td th:text="${motivo.descripcion}"> lorem ipsu example </td>
+                                <td th:text="${motivo.estado}"> AC </td>
+                            </tr>
+
+                            <tr th:if="${#lists.isEmpty(listadoMotivosBean)}" >
+                                <td colspan="4">
+                                    <h1> <span class="material-symbols-rounded">report_off</span>
+                                        No existe registros con los criterios proporcionados
+                                    </h1>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <section class="post">
+
+                <header class="post-header">
+
+                    <div>
+
+                        <form method="post" class="pure-form" action="#" th:action="@{/nacionalidad/filter}" th:object="${NacionalidadFilterBean}">
+                            <fieldset>
+
+                                <input type="text" th:field="*{paisId}" th:value="${NacionalidadFilterBean.paisId}" placeholder="Pais Id" />
+
+                                <input type="text" th:field="*{nombre}" th:value="${NacionalidadFilterBean.nombre}" placeholder="Nombre Pais" />
+
+                                <button type="submit" class="pure-button pure-button-primary" >Buscar </button>
+
+                                <select id="rowCountNacionalidad" th:field="*{rowCounter}" th:value="${NacionalidadFilterBean.rowCounter}" style="float: right;">
+                                    <option value="5">DEFAULT</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="500">500</option>
+                                </select>
+                            </fieldset>
+                        </form>
+
+                    </div>
+
+                </header>
+
+                <div class="post-description">
+                    <table class="pure-table"  style="height">
+                        <thead>
+                        <tr>
+                            <th><span class="material-symbols-rounded">workspace_premium</span></th>
+                            <th>NACIONALIDAD ID</th>
+                            <th>NACIONALIDAD</th>
+                            <th>PAIS ID</th>
+                            <th>NOMBRE PAIS</th>
+                            <th>ESTADO</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr  th:each="nacionalidad : ${listadoNacionalidadBean}" th:if="${not #lists.isEmpty(listadoNacionalidadBean)}">
+                            <td><span class="material-symbols-rounded">flag</span></td>
+                            <td th:text="${nacionalidad.nacionalidadId}"> 1 </td>
+                            <td th:text="${nacionalidad.descripcion}"> lorem ipsu example </td>
+                            <td th:text="${nacionalidad.paisId}"> AC </td>
+                            <td th:text="${nacionalidad.nombrePais}"> AC </td>
+                            <td th:text="${nacionalidad.estado}"> AC </td>
+                        </tr>
+
+                        <tr th:if="${#lists.isEmpty(listadoNacionalidadBean)}" >
+                            <td colspan="4">
+                                <h1> <span class="material-symbols-rounded">report_off</span>
+                                    No existe registros con los criterios proporcionados
+                                </h1>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!--
+        <div class="footer">
+             <div class="pure-menu pure-menu-horizontal">
+                 <ul>
+                     <li class="pure-menu-item"><a href="http://purecss.io/" class="pure-menu-link">About</a></li>
+                     <li class="pure-menu-item"><a href="http://github.com/pure-css/pure/" class="pure-menu-link">GitHub</a></li>
+                 </ul>
+             </div>
+         </div>
+         -->
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
