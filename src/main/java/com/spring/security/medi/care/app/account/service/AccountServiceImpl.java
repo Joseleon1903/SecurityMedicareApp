@@ -17,7 +17,7 @@ import com.spring.security.medi.care.app.account.domain.Account;
  * 
  * @author eruiz
  */
-@Service
+//@Service
 public class AccountServiceImpl implements AccountService {
 
     private static final Logger LOG = LoggerFactory.getLogger(AccountServiceImpl.class);
