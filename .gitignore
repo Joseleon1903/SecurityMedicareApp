@@ -24,6 +24,8 @@ hs_err_pid*
 
 #Maven
 .mvn
+target/
 
 #IDE
 .idea
+${project.build.directory}/
