@@ -1,0 +1,14 @@
+CREATE TABLE SEGURO
+(
+  SEGURO_ID             	SERIAL PRIMARY KEY,
+  DESCRIPCION           	VARCHAR ( 250 ) NOT NULL,
+  ESTADO                 	VARCHAR(2)   NOT NULL
+);
+
+COMMENT ON TABLE SEGURO IS 'Catálogo de Seguros del Sistema';
+
+COMMENT ON COLUMN SEGURO.SEGURO_ID IS 'Código que identifica el Seguro';
+COMMENT ON COLUMN SEGURO.DESCRIPCION IS 'Descripción del Seguro';
+COMMENT ON COLUMN SEGURO.ESTADO IS 'Estado del Seguro. Posibles valores: AC = Activo, IN = Inactivo';
+
+ALTER TABLE SEGURO ADD CONSTRAINT SEGURO_ESTADO_CK CHECK (ESTADO in ('AC', 'IN'));
