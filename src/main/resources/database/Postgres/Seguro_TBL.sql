@@ -1,14 +1,15 @@
-CREATE TABLE SEGURO
+CREATE TABLE MOTIVO_ESTADO
 (
-  SEGURO_ID             	SERIAL PRIMARY KEY,
-  DESCRIPCION           	VARCHAR ( 250 ) NOT NULL,
-  ESTADO                 	VARCHAR(2)   NOT NULL
+  MOTIVO_ID                     SERIAL PRIMARY KEY,
+  DESCRIPCION                   VARCHAR(150) NOT NULL,
+  ESTADO                        VARCHAR(2)   NOT NULL
 );
 
-COMMENT ON TABLE SEGURO IS 'Catálogo de Seguros del Sistema';
+COMMENT ON TABLE MOTIVO_ESTADO IS 'Catalogo de los motivos de las solicitudes';
 
-COMMENT ON COLUMN SEGURO.SEGURO_ID IS 'Código que identifica el Seguro';
-COMMENT ON COLUMN SEGURO.DESCRIPCION IS 'Descripción del Seguro';
-COMMENT ON COLUMN SEGURO.ESTADO IS 'Estado del Seguro. Posibles valores: AC = Activo, IN = Inactivo';
+COMMENT ON COLUMN MOTIVO_ESTADO.MOTIVO_ID IS 'Codigo con el que se identifica el motivo del estado';
+COMMENT ON COLUMN MOTIVO_ESTADO.DESCRIPCION IS 'Descripcion del motivo';
+COMMENT ON COLUMN MOTIVO_ESTADO.ESTADO  IS 'Estado del codigo de motivo. Posibles valores: AC = Activo, IN = Inactivo';
 
-ALTER TABLE SEGURO ADD CONSTRAINT SEGURO_ESTADO_CK CHECK (ESTADO in ('AC', 'IN'));
+
+ALTER TABLE MOTIVO_ESTADO ADD CONSTRAINT MOTIVO_ESTADO_ESTADO_CK CHECK (ESTADO IN ('AC', 'IN'));
