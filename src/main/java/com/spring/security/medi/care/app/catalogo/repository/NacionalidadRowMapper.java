@@ -1,6 +1,6 @@
 package com.spring.security.medi.care.app.catalogo.repository;
 
-import com.spring.security.medi.care.app.catalogo.domain.Nacionalidad;
+import com.spring.security.medi.care.app.commons.repository.Nacionalidad;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

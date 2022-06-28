@@ -1,6 +1,6 @@
 package com.spring.security.medi.care.app.catalogo.repository;
 
-import com.spring.security.medi.care.app.catalogo.domain.MotivoEstado;
+import com.spring.security.medi.care.app.commons.repository.MotivoEstado;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

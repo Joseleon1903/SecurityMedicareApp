@@ -1,7 +1,7 @@
 package com.spring.security.medi.care.app.catalogo.repository;
 
-import com.spring.security.medi.care.app.catalogo.domain.MotivoEstado;
 import com.spring.security.medi.care.app.commons.DaoUtil;
+import com.spring.security.medi.care.app.commons.repository.MotivoEstado;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
