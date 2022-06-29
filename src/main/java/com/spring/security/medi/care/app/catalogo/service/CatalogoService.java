@@ -1,8 +1,8 @@
 package com.spring.security.medi.care.app.catalogo.service;
 
-import com.spring.security.medi.care.app.catalogo.domain.MotivoEstado;
-import com.spring.security.medi.care.app.catalogo.domain.Nacionalidad;
-import com.spring.security.medi.care.app.catalogo.domain.Parentesco;
+import com.spring.security.medi.care.app.commons.repository.MotivoEstado;
+import com.spring.security.medi.care.app.commons.repository.Nacionalidad;
+import com.spring.security.medi.care.app.commons.repository.Parentesco;
 
 import java.util.List;
 

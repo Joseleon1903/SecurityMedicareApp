@@ -15,7 +15,6 @@ public class NacionalidadRowMapper implements RowMapper<Nacionalidad> {
         nac.setNacionalidadId(rs.getLong("NACIONALIDAD_ID"));
         nac.setDescripcion(rs.getString("NACIONALIDAD"));
         nac.setPaisId(rs.getString("PAIS_ID"));
-        nac.setNombrePais(rs.getString("NOMBRE_PAIS"));
         nac.setEstado(rs.getString("ESTADO"));
         return nac;
     }

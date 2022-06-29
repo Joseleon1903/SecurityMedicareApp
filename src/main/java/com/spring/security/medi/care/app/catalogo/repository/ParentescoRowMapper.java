@@ -1,7 +1,7 @@
 package com.spring.security.medi.care.app.catalogo.repository;
 
-import com.spring.security.medi.care.app.catalogo.domain.Parentesco;
 import com.spring.security.medi.care.app.commons.DaoUtil;
+import com.spring.security.medi.care.app.commons.repository.Parentesco;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -27,7 +27,6 @@ public class ParentescoRowMapper implements RowMapper<Parentesco> {
         pare.setDescripcionParentesco(rs.getString("DESCRIPCION"));
         pare.setTipoDependiente( (rs.getString("TIPO_DEPENDIENTE").equals(Adiccional)? "ADICCIONAL" : "DIRECTO"));
         pare.setGenero(genero);
-        pare.setGradoConsanguinidad(rs.getString("GRADO_CONSANGUINIDAD"));
         pare.setEstado(DaoUtil.parseEstadoColumn(rs.getString("ESTADO")));
         return pare;
     }

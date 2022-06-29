@@ -1,11 +1,11 @@
 package com.spring.security.medi.care.app.catalogo.service;
 
-import com.spring.security.medi.care.app.catalogo.domain.MotivoEstado;
-import com.spring.security.medi.care.app.catalogo.domain.Nacionalidad;
-import com.spring.security.medi.care.app.catalogo.domain.Parentesco;
 import com.spring.security.medi.care.app.catalogo.repository.MotivoEstadoJdbcImpl;
 import com.spring.security.medi.care.app.catalogo.repository.NacionalidadJdbcImpl;
 import com.spring.security.medi.care.app.catalogo.repository.ParentescoJdbcImpl;
+import com.spring.security.medi.care.app.commons.repository.MotivoEstado;
+import com.spring.security.medi.care.app.commons.repository.Nacionalidad;
+import com.spring.security.medi.care.app.commons.repository.Parentesco;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
