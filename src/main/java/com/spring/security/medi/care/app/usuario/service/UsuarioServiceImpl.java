@@ -1,8 +1,8 @@
 package com.spring.security.medi.care.app.usuario.service;
 
-import com.spring.security.medi.care.app.usuario.domain.UnipagoUsuario;
-import com.spring.security.medi.care.app.usuario.domain.Usuario;
-import com.spring.security.medi.care.app.usuario.repository.UsuarioJdbcImpl;
+import com.spring.security.medi.care.app.usuario.types.UnipagoUsuario;
+import com.spring.security.medi.care.app.usuario.types.Usuario;
+import com.spring.security.medi.care.app.usuario.repository.jdbc.UsuarioJdbcImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

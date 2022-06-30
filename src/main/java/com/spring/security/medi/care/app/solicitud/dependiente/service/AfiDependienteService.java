@@ -1,6 +1,6 @@
 package com.spring.security.medi.care.app.solicitud.dependiente.service;
 
-import com.spring.security.medi.care.app.solicitud.dependiente.domain.SolicitudDependiente;
+import com.spring.security.medi.care.app.solicitud.dependiente.types.SolicitudDependiente;
 import java.util.List;
 
 public interface AfiDependienteService {

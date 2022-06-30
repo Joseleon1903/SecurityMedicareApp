@@ -1,6 +1,6 @@
 package com.spring.security.medi.care.app.entidad.service;
 
-import com.spring.security.medi.care.app.entidad.domain.EntidadType;
+import com.spring.security.medi.care.app.entidad.types.EntidadType;
 import java.util.List;
 
 public interface EntidadService {

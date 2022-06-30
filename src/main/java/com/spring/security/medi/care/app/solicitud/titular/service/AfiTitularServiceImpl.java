@@ -1,8 +1,8 @@
 package com.spring.security.medi.care.app.solicitud.titular.service;
 
 import com.spring.security.medi.care.app.solicitud.dependiente.service.AfiDependienteServiceImpl;
-import com.spring.security.medi.care.app.solicitud.titular.domain.SolicitudTitular;
-import com.spring.security.medi.care.app.solicitud.titular.repository.AfiTitularJdbcImpl;
+import com.spring.security.medi.care.app.solicitud.titular.types.SolicitudTitular;
+import com.spring.security.medi.care.app.solicitud.titular.repository.jdbc.AfiTitularJdbcImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,12 +1,16 @@
 package com.spring.security.medi.care.app.catalogo.service;
 
-import com.spring.security.medi.care.app.commons.repository.MotivoEstado;
-import com.spring.security.medi.care.app.commons.repository.Nacionalidad;
-import com.spring.security.medi.care.app.commons.repository.Parentesco;
+import com.spring.security.medi.care.app.commons.domain.MotivoEstado;
+import com.spring.security.medi.care.app.commons.domain.Nacionalidad;
+import com.spring.security.medi.care.app.commons.domain.Parentesco;
 
 import java.util.List;
 
 public interface CatalogoService {
+
+    MotivoEstado buscarPorId(Long id);
+
+    List<MotivoEstado> buscarTodos();
 
     List<Parentesco> buscarCatalogoParentescoPorParametros(String tipoDependiente, String genero, int rowCount);
 
