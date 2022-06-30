@@ -28,14 +28,14 @@ public class MotivoEstadoRestController {
     @RequestMapping(value="/{id}", method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<MotivoEstado> findById(@PathVariable("id") Long id){
-        MotivoEstado motivo = catalogoService.buscarPorId(id);
+        MotivoEstado motivo = catalogoService.buscarMotivoPorId(id);
         return new ResponseEntity<MotivoEstado>(motivo, HttpStatus.OK);
     }
 
     @RequestMapping(value="/all", method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<List<MotivoEstado>> findAll(){
-        List<MotivoEstado> motivosList = catalogoService.buscarTodos();
+        List<MotivoEstado> motivosList = catalogoService.buscarMotivosTodos();
         return new ResponseEntity<List<MotivoEstado>>(motivosList, HttpStatus.OK);
     }
 

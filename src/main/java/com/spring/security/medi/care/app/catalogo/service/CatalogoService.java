@@ -8,9 +8,17 @@ import java.util.List;
 
 public interface CatalogoService {
 
-    MotivoEstado buscarPorId(Long id);
+    MotivoEstado buscarMotivoPorId(Long id);
 
-    List<MotivoEstado> buscarTodos();
+    List<MotivoEstado> buscarMotivosTodos();
+
+    Parentesco buscarParentescoPorId(Long id);
+
+    List<Parentesco> buscarParentescoTodos();
+
+    Nacionalidad buscarNacionalidadPorId(Long id);
+
+    List<Nacionalidad> buscarNacionalidadTodos();
 
     List<Parentesco> buscarCatalogoParentescoPorParametros(String tipoDependiente, String genero, int rowCount);
 
