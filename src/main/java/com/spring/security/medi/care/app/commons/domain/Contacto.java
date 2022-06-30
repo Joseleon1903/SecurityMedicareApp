@@ -2,8 +2,7 @@ package com.spring.security.medi.care.app.commons.domain;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -15,7 +14,9 @@ public class Contacto implements Serializable {
     @Id
     private Long contactoId;
     private Integer tipoPersona;
-    private Long entidadId;
+    @OneToOne
+    @JoinColumn(name="entidadId")
+    private Entidad entidadId;
     private Long ciudadanoId;
     private String descripcion;
     private String correoCoorporativo;
@@ -29,7 +30,7 @@ public class Contacto implements Serializable {
     public Contacto() {
     }
 
-    public Contacto(Long contactoId, Integer tipoPersona, Long entidadId, Long ciudadanoId, String descripcion, String correoCoorporativo, String correoAlterno, String posicion, LocalDate fechaCreacion, LocalDate fechaUltimoCambio, Boolean tieneHijos, String estado) {
+    public Contacto(Long contactoId, Integer tipoPersona, Entidad entidadId, Long ciudadanoId, String descripcion, String correoCoorporativo, String correoAlterno, String posicion, LocalDate fechaCreacion, LocalDate fechaUltimoCambio, Boolean tieneHijos, String estado) {
         this.contactoId = contactoId;
         this.tipoPersona = tipoPersona;
         this.entidadId = entidadId;
