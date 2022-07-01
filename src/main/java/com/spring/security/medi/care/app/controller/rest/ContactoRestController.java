@@ -1,7 +1,6 @@
 package com.spring.security.medi.care.app.controller.rest;
 
 import com.spring.security.medi.care.app.commons.domain.Contacto;
-import com.spring.security.medi.care.app.commons.domain.Usuario;
 import com.spring.security.medi.care.app.usuario.service.ContactoService;
 import com.spring.security.medi.care.app.usuario.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;

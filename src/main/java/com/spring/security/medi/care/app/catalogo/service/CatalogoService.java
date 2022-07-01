@@ -1,8 +1,6 @@
 package com.spring.security.medi.care.app.catalogo.service;
 
-import com.spring.security.medi.care.app.commons.domain.MotivoEstado;
-import com.spring.security.medi.care.app.commons.domain.Nacionalidad;
-import com.spring.security.medi.care.app.commons.domain.Parentesco;
+import com.spring.security.medi.care.app.commons.domain.*;
 
 import java.util.List;
 
@@ -19,6 +17,14 @@ public interface CatalogoService {
     Nacionalidad buscarNacionalidadPorId(Long id);
 
     List<Nacionalidad> buscarNacionalidadTodos();
+
+    Municipio buscarMunicipioPorId(Long id);
+
+    List<Municipio> buscarMunicipiosTodos();
+
+    GradoConsanguinidad buscarGradoConsanguinidadPorId(Long id);
+
+    List<GradoConsanguinidad> buscarGradoConsanguinidadesTodos();
 
     List<Parentesco> buscarCatalogoParentescoPorParametros(String tipoDependiente, String genero, int rowCount);
 
