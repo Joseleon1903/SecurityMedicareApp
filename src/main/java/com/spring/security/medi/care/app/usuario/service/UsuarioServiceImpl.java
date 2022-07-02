@@ -6,7 +6,6 @@ import com.spring.security.medi.care.app.usuario.repository.jdbc.UsuarioJdbcImpl
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.spring.security.medi.care.app.commons.domain.Usuario;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class UsuarioServiceImpl implements  UsuarioService{
 
     @Override
     public List<Usuario> buscarusuariosSistema() {
-        throw new NotImplementedException();
+        return null;
     }
 
     @Override
