@@ -29,14 +29,21 @@ public class MotivoEstadoRestController {
     @ResponseBody
     public ResponseEntity<MotivoEstado> findById(@PathVariable("id") Long id){
         MotivoEstado motivo = catalogoService.buscarMotivoPorId(id);
-        return new ResponseEntity<MotivoEstado>(motivo, HttpStatus.OK);
+        return new ResponseEntity<MotivoEstado>(motivo, HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(value="/all", method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<List<MotivoEstado>> findAll(){
         List<MotivoEstado> motivosList = catalogoService.buscarMotivosTodos();
-        return new ResponseEntity<List<MotivoEstado>>(motivosList, HttpStatus.OK);
+        return new ResponseEntity<List<MotivoEstado>>(motivosList, HttpStatus.ACCEPTED);
+    }
+
+    @PutMapping
+    @ResponseBody
+    public ResponseEntity<MotivoEstado> updateEntity(@RequestBody MotivoEstado motivo){
+        MotivoEstado motivoOut = catalogoService.actualizarMotivoEstado(motivo);
+        return new ResponseEntity<MotivoEstado>(motivoOut, HttpStatus.OK);
     }
 
 }

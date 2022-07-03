@@ -63,6 +63,20 @@ public class CatalogoServiceImpl implements CatalogoService {
     }
 
     @Override
+    public GradoConsanguinidad actualizarGradoConsanguinidad(GradoConsanguinidad grado) {
+        logger.info("Entering in actualizarGradoConsanguinidad");
+        logger.info("param GradoConsanguinidad: "+grado);
+        return gradoConsanguinidadJpaRepo.save(grado);
+    }
+
+    @Override
+    public MotivoEstado actualizarMotivoEstado(MotivoEstado motivo) {
+        logger.info("Entering in actualizarMotivoEstado");
+        logger.info("param MotivoEstado: "+motivo);
+        return motivoEstadoJpaRepo.save(motivo);
+    }
+
+    @Override
     public MotivoEstado buscarMotivoPorId(Long id){
         logger.info("Entering in buscarPorId");
         logger.info("param id: "+id);
@@ -72,7 +86,7 @@ public class CatalogoServiceImpl implements CatalogoService {
     @Override
     public List<MotivoEstado> buscarMotivosTodos(){
         logger.info("Entering in buscarTodos");
-        return motivoEstadoJpaRepo.findAll();
+        return motivoEstadoJpaRepo.findAllMotivos();
     }
 
     @Override
@@ -118,6 +132,6 @@ public class CatalogoServiceImpl implements CatalogoService {
 
     @Override
     public List<GradoConsanguinidad> buscarGradoConsanguinidadesTodos(){
-        return gradoConsanguinidadJpaRepo.findAll();
+        return gradoConsanguinidadJpaRepo.findAllOrderByGradoConsanguinidadId();
     }
 }

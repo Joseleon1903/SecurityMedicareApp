@@ -32,4 +32,8 @@ public interface CatalogoService {
 
     List<Nacionalidad> buscarCatalogoNacionalidad(String paisId, String nombrePais, int rowCount);
 
+    GradoConsanguinidad actualizarGradoConsanguinidad(GradoConsanguinidad grado);
+
+    MotivoEstado actualizarMotivoEstado(MotivoEstado motivo);
+
 }
