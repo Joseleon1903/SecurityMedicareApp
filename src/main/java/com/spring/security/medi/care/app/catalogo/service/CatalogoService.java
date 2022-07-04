@@ -36,4 +36,6 @@ public interface CatalogoService {
 
     MotivoEstado actualizarMotivoEstado(MotivoEstado motivo);
 
+    Municipio actualizarMunicipio(Municipio municipio);
+
 }

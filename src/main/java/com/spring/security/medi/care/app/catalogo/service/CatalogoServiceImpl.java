@@ -117,21 +117,31 @@ public class CatalogoServiceImpl implements CatalogoService {
 
     @Override
     public Municipio buscarMunicipioPorId(Long id){
+        logger.info("Entering in buscarMunicipioPorId");
         return municipioJpaRepo.findByMunicipioId(id);
     }
 
     @Override
     public List<Municipio> buscarMunicipiosTodos(){
+        logger.info("Entering in buscarMunicipiosTodos");
         return municipioJpaRepo.findAll();
     }
 
     @Override
     public GradoConsanguinidad buscarGradoConsanguinidadPorId(Long id){
+        logger.info("Entering in buscarGradoConsanguinidadPorId");
         return gradoConsanguinidadJpaRepo.findByGradoConsanguinidadId(id);
     }
 
     @Override
     public List<GradoConsanguinidad> buscarGradoConsanguinidadesTodos(){
+        logger.info("Entering in buscarGradoConsanguinidadesTodos");
         return gradoConsanguinidadJpaRepo.findAllOrderByGradoConsanguinidadId();
+    }
+
+    public Municipio actualizarMunicipio(Municipio municipio){
+        logger.info("Entering in actualizarMunicipio");
+        logger.info("param MotivoEstado: "+municipio);
+        return municipioJpaRepo.save(municipio);
     }
 }

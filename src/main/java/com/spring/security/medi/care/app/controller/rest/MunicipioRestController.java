@@ -1,9 +1,7 @@
 package com.spring.security.medi.care.app.controller.rest;
 
 import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
-import com.spring.security.medi.care.app.commons.domain.MotivoEstado;
 import com.spring.security.medi.care.app.commons.domain.Municipio;
-import com.spring.security.medi.care.app.controller.page.AfiliacionTitularController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/municipio/")
+@RequestMapping(name="/api/municipio/", produces=MediaType.APPLICATION_JSON_VALUE)
 public class MunicipioRestController {
 
     private static final Logger logger = LoggerFactory.getLogger(MunicipioRestController.class);
@@ -26,18 +24,25 @@ public class MunicipioRestController {
         this.catalogoService= catalogoService;
     }
 
-    @RequestMapping(value="/{id}", method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/{id}")
     @ResponseBody
     public ResponseEntity<Municipio> findById(@PathVariable("id") Long id){
         Municipio municipio = catalogoService.buscarMunicipioPorId(id);
-        return new ResponseEntity<Municipio>(municipio, HttpStatus.OK);
+        return new ResponseEntity<Municipio>(municipio, HttpStatus.ACCEPTED);
     }
 
-    @RequestMapping(value="/all", method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/all")
     @ResponseBody
     public ResponseEntity<List<Municipio>> findAll(){
         List<Municipio> municipiosList = catalogoService.buscarMunicipiosTodos();
-        return new ResponseEntity<List<Municipio>>(municipiosList, HttpStatus.OK);
+        return new ResponseEntity<List<Municipio>>(municipiosList, HttpStatus.ACCEPTED);
+    }
+
+    @PostMapping
+    @ResponseBody
+    public ResponseEntity<Municipio> findById(@RequestBody Municipio municipio){
+        Municipio municipioOut = catalogoService.actualizarMunicipio(municipio);
+        return new ResponseEntity<Municipio>(municipioOut, HttpStatus.OK);
     }
 
 }
