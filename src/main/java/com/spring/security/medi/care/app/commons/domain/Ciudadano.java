@@ -4,7 +4,7 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @Entity
@@ -22,13 +22,13 @@ public class Ciudadano implements Serializable {
     private Long nacionalidadId;
     private Boolean estranjero;
     private String genero;
-    private LocalDate fechaNacimiento;
+    private Date fechaNacimiento;
     private String estado;
 
     public Ciudadano() {
     }
 
-    public Ciudadano(Long ciudadanoId, String cedula, Integer nss, String nombre, String primerApellido, String segundoApellido, Long municipioId, Long nacionalidadId, Boolean estranjero, String genero, LocalDate fechaNacimiento, String estado) {
+    public Ciudadano(Long ciudadanoId, String cedula, Integer nss, String nombre, String primerApellido, String segundoApellido, Long municipioId, Long nacionalidadId, Boolean estranjero, String genero, Date fechaNacimiento, String estado) {
         this.ciudadanoId = ciudadanoId;
         this.cedula = cedula;
         this.nss = nss;

@@ -17,7 +17,7 @@ import java.util.List;
 public class ContactoRestController {
 
 
-    private static final Logger logger = LoggerFactory.getLogger(ParentescoRestController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ContactoRestController.class);
 
     private final ContactoService contactoService;
 

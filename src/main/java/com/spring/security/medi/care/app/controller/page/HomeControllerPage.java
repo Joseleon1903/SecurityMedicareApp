@@ -21,8 +21,6 @@ public class HomeControllerPage extends ViewBaseContext {
     public String homePage(Model model){
         logger.info("------- entering -----------");
         logger.info("Entering in method homePage..");
-
-
         model.addAttribute("SystemInfoBean", systemInfoDTO);
         return "pages/home/HomePage";
     }
@@ -33,7 +31,6 @@ public class HomeControllerPage extends ViewBaseContext {
         logger.info("Generando systemInfoDTO");
         systemInfoDTO = new SystemInfoDTO("Unipago Soporte Home",new Date());
         logger.info("systemInfoDTO: "+ systemInfoDTO);
-
         logger.info("existing init method ");
     }
 }
