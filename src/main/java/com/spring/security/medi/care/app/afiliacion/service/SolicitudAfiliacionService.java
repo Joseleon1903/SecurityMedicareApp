@@ -1,6 +1,6 @@
 package com.spring.security.medi.care.app.afiliacion.service;
 
-import com.spring.security.medi.care.app.afiliacion.domain.SolicitudAfiliacion;
+import com.spring.security.medi.care.app.afiliacion.types.SolicitudAfiliacion;
 
 import java.util.List;
 

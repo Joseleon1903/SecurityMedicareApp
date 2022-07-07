@@ -1,7 +1,7 @@
 package com.spring.security.medi.care.app.entidad.service;
 
-import com.spring.security.medi.care.app.entidad.domain.EntidadType;
-import com.spring.security.medi.care.app.entidad.repository.EntidadJdbcImpl;
+import com.spring.security.medi.care.app.entidad.types.EntidadType;
+import com.spring.security.medi.care.app.entidad.repository.jdbc.EntidadJdbcImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
