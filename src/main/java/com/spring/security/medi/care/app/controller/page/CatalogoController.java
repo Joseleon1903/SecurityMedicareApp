@@ -65,7 +65,7 @@ public class CatalogoController extends ViewBaseContext {
 
         logger.info("iniciando busqueda para parentesco..");
 
-        if(parentescoInputDto.getTipoDependiente() != null || parentescoInputDto.getGenero() != null){
+     /*   if(parentescoInputDto.getTipoDependiente() != null || parentescoInputDto.getGenero() != null){
            logger.info("iniciando busqueda parentesco "+parentescoInputDto);
 
            listaParentesco = catalogoService
@@ -116,11 +116,12 @@ public class CatalogoController extends ViewBaseContext {
         model.addAttribute("listadoParentescoBean", listaParentesco);
         model.addAttribute("listadoNacionalidadBean", listaNacionalidades);
 
-        model.addAttribute("SystemInfoBean", systemInfoDTO);
         model.addAttribute("motivoFilterBean",motivoFilterDTO);
         model.addAttribute("NacionalidadFilterBean",nacionalidadFilterDTO);
 
-        model.addAttribute("listadoMotivosBean", listaMotivos);
+        model.addAttribute("listadoMotivosBean", listaMotivos);*/
+        model.addAttribute("SystemInfoBean", systemInfoDTO);
+
         return "/pages/catalogo/show";
     }
 
@@ -186,7 +187,7 @@ public class CatalogoController extends ViewBaseContext {
     protected void init() {
         logger.info("entering init method ");
         logger.info("Generando systemInfoDTO");
-        systemInfoDTO = new SystemInfoDTO("Unipago información Catalogada",new Date());
+        systemInfoDTO = new SystemInfoDTO("Catalogos",new Date());
         logger.info("systemInfoDTO: "+ systemInfoDTO);
 
         logger.info("existing init method ");

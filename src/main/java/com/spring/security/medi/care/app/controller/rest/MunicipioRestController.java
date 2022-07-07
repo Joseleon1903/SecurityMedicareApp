@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 @RestController
-@RequestMapping(name="/api/municipio/", produces=MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value="/api/municipio/", produces=MediaType.APPLICATION_JSON_VALUE)
 public class MunicipioRestController {
 
     private static final Logger logger = LoggerFactory.getLogger(MunicipioRestController.class);
@@ -40,7 +40,7 @@ public class MunicipioRestController {
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity<Municipio> findById(@RequestBody Municipio municipio){
+    public ResponseEntity<Municipio> updateById(@RequestBody Municipio municipio){
         Municipio municipioOut = catalogoService.actualizarMunicipio(municipio);
         return new ResponseEntity<Municipio>(municipioOut, HttpStatus.OK);
     }

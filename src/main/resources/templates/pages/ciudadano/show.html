@@ -35,7 +35,7 @@
 <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-        <a href="index.html" class="logo d-flex align-items-center">
+        <a th:href="@{/home}" class="logo d-flex align-items-center">
             <!-- Uncomment the line below if you also wish to use an image logo -->
             <!-- <img src="assets/img/logo.png" alt=""> -->
             <h1>Security Medicare</h1>
@@ -46,9 +46,9 @@
         <nav id="navbar" class="navbar">
             <ul>
                 <li><a th:href="@{/home}" class="active">Home</a></li>
-                <li><a th:href="@{/ciudadanos}" class="active">Ciudadanos</a></li>
+                <li><a th:href="@{/ciudadano}" class="active">Ciudadanos</a></li>
                 <li><a th:href="@{/home}" class="active">Solicitudes</a></li>
-                <li><a th:href="@{/home}" class="active">Catalogos</a></li>
+                <li><a th:href="@{/catalogo}" class="active">Catalogos</a></li>
             </ul>
         </nav><!-- .navbar -->
 
