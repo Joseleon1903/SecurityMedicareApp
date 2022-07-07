@@ -1,14 +1,7 @@
-CREATE TABLE SEGURO
-(
-  SEGURO_ID             	SERIAL PRIMARY KEY,
-  DESCRIPCION           	VARCHAR ( 250 ) NOT NULL,
-  ESTADO                 	VARCHAR(2)   NOT NULL
+CREATE TABLE public.seguro (
+	seguro_id serial4 NOT NULL,
+	descripcion varchar(250) NOT NULL,
+	estado varchar(2) NOT NULL,
+	CONSTRAINT seguro_estado_ck CHECK (((estado)::text = ANY ((ARRAY['AC'::character varying, 'IN'::character varying])::text[]))),
+	CONSTRAINT seguro_pkey PRIMARY KEY (seguro_id)
 );
-
-COMMENT ON TABLE SEGURO IS 'Catálogo de Seguros del Sistema';
-
-COMMENT ON COLUMN SEGURO.SEGURO_ID IS 'Código que identifica el Seguro';
-COMMENT ON COLUMN SEGURO.DESCRIPCION IS 'Descripción del Seguro';
-COMMENT ON COLUMN SEGURO.ESTADO IS 'Estado del Seguro. Posibles valores: AC = Activo, IN = Inactivo';
-
-ALTER TABLE SEGURO ADD CONSTRAINT SEGURO_ESTADO_CK CHECK (ESTADO in ('AC', 'IN'));

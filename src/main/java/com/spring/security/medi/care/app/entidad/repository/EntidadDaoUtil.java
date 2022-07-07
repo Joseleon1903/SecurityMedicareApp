@@ -1,10 +1,8 @@
 package com.spring.security.medi.care.app.entidad.repository;
 
-import com.spring.security.medi.care.app.controller.EntidadController;
+import com.spring.security.medi.care.app.controller.page.EntidadController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Locale;
 
 public class EntidadDaoUtil {
 
