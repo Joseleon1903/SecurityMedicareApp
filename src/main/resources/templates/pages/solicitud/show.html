@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+      xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Security Medicare App</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link th:href="@{assets/img/favicon.png}" rel="icon">
+    <link th:href="@{assets/img/apple-touch-icon.}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link th:href="@{assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+    <link th:href="@{assets/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet">
+    <link th:href="@{assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
+    <link th:href="@{assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
+    <link th:href="@{assets/vendor/aos/aos.css}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link th:href="@{assets/css/main.css}" rel="stylesheet">
+    <link th:href="@{css/solicitud_form.css}" rel="stylesheet">
+</head>
+<body data-aos-easing="ease-in-out" data-aos-duration="1000" data-aos-delay="0">
+
+<!-- ======= Header ======= -->
+<header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+        <a th:href="@{/home}" class="logo d-flex align-items-center">
+            <!-- Uncomment the line below if you also wish to use an image logo -->
+            <!-- <img src="assets/img/logo.png" alt=""> -->
+            <h1>Security Medicare</h1>
+        </a>
+
+        <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+        <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a th:href="@{/home}" class="active">Home</a></li>
+                <li><a th:href="@{/ciudadano}" class="active">Ciudadanos</a></li>
+                <li><a th:href="@{/solicitud}" class="active">Solicitudes</a></li>
+                <li><a th:href="@{/catalogo}" class="active">Catalogos</a></li>
+            </ul>
+        </nav><!-- .navbar -->
+
+    </div>
+</header><!-- End Header -->
+<!-- End Header -->
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+        <div class="page-header d-flex align-items-center" style="background-image: url('assets/img/page-header.jpg');">
+            <div class="container position-relative">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        <h2>Solicitudes</h2>
+                        <p>Soliciudes realizadas por un afiliado a los servicios de salud (medicamentos, procedimientos,
+                            medios diagnósticos, pruebas de laboratorio, materiales, terapias, etc.)
+                            dentro del Plan de Servicios de Salud (PDSS), así como la disponibilidad económica o agotamiento para
+                            que pueda gestionar la colaboración por otros medios.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <ol>
+                    <li><a th:href="@{/home}" >Home</a></li>
+                    <li th:text="${SystemInfoBean.pageName}" >Solicitudes</li>
+                </ol>
+            </div>
+        </nav>
+    </div><!-- End Breadcrumbs -->
+
+    <section id="form-solicitud" class="form-solicitud" style="padding: 0px;">
+
+        <div class="container aos-init aos-animate" data-aos="fade-up">
+            <div class="row gy-4 mt-4">
+
+                <div class="col-lg-4">
+
+                    <div class="d-flex menu-form-solicitud" >
+                        <button type="button" class="menu-button-solicitud btn btn-primary">
+                            <i class="bi bi-chat-fill"></i>
+                        </button>
+
+                        <div>
+                            <h4 th:text="#{page.titulo.solicitud.datos.solicitante}"> Location:</h4>
+                            <!--<p>A108 Adam Street, New York, NY 535022</p>-->
+                        </div>
+                    </div><!-- End Info Item -->
+
+                    <div class="d-flex menu-form-solicitud" >
+                        <button type="button" class="menu-button-solicitud btn btn-primary">
+                            <i class="bi bi-chat-fill"></i>
+                        </button>
+                        <div>
+                            <h4 th:text="#{page.titulo.solicitud.datos.ubicacion}">Email:</h4>
+<!--
+                            <p>info@example.com</p>
+-->
+                        </div>
+                    </div><!-- End Info Item -->
+
+                    <div class="d-flex menu-form-solicitud">
+                        <button type="button" class="menu-button-solicitud btn btn-primary">
+                            <i class="bi bi-chat-fill"></i>
+                        </button>
+                        <div>
+                            <h4 th:text="#{page.titulo.solicitud.datos.titular}" >Call:</h4>
+<!--
+                            <p>+1 5589 55488 55</p>
+-->
+                        </div>
+                    </div>
+                    <!-- End Info Item -->
+
+                </div>
+
+                <div class="col-lg-8 card" >
+                    <form method="post" role="form" class="card-body">
+
+                        <div class="alert alert-danger" role="alert" style="display: none;">
+                            A simple danger alert—check it out!
+                        </div>
+
+                        <div id="datos-solicitante" style="display: none;">
+
+                            <div class="row" >
+                                <div class="col-md-8 form-group">
+                                <select class="form-select" aria-label="Default select example">
+                                    <option value="0" th:text="#{page.label.solicitud.datos.solicitante.tipoIdentificacion}" selected>Open this select menu</option>
+                                    <option value="1">Cedula</option>
+                                    <option value="2">Nss</option>
+                                </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <input type="text" name="cedula" class="form-control" id="name" placeholder="Cedula" required="">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 form-group mt-3 mt-md-0">
+                                    <input type="text" class="form-control" name="nss" id="nss" placeholder="Nss" required="">
+                                </div>
+                            </div>
+
+                            <div class="text-center"><button class="btn btn-primary" th:text="#{page.generar.label.accion.next}">Next</button></div>
+
+                        </div>
+
+                        <div id="datos-ubicacion" style="display:none;">
+
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label for="codigoMunicipio" class="form-label" th:text="#{page.label.solicitud.datos.ubicacion.codigoMunicipio}">Email address</label>
+                                    <input type="text" name="codigoMunicipio" class="form-control" id="codigoMunicipio" placeholder="Codigo municipio" required="">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label for="codigoProvincia" class="form-label" th:text="#{page.label.solicitud.datos.solicitante.codigoProvincia}">Email address</label>
+                                    <input type="text" name="codigoProvincia" class="form-control" id="codigoProvincia" placeholder="Codigo provincia" required="">
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-8 form-group">
+                                    <label class="form-label" th:text="#{page.label.solicitud.datos.solicitante.seguroId}">Email address</label>
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option value="0" th:text="#{page.label.solicitud.datos.solicitante.seguroId}" selected>Open this select menu</option>
+                                        <option value="1">Salud</option>
+                                        <option value="2">Pensiones</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <label class="form-label" th:text="#{page.label.solicitud.datos.solicitante.regimenId}">Email address</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option value="0" th:text="#{page.label.solicitud.datos.solicitante.regimenId}" selected>Open this select menu</option>
+                                    <option value="1">Subsidiado</option>
+                                    <option value="2">Contributivo</option>
+                                </select>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label for="codigoMunicipio" class="form-label" th:text="#{page.label.solicitud.datos.solicitante.asignar.pension}">Email address</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault" th:text="#{page.label.solicitud.datos.solicitante.asignar.automatica}">
+                                            Default checkbox
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center"><button class="btn btn-primary" th:text="#{page.generar.label.accion.next}">Next</button></div>
+
+                        </div>
+
+                        <div id="datos-titular">
+
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label for="cedulaTitular" class="form-label" th:text="#{page.label.solicitud.datos.titular.cedula}">Email address</label>
+                                    <input type="text" name="cedulaTitular" class="form-control" id="cedulaTitular" placeholder="Cedula titular" required="">
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-8 form-group">
+                                    <label class="form-label" th:text="#{page.label.solicitud.datos.titular.tipoAfiliado}">Email address</label>
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option value="1">Titular</option>
+                                        <option value="2">Dependiente</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <label class="form-label" th:text="#{page.label.solicitud.datos.titular.tipoDependiente}">Email address</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option value="0" selected th:text="#{page.generar.label.abrir.menu}">Open this select menu</option>
+                                    <option value="1">Directo</option>
+                                    <option value="2">Adiccional</option>
+                                </select>
+                            </div>
+
+                            <div class="row">
+                                <label class="form-label" th:text="#{page.label.solicitud.datos.titular.parentesco}">Email address</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option value="0" selected th:text="#{page.generar.label.abrir.menu}">Open this select menu</option>
+                                    <option value="1">Madre</option>
+                                    <option value="2">Padre</option>
+                                    <option value="3">Hijo</option>
+                                </select>
+                            </div>
+
+                            <div class="text-center"><button class="btn btn-primary" th:text="#{page.generar.label.accion.submit}">Enviar</button></div>
+
+                        </div>
+
+                    </form>
+                </div>
+                <!-- End Contact Form -->
+
+            </div>
+        </div>
+
+    </section>
+
+
+</main><!-- End #main -->
+
+<!-- Vendor JS Files -->
+<script th:src="@{assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+<script th:src="@{assets/vendor/glightbox/js/glightbox.min.js}"></script>
+<script th:src="@{assets/vendor/swiper/swiper-bundle.min.js}"></script>
+<script th:src="@{assets/vendor/aos/aos.js}"></script>
+<script th:src="@{assets/vendor/php-email-form/validate.js}"></script>
+
+<!-- Template Main JS File -->
+<script th:src="@{assets/js/main.js}"></script>
+
+</body>
+</html>
