@@ -5,31 +5,31 @@ import com.spring.security.medi.care.app.controller.dto.SystemInfoDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import java.util.Date;
 
 @Controller
-public class HomeControllerPage extends ViewBaseContext {
+public class SolicitudController extends ViewBaseContext {
 
     private SystemInfoDTO systemInfoDTO;
 
-
-    public HomeControllerPage(){
+    public SolicitudController(){
         super();
     }
 
-    @RequestMapping({"/home", "/"})
-    public String homePage(Model model){
+    @RequestMapping("/solicitud")
+    public String solicituPage(Model model){
         logger.info("------- entering -----------");
-        logger.info("Entering in method homePage..");
+        logger.info("Entering in method solicituPage..");
         model.addAttribute("SystemInfoBean", systemInfoDTO);
-        return "pages/home/HomePage";
+        return "pages/solicitud/show";
     }
 
     @Override
     protected void init() {
         logger.info("entering init method ");
         logger.info("Generando systemInfoDTO");
-        systemInfoDTO = new SystemInfoDTO("Home Page",new Date());
+        systemInfoDTO = new SystemInfoDTO("Solicitudes",new Date());
         logger.info("systemInfoDTO: "+ systemInfoDTO);
         logger.info("existing init method ");
     }
