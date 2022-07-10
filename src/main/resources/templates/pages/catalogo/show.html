@@ -75,7 +75,6 @@
                 <li><a th:href="@{/home}" class="active">Home</a></li>
                 <li><a th:href="@{/ciudadano}" class="active">Ciudadanos</a></li>
                 <li><a th:href="@{/solicitud}" class="active">Solicitudes</a></li>
-                <li><a th:href="@{/home}" class="active">Solicitudes</a></li>
                 <li><a th:href="@{/catalogo}" class="active">Catalogos</a></li>
             </ul>
         </nav><!-- .navbar -->
@@ -185,10 +184,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row" >1</th>
-                            <td >Nam voluptatem quasi numquam quas</td>
-                            <td >Activo</td>
+                        <tr th:each="motivo : ${PaginatedMotivosBean.motivos}" th:if="${not #lists.isEmpty(PaginatedMotivosBean.motivos)}">
+                            <th scope="row" th:text="${motivo.motivoId}" >1</th>
+                            <td th:text="${motivo.descripcion}">Nam voluptatem quasi numquam quas</td>
+                            <td th:text="${motivo.estado}">Activo</td>
                         </tr>
                         </tbody>
 
@@ -255,12 +254,12 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row" >1</th>
-                            <td >Nam voluptatem quasi numquam quas</td>
-                            <td >TRE-001</td>
-                            <td >25</td>
-                            <td >Activo</td>
+                        <tr th:each="municipio : ${PaginatedMunicipioBean.municipios}" th:if="${not #lists.isEmpty(PaginatedMunicipioBean.municipios)}">
+                            <th scope="row" th:text="${municipio.municipioId}">1</th>
+                            <td th:text="${municipio.descripcion}">Nam voluptatem quasi numquam quas</td>
+                            <td th:text="${municipio.codigoMunicipio}">TRE-001</td>
+                            <td th:text="${municipio.provinciaId}">25</td>
+                            <td th:text="${municipio.estado}">Activo</td>
                         </tr>
                         </tbody>
 
@@ -322,11 +321,11 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row" >1</th>
-                            <td >Nam voluptatem quasi numquam quas</td>
-                            <td >TRE-001</td>
-                            <td >Activo</td>
+                        <tr th:each="nacionalidad : ${PaginatedNacionalidadBean.nacionalidades}" th:if="${not #lists.isEmpty(PaginatedNacionalidadBean.nacionalidades)}">
+                            <th scope="row" th:text="${nacionalidad.nacionalidadId}">1</th>
+                            <td th:text="${nacionalidad.descripcion}" >Nam voluptatem quasi numquam quas</td>
+                            <td th:text="${nacionalidad.paisId}" >TRE-001</td>
+                            <td th:text="${nacionalidad.estado}">Activo</td>
                         </tr>
                         </tbody>
 

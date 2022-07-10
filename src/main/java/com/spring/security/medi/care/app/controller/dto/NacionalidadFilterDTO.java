@@ -1,5 +1,6 @@
 package com.spring.security.medi.care.app.controller.dto;
 
+import com.spring.security.medi.care.app.commons.DaoUtil;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -8,21 +9,14 @@ import java.io.Serializable;
 public class NacionalidadFilterDTO implements Serializable {
 
     private String paisId;
-    private String nombre;
-    private String rowCounter;
+    private int rowCounter = DaoUtil.DEFAULT_ROW_COUNT;
 
-    public NacionalidadFilterDTO(String paisId, String nombre) {
+    public NacionalidadFilterDTO(String paisId) {
         this.paisId = paisId;
-        this.nombre = nombre;
     }
 
-    public NacionalidadFilterDTO(String paisId, String nombre, String rowCounter) {
-        this.paisId = paisId;
-        this.nombre = nombre;
-        this.rowCounter = rowCounter;
+    public NacionalidadFilterDTO() {
     }
-
-    public NacionalidadFilterDTO() {}
 
     public String getPaisId() {
         return paisId;
@@ -32,19 +26,12 @@ public class NacionalidadFilterDTO implements Serializable {
         this.paisId = paisId;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getRowCounter() {
+    public int getRowCounter() {
         return rowCounter;
     }
 
-    public void setRowCounter(String rowCounter) {
+    public void setRowCounter(int rowCounter) {
         this.rowCounter = rowCounter;
     }
 
@@ -52,7 +39,6 @@ public class NacionalidadFilterDTO implements Serializable {
     public String toString() {
         return "NacionalidadFilterDTO{" +
                 "paisId='" + paisId + '\'' +
-                ", nombre='" + nombre + '\'' +
                 ", rowCounter=" + rowCounter +
                 '}';
     }
