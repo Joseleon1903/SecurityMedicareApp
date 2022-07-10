@@ -1,5 +1,7 @@
 package com.spring.security.medi.care.app.controller.rest;
 
+import com.spring.security.medi.care.app.catalogo.dto.MotivoEstadoPaginatedDto;
+import com.spring.security.medi.care.app.catalogo.dto.MunicipioPaginatedDto;
 import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.commons.domain.Municipio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,21 +30,32 @@ public class MunicipioRestController {
     @ResponseBody
     public ResponseEntity<Municipio> findById(@PathVariable("id") Long id){
         Municipio municipio = catalogoService.buscarMunicipioPorId(id);
-        return new ResponseEntity<Municipio>(municipio, HttpStatus.ACCEPTED);
+        return new ResponseEntity(municipio, HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/all")
     @ResponseBody
     public ResponseEntity<List<Municipio>> findAll(){
         List<Municipio> municipiosList = catalogoService.buscarMunicipiosTodos();
-        return new ResponseEntity<List<Municipio>>(municipiosList, HttpStatus.ACCEPTED);
+        return new ResponseEntity(municipiosList, HttpStatus.ACCEPTED);
     }
 
     @PostMapping
     @ResponseBody
     public ResponseEntity<Municipio> updateById(@RequestBody Municipio municipio){
         Municipio municipioOut = catalogoService.actualizarMunicipio(municipio);
-        return new ResponseEntity<Municipio>(municipioOut, HttpStatus.OK);
+        return new ResponseEntity(municipioOut, HttpStatus.OK);
+    }
+
+    @GetMapping("/find")
+    @ResponseBody
+    public ResponseEntity<MunicipioPaginatedDto> findMunicipiosWithParameters(
+            @RequestParam(value = "codigoMunicipio", required = false) String codigoMunicipio,
+            @RequestParam(value = "descripcion", required = false) String descripcion,
+            @RequestParam(value = "page") int page,
+            @RequestParam(value = "size") int size){
+        MunicipioPaginatedDto municipiosPageable = catalogoService.buscarMunicipioPorParametros(codigoMunicipio, descripcion, page, size);
+        return new ResponseEntity(municipiosPageable, HttpStatus.ACCEPTED);
     }
 
 }

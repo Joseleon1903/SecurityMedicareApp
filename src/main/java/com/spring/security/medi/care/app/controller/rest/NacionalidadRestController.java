@@ -1,5 +1,7 @@
 package com.spring.security.medi.care.app.controller.rest;
 
+import com.spring.security.medi.care.app.catalogo.dto.MunicipioPaginatedDto;
+import com.spring.security.medi.care.app.catalogo.dto.NacionalidadPaginatedDto;
 import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.commons.domain.Nacionalidad;
 import com.spring.security.medi.care.app.controller.page.AfiliacionTitularController;
@@ -39,5 +41,16 @@ public class NacionalidadRestController {
         List<Nacionalidad> nacionalidadesList = catalogoService.buscarNacionalidadTodos();
         return new ResponseEntity<List<Nacionalidad>>(nacionalidadesList, HttpStatus.OK);
     }
+
+    @GetMapping("/find")
+    @ResponseBody
+    public ResponseEntity<NacionalidadPaginatedDto> findNacionalidadWithParameters(
+            @RequestParam(value = "paisId", required = false) String paisId,
+            @RequestParam(value = "page") int page,
+            @RequestParam(value = "size") int size){
+        NacionalidadPaginatedDto nacionalidadesPageable = catalogoService.buscarNacionalidadPorParametros(paisId, page, size);
+        return new ResponseEntity(nacionalidadesPageable, HttpStatus.ACCEPTED);
+    }
+
 
 }

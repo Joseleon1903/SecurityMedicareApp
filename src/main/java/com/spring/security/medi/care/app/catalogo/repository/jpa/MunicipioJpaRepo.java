@@ -1,8 +1,13 @@
 package com.spring.security.medi.care.app.catalogo.repository.jpa;
 
+import com.spring.security.medi.care.app.commons.domain.MotivoEstado;
 import com.spring.security.medi.care.app.commons.domain.Municipio;
 import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 public interface MunicipioJpaRepo extends JpaRepository<Municipio, Long>{
 
@@ -10,4 +15,6 @@ public interface MunicipioJpaRepo extends JpaRepository<Municipio, Long>{
 
     List<Municipio> findAll();
 
+    @Query("select m from Municipio m where (:codigoMunicipio is null or m.codigoMunicipio = :codigoMunicipio) and (:descripcion is null or m.descripcion = :descripcion) order by m.municipioId asc")
+    Page<Municipio> findMotivosByParameters(String codigoMunicipio, String descripcion, Pageable paging);
 }

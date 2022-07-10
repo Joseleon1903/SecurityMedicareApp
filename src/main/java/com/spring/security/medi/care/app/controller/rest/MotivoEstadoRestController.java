@@ -1,5 +1,6 @@
 package com.spring.security.medi.care.app.controller.rest;
 
+import com.spring.security.medi.care.app.catalogo.dto.MotivoEstadoPaginatedDto;
 import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.commons.domain.MotivoEstado;
 import com.spring.security.medi.care.app.controller.page.AfiliacionTitularController;
@@ -44,6 +45,17 @@ public class MotivoEstadoRestController {
     public ResponseEntity<MotivoEstado> updateEntity(@RequestBody MotivoEstado motivo){
         MotivoEstado motivoOut = catalogoService.actualizarMotivoEstado(motivo);
         return new ResponseEntity<MotivoEstado>(motivoOut, HttpStatus.OK);
+    }
+
+    @GetMapping("/find")
+    @ResponseBody
+    public ResponseEntity<MotivoEstadoPaginatedDto> findMotivosWithParameters(
+            @RequestParam(value = "motivoId", required = false) Long motivoId,
+            @RequestParam(value = "descripcion", required = false) String descripcion,
+            @RequestParam(value = "page") int page,
+            @RequestParam(value = "size") int size){
+        MotivoEstadoPaginatedDto motivosPageable = catalogoService.buscarMotivosPorParametros(motivoId, descripcion, page, size);
+        return new ResponseEntity(motivosPageable, HttpStatus.ACCEPTED);
     }
 
 }

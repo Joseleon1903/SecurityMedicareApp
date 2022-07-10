@@ -1,5 +1,8 @@
 package com.spring.security.medi.care.app.catalogo.service;
 
+import com.spring.security.medi.care.app.catalogo.dto.MotivoEstadoPaginatedDto;
+import com.spring.security.medi.care.app.catalogo.dto.MunicipioPaginatedDto;
+import com.spring.security.medi.care.app.catalogo.dto.NacionalidadPaginatedDto;
 import com.spring.security.medi.care.app.commons.domain.*;
 
 import java.util.List;
@@ -37,5 +40,11 @@ public interface CatalogoService {
     MotivoEstado actualizarMotivoEstado(MotivoEstado motivo);
 
     Municipio actualizarMunicipio(Municipio municipio);
+
+    MotivoEstadoPaginatedDto buscarMotivosPorParametros(Long motivoId, String description , int page, int size);
+
+    MunicipioPaginatedDto buscarMunicipioPorParametros(String codigoMunicipio, String description , int page, int size);
+
+    NacionalidadPaginatedDto buscarNacionalidadPorParametros(String paisId , int page, int size);
 
 }
