@@ -2,7 +2,6 @@ package com.spring.security.medi.care.app.controller.rest;
 
 import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.commons.domain.Parentesco;
-import com.spring.security.medi.care.app.controller.page.AfiliacionTitularController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/parentesco/")
+@RequestMapping(value="/api/parentesco/",produces=MediaType.APPLICATION_JSON_VALUE)
 public class ParentescoRestController {
 
 
@@ -26,14 +25,14 @@ public class ParentescoRestController {
         this.catalogoService= catalogoService;
     }
 
-    @RequestMapping(value="/{id}", method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/{id}")
     @ResponseBody
     public ResponseEntity<Parentesco> findById(@PathVariable("id") Long id){
         Parentesco parentesco = catalogoService.buscarParentescoPorId(id);
         return new ResponseEntity<Parentesco>(parentesco, HttpStatus.OK);
     }
 
-    @RequestMapping(value="/all", method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/all")
     @ResponseBody
     public ResponseEntity<List<Parentesco>> findAll(){
         List<Parentesco> parentescosList = catalogoService.buscarParentescoTodos();

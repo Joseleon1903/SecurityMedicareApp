@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/contacto/")
+@RequestMapping(value="/api/contacto/" ,produces=MediaType.APPLICATION_JSON_VALUE)
 public class ContactoRestController {
 
 
@@ -26,14 +26,14 @@ public class ContactoRestController {
         this.contactoService= contactoService;
     }
 
-    @RequestMapping(value="/{contactoId}", method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/{contactoId}")
     @ResponseBody
     public ResponseEntity<Contacto> findById(@PathVariable("contactoId") Long id){
         Contacto contacto = contactoService.buscarContactoPorId(id);
         return new ResponseEntity<Contacto>(contacto, HttpStatus.OK);
     }
 
-    @RequestMapping(value="/all", method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/all")
     @ResponseBody
     public ResponseEntity<List<Contacto>> findAll(){
         List<Contacto> contactosList = contactoService.buscarContactosSistema();
