@@ -19,7 +19,7 @@ public class CiudadanoController extends ViewBaseContext {
 
     private final CiudadanoService ciudadanoService;
 
-    List<Ciudadano> ciudadanos;
+    private List<Ciudadano> ciudadanos;
 
     @Autowired
     public CiudadanoController(CiudadanoService ciudadanoService){

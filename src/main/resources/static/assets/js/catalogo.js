@@ -3,27 +3,44 @@
 * Author: jose de leon
 * License: https://securitymedicareapp.com/license/
 */
- var seccionMotivo = false;
- var seccionMunicipio = false;
- var seccionNacionalidad = false;
+ var seccionMotivo = localStorage.getItem('SeccionMotivo');
+ var seccionMunicipio = localStorage.getItem('SeccionMunicipio');
+ var seccionNacionalidad = localStorage.getItem('SeccionNacionalidad');
+
+console.log("seccionMotivo: "+seccionMotivo);
+console.log("seccionMunicipio: "+ seccionMunicipio);
+console.log("seccionNacionalidad: "+seccionNacionalidad);
+
+window.onload = function loadPreviouspageState(){
+    console.log("entering loadPreviouspageState");
+    console.log("execute after load");
+    if(seccionMotivo == 'true'){
+        showSection('section-motivo-estado');
+    }else if(seccionMunicipio ==  'true'){
+        showSection('section-municipio');
+    }else if(seccionNacionalidad == 'true'){
+        showSection('section-nacionalidad');
+    }
+    console.log("existing loadPreviouspageState");
+}
 
  function resetView(seccionMotivoIn, seccionMunicipioIn, seccionNacionalidadIn){
 
-    if(seccionMotivoIn == false){
+    if(seccionMotivoIn == 'false'){
      var element = document.getElementById("section-motivo-estado");
      element.style.display = "none";
      var elementLink = document.getElementById("motivo-table-link");
      elementLink.style.borderBottom ="";
     }
 
-    if(seccionMunicipioIn == false){
+    if(seccionMunicipioIn == 'false'){
      var element = document.getElementById("section-municipio");
      element.style.display = "none";
      var elementLink = document.getElementById("municipio-table-link");
      elementLink.style.borderBottom ="";
     }
 
-    if(seccionNacionalidadIn == false){
+    if(seccionNacionalidadIn == 'false'){
      var element = document.getElementById("section-nacionalidad");
      element.style.display = "none";
      var elementLink = document.getElementById("nacionalidad-table-link");
@@ -37,11 +54,11 @@
 
     if(nombreSeccion == 'section-motivo-estado'){
 
-      seccionMotivo= true;
-      seccionMunicipio = false;
-      seccionNacionalidad = false;
+      localStorage.setItem('SeccionMotivo', 'true');
+      localStorage.setItem('SeccionMunicipio', 'false');
+      localStorage.setItem('SeccionNacionalidad', 'false');
 
-      if(seccionMotivo){
+      if(localStorage.getItem('SeccionMotivo')){
         var element = document.getElementById("section-motivo-estado");
         element.style.display = "block";
 
@@ -52,11 +69,11 @@
 
    if(nombreSeccion == 'section-municipio'){
 
-      seccionMotivo= false;
-      seccionMunicipio = true;
-      seccionNacionalidad = false;
+      localStorage.setItem('SeccionMotivo', 'false');
+      localStorage.setItem('SeccionMunicipio', 'true');
+      localStorage.setItem('SeccionNacionalidad', 'false');
 
-      if(seccionMunicipio){
+      if(localStorage.getItem('SeccionMunicipio')){
         var element = document.getElementById("section-municipio");
         element.style.display = "block";
 
@@ -67,11 +84,11 @@
 
     if(nombreSeccion == 'section-nacionalidad'){
 
-      seccionMotivo= false;
-      seccionMunicipio = false;
-      seccionNacionalidad = true;
+      localStorage.setItem('SeccionMotivo', 'false');
+      localStorage.setItem('SeccionMunicipio', 'false');
+      localStorage.setItem('SeccionNacionalidad', 'true');
 
-      if(seccionNacionalidad){
+      if(localStorage.getItem('SeccionNacionalidad')){
         var element = document.getElementById("section-nacionalidad");
         element.style.display = "block";
 
@@ -81,6 +98,6 @@
       }
     }
 
-    resetView(seccionMotivo, seccionMunicipio, seccionNacionalidad);
+    resetView(localStorage.getItem('SeccionMotivo'), localStorage.getItem('SeccionMunicipio'), localStorage.getItem('SeccionNacionalidad'));
     window.scrollTo(0, document.body.scrollHeight);
 }

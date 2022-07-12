@@ -157,7 +157,7 @@ public class CatalogoServiceImpl implements CatalogoService {
     public MotivoEstadoPaginatedDto buscarMotivosPorParametros(Long motivoId, String description , int page, int size){
         logger.info("Entering in buscarMotivosPorParametros");
         logger.info("param motivoId: "+ motivoId);
-        description = (description != null)? description.toUpperCase(): null;
+        description = (description != null)? "%"+description.toUpperCase()+"%": null;
         logger.info("param description: "+ description);
         logger.info("param page: "+ page);
         logger.info("param size: "+ size);
@@ -170,9 +170,9 @@ public class CatalogoServiceImpl implements CatalogoService {
     @Override
     public MunicipioPaginatedDto buscarMunicipioPorParametros(String codigoMunicipio, String description, int page, int size) {
         logger.info("Entering in buscarMunicipioPorParametros");
-        codigoMunicipio = (codigoMunicipio != null)? codigoMunicipio.toUpperCase(): null;
+        codigoMunicipio = (codigoMunicipio != null)? "%"+codigoMunicipio.toUpperCase()+"%": null;
         logger.info("param motivoId: "+ codigoMunicipio);
-        description = (description != null)? description.toUpperCase(): null;
+        description = (description != null)? "%"+description.toUpperCase()+"%": null;
         logger.info("param description: "+ description);
         logger.info("param page: "+ page);
         logger.info("param size: "+ size);
@@ -185,7 +185,7 @@ public class CatalogoServiceImpl implements CatalogoService {
     @Override
     public NacionalidadPaginatedDto buscarNacionalidadPorParametros(String paisId, int page, int size) {
         logger.info("Entering in buscarNacionalidadPorParametros");
-        paisId = (paisId != null)? paisId.toUpperCase(): null;
+        paisId = (paisId != null)? "%"+ paisId.toUpperCase()+"%": null;
         logger.info("param page: "+ page);
         logger.info("param size: "+ size);
         Pageable paging = PageRequest.of(page, size);

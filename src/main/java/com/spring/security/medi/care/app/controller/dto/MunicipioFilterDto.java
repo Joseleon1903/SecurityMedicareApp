@@ -9,6 +9,7 @@ public class MunicipioFilterDto {
     private String codigoMunicipio;
     private String descripcion;
     private int rowCounter = DaoUtil.DEFAULT_ROW_COUNT;
+    private int page = DaoUtil.DEFAULT_PAGE;
 
     public MunicipioFilterDto(String codigoMunicipio, String descripcion) {
         this.codigoMunicipio = codigoMunicipio;
@@ -40,6 +41,14 @@ public class MunicipioFilterDto {
 
     public void setRowCounter(int rowCounter) {
         this.rowCounter = rowCounter;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
     }
 
     @Override

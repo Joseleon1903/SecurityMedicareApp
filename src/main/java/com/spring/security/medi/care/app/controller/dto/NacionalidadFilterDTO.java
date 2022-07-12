@@ -10,6 +10,7 @@ public class NacionalidadFilterDTO implements Serializable {
 
     private String paisId;
     private int rowCounter = DaoUtil.DEFAULT_ROW_COUNT;
+    private int page = DaoUtil.DEFAULT_PAGE;
 
     public NacionalidadFilterDTO(String paisId) {
         this.paisId = paisId;
@@ -26,7 +27,6 @@ public class NacionalidadFilterDTO implements Serializable {
         this.paisId = paisId;
     }
 
-
     public int getRowCounter() {
         return rowCounter;
     }
@@ -35,11 +35,20 @@ public class NacionalidadFilterDTO implements Serializable {
         this.rowCounter = rowCounter;
     }
 
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
     @Override
     public String toString() {
         return "NacionalidadFilterDTO{" +
                 "paisId='" + paisId + '\'' +
                 ", rowCounter=" + rowCounter +
+                ", page=" + page +
                 '}';
     }
 }

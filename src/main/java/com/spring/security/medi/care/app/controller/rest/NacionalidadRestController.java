@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.List;
+import java.util.Locale;
 
 @RestController
 @RequestMapping(value="/api/nacionalidad/", produces=MediaType.APPLICATION_JSON_VALUE)
@@ -45,7 +46,7 @@ public class NacionalidadRestController {
             @RequestParam(value = "paisId", required = false) String paisId,
             @RequestParam(value = "page") int page,
             @RequestParam(value = "size") int size){
-        NacionalidadPaginatedDto nacionalidadesPageable = catalogoService.buscarNacionalidadPorParametros(paisId, page, size);
+        NacionalidadPaginatedDto nacionalidadesPageable = catalogoService.buscarNacionalidadPorParametros(paisId.toUpperCase(), page, size);
         return new ResponseEntity(nacionalidadesPageable, HttpStatus.OK);
     }
 

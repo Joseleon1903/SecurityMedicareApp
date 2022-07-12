@@ -10,6 +10,7 @@ public class MotivoEstadoFilterDTO implements Serializable {
     private Long motivoId;
     private String descripcion;
     private int rowCounter = DaoUtil.DEFAULT_ROW_COUNT;
+    private int page = DaoUtil.DEFAULT_PAGE;
 
     public MotivoEstadoFilterDTO(Long motivoId, String descripcion) {
         this.motivoId = motivoId;
@@ -42,12 +43,21 @@ public class MotivoEstadoFilterDTO implements Serializable {
         this.rowCounter = rowCounter;
     }
 
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
     @Override
     public String toString() {
         return "MotivoEstadoFilterDTO{" +
                 "motivoId=" + motivoId +
                 ", descripcion='" + descripcion + '\'' +
-                ", rowCounter='" + rowCounter + '\'' +
+                ", rowCounter=" + rowCounter +
+                ", page=" + page +
                 '}';
     }
 }

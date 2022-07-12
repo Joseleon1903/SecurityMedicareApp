@@ -16,7 +16,7 @@ public interface MotivoEstadoJpaRepo extends JpaRepository<MotivoEstado, Long>{
     @Query("select m from MotivoEstado m order by m.motivoId asc")
     List<MotivoEstado> findAllMotivos();
 
-    @Query("select m from MotivoEstado m where (:motivoId is null or m.motivoId = :motivoId) and (:descripcion is null or m.descripcion = :descripcion) order by m.motivoId asc")
+    @Query("select m from MotivoEstado m where (:motivoId is null or m.motivoId = :motivoId) and (:descripcion is null or m.descripcion like :descripcion) order by m.motivoId asc")
     Page<MotivoEstado> findMotivosByParameters(Long motivoId, String descripcion, Pageable paging);
 
 }

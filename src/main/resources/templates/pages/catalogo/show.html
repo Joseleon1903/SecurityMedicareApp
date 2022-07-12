@@ -11,7 +11,6 @@
 
     <!-- Favicons -->
     <link th:href="@{assets/img/favicon.png}" rel="icon">
-    <link th:href="@{assets/img/apple-touch-icon.}" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -158,15 +157,15 @@
                 </div>
 
                 <div class="col-lg-3 card">
-                    <form id="form-motivo-filter" class="form-catalogo-filter">
+                    <form  method="post" action="#" th:action="@{/motivoestado/filter}" th:object="${MotivoFilterDtoBean}" id="form-motivo-filter" class="form-catalogo-filter">
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="motivo-input" placeholder="Motivo id">
+                            <input type="text" class="form-control" id="motivo-input" th:field="*{motivoId}" th:value="${MotivoFilterDtoBean.motivoId}" placeholder="Motivo id">
                             <label for="motivo-input">Motivo Id</label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="descripcion-motivo-input" placeholder="Descripcion">
+                            <input type="text" class="form-control" id="descripcion-motivo-input" th:field="*{descripcion}" th:value="${MotivoFilterDtoBean.descripcion}" placeholder="Descripcion">
                             <label for="descripcion-motivo-input">Descripcion</label>
                         </div>
                         <button type="submit" class="btn btn-primary" th:text="#{page.generar.column.buscar}" >Submit</button>
@@ -192,6 +191,11 @@
                         </tbody>
 
                     </table>
+
+                    <div class="section-header" th:if="${#lists.isEmpty(PaginatedMotivosBean.motivos)}">
+                        <span th:text="#{page.error.query.no.data.text}" > No existen registros con los parametros proporcionados</span>
+                        <h4 th:text="#{page.error.query.no.data.text}" >No existen registros con los parametros proporcionados</h4>
+                    </div>
 
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-end">
@@ -226,15 +230,15 @@
                 </div>
 
                 <div class="col-lg-3 card">
-                    <form class="form-catalogo-filter" id="form-municipio-filter">
+                    <form method="post" action="#" th:action="@{/municipio/filter}" th:object="${MunicipioFilterDtoBean}" class="form-catalogo-filter" id="form-municipio-filter">
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="municipioCodigo-input" placeholder="Codigo municipio">
+                            <input type="text" class="form-control" id="municipioCodigo-input" th:field="*{codigoMunicipio}" th:value="${MunicipioFilterDtoBean.codigoMunicipio}" placeholder="Codigo municipio">
                             <label for="municipioCodigo-input">Codigo municipio</label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="descripcion-municipio-input" placeholder="Descripción">
+                            <input type="text" class="form-control" id="descripcion-municipio-input" th:field="*{descripcion}" th:value="${MunicipioFilterDtoBean.descripcion}" placeholder="Descripción">
                             <label for="descripcion-municipio-input">Descripción</label>
                         </div>
                         <button type="submit" class="btn btn-primary" th:text="#{page.generar.column.buscar}" >Submit</button>
@@ -264,6 +268,11 @@
                         </tbody>
 
                     </table>
+
+                    <div class="section-header" th:if="${#lists.isEmpty(PaginatedMunicipioBean.municipios)}">
+                        <span th:text="#{page.error.query.no.data.text}" >No existen registros con los parametros proporcionados</span>
+                        <h4 th:text="#{page.error.query.no.data.text}">No existen registros con los parametros proporcionados</h4>
+                    </div>
 
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-end">
@@ -298,10 +307,10 @@
                 </div>
 
                 <div class="col-lg-3 card">
-                    <form class="form-catalogo-filter" id="form-nacionalidad-filter">
+                    <form method="post" action="#" th:action="@{/nacionalidad/filter}" th:object="${NacionalidadFilterDTOBean}" class="form-catalogo-filter" id="form-nacionalidad-filter">
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="paisId-input" placeholder="Pais Id">
+                            <input type="text" class="form-control" id="paisId-input" th:field="*{paisId}" th:value="${NacionalidadFilterDTOBean.paisId}" placeholder="Pais Id">
                             <label for="paisId-input">Pais Id</label>
                         </div>
 
@@ -330,6 +339,11 @@
                         </tbody>
 
                     </table>
+
+                    <div class="section-header" th:if="${#lists.isEmpty(PaginatedNacionalidadBean.nacionalidades)}">
+                        <span th:text="#{page.error.query.no.data.text}">No existen registros con los parametros proporcionados</span>
+                        <h4 th:text="#{page.error.query.no.data.text}">No existen registros con los parametros proporcionados</h4>
+                    </div>
 
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-end">
