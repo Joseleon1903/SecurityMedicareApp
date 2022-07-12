@@ -101,7 +101,6 @@ public class CatalogoController extends ViewBaseContext {
     public String buscarMunicipiosPorParametros(@ModelAttribute MunicipioFilterDto municipioFilterDtoInput, Model model){
         logger.info("------- entering -----------");
         logger.info("Entering in method buscarMunicipiosPorParametros..");
-
         logger.info("Form values : "+municipioFilterDtoInput);
 
         if(municipioFilterDtoInput != null && municipioFilterDtoInput.getCodigoMunicipio().isEmpty()){
@@ -110,11 +109,9 @@ public class CatalogoController extends ViewBaseContext {
         if(municipioFilterDtoInput != null && municipioFilterDtoInput.getDescripcion().isEmpty() ){
             municipioFilterDtoInput.setDescripcion(null);
         }
-
         paginatedMunicipio = catalogoService
                 .buscarMunicipioPorParametros(municipioFilterDtoInput.getCodigoMunicipio(), municipioFilterDtoInput.getDescripcion(),municipioFilterDtoInput.getPage(),
                         municipioFilterDtoInput.getRowCounter());
-
         this.municipioFilterDto = municipioFilterDtoInput;
         logger.info("Exiting in method buscarMunicipiosPorParametros..");
         return "redirect:/catalogo";
@@ -154,12 +151,9 @@ public class CatalogoController extends ViewBaseContext {
         if(nacionalidadFilterInput != null && nacionalidadFilterInput.getPaisId().isEmpty()){
             nacionalidadFilterInput.setPaisId(null);
         }
-
         this.nacionalidadFilterDTO = nacionalidadFilterInput;
-
         paginatedNacionalidad = catalogoService.buscarNacionalidadPorParametros(nacionalidadFilterDTO.getPaisId(),nacionalidadFilterDTO.getPage(),
                 nacionalidadFilterDTO.getRowCounter());
-
         logger.info("Exiting in method buscarNacionalidadPorParametros..");
         return "redirect:/catalogo";
     }

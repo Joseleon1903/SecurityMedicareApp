@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import java.util.Date;
 import java.util.List;
 
@@ -38,6 +40,17 @@ public class CiudadanoController extends ViewBaseContext {
         model.addAttribute("CiudadanosList", ciudadanos);
         model.addAttribute("SystemInfoBean", systemInfoDTO);
         return "pages/ciudadano/show";
+    }
+
+    @PostMapping("/delete")
+    public String deleteCiudadanoRequest(@ModelAttribute Ciudadano ciudadanoInput, Model model){
+        logger.info("------- entering -----------");
+        logger.info("Entering in method deleteCiudadanoRequest..");
+        logger.info("param: "+ ciudadanoInput);
+
+        ciudadanoService.eliminarCiudadanoId(ciudadanoInput.getCiudadanoId());
+        logger.info("Exiting in method deleteCiudadanoRequest..");
+        return "redirect:/ciudadano";
     }
 
     @Override

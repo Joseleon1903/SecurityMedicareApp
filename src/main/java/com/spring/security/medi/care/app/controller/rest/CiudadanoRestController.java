@@ -40,4 +40,11 @@ public class CiudadanoRestController {
         List<Ciudadano> ciudadanos = ciudadanoService.buscarTodosCiudadanos();
         return new ResponseEntity<List<Ciudadano>>(ciudadanos, HttpStatus.OK);
     }
+
+    @DeleteMapping("/delete/{ciudadanoId}")
+    @ResponseBody
+    public ResponseEntity<Void> deleteById(@PathVariable("ciudadanoId") Long id){
+        ciudadanoService.eliminarCiudadanoId(id);
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+    }
 }

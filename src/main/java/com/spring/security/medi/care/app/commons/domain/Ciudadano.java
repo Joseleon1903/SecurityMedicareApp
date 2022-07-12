@@ -42,4 +42,6 @@ public class Ciudadano implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
         this.estado = estado;
     }
+
+
 }

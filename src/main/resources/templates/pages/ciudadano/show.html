@@ -99,7 +99,7 @@
                         <th scope="col" th:text="#{page.ciudadano.column.fechaNacimiento}">Fecha Nacimiento</th>
                         <th scope="col" th:text="#{page.ciudadano.column.edad}">Edad</th>
                         <th scope="col" th:text="#{page.ciudadano.column.estado}">Estado</th>
-                        <th scope="col" th:text="#{page.generar.column.accion}">Acción</th>
+                        <th scope="col" colspan="2" th:text="#{page.generar.column.accion}">Acción</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -115,8 +115,14 @@
                         <td>22</td>
                         <td th:text="${ciudadano.estado}">Activo</td>
                         <td>
-                            <button>View</button>
-                            <button>Delete</button>
+                            <button type="button" class="menu-button-solicitud btn btn-primary" >
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="menu-button-solicitud btn btn-danger">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
                         </td>
                     </tr>
                     </tbody>

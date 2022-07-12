@@ -1,8 +1,7 @@
-/**
-* Template Name: Logis - v1.0.1
-* Template URL: https://bootstrapmade.com/logis-bootstrap-logistics-website-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
+/*
+* Template Name: Catalogo Sistema
+* Author: jose de leon
+* License: https://securitymedicareapp.com/license/
 */
 document.addEventListener('DOMContentLoaded', () => {
   "use strict";

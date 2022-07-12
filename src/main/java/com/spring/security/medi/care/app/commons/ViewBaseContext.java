@@ -1,12 +1,11 @@
 package com.spring.security.medi.care.app.commons;
 
-import com.spring.security.medi.care.app.controller.page.CatalogoController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class ViewBaseContext {
 
-    protected static final Logger logger = LoggerFactory.getLogger(CatalogoController.class);
+    protected static final Logger logger = LoggerFactory.getLogger(ViewBaseContext.class);
 
     protected abstract void init();
 
