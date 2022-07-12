@@ -35,7 +35,7 @@ public class Ciudadano implements Serializable {
         this.nombre = nombre;
         this.primerApellido = primerApellido;
         this.segundoApellido = segundoApellido;
-        municipioId = municipioId;
+        this.municipioId = municipioId;
         this.nacionalidadId = nacionalidadId;
         this.estranjero = estranjero;
         this.genero = genero;
