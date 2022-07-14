@@ -6,12 +6,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/gradoconsanguinidad/")
+@RequestMapping(value="/api/gradoconsanguinidad/",produces=MediaType.APPLICATION_JSON_VALUE)
 public class GradoConsanguinidadRestController {
 
     private static final Logger logger = LoggerFactory.getLogger(MunicipioRestController.class);
@@ -27,14 +28,14 @@ public class GradoConsanguinidadRestController {
     @ResponseBody
     public ResponseEntity<GradoConsanguinidad> findById(@PathVariable("id") Long id){
         GradoConsanguinidad grado = catalogoService.buscarGradoConsanguinidadPorId(id);
-        return new ResponseEntity<GradoConsanguinidad>(grado, HttpStatus.ACCEPTED);
+        return new ResponseEntity<GradoConsanguinidad>(grado, HttpStatus.OK);
     }
 
     @GetMapping("/all")
     @ResponseBody
     public ResponseEntity<List<GradoConsanguinidad>> findAll(){
         List<GradoConsanguinidad> gradosList = catalogoService.buscarGradoConsanguinidadesTodos();
-        return new ResponseEntity<List<GradoConsanguinidad>>(gradosList, HttpStatus.ACCEPTED);
+        return new ResponseEntity<List<GradoConsanguinidad>>(gradosList, HttpStatus.OK);
     }
 
     @PutMapping

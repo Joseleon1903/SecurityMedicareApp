@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/usuario/")
+@RequestMapping(value="/api/usuario/",produces=MediaType.APPLICATION_JSON_VALUE)
 public class UsuarioRestController {
 
     private static final Logger logger = LoggerFactory.getLogger(ParentescoRestController.class);
@@ -24,14 +24,14 @@ public class UsuarioRestController {
         this.usuarioService= usuarioService;
     }
 
-    @RequestMapping(value="/{codigo}", method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/{codigo}")
     @ResponseBody
     public ResponseEntity<Usuario> findById(@PathVariable("codigo") String code){
         Usuario user = usuarioService.buscarUsuariosSistemaporCodigoJpa(code);
         return new ResponseEntity<Usuario>(user, HttpStatus.OK);
     }
 
-    @RequestMapping(value="/all", method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/all")
     @ResponseBody
     public ResponseEntity<List<Usuario>> findAll(){
         List<Usuario> usersList = usuarioService.buscarUsuariosSistemaJpa();

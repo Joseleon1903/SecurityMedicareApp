@@ -9,4 +9,6 @@ public interface CiudadanoService {
 
     List<Ciudadano> buscarTodosCiudadanos();
 
+    void eliminarCiudadanoId(Long ciudadanoId);
+
 }

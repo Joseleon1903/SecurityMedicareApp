@@ -11,7 +11,6 @@
 
     <!-- Favicons -->
     <link th:href="@{assets/img/favicon.png}" rel="icon">
-    <link th:href="@{assets/img/apple-touch-icon.}" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,10 +25,16 @@
     <link th:href="@{assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
     <link th:href="@{assets/vendor/aos/aos.css}" rel="stylesheet">
 
+    <!-- jQuery Core version 3.6.0 File -->
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+
     <!-- Template Main CSS File -->
     <link th:href="@{assets/css/main.css}" rel="stylesheet">
 </head>
-<body data-aos-easing="ease-in-out" data-aos-duration="1000" data-aos-delay="0">
+<body id="app" data-aos-easing="ease-in-out" data-aos-duration="1000" data-aos-delay="0">
 
 <!-- ======= Header ======= -->
 <header id="header" class="header d-flex align-items-center fixed-top">
@@ -80,6 +85,13 @@
         </nav>
     </div><!-- End Breadcrumbs -->
 
+    <!-- Button trigger modal -->
+    <button id="detail-modal-buttom" type="button" data-bs-toggle="modal" data-bs-target="#detailModal" style=" display:none;">
+    </button>
+
+    <button id="delete-modal-buttom" type="button" data-bs-toggle="modal" data-bs-target="#delete-ciudadano-modal" style=" display:none;">
+    </button>
+
     <!-- ======= About Us Section ======= -->
     <section id="about" class="about" style="padding: 1em 0;">
         <div class="container aos-init aos-animate" data-aos="fade-up">
@@ -99,7 +111,7 @@
                         <th scope="col" th:text="#{page.ciudadano.column.fechaNacimiento}">Fecha Nacimiento</th>
                         <th scope="col" th:text="#{page.ciudadano.column.edad}">Edad</th>
                         <th scope="col" th:text="#{page.ciudadano.column.estado}">Estado</th>
-                        <th scope="col" th:text="#{page.generar.column.accion}">Acción</th>
+                        <th scope="col" colspan="2" th:text="#{page.generar.column.accion}">Acción</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -108,15 +120,21 @@
                         <td th:text="${ciudadano.cedula}" >0456325896</td>
                         <td th:text="${ciudadano.nss}">8965235</td>
                         <td th:text="${ciudadano.nombre}">Mario</td>
-                        <th th:text="${ciudadano.primerApellido}">1</th>
+                        <td th:text="${ciudadano.primerApellido}">1</td>
                         <td th:text="${ciudadano.segundoApellido}">Cesar</td>
                         <td th:text="${ciudadano.genero}">M</td>
-                        <td th:text="${#dates.format(ciudadano.fechaNacimiento,'dd MMMM yyyy')}">01/01/2000</td>
+                        <td th:text="${#dates.format(ciudadano.fechaNacimiento,'dd/MMM/yyyy')}">01/01/2000</td>
                         <td>22</td>
                         <td th:text="${ciudadano.estado}">Activo</td>
                         <td>
-                            <button>View</button>
-                            <button>Delete</button>
+                            <button type="button" th:data-text="${ciudadano.ciudadanoId}" class="menu-button-solicitud btn btn-primary" >
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button th:data-text="${ciudadano.ciudadanoId}" type="button" class="menu-button-solicitud btn btn-danger">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
                         </td>
                     </tr>
                     </tbody>
@@ -131,6 +149,89 @@
 
 </main><!-- End #main -->
 
+<!-- Modal detail ciudadano -->
+<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailModalLabel" th:text="#{page.generar.label.detail.modal.title}">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form>
+
+            <div class="modal-body">
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="ciudadanoId" th:field="${DetailCiudadanoBean.ciudadanoId}" th:value="${DetailCiudadanoBean.ciudadanoId}" disabled="true" value="1156">
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="cedula" disabled="true" value="02100032850">
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="nss" disabled="true" value="50307232">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" value="FREIDMANT">
+                    </div>
+                    <div class="mb-3">
+                        <label for="primerApellido" class="form-label">Primer Apellido</label>
+                        <input type="text" class="form-control" id="primerApellido" value="DOINET">
+                    </div>
+                    <div class="mb-3">
+                        <label for="segundoApellido" class="form-label">Segundo Apellido</label>
+                        <input type="text" class="form-control" id="segundoApellido" value="GODEK">
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="sexo" disabled="true" value="Masculino">
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="fechaNacimiento" disabled="true" value="05/Jan/1990">
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="nacionalidad" disabled="true" value="Dominicana">
+                    </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" th:text="#{page.generar.label.accion.modificar}">Save changes</button>
+
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" th:text="#{page.generar.label.accion.cerrar}">Close</button>
+            </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal delete ciudadano -->
+<div class="modal fade" id="delete-ciudadano-modal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel" th:text="#{page.generar.label.delete.modal.title}">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="reloadPage()"></button>
+            </div>
+            <div id="delete-modal-body" class="modal-body" >
+               <!-- <h4 >
+                    Woo-hoo, you're reading this text in a modal!
+                </h4>-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" th:text="#{page.generar.label.accion.cerrar}" onclick="reloadPage()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Vendor JS Files -->
 <script th:src="@{assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <script th:src="@{assets/vendor/purecounter/purecounter_vanilla.js}"></script>
@@ -141,6 +242,8 @@
 
 <!-- Template Main JS File -->
 <script th:src="@{assets/js/main.js}"></script>
+<!-- ciudadano JS File -->
+<script th:src="@{assets/js/ciudadano-script.js}"></script>
 
 </body>
 </html>

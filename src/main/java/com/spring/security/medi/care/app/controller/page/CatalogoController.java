@@ -1,14 +1,14 @@
 package com.spring.security.medi.care.app.controller.page;
 
+import com.spring.security.medi.care.app.catalogo.dto.MotivoEstadoPaginatedDto;
+import com.spring.security.medi.care.app.catalogo.dto.MunicipioPaginatedDto;
+import com.spring.security.medi.care.app.catalogo.dto.NacionalidadPaginatedDto;
 import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
 import com.spring.security.medi.care.app.commons.domain.MotivoEstado;
 import com.spring.security.medi.care.app.commons.domain.Nacionalidad;
 import com.spring.security.medi.care.app.commons.domain.Parentesco;
-import com.spring.security.medi.care.app.controller.dto.MotivoEstadoFilterDTO;
-import com.spring.security.medi.care.app.controller.dto.NacionalidadFilterDTO;
-import com.spring.security.medi.care.app.controller.dto.ParentescoFilterDTO;
-import com.spring.security.medi.care.app.controller.dto.SystemInfoDTO;
+import com.spring.security.medi.care.app.controller.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -29,21 +29,21 @@ public class CatalogoController extends ViewBaseContext {
 
     private SystemInfoDTO systemInfoDTO;
 
-    private ParentescoFilterDTO parentescoInputDto;
     private MotivoEstadoFilterDTO motivoFilterDTO;
     private NacionalidadFilterDTO nacionalidadFilterDTO;
+    private MunicipioFilterDto municipioFilterDto;
 
-    private List<Parentesco> listaParentesco;
-    private List<MotivoEstado> listaMotivos;
-    private List<Nacionalidad> listaNacionalidades;
+    private MunicipioPaginatedDto paginatedMunicipio;
+    private MotivoEstadoPaginatedDto paginatedMotivoEstado;
+    private NacionalidadPaginatedDto paginatedNacionalidad;
 
     @Autowired
-    public CatalogoController(CatalogoService catalogoService, ParentescoFilterDTO parentescoInputDto,MotivoEstadoFilterDTO motivoFilterDTO, NacionalidadFilterDTO nacionalidadFilterDTO) {
+    public CatalogoController(CatalogoService catalogoService ,MotivoEstadoFilterDTO motivoFilterDTO, NacionalidadFilterDTO nacionalidadFilterDTO, MunicipioFilterDto municipioFilterDto) {
         super();
         this.catalogoService = catalogoService;
-        this.parentescoInputDto = parentescoInputDto;
         this.motivoFilterDTO = motivoFilterDTO;
         this.nacionalidadFilterDTO = nacionalidadFilterDTO;
+        this.municipioFilterDto = municipioFilterDto;
     }
 
     /***
@@ -55,111 +55,89 @@ public class CatalogoController extends ViewBaseContext {
     public String showCatalogo(Model model) {
         logger.info("entering  in show showCatalogo");
 
-        logger.info("filter parameters : "+parentescoInputDto);
         logger.info("filter parameters : "+motivoFilterDTO);
         logger.info("filter parameters : "+nacionalidadFilterDTO);
+        logger.info("filter parameters : "+municipioFilterDto);
 
-        listaParentesco = new ArrayList<>();
-        listaMotivos = new ArrayList<>();
-        listaNacionalidades = new ArrayList<>();
-
-        logger.info("iniciando busqueda para parentesco..");
-
-     /*   if(parentescoInputDto.getTipoDependiente() != null || parentescoInputDto.getGenero() != null){
-           logger.info("iniciando busqueda parentesco "+parentescoInputDto);
-
-           listaParentesco = catalogoService
-                   .buscarCatalogoParentescoPorParametros(parentescoInputDto.getTipoDependiente(),parentescoInputDto.getGenero(),
-                           parserRowCounter(parentescoInputDto.getRowCounter()));
-           logger.info("termiando busqueda Parentescos" );
-        }else{
-           listaParentesco = catalogoService
-                   .buscarCatalogoParentescoPorParametros(parentescoInputDto.getTipoDependiente(),parentescoInputDto.getGenero(),
-                           parserRowCounter(parentescoInputDto.getRowCounter()));
-       }
-        logger.info("Terminando busqueda para parentesco..");
-        logger.info("total paretescos count: "+ listaParentesco.size());
-
-        logger.info("iniciando busqueda para motivos estado codigo errores..");
-
-        if(motivoFilterDTO.getMotivoId() != null || motivoFilterDTO.getDescripcion() != null){
+        if(paginatedMotivoEstado == null){
+            logger.info("iniciando busqueda para motivos estado codigo errores..");
             logger.info("iniciando busqueda motivos "+motivoFilterDTO);
-
-            listaMotivos = catalogoService
-                    .buscarCatalogomotivoEstadooPorParametros(motivoFilterDTO.getMotivoId(),motivoFilterDTO.getDescripcion(), parserRowCounter(motivoFilterDTO.getRowCounter()));
-            logger.info("termiando busqueda motivos" );
-        }else{
-            listaMotivos = catalogoService
-                    .buscarCatalogomotivoEstadooPorParametros(motivoFilterDTO.getMotivoId(),motivoFilterDTO.getDescripcion(), parserRowCounter(motivoFilterDTO.getRowCounter()));
+            paginatedMotivoEstado = catalogoService
+                    .buscarMotivosPorParametros(motivoFilterDTO.getMotivoId(),motivoFilterDTO.getDescripcion(), motivoFilterDTO.getPage(), motivoFilterDTO.getRowCounter());
+            logger.info("termiando busqueda motivos");
+            logger.info("temrinando busqueda para motivos estado codigo errores..");
         }
-        logger.info("temrinando busqueda para motivos estado codigo errores..");
 
-        logger.info("iniciando busqueda para nacionalidad..");
-
-        if(nacionalidadFilterDTO.getNombre() != null || nacionalidadFilterDTO.getPaisId() != null){
-            logger.info("iniciando busqueda parentesco "+nacionalidadFilterDTO);
-
-            listaNacionalidades = catalogoService
-                    .buscarCatalogoNacionalidad(nacionalidadFilterDTO.getPaisId(),nacionalidadFilterDTO.getNombre(),
-                            parserRowCounter(nacionalidadFilterDTO.getRowCounter()));
-            logger.info("termiando busqueda Nacionalidad" );
-        }else{
-            listaNacionalidades = catalogoService
-                    .buscarCatalogoNacionalidad(nacionalidadFilterDTO.getPaisId(),nacionalidadFilterDTO.getNombre(),
-                            parserRowCounter(nacionalidadFilterDTO.getRowCounter()));
+        if(paginatedNacionalidad == null){
+            logger.info("iniciando busqueda para nacionalidad..");
+            logger.info("iniciando busqueda nacionalidadFilterDTO "+nacionalidadFilterDTO);
+            paginatedNacionalidad = catalogoService.buscarNacionalidadPorParametros(nacionalidadFilterDTO.getPaisId(),nacionalidadFilterDTO.getPage(),
+                    nacionalidadFilterDTO.getRowCounter());
+            logger.info("termiando busqueda Nacionalidad");
+            logger.info("Terminando busqueda para Nacionalidad..");
         }
-        logger.info("Terminando busqueda para parentesco..");
-        logger.info("total paretescos count: "+ listaNacionalidades.size());
 
+        if(paginatedMunicipio == null){
+            logger.info("iniciando busqueda para municipio..");
+            logger.info("municipioFilterDto: "+municipioFilterDto);
+            paginatedMunicipio = catalogoService
+                    .buscarMunicipioPorParametros(municipioFilterDto.getCodigoMunicipio(), municipioFilterDto.getDescripcion(),0,
+                            municipioFilterDto.getRowCounter());
+            logger.info("termiando busqueda municipio" );
+        }
 
-        model.addAttribute("parentescoFilterBean",parentescoInputDto);
-        model.addAttribute("listadoParentescoBean", listaParentesco);
-        model.addAttribute("listadoNacionalidadBean", listaNacionalidades);
-
-        model.addAttribute("motivoFilterBean",motivoFilterDTO);
-        model.addAttribute("NacionalidadFilterBean",nacionalidadFilterDTO);
-
-        model.addAttribute("listadoMotivosBean", listaMotivos);*/
+        model.addAttribute("NacionalidadFilterDTOBean",nacionalidadFilterDTO);
+        model.addAttribute("MunicipioFilterDtoBean",municipioFilterDto);
+        model.addAttribute("MotivoFilterDtoBean",motivoFilterDTO);
+        model.addAttribute("PaginatedMunicipioBean",paginatedMunicipio);
+        model.addAttribute("PaginatedNacionalidadBean",paginatedNacionalidad);
+        model.addAttribute("PaginatedMotivosBean", paginatedMotivoEstado);
         model.addAttribute("SystemInfoBean", systemInfoDTO);
 
         return "/pages/catalogo/show";
     }
 
-    @PostMapping("/parentesco/filter")
-    public String buscarParentescosPorParametros(@ModelAttribute ParentescoFilterDTO parentescoFilterDTO, Model model){
+    @PostMapping("/municipio/filter")
+    public String buscarMunicipiosPorParametros(@ModelAttribute MunicipioFilterDto municipioFilterDtoInput, Model model){
         logger.info("------- entering -----------");
-        logger.info("Entering in method buscarParentescosPorParametros..");
+        logger.info("Entering in method buscarMunicipiosPorParametros..");
+        logger.info("Form values : "+municipioFilterDtoInput);
 
-        logger.info("Form values : "+parentescoFilterDTO);
-
-        if(parentescoFilterDTO.getGenero().equals("T")){
-            parentescoFilterDTO.setGenero(null);
+        if(municipioFilterDtoInput != null && municipioFilterDtoInput.getCodigoMunicipio().isEmpty()){
+            municipioFilterDtoInput.setCodigoMunicipio(null);
         }
-
-        if(parentescoFilterDTO.getTipoDependiente().equals("T")){
-            parentescoFilterDTO.setTipoDependiente(null);
+        if(municipioFilterDtoInput != null && municipioFilterDtoInput.getDescripcion().isEmpty() ){
+            municipioFilterDtoInput.setDescripcion(null);
         }
-
-        this.parentescoInputDto = parentescoFilterDTO;
-        logger.info("Exiting in method buscarParentescosPorParametros..");
+        paginatedMunicipio = catalogoService
+                .buscarMunicipioPorParametros(municipioFilterDtoInput.getCodigoMunicipio(), municipioFilterDtoInput.getDescripcion(),municipioFilterDtoInput.getPage(),
+                        municipioFilterDtoInput.getRowCounter());
+        this.municipioFilterDto = municipioFilterDtoInput;
+        logger.info("Exiting in method buscarMunicipiosPorParametros..");
         return "redirect:/catalogo";
     }
 
-    @PostMapping("/motivo/filter")
-    public String buscarMotivosEstadosPorParametros(@ModelAttribute MotivoEstadoFilterDTO motivoFilterDTO, Model model){
+    @PostMapping("/motivoestado/filter")
+    public String buscarMotivosEstadosPorParametros(@ModelAttribute MotivoEstadoFilterDTO motivoFilterDtoInput, Model model){
         logger.info("------- entering -----------");
         logger.info("Entering in method buscarMotivosEstadosPorParametros..");
-        logger.info("Form values : "+motivoFilterDTO);
+        logger.info("Form values : "+motivoFilterDtoInput);
 
-        if(motivoFilterDTO != null && motivoFilterDTO.getMotivoId() != null && motivoFilterDTO.getMotivoId() <=0){
-            motivoFilterDTO.setMotivoId(null);
+        if(motivoFilterDtoInput != null && motivoFilterDtoInput.getMotivoId() != null && motivoFilterDtoInput.getMotivoId() <=0){
+            motivoFilterDtoInput.setMotivoId(null);
         }
 
-        if(motivoFilterDTO != null && motivoFilterDTO.getDescripcion() != null && motivoFilterDTO.getDescripcion().isEmpty()){
-            motivoFilterDTO.setDescripcion(null);
+        if(motivoFilterDtoInput != null && motivoFilterDtoInput.getDescripcion() != null && motivoFilterDtoInput.getDescripcion().isEmpty()){
+            motivoFilterDtoInput.setDescripcion(null);
         }
 
-        this.motivoFilterDTO = motivoFilterDTO;
+        logger.info("iniciando busqueda motivos "+motivoFilterDtoInput);
+        paginatedMotivoEstado = catalogoService
+                .buscarMotivosPorParametros(motivoFilterDtoInput.getMotivoId(),motivoFilterDtoInput.getDescripcion(), motivoFilterDtoInput.getPage(), motivoFilterDtoInput.getRowCounter());
+        logger.info("termiando busqueda motivos" );
+        logger.info("terminando busqueda para motivos estado codigo errores..");
+
+        this.motivoFilterDTO = motivoFilterDtoInput;
         logger.info("Exiting in method buscarMotivosEstadosPorParametros..");
         return "redirect:/catalogo";
     }
@@ -173,12 +151,9 @@ public class CatalogoController extends ViewBaseContext {
         if(nacionalidadFilterInput != null && nacionalidadFilterInput.getPaisId().isEmpty()){
             nacionalidadFilterInput.setPaisId(null);
         }
-
-        if(nacionalidadFilterInput != null && nacionalidadFilterInput.getNombre().isEmpty()){
-            nacionalidadFilterInput.setNombre(null);
-        }
-
         this.nacionalidadFilterDTO = nacionalidadFilterInput;
+        paginatedNacionalidad = catalogoService.buscarNacionalidadPorParametros(nacionalidadFilterDTO.getPaisId(),nacionalidadFilterDTO.getPage(),
+                nacionalidadFilterDTO.getRowCounter());
         logger.info("Exiting in method buscarNacionalidadPorParametros..");
         return "redirect:/catalogo";
     }
@@ -189,7 +164,6 @@ public class CatalogoController extends ViewBaseContext {
         logger.info("Generando systemInfoDTO");
         systemInfoDTO = new SystemInfoDTO("Catalogos",new Date());
         logger.info("systemInfoDTO: "+ systemInfoDTO);
-
         logger.info("existing init method ");
     }
 }
