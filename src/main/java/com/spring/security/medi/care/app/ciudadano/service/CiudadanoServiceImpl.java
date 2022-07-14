@@ -22,15 +22,25 @@ public class CiudadanoServiceImpl implements CiudadanoService {
         this.ciudadanoJpaRepo = ciudadanoJpaRepo;
     }
 
+    @Override
     public Ciudadano buscarCiudadanoPorCiudadanoId(Long ciudadanoId){
         return ciudadanoJpaRepo.findByCiudadanoId(ciudadanoId);
     }
 
+    @Override
     public List<Ciudadano> buscarTodosCiudadanos(){
         Integer pageNo = 0;
         Integer pageSize = 15;
         Pageable paging = PageRequest.of(pageNo, pageSize);
         return ciudadanoJpaRepo.findAll(paging).toList();
+    }
+
+    @Override
+    public void eliminarCiudadanoId(Long ciudadanoId){
+        Ciudadano ciu = ciudadanoJpaRepo.findByCiudadanoId(ciudadanoId);
+        if(ciu != null){
+            ciudadanoJpaRepo.delete(ciu);
+        }
     }
 
 }

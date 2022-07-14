@@ -2,29 +2,29 @@ package com.spring.security.medi.care.app.controller.dto;
 
 import com.spring.security.medi.care.app.commons.DaoUtil;
 import org.springframework.stereotype.Component;
-import java.io.Serializable;
 
 @Component
-public class MotivoEstadoFilterDTO implements Serializable {
+public class MunicipioFilterDto {
 
-    private Long motivoId;
+    private String codigoMunicipio;
     private String descripcion;
     private int rowCounter = DaoUtil.DEFAULT_ROW_COUNT;
     private int page = DaoUtil.DEFAULT_PAGE;
 
-    public MotivoEstadoFilterDTO(Long motivoId, String descripcion) {
-        this.motivoId = motivoId;
+    public MunicipioFilterDto(String codigoMunicipio, String descripcion) {
+        this.codigoMunicipio = codigoMunicipio;
         this.descripcion = descripcion;
     }
 
-    public MotivoEstadoFilterDTO() {}
-
-    public Long getMotivoId() {
-        return motivoId;
+    public MunicipioFilterDto() {
     }
 
-    public void setMotivoId(Long motivoId) {
-        this.motivoId = motivoId;
+    public String getCodigoMunicipio() {
+        return codigoMunicipio;
+    }
+
+    public void setCodigoMunicipio(String codigoMunicipio) {
+        this.codigoMunicipio = codigoMunicipio;
     }
 
     public String getDescripcion() {
@@ -53,11 +53,10 @@ public class MotivoEstadoFilterDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "MotivoEstadoFilterDTO{" +
-                "motivoId=" + motivoId +
+        return "MunicipioFilterDto{" +
+                "codigoMunicipio='" + codigoMunicipio + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", rowCounter=" + rowCounter +
-                ", page=" + page +
                 '}';
     }
 }

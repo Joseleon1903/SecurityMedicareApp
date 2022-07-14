@@ -31,13 +31,20 @@ public class CiudadanoRestController {
     @ResponseBody
     public ResponseEntity<Ciudadano> findById(@PathVariable("ciudadanoId") Long id){
         Ciudadano ciudadano = ciudadanoService.buscarCiudadanoPorCiudadanoId(id);
-        return new ResponseEntity<Ciudadano>(ciudadano, HttpStatus.ACCEPTED);
+        return new ResponseEntity<Ciudadano>(ciudadano, HttpStatus.OK);
     }
 
     @GetMapping("/all")
     @ResponseBody
     public ResponseEntity<List<Ciudadano>> findAll(){
         List<Ciudadano> ciudadanos = ciudadanoService.buscarTodosCiudadanos();
-        return new ResponseEntity<List<Ciudadano>>(ciudadanos, HttpStatus.ACCEPTED);
+        return new ResponseEntity<List<Ciudadano>>(ciudadanos, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{ciudadanoId}")
+    @ResponseBody
+    public ResponseEntity<Void> deleteById(@PathVariable("ciudadanoId") Long id){
+        ciudadanoService.eliminarCiudadanoId(id);
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
 }

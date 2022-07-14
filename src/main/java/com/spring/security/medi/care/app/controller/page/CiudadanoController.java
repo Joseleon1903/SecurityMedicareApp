@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +22,9 @@ public class CiudadanoController extends ViewBaseContext {
 
     private final CiudadanoService ciudadanoService;
 
-    List<Ciudadano> ciudadanos;
+    private List<Ciudadano> ciudadanos;
+
+    private Ciudadano detailCiudadano = new Ciudadano();
 
     @Autowired
     public CiudadanoController(CiudadanoService ciudadanoService){
@@ -37,7 +42,35 @@ public class CiudadanoController extends ViewBaseContext {
 
         model.addAttribute("CiudadanosList", ciudadanos);
         model.addAttribute("SystemInfoBean", systemInfoDTO);
+        model.addAttribute("DetailCiudadanoBean", detailCiudadano);
+
         return "pages/ciudadano/show";
+    }
+
+    @RequestMapping("/ciudadano/{ciudadanoId}")
+    public String updateDetailCiudadanoPage(@PathVariable("ciudadanoId") Long ciudadanoId, Model model){
+        logger.info("------- entering -----------");
+        logger.info("Entering in method updateDetailCiudadanoPage..");
+
+        logger.info("buscando ciudadanos ...");
+        detailCiudadano = ciudadanoService.buscarCiudadanoPorCiudadanoId(ciudadanoId);
+        logger.info("terminando buscando ciudadanos:"+ detailCiudadano);
+
+        model.addAttribute("CiudadanosList", ciudadanos);
+        model.addAttribute("SystemInfoBean", systemInfoDTO);
+        model.addAttribute("DetailCiudadanoBean", detailCiudadano);
+        return "pages/ciudadano/show";
+    }
+
+    @PostMapping("/delete")
+    public String deleteCiudadanoRequest(@ModelAttribute Ciudadano ciudadanoInput){
+        logger.info("------- entering -----------");
+        logger.info("Entering in method deleteCiudadanoRequest..");
+        logger.info("param: "+ ciudadanoInput);
+
+        ciudadanoService.eliminarCiudadanoId(ciudadanoInput.getCiudadanoId());
+        logger.info("Exiting in method deleteCiudadanoRequest..");
+        return "redirect:/ciudadano";
     }
 
     @Override

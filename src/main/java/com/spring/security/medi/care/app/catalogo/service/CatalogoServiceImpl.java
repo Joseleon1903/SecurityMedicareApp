@@ -1,12 +1,19 @@
 package com.spring.security.medi.care.app.catalogo.service;
 
+import com.spring.security.medi.care.app.catalogo.dto.MotivoEstadoPaginatedDto;
+import com.spring.security.medi.care.app.catalogo.dto.MunicipioPaginatedDto;
+import com.spring.security.medi.care.app.catalogo.dto.NacionalidadPaginatedDto;
 import com.spring.security.medi.care.app.catalogo.repository.jdbc.MotivoEstadoJdbcImpl;
 import com.spring.security.medi.care.app.catalogo.repository.jdbc.NacionalidadJdbcImpl;
 import com.spring.security.medi.care.app.catalogo.repository.jdbc.ParentescoJdbcImpl;
 import com.spring.security.medi.care.app.catalogo.repository.jpa.*;
+import com.spring.security.medi.care.app.commons.PaginationOutput;
 import com.spring.security.medi.care.app.commons.domain.*;
 import com.spring.security.medi.care.app.controller.rest.MotivoEstadoRestController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import org.slf4j.Logger;
@@ -77,6 +84,13 @@ public class CatalogoServiceImpl implements CatalogoService {
     }
 
     @Override
+    public Municipio actualizarMunicipio(Municipio municipio) {
+        logger.info("Entering in actualizarMunicipio");
+        logger.info("param Municipio: "+municipio);
+        return municipioJpaRepo.save(municipio);
+    }
+
+    @Override
     public MotivoEstado buscarMotivoPorId(Long id){
         logger.info("Entering in buscarPorId");
         logger.info("param id: "+id);
@@ -139,9 +153,46 @@ public class CatalogoServiceImpl implements CatalogoService {
         return gradoConsanguinidadJpaRepo.findAllOrderByGradoConsanguinidadId();
     }
 
-    public Municipio actualizarMunicipio(Municipio municipio){
-        logger.info("Entering in actualizarMunicipio");
-        logger.info("param MotivoEstado: "+municipio);
-        return municipioJpaRepo.save(municipio);
+    @Override
+    public MotivoEstadoPaginatedDto buscarMotivosPorParametros(Long motivoId, String description , int page, int size){
+        logger.info("Entering in buscarMotivosPorParametros");
+        logger.info("param motivoId: "+ motivoId);
+        description = (description != null)? "%"+description.toUpperCase()+"%": null;
+        logger.info("param description: "+ description);
+        logger.info("param page: "+ page);
+        logger.info("param size: "+ size);
+        Pageable paging = PageRequest.of(page, size);
+        Page<MotivoEstado> motivosPages =motivoEstadoJpaRepo.findMotivosByParameters(motivoId, description, paging);
+        PaginationOutput pageOut = new PaginationOutput(page, size, motivosPages.getTotalElements(), motivosPages.getTotalPages());
+        return new MotivoEstadoPaginatedDto( motivosPages.getContent(), pageOut);
     }
+
+    @Override
+    public MunicipioPaginatedDto buscarMunicipioPorParametros(String codigoMunicipio, String description, int page, int size) {
+        logger.info("Entering in buscarMunicipioPorParametros");
+        codigoMunicipio = (codigoMunicipio != null)? "%"+codigoMunicipio.toUpperCase()+"%": null;
+        logger.info("param motivoId: "+ codigoMunicipio);
+        description = (description != null)? "%"+description.toUpperCase()+"%": null;
+        logger.info("param description: "+ description);
+        logger.info("param page: "+ page);
+        logger.info("param size: "+ size);
+        Pageable paging = PageRequest.of(page, size);
+        Page<Municipio> municipiosPages =municipioJpaRepo.findMotivosByParameters(codigoMunicipio, description, paging);
+        PaginationOutput pageOut = new PaginationOutput(page, size, municipiosPages.getTotalElements(), municipiosPages.getTotalPages());
+        return new MunicipioPaginatedDto(municipiosPages.getContent(), pageOut);
+    }
+
+    @Override
+    public NacionalidadPaginatedDto buscarNacionalidadPorParametros(String paisId, int page, int size) {
+        logger.info("Entering in buscarNacionalidadPorParametros");
+        paisId = (paisId != null)? "%"+ paisId.toUpperCase()+"%": null;
+        logger.info("param page: "+ page);
+        logger.info("param size: "+ size);
+        Pageable paging = PageRequest.of(page, size);
+        Page<Nacionalidad> nacionalidadesPages =nacionalidadJpaRepo.findNacionalidadByParameters(paisId, paging);
+        PaginationOutput pageOut = new PaginationOutput(page, size, nacionalidadesPages.getTotalElements(), nacionalidadesPages.getTotalPages());
+        return new NacionalidadPaginatedDto(nacionalidadesPages.getContent(), pageOut);
+    }
+
+
 }

@@ -11,7 +11,6 @@
 
     <!-- Favicons -->
     <link th:href="@{assets/img/favicon.png}" rel="icon">
-    <link th:href="@{assets/img/apple-touch-icon.}" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -75,7 +74,6 @@
                 <li><a th:href="@{/home}" class="active">Home</a></li>
                 <li><a th:href="@{/ciudadano}" class="active">Ciudadanos</a></li>
                 <li><a th:href="@{/solicitud}" class="active">Solicitudes</a></li>
-                <li><a th:href="@{/home}" class="active">Solicitudes</a></li>
                 <li><a th:href="@{/catalogo}" class="active">Catalogos</a></li>
             </ul>
         </nav><!-- .navbar -->
@@ -159,15 +157,15 @@
                 </div>
 
                 <div class="col-lg-3 card">
-                    <form id="form-motivo-filter" class="form-catalogo-filter">
+                    <form  method="post" action="#" th:action="@{/motivoestado/filter}" th:object="${MotivoFilterDtoBean}" id="form-motivo-filter" class="form-catalogo-filter">
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="motivo-input" placeholder="Motivo id">
+                            <input type="text" class="form-control" id="motivo-input" th:field="*{motivoId}" th:value="${MotivoFilterDtoBean.motivoId}" placeholder="Motivo id">
                             <label for="motivo-input">Motivo Id</label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="descripcion-motivo-input" placeholder="Descripcion">
+                            <input type="text" class="form-control" id="descripcion-motivo-input" th:field="*{descripcion}" th:value="${MotivoFilterDtoBean.descripcion}" placeholder="Descripcion">
                             <label for="descripcion-motivo-input">Descripcion</label>
                         </div>
                         <button type="submit" class="btn btn-primary" th:text="#{page.generar.column.buscar}" >Submit</button>
@@ -185,14 +183,19 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row" >1</th>
-                            <td >Nam voluptatem quasi numquam quas</td>
-                            <td >Activo</td>
+                        <tr th:each="motivo : ${PaginatedMotivosBean.motivos}" th:if="${not #lists.isEmpty(PaginatedMotivosBean.motivos)}">
+                            <th scope="row" th:text="${motivo.motivoId}" >1</th>
+                            <td th:text="${motivo.descripcion}">Nam voluptatem quasi numquam quas</td>
+                            <td th:text="${motivo.estado}">Activo</td>
                         </tr>
                         </tbody>
 
                     </table>
+
+                    <div class="section-header" th:if="${#lists.isEmpty(PaginatedMotivosBean.motivos)}">
+                        <span th:text="#{page.error.query.no.data.text}" > No existen registros con los parametros proporcionados</span>
+                        <h4 th:text="#{page.error.query.no.data.text}" >No existen registros con los parametros proporcionados</h4>
+                    </div>
 
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-end">
@@ -227,15 +230,15 @@
                 </div>
 
                 <div class="col-lg-3 card">
-                    <form class="form-catalogo-filter" id="form-municipio-filter">
+                    <form method="post" action="#" th:action="@{/municipio/filter}" th:object="${MunicipioFilterDtoBean}" class="form-catalogo-filter" id="form-municipio-filter">
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="municipioCodigo-input" placeholder="Codigo municipio">
+                            <input type="text" class="form-control" id="municipioCodigo-input" th:field="*{codigoMunicipio}" th:value="${MunicipioFilterDtoBean.codigoMunicipio}" placeholder="Codigo municipio">
                             <label for="municipioCodigo-input">Codigo municipio</label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="descripcion-municipio-input" placeholder="Descripción">
+                            <input type="text" class="form-control" id="descripcion-municipio-input" th:field="*{descripcion}" th:value="${MunicipioFilterDtoBean.descripcion}" placeholder="Descripción">
                             <label for="descripcion-municipio-input">Descripción</label>
                         </div>
                         <button type="submit" class="btn btn-primary" th:text="#{page.generar.column.buscar}" >Submit</button>
@@ -255,16 +258,21 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row" >1</th>
-                            <td >Nam voluptatem quasi numquam quas</td>
-                            <td >TRE-001</td>
-                            <td >25</td>
-                            <td >Activo</td>
+                        <tr th:each="municipio : ${PaginatedMunicipioBean.municipios}" th:if="${not #lists.isEmpty(PaginatedMunicipioBean.municipios)}">
+                            <th scope="row" th:text="${municipio.municipioId}">1</th>
+                            <td th:text="${municipio.descripcion}">Nam voluptatem quasi numquam quas</td>
+                            <td th:text="${municipio.codigoMunicipio}">TRE-001</td>
+                            <td th:text="${municipio.provinciaId}">25</td>
+                            <td th:text="${municipio.estado}">Activo</td>
                         </tr>
                         </tbody>
 
                     </table>
+
+                    <div class="section-header" th:if="${#lists.isEmpty(PaginatedMunicipioBean.municipios)}">
+                        <span th:text="#{page.error.query.no.data.text}" >No existen registros con los parametros proporcionados</span>
+                        <h4 th:text="#{page.error.query.no.data.text}">No existen registros con los parametros proporcionados</h4>
+                    </div>
 
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-end">
@@ -299,10 +307,10 @@
                 </div>
 
                 <div class="col-lg-3 card">
-                    <form class="form-catalogo-filter" id="form-nacionalidad-filter">
+                    <form method="post" action="#" th:action="@{/nacionalidad/filter}" th:object="${NacionalidadFilterDTOBean}" class="form-catalogo-filter" id="form-nacionalidad-filter">
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="paisId-input" placeholder="Pais Id">
+                            <input type="text" class="form-control" id="paisId-input" th:field="*{paisId}" th:value="${NacionalidadFilterDTOBean.paisId}" placeholder="Pais Id">
                             <label for="paisId-input">Pais Id</label>
                         </div>
 
@@ -322,15 +330,20 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row" >1</th>
-                            <td >Nam voluptatem quasi numquam quas</td>
-                            <td >TRE-001</td>
-                            <td >Activo</td>
+                        <tr th:each="nacionalidad : ${PaginatedNacionalidadBean.nacionalidades}" th:if="${not #lists.isEmpty(PaginatedNacionalidadBean.nacionalidades)}">
+                            <th scope="row" th:text="${nacionalidad.nacionalidadId}">1</th>
+                            <td th:text="${nacionalidad.descripcion}" >Nam voluptatem quasi numquam quas</td>
+                            <td th:text="${nacionalidad.paisId}" >TRE-001</td>
+                            <td th:text="${nacionalidad.estado}">Activo</td>
                         </tr>
                         </tbody>
 
                     </table>
+
+                    <div class="section-header" th:if="${#lists.isEmpty(PaginatedNacionalidadBean.nacionalidades)}">
+                        <span th:text="#{page.error.query.no.data.text}">No existen registros con los parametros proporcionados</span>
+                        <h4 th:text="#{page.error.query.no.data.text}">No existen registros con los parametros proporcionados</h4>
+                    </div>
 
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-end">
