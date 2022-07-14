@@ -148,3 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
+function reloadPage(){
+ location.reload();
+}
