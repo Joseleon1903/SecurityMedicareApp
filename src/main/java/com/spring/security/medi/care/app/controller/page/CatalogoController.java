@@ -51,7 +51,7 @@ public class CatalogoController extends ViewBaseContext {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/catalogo", method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
+    @RequestMapping("/catalogo")
     public String showCatalogo(Model model) {
         logger.info("entering  in show showCatalogo");
 
@@ -94,7 +94,7 @@ public class CatalogoController extends ViewBaseContext {
         model.addAttribute("PaginatedMotivosBean", paginatedMotivoEstado);
         model.addAttribute("SystemInfoBean", systemInfoDTO);
 
-        return "/pages/catalogo/show";
+        return "pages/catalogo/show";
     }
 
     @PostMapping("/municipio/filter")
