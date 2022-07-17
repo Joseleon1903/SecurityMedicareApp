@@ -38,12 +38,14 @@ public class CatalogoServiceImpl implements CatalogoService {
 
     private final MunicipioJpaRepo municipioJpaRepo;
 
+    private final SeguroJpaRepo seguroJpaRepo;
+
     private final GradoConsanguinidadJpaRepo gradoConsanguinidadJpaRepo;
 
     @Autowired
     public CatalogoServiceImpl(ParentescoJdbcImpl parentescoJdbc, MotivoEstadoJdbcImpl motivoEstadoJdbc, NacionalidadJdbcImpl nacionalidadJdbcImpl,
                                MotivoEstadoJpaRepo motivoEstadoJpaRepo, ParentescoJpaRepo parentescoJpaRepo, NacionalidadJpaRepo nacionalidadJpaRepo,
-                               MunicipioJpaRepo municipioJpaRepo, GradoConsanguinidadJpaRepo gradoConsanguinidadJpaRepo) {
+                               MunicipioJpaRepo municipioJpaRepo, GradoConsanguinidadJpaRepo gradoConsanguinidadJpaRepo, SeguroJpaRepo seguroJpaRepo) {
         this.parentescoJdbc = parentescoJdbc;
         this.motivoEstadoJdbc = motivoEstadoJdbc;
         this.nacionalidadJdbcImpl = nacionalidadJdbcImpl;
@@ -52,6 +54,7 @@ public class CatalogoServiceImpl implements CatalogoService {
         this.nacionalidadJpaRepo =nacionalidadJpaRepo;
         this.municipioJpaRepo = municipioJpaRepo;
         this.gradoConsanguinidadJpaRepo = gradoConsanguinidadJpaRepo;
+        this.seguroJpaRepo = seguroJpaRepo;
     }
 
     @Override
@@ -194,5 +197,10 @@ public class CatalogoServiceImpl implements CatalogoService {
         return new NacionalidadPaginatedDto(nacionalidadesPages.getContent(), pageOut);
     }
 
+    @Override
+    public List<Seguro> buscarSegurosSistema() {
+        logger.info("Entering in buscarSegurosSistema");
+        return seguroJpaRepo.findAll();
+    }
 
 }
