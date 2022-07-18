@@ -12,31 +12,27 @@ public class SolicitudFormDto implements Serializable {
     private Short tipoIdentificacion;
     private String cedula;
     private String nss;
-    private String codigoMunicipio;
-    private String codigoProvincia;
-    private Long ciudadanoTitularId;
+    private Long municipioId;
     private String cedulaTitular;
     private String tipoAfiliado;
     private String tipoDependiente;
     private Long parentescoId;
-    private Short seguroId;
-    private Short regimenId;
-    private Long institucionPensionadoId;
+    private Long seguroId;
+    private Long regimenId;
+    private Boolean aplicaInsitucionAutomtica;
 
-    public SolicitudFormDto(Short tipoIdentificacion, String cedula, String nss, String codigoMunicipio, String codigoProvincia, Long ciudadanoTitularId, String cedulaTitular, String tipoAfiliado, String tipoDependiente, Long parentescoId, Short seguroId, Short regimenId, Long institucionPensionadoId) {
+    public SolicitudFormDto(Short tipoIdentificacion, String cedula, String nss, Long municipioId, String cedulaTitular, String tipoAfiliado, String tipoDependiente, Long parentescoId, Long seguroId, Long regimenId, Boolean aplicaInsitucionAutomtica) {
         this.tipoIdentificacion = tipoIdentificacion;
         this.cedula = cedula;
         this.nss = nss;
-        this.codigoMunicipio = codigoMunicipio;
-        this.codigoProvincia = codigoProvincia;
-        this.ciudadanoTitularId = ciudadanoTitularId;
+        this.municipioId = municipioId;
         this.cedulaTitular = cedulaTitular;
         this.tipoAfiliado = tipoAfiliado;
         this.tipoDependiente = tipoDependiente;
         this.parentescoId = parentescoId;
         this.seguroId = seguroId;
         this.regimenId = regimenId;
-        this.institucionPensionadoId = institucionPensionadoId;
+        this.aplicaInsitucionAutomtica = aplicaInsitucionAutomtica;
     }
 
     public SolicitudFormDto() {
@@ -48,16 +44,14 @@ public class SolicitudFormDto implements Serializable {
                 "tipoIdentificacion=" + tipoIdentificacion +
                 ", cedula='" + cedula + '\'' +
                 ", nss='" + nss + '\'' +
-                ", codigoMunicipio='" + codigoMunicipio + '\'' +
-                ", codigoProvincia='" + codigoProvincia + '\'' +
-                ", ciudadanoTitularId=" + ciudadanoTitularId +
+                ", municipioId='" + municipioId + '\'' +
                 ", cedulaTitular='" + cedulaTitular + '\'' +
                 ", tipoAfiliado='" + tipoAfiliado + '\'' +
                 ", tipoDependiente='" + tipoDependiente + '\'' +
                 ", parentescoId=" + parentescoId +
                 ", seguroId=" + seguroId +
                 ", regimenId=" + regimenId +
-                ", institucionPensionadoId=" + institucionPensionadoId +
+                ", aplicaInsitucionAutomtica=" + aplicaInsitucionAutomtica +
                 '}';
     }
 }

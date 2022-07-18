@@ -5,16 +5,17 @@ import java.time.LocalDate;
 
 import lombok.Data;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Data
 @Entity
 public class SolicitudAfiliacion implements Serializable {
 
-
     @Id
+    @GeneratedValue
     private Long solicitudId;
-    private Integer servivioId;
+    private Integer servicioId;
     private Integer loteId;
     private Long entidadId;
     private Long seguroId;
@@ -34,7 +35,7 @@ public class SolicitudAfiliacion implements Serializable {
 
     public SolicitudAfiliacion(Long solicitudId, Integer servivioId, Integer loteId, Long entidadId, Long seguroId, Long regimenId, String tipoAfiliado, Short tipoIdentificacionId, String nombre, String primerApellido, Boolean automatica, Long institucionPensionadoId, Long claveInstitucionPensionado, String estado, LocalDate fechaRecepcion, Long municipioId, Long ciudadanoId, LocalDate fechaUltimoCambio) {
         this.solicitudId = solicitudId;
-        this.servivioId = servivioId;
+        this.servicioId = servivioId;
         this.loteId = loteId;
         this.entidadId = entidadId;
         this.seguroId = seguroId;

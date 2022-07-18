@@ -11,11 +11,11 @@ public class ErrorPageDto implements Serializable {
 
     private String descripcionError;
 
-    private String codigoError;
+    private Integer codigoError;
 
-    private boolean isError;
+    private boolean isError = false;
 
-    public ErrorPageDto(String descripcionError, String codigoError, boolean isError) {
+    public ErrorPageDto(Integer codigoError,String descripcionError, boolean isError) {
         this.descripcionError = descripcionError;
         this.codigoError = codigoError;
         this.isError = isError;

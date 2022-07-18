@@ -49,6 +49,7 @@
                 <li><a th:href="@{/home}" class="active">Home</a></li>
                 <li><a th:href="@{/ciudadano}" class="active">Ciudadanos</a></li>
                 <li><a th:href="@{/solicitud}" class="active">Solicitudes</a></li>
+                <li><a th:href="@{/despacho}" class="active">Despacho</a></li>
                 <li><a th:href="@{/catalogo}" class="active">Catalogos</a></li>
             </ul>
         </nav><!-- .navbar -->
@@ -124,8 +125,9 @@
                 <div class="col-lg-8 card" >
                     <form method="post" action="#" th:action="@{/solicitud}" th:object="${SolicitudFormBean}" role="form" class="card-body">
 
-                        <div class="alert alert-danger" role="alert" style="display: none;">
-                            A simple danger alert—check it out!
+                        <div class="alert alert-danger" role="alert" th:if="${ErrorPageBean.isError}">
+                            <p th:text="${ErrorPageBean.codigoError}"></p>
+                            <p th:text="${ErrorPageBean.descripcionError}"></p>
                         </div>
                         <!--  formulario datos solicitantes  -->
                         <div id="datos-solicitante" >
@@ -160,7 +162,7 @@
 
                             <div class="col-md-8 form-group">
                                 <label class="form-label" th:text="#{page.label.solicitud.datos.ubicacion.codigoMunicipio}">Codigo municipio</label>
-                                <select class="form-select" aria-label="Default select example">
+                                <select th:field="*{municipioId}" th:value="${SolicitudFormBean.municipioId}" class="form-select" aria-label="Default select example">
                                     <option value="0" th:text="#{page.select.solicitud.datos.ubicacion.codigoMunicipio}" selected>Open this select menu</option>
                                     <option th:each="municipio : ${ListaMunicipioBean}" th:value="${municipio.municipioId}" th:text="${municipio.descripcion}" ></option>
                                 </select>
@@ -170,7 +172,7 @@
 
                                 <div class="col-md-8 form-group">
                                     <label class="form-label" th:text="#{page.label.solicitud.datos.solicitante.seguroId}">Email address</label>
-                                    <select class="form-select" aria-label="Default select example">
+                                    <select th:field="*{seguroId}" th:value="${SolicitudFormBean.seguroId}" class="form-select" aria-label="Default select example">
                                         <option value="0" th:text="#{page.label.solicitud.datos.solicitante.seguroId}" selected>Open this select menu</option>
                                         <option th:each="seguro : ${ListaSeguroBean}" th:value="${seguro.seguroId}" th:text="${seguro.descripcion}" ></option>
                                     </select>
@@ -179,7 +181,7 @@
 
                             <div class="row">
                                 <label class="form-label" th:text="#{page.label.solicitud.datos.solicitante.regimenId}">Email address</label>
-                                <select class="form-select" aria-label="Default select example">
+                                <select th:field="*{regimenId}" th:value="${SolicitudFormBean.regimenId}" class="form-select" aria-label="Default select example">
                                     <option value="0" th:text="#{page.label.solicitud.datos.solicitante.regimenId}" selected>Open this select menu</option>
                                     <option value="1">Subsidiado</option>
                                     <option value="2">Contributivo</option>
@@ -190,7 +192,7 @@
                                 <div class="col-md-6 form-group">
                                     <label class="form-label" th:text="#{page.label.solicitud.datos.solicitante.asignar.pension}">Email address</label>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <input th:field="*{aplicaInsitucionAutomtica}" th:value="${SolicitudFormBean.aplicaInsitucionAutomtica}" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault" th:text="#{page.label.solicitud.datos.solicitante.asignar.automatica}">
                                             Default checkbox
                                         </label>
@@ -208,7 +210,7 @@
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <label for="cedulaTitular" class="form-label" th:text="#{page.label.solicitud.datos.titular.cedula}">Email address</label>
-                                    <input type="text" name="cedulaTitular" class="form-control" id="cedulaTitular" placeholder="Cedula titular">
+                                    <input type="text" th:field="*{cedulaTitular}" th:value="${SolicitudFormBean.cedulaTitular}" name="cedulaTitular" class="form-control" id="cedulaTitular" placeholder="Cedula titular">
                                 </div>
                             </div>
 
@@ -216,16 +218,16 @@
 
                                 <div class="col-md-8 form-group">
                                     <label class="form-label" th:text="#{page.label.solicitud.datos.titular.tipoAfiliado}">Email address</label>
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option value="1">Titular</option>
-                                        <option value="2">Dependiente</option>
+                                    <select th:field="*{tipoAfiliado}" th:value="${SolicitudFormBean.tipoAfiliado}" class="form-select" aria-label="Default select example">
+                                        <option value="T">Titular</option>
+                                        <option value="D">Dependiente</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <label class="form-label" th:text="#{page.label.solicitud.datos.titular.tipoDependiente}">Email address</label>
-                                <select class="form-select" aria-label="Default select example">
+                                <select th:field="*{tipoDependiente}" th:value="${SolicitudFormBean.tipoDependiente}" class="form-select" aria-label="Default select example">
                                     <option value="0" selected th:text="#{page.generar.label.abrir.menu}">Open this select menu</option>
                                     <option value="1">Directo</option>
                                     <option value="2">Adiccional</option>
@@ -234,7 +236,7 @@
 
                             <div class="row">
                                 <label class="form-label" th:text="#{page.label.solicitud.datos.titular.parentesco}">Email address</label>
-                                <select class="form-select" aria-label="Default select example">
+                                <select th:field="*{parentescoId}" th:value="${SolicitudFormBean.parentescoId}" class="form-select" aria-label="Default select example">
                                     <option value="0" selected th:text="#{page.select.solicitud.datos.titular.parentesco}">Open this select menu</option>
                                     <option th:each="paren : ${ListaparentescoBean}" th:value="${paren.parentescoId}" th:text="${paren.descripcion}" value="1">Madre</option>
                                     <option value="2">Padre</option>
