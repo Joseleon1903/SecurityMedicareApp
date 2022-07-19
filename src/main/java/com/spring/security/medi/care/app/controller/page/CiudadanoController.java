@@ -7,7 +7,7 @@ import com.spring.security.medi.care.app.controller.dto.SystemInfoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +31,7 @@ public class CiudadanoController extends ViewBaseContext {
         this.ciudadanoService = ciudadanoService;
     }
 
-    @RequestMapping("/ciudadano")
+    @GetMapping("/ciudadano")
     public String showPage(Model model){
         logger.info("------- entering -----------");
         logger.info("Entering in method showPage..");
@@ -47,7 +47,7 @@ public class CiudadanoController extends ViewBaseContext {
         return "pages/ciudadano/show";
     }
 
-    @RequestMapping("/ciudadano/{ciudadanoId}")
+    @GetMapping("/ciudadano/{ciudadanoId}")
     public String updateDetailCiudadanoPage(@PathVariable("ciudadanoId") Long ciudadanoId, Model model){
         logger.info("------- entering -----------");
         logger.info("Entering in method updateDetailCiudadanoPage..");
@@ -67,7 +67,6 @@ public class CiudadanoController extends ViewBaseContext {
         logger.info("------- entering -----------");
         logger.info("Entering in method deleteCiudadanoRequest..");
         logger.info("param: "+ ciudadanoInput);
-
         ciudadanoService.eliminarCiudadanoId(ciudadanoInput.getCiudadanoId());
         logger.info("Exiting in method deleteCiudadanoRequest..");
         return "redirect:/ciudadano";

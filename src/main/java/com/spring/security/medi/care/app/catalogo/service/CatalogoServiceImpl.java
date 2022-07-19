@@ -203,4 +203,12 @@ public class CatalogoServiceImpl implements CatalogoService {
         return seguroJpaRepo.findAll();
     }
 
+    @Override
+    public Seguro buscarSegurosSistemaPorId(Long id){
+        logger.info("Entering in buscarSegurosSistema");
+        return seguroJpaRepo.findBySeguroId(id);
+
+    }
+
+
 }

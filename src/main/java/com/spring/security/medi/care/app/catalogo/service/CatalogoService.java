@@ -48,4 +48,7 @@ public interface CatalogoService {
     NacionalidadPaginatedDto buscarNacionalidadPorParametros(String paisId , int page, int size);
 
     List<Seguro> buscarSegurosSistema();
+
+    Seguro buscarSegurosSistemaPorId(Long id);
+
 }
