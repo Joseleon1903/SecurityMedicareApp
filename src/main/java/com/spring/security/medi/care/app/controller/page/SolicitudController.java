@@ -79,22 +79,23 @@ public class SolicitudController extends ViewBaseContext {
         solicitudIn.setRegimenId(solicitudForm.getRegimenId());
         solicitudIn.setTipoAfiliado(solicitudForm.getTipoAfiliado());
         solicitudIn.setTipoIdentificacionId(solicitudForm.getTipoIdentificacion());
+        solicitudIn.setCedula(solicitudForm.getCedula());
+        solicitudIn.setNss(solicitudForm.getNss());
+        solicitudIn.setCedulaTitular(solicitudForm.getCedulaTitular());
         solicitudIn.setNombre(AplicationConstantUtil.PARAMETRO_PENDIENTE_DEFINICION);
         solicitudIn.setPrimerApellido(AplicationConstantUtil.PARAMETRO_PENDIENTE_DEFINICION);
         solicitudIn.setAutomatica(solicitudForm.getAplicaInsitucionAutomtica());
         solicitudIn.setEstado(AplicationConstantUtil.ESTADO_PE);
-        solicitudIn.setFechaRecepcion(LocalDate.now());
+        solicitudIn.setFechaRecepcion(new Date());
         solicitudIn.setMunicipioId(solicitudForm.getMunicipioId());
-        solicitudIn.setFechaUltimoCambio(LocalDate.now());
+        solicitudIn.setFechaUltimoCambio(new Date());
         logger.info("Inicinado registro de la solicitud");
-//        try {
-//            this.solicitudOut= solicitudAfiliacionService.regristarSolicitudAfiliacion(solicitudIn);
-//        } catch (Exception e) {
-//            logger.info(e.getLocalizedMessage());
-//            e.printStackTrace();
-//        }
-        this.errorPageDto =  new ErrorPageDto(500, "Existen datos no proporcionados", true);
-
+        try {
+            this.solicitudOut= solicitudAfiliacionService.regristarSolicitudAfiliacion(solicitudIn);
+        } catch (Exception e) {
+            logger.info(e.getLocalizedMessage());
+            e.printStackTrace();
+        }
         logger.info("Solicitud realizado con exito : "+ this.solicitudOut);
         return "redirect:solicitud";
     }

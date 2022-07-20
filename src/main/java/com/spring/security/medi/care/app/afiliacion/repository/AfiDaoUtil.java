@@ -1,5 +1,11 @@
 package com.spring.security.medi.care.app.afiliacion.repository;
 
+import com.spring.security.medi.care.app.commons.domain.SolicitudAfiliacion;
+import com.spring.security.medi.care.app.controller.dto.SolicitudAfiliacionOutputDto;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class AfiDaoUtil {
 
     public static String FIND_SOLICTUD_AFILIACION ="SELECT " +
@@ -33,4 +39,13 @@ public class AfiDaoUtil {
             "    LEFT JOIN MUNICIPIO MUN_CIU ON CIU.MUNICIPIO_ID = MUN_CIU.MUNICIPIO_ID " +
             "    LEFT JOIN PROVINCIA PRO_CIU ON MUN_CIU.PROVINCIA_ID = PRO_CIU.PROVINCIA_ID  " +
             "    WHERE rownum <= 500 ORDER BY  SA.SOLICITUD_ID DESC ";
+
+    public static List<SolicitudAfiliacionOutputDto> convertToDto(List<SolicitudAfiliacion> solIn){
+        List<SolicitudAfiliacionOutputDto> listout = new ArrayList<>();
+        for(SolicitudAfiliacion sol : solIn){
+            listout.add(new SolicitudAfiliacionOutputDto(sol));
+        }
+        return listout;
+    }
+
 }

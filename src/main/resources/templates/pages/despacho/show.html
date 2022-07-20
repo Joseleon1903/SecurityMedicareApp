@@ -86,8 +86,81 @@
         </nav>
     </div><!-- End Breadcrumbs -->
 
+    <div class="breadcrumbs" style="margin-right: 20px; margin-left: 20px;margin-top: 15px">
+        <nav>
+            <div class="container">
+                <form method="post" action="#" th:action="@{/solicitud/filter}" th:object="${SolicituFromFilterBean}">
+
+                    <!--row con los label-->
+                    <div class="row g-3" style="margin-bottom: 0.2em;">
+
+                        <div class="col-md-2 form-group">
+                            <label for="cedula" class="despacho-inline-form-label" th:text="#{page.label.despacho.datos.form.filter.cedula}">cedula</label>
+                        </div>
+
+                        <div class="col-md-2 form-group">
+                            <label for="servicioId" class="despacho-inline-form-label" th:text="#{page.label.despacho.datos.form.filter.servicioId}">servicioId</label>
+                        </div>
+
+                        <div class="col-md-2 form-group">
+                            <label for="seguroId" class="despacho-inline-form-label" th:text="#{page.label.despacho.datos.form.filter.seguroId}">seguroId</label>
+                        </div>
+
+                        <div class="col-md-2 form-group">
+                            <label for="regimenId" class="despacho-inline-form-label" th:text="#{page.label.despacho.datos.form.filter.regimen}">regimen</label>
+                        </div>
+
+                        <div class="col-md-2 form-group">
+                            <label for="cedula" class="despacho-inline-form-label" th:text="#{page.label.despacho.datos.form.filter.estado}">estado</label>
+                        </div>
+
+                    </div>
+
+                    <!--row con los input-->
+                    <div class="row g-3">
+
+                        <div class="col-md-2 form-group">
+                            <input type="text" th:field="*{cedula}" th:value="${SolicituFromFilterBean.cedula}" class="form-control" id="cedula" th:placeholder="#{page.label.despacho.datos.form.filter.cedula}">
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <select id="servicioId" th:field="*{servicioId}" th:value="${SolicituFromFilterBean.servicioId}" class="form-select" aria-label="Default select example">
+                                <option value="0" selected>Todos</option>
+                                <option value="301" > Solicitud Afiliación</option>
+                                <option value="302" > Afiliación procesada</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <select id="seguroId" class="form-select" aria-label="Default select example">
+                                <option value="0" selected>Todos</option>
+                                <option th:each="seguro : ${ListaSeguroBean}" th:value="${seguro.seguroId}"  th:text="${seguro.descripcion}"> Seguro salud</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <select id="regimenId" th:field="*{regimenId}" th:value="${SolicituFromFilterBean.regimenId}"  class="form-select" aria-label="Default select example">
+                                <option value="" selected>Todos</option>
+                                <option value="1">Subsidiado</option>
+                                <option value="2">Contributivo</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <select th:field="*{estado}" th:value="${SolicituFromFilterBean.estado}"  class="form-select" aria-label="Default select example">
+                                <option value="" selected>Todos</option>
+                                <option value="PE" > Pendiente</option>
+                                <option value="AC" > Aceptada</option>
+                                <option value="RE" > Rechazada</option>
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary mb-3">Aplicar</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </nav>
+    </div>
+
     <!-- ======= About Us Section ======= -->
-<!--
     <section id="about" class="about" style="padding: 1em 0;">
         <div class="container aos-init aos-animate" data-aos="fade-up">
 
@@ -96,40 +169,49 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th scope="col" th:text="#{page.ciudadano.column.ciudadanoId}">CiudadanoId</th>
-                        <th scope="col" th:text="#{page.ciudadano.column.cedula}">Cedula</th>
-                        <th scope="col" th:text="#{page.ciudadano.column.nss}">Nss</th>
-                        <th scope="col" th:text="#{page.ciudadano.column.nombre}">Nombre</th>
-                        <th scope="col" th:text="#{page.ciudadano.column.primerApellido}">Primer Apellido</th>
-                        <th scope="col" th:text="#{page.ciudadano.column.segundoApellido}">Segundo Apellido</th>
-                        <th scope="col" th:text="#{page.ciudadano.column.genero}">Genero</th>
-                        <th scope="col" th:text="#{page.ciudadano.column.fechaNacimiento}">Fecha Nacimiento</th>
-                        <th scope="col" th:text="#{page.ciudadano.column.edad}">Edad</th>
-                        <th scope="col" th:text="#{page.ciudadano.column.estado}">Estado</th>
+                        <th scope="col" th:text="#{page.despacho.column.solicitudId}">CiudadanoId</th>
+                        <th scope="col" th:text="#{page.despacho.column.servicioId}">Cedula</th>
+                        <th scope="col" th:text="#{page.despacho.column.fechaRecepcion}">Nss</th>
+                        <th scope="col" th:text="#{page.despacho.column.loteId}">Nombre</th>
+                        <th scope="col" th:text="#{page.despacho.column.entidadId}">Primer Apellido</th>
+                        <th scope="col" th:text="#{page.despacho.column.seguroId}">Segundo Apellido</th>
+                        <th scope="col" th:text="#{page.despacho.column.regimenId}">Genero</th>
+                        <th scope="col" th:text="#{page.despacho.column.tipoAfiliado}">Fecha Nacimiento</th>
+                        <th scope="col" th:text="#{page.despacho.column.cedula}">Edad</th>
+                        <th scope="col" th:text="#{page.despacho.column.nss}">Edad</th>
+                        <th scope="col" th:text="#{page.despacho.column.cedulaTitular}">Edad</th>
+                        <th scope="col" th:text="#{page.despacho.column.municipio}">Municipio</th>
+                        <th scope="col" th:text="#{page.despacho.column.estado}">Estado</th>
+                        <th scope="col" th:text="#{page.despacho.column.motivoId}">Motivo</th>
+
                         <th scope="col" colspan="2" th:text="#{page.generar.column.accion}">Acción</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="ciudadano : ${CiudadanosList}" th:if="${not #lists.isEmpty(CiudadanosList)}">
-                        <th scope="row" th:text="${ciudadano.ciudadanoId}" >1</th>
-                        <td th:text="${ciudadano.cedula}" >0456325896</td>
-                        <td th:text="${ciudadano.nss}">8965235</td>
-                        <td th:text="${ciudadano.nombre}">Mario</td>
-                        <td th:text="${ciudadano.primerApellido}">1</td>
-                        <td th:text="${ciudadano.segundoApellido}">Cesar</td>
-                        <td th:text="${ciudadano.genero}">M</td>
-                        <td th:text="${#dates.format(ciudadano.fechaNacimiento,'dd/MM/yyyy')}">01/01/2000</td>
-                        <td>22</td>
-                        <td th:text="${ciudadano.estado}">Activo</td>
+                    <tr th:each="sol : ${SolicitudAfiliacionListBean}" th:if="${not #lists.isEmpty(SolicitudAfiliacionListBean)}">
+                        <th scope="row" th:text="${sol.solicitudId}" >1</th>
+                        <td th:text="${sol.servicioId}" >0456325896</td>
+                        <td th:text="${#dates.format(sol.fechaRecepcion,'dd/MM/yyyy')}">01/01/2000</td>
+                        <td th:text="${sol.loteId}">8965235</td>
+                        <td th:text="${sol.entidadId}">Mario</td>
+                        <td th:text="${sol.seguroId}">1</td>
+                        <td th:text="${sol.regimenId}">Cesar</td>
+                        <td th:text="${sol.tipoAfiliado}">M</td>
+                        <td th:text="${sol.cedula}">M</td>
+                        <td th:text="${sol.nss}">M</td>
+                        <td th:text="${sol.cedulaTitular}">M</td>
+                        <td th:text="${sol.municipioId}">M</td>
+                        <td th:text="${sol.estado}">M</td>
+                        <td th:text="${sol.motivoId}">Activo</td>
                         <td>
-                            <button type="button" th:data-text="${ciudadano.ciudadanoId}" class="menu-button-solicitud btn btn-primary" >
+                           <!-- <button type="button" th:data-text="${ciudadano.ciudadanoId}" class="menu-button-solicitud btn btn-primary" >
                                 <i class="fa-solid fa-eye"></i>
-                            </button>
+                            </button>-->
                         </td>
                         <td>
-                            <button th:data-text="${ciudadano.ciudadanoId}" type="button" class="menu-button-solicitud btn btn-danger">
+<!--                            <button th:data-text="${ciudadano.ciudadanoId}" type="button" class="menu-button-solicitud btn btn-danger">
                                 <i class="fa-solid fa-trash-can"></i>
-                            </button>
+                            </button>-->
                         </td>
                     </tr>
                     </tbody>
@@ -139,9 +221,7 @@
             </div>
 
         </div>
-    </section>&lt;!&ndash; End About Us Section &ndash;&gt;
--->
-
+    </section>
 
 </main><!-- End #main -->
 
