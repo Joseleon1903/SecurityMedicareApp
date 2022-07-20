@@ -53,6 +53,7 @@
                 <li><a th:href="@{/home}" class="active">Home</a></li>
                 <li><a th:href="@{/ciudadano}" class="active">Ciudadanos</a></li>
                 <li><a th:href="@{/solicitud}" class="active">Solicitudes</a></li>
+                <li><a th:href="@{/despacho}" class="active">Despacho</a></li>
                 <li><a th:href="@{/catalogo}" class="active">Catalogos</a></li>
             </ul>
         </nav><!-- .navbar -->
@@ -123,7 +124,7 @@
                         <td th:text="${ciudadano.primerApellido}">1</td>
                         <td th:text="${ciudadano.segundoApellido}">Cesar</td>
                         <td th:text="${ciudadano.genero}">M</td>
-                        <td th:text="${#dates.format(ciudadano.fechaNacimiento,'dd/MMM/yyyy')}">01/01/2000</td>
+                        <td th:text="${#dates.format(ciudadano.fechaNacimiento,'dd/MM/yyyy')}">01/01/2000</td>
                         <td>22</td>
                         <td th:text="${ciudadano.estado}">Activo</td>
                         <td>
