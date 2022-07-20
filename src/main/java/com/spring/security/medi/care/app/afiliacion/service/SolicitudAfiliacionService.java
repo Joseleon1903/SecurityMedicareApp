@@ -1,12 +1,14 @@
 package com.spring.security.medi.care.app.afiliacion.service;
 
-import com.spring.security.medi.care.app.afiliacion.types.SolicitudAfiliacion;
+import com.spring.security.medi.care.app.commons.domain.SolicitudAfiliacion;
 
 import java.util.List;
 
 public interface SolicitudAfiliacionService {
 
-    public List<SolicitudAfiliacion> buscarSolicitudesAfiliacion();
+    List<SolicitudAfiliacion> buscarSolicitudesAfiliacion();
 
+    SolicitudAfiliacion regristarSolicitudAfiliacion(SolicitudAfiliacion solicitud) throws Exception;
 
+    List<SolicitudAfiliacion> buscarSolicitudesAfiliacionPorParametros(String cedula,Integer servicioId, Long seguroId, Long regimenId, String estado, int page, int size);
 }

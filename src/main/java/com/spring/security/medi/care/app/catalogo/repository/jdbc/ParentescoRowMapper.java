@@ -24,7 +24,7 @@ public class ParentescoRowMapper implements RowMapper<Parentesco> {
             genero = "HOMBRE";
         }
         pare.setParentescoId(rs.getLong("PARENTESCO_ID"));
-        pare.setDescripcionParentesco(rs.getString("DESCRIPCION"));
+        pare.setDescripcion(rs.getString("DESCRIPCION"));
         pare.setTipoDependiente( (rs.getString("TIPO_DEPENDIENTE").equals(Adiccional)? "ADICCIONAL" : "DIRECTO"));
         pare.setGenero(genero);
         pare.setEstado(DaoUtil.parseEstadoColumn(rs.getString("ESTADO")));
