@@ -3,7 +3,6 @@ package com.spring.security.medi.care.app.controller.rest;
 import com.spring.security.medi.care.app.catalogo.dto.MotivoEstadoPaginatedDto;
 import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.commons.domain.MotivoEstado;
-import com.spring.security.medi.care.app.controller.page.AfiliacionTitularController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

@@ -51,9 +51,10 @@ public class CiudadanoController extends ViewBaseContext {
     public String updateDetailCiudadanoPage(@PathVariable("ciudadanoId") Long ciudadanoId, Model model){
         logger.info("------- entering -----------");
         logger.info("Entering in method updateDetailCiudadanoPage..");
+        logger.info("param detalle ciudadanoId = "+ ciudadanoId);
 
         logger.info("buscando ciudadanos ...");
-        detailCiudadano = ciudadanoService.buscarCiudadanoPorCiudadanoId(ciudadanoId);
+        this.detailCiudadano = ciudadanoService.buscarCiudadanoPorCiudadanoId(ciudadanoId);
         logger.info("terminando buscando ciudadanos:"+ detailCiudadano);
 
         model.addAttribute("CiudadanosList", ciudadanos);
