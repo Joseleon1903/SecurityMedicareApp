@@ -86,7 +86,6 @@ public class EntidadController extends ViewBaseContext {
         logger.info("Generando systemInfoDTO");
         systemInfoDTO = new SystemInfoDTO("Unipago Entidades del sistema de seguridad social",new Date());
         logger.info("systemInfoDTO: "+ systemInfoDTO);
-
         logger.info("existing init method ");
     }
 }

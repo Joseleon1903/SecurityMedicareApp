@@ -20,6 +20,7 @@ CREATE TABLE solicitud_afiliacion (
 	fecha_recepcion date NOT NULL,
 	municipio_id int4 NULL,
 	ciudadano_id int4 NULL,
+	nacionalidad_id int4 NULL,
 	fecha_ultimo_cambio date NOT NULL,
 	servivio_id int4 NULL,
 	CONSTRAINT sol_afiliacion_tipo_afi_ck CHECK (((tipo_afiliado)::text = ANY ((ARRAY['D'::character varying, 'T'::character varying])::text[]))),
@@ -32,6 +33,7 @@ CREATE TABLE solicitud_afiliacion (
 
 ALTER TABLE public.solicitud_afiliacion ADD CONSTRAINT sol_afiliacion_ciudadano_fk FOREIGN KEY (ciudadano_id) REFERENCES public.ciudadano(ciudadano_id);
 ALTER TABLE public.solicitud_afiliacion ADD CONSTRAINT sol_afiliacion_entidad_fk FOREIGN KEY (entidad_id) REFERENCES public.entidad(entidad_id);
+ALTER TABLE public.solicitud_afiliacion ADD CONSTRAINT sol_afiliacion_nacionalidad_fk FOREIGN KEY (nacionalidad_id) REFERENCES public.nacionalidad(nacionalidad_id);
 ALTER TABLE public.solicitud_afiliacion ADD CONSTRAINT sol_afiliacion_instt_pen_fk FOREIGN KEY (institucion_pensionado_id) REFERENCES public.institucion_pensionado(institucion_pensionado_id);
 ALTER TABLE public.solicitud_afiliacion ADD CONSTRAINT sol_afiliacion_municipio_fk FOREIGN KEY (municipio_id) REFERENCES public.municipio(municipio_id);
 ALTER TABLE public.solicitud_afiliacion ADD CONSTRAINT solicitud_afiliacion_seguro_fk FOREIGN KEY (seguro_id) REFERENCES public.seguro(seguro_id);

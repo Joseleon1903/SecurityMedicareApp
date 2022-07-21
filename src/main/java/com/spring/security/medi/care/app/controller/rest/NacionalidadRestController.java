@@ -17,7 +17,7 @@ import java.util.Locale;
 @RequestMapping(value="/api/nacionalidad/", produces=MediaType.APPLICATION_JSON_VALUE)
 public class NacionalidadRestController {
 
-    private static final Logger logger = LoggerFactory.getLogger(ParentescoRestController.class);
+    private static final Logger logger = LoggerFactory.getLogger(NacionalidadRestController.class);
 
     private final CatalogoService catalogoService;
 

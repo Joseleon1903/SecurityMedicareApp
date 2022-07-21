@@ -7,7 +7,6 @@ import com.spring.security.medi.care.app.commons.DaoUtil;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
 import com.spring.security.medi.care.app.commons.domain.Seguro;
 import com.spring.security.medi.care.app.commons.domain.SolicitudAfiliacion;
-import com.spring.security.medi.care.app.controller.dto.MunicipioFilterDto;
 import com.spring.security.medi.care.app.controller.dto.SolicituFromFilterDto;
 import com.spring.security.medi.care.app.controller.dto.SolicitudAfiliacionOutputDto;
 import com.spring.security.medi.care.app.controller.dto.SystemInfoDTO;
@@ -68,7 +67,7 @@ public class DespachoSolicitudController extends ViewBaseContext {
         return "pages/despacho/show";
     }
 
-    @PostMapping("solicitud/filter")
+    @PostMapping("/solicitud/filter")
     public String buscarSolicitudesPorParametros(@ModelAttribute SolicituFromFilterDto solicituFromFilterInput, Model model){
         logger.info("------- entering -----------");
         logger.info("Entering in method buscarSolicitudesPorParametros..");

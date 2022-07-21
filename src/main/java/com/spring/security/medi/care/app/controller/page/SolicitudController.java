@@ -5,7 +5,7 @@ import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.commons.AplicationConstantUtil;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
 import com.spring.security.medi.care.app.commons.domain.Municipio;
-import com.spring.security.medi.care.app.commons.domain.Parentesco;
+import com.spring.security.medi.care.app.commons.domain.Nacionalidad;
 import com.spring.security.medi.care.app.commons.domain.Seguro;
 import com.spring.security.medi.care.app.commons.domain.SolicitudAfiliacion;
 import com.spring.security.medi.care.app.controller.dto.ErrorPageDto;
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +28,7 @@ public class SolicitudController extends ViewBaseContext {
 
     private List<Seguro> segurosSistema;
     private List<Municipio> municipiosSistema;
-    private List<Parentesco> parentescosSistema;
+    private List<Nacionalidad> nacionalidadesSistema;
     private SolicitudAfiliacion solicitudOut = new SolicitudAfiliacion();
 
     private final CatalogoService catalogoService;
@@ -56,7 +55,7 @@ public class SolicitudController extends ViewBaseContext {
 
         model.addAttribute("ListaSeguroBean", segurosSistema);
         model.addAttribute("ListaMunicipioBean", municipiosSistema);
-        model.addAttribute("ListaparentescoBean", parentescosSistema);
+        model.addAttribute("ListaNacionalidadBean", nacionalidadesSistema);
         model.addAttribute("SystemInfoBean", systemInfoDTO);
         model.addAttribute("SolicitudFormBean", solicitudForm);
         model.addAttribute("SolicitudReponseBean", solicitudOut);
@@ -89,11 +88,14 @@ public class SolicitudController extends ViewBaseContext {
         solicitudIn.setFechaRecepcion(new Date());
         solicitudIn.setMunicipioId(solicitudForm.getMunicipioId());
         solicitudIn.setFechaUltimoCambio(new Date());
+        solicitudIn.setNacionalidadId(solicitudForm.getNacionalidadId());
         logger.info("Inicinado registro de la solicitud");
         try {
             this.solicitudOut= solicitudAfiliacionService.regristarSolicitudAfiliacion(solicitudIn);
+            this.errorPageDto = new ErrorPageDto();
         } catch (Exception e) {
             logger.info(e.getLocalizedMessage());
+            this.errorPageDto = new ErrorPageDto( 500 , "Internal server error : "+e.getLocalizedMessage(), true);
             e.printStackTrace();
         }
         logger.info("Solicitud realizado con exito : "+ this.solicitudOut);
@@ -124,7 +126,7 @@ public class SolicitudController extends ViewBaseContext {
 
     public void cargarCatalogoParentesco(){
         logger.info("entering cargarCatalogoParentesco");
-        this.parentescosSistema = catalogoService.buscarParentescoTodos();
+        this.nacionalidadesSistema = catalogoService.buscarNacionalidadTodos();
         logger.info("exiting cargarCatalogoParentesco");
     }
 

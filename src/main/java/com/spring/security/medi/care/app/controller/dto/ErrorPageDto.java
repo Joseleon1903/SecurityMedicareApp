@@ -21,7 +21,9 @@ public class ErrorPageDto implements Serializable {
         this.isError = isError;
     }
 
-    public ErrorPageDto() {}
+    public ErrorPageDto() {
+        isError =false;
+    }
 
     @Override
     public String toString() {
