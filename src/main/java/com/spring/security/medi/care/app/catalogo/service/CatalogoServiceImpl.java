@@ -5,7 +5,6 @@ import com.spring.security.medi.care.app.catalogo.dto.MunicipioPaginatedDto;
 import com.spring.security.medi.care.app.catalogo.dto.NacionalidadPaginatedDto;
 import com.spring.security.medi.care.app.catalogo.repository.jdbc.MotivoEstadoJdbcImpl;
 import com.spring.security.medi.care.app.catalogo.repository.jdbc.NacionalidadJdbcImpl;
-import com.spring.security.medi.care.app.catalogo.repository.jdbc.ParentescoJdbcImpl;
 import com.spring.security.medi.care.app.catalogo.repository.jpa.*;
 import com.spring.security.medi.care.app.commons.PaginationOutput;
 import com.spring.security.medi.care.app.commons.domain.*;
@@ -24,7 +23,6 @@ public class CatalogoServiceImpl implements CatalogoService {
 
     private static final Logger logger = LoggerFactory.getLogger(MotivoEstadoRestController.class);
 
-    private final ParentescoJdbcImpl parentescoJdbc;
 
     private final MotivoEstadoJdbcImpl motivoEstadoJdbc;
 
@@ -32,34 +30,22 @@ public class CatalogoServiceImpl implements CatalogoService {
 
     private final MotivoEstadoJpaRepo motivoEstadoJpaRepo;
 
-    private final ParentescoJpaRepo parentescoJpaRepo;
-
     private final NacionalidadJpaRepo nacionalidadJpaRepo;
 
     private final MunicipioJpaRepo municipioJpaRepo;
 
     private final SeguroJpaRepo seguroJpaRepo;
 
-    private final GradoConsanguinidadJpaRepo gradoConsanguinidadJpaRepo;
-
     @Autowired
-    public CatalogoServiceImpl(ParentescoJdbcImpl parentescoJdbc, MotivoEstadoJdbcImpl motivoEstadoJdbc, NacionalidadJdbcImpl nacionalidadJdbcImpl,
-                               MotivoEstadoJpaRepo motivoEstadoJpaRepo, ParentescoJpaRepo parentescoJpaRepo, NacionalidadJpaRepo nacionalidadJpaRepo,
-                               MunicipioJpaRepo municipioJpaRepo, GradoConsanguinidadJpaRepo gradoConsanguinidadJpaRepo, SeguroJpaRepo seguroJpaRepo) {
-        this.parentescoJdbc = parentescoJdbc;
+    public CatalogoServiceImpl(MotivoEstadoJdbcImpl motivoEstadoJdbc, NacionalidadJdbcImpl nacionalidadJdbcImpl,
+                               MotivoEstadoJpaRepo motivoEstadoJpaRepo, NacionalidadJpaRepo nacionalidadJpaRepo,
+                               MunicipioJpaRepo municipioJpaRepo, SeguroJpaRepo seguroJpaRepo) {
         this.motivoEstadoJdbc = motivoEstadoJdbc;
         this.nacionalidadJdbcImpl = nacionalidadJdbcImpl;
         this.motivoEstadoJpaRepo = motivoEstadoJpaRepo;
-        this.parentescoJpaRepo =parentescoJpaRepo;
         this.nacionalidadJpaRepo =nacionalidadJpaRepo;
         this.municipioJpaRepo = municipioJpaRepo;
-        this.gradoConsanguinidadJpaRepo = gradoConsanguinidadJpaRepo;
         this.seguroJpaRepo = seguroJpaRepo;
-    }
-
-    @Override
-    public List<Parentesco> buscarCatalogoParentescoPorParametros(String tipoDependiente, String genero, int rowCount) {
-        return parentescoJdbc.buscarCatalogoParentesco(tipoDependiente, genero, rowCount);
     }
 
     @Override
@@ -72,12 +58,6 @@ public class CatalogoServiceImpl implements CatalogoService {
         return nacionalidadJdbcImpl.buscarCatalogoNacionalidad(paisId, nombrePais, rowCount);
     }
 
-    @Override
-    public GradoConsanguinidad actualizarGradoConsanguinidad(GradoConsanguinidad grado) {
-        logger.info("Entering in actualizarGradoConsanguinidad");
-        logger.info("param GradoConsanguinidad: "+grado);
-        return gradoConsanguinidadJpaRepo.save(grado);
-    }
 
     @Override
     public MotivoEstado actualizarMotivoEstado(MotivoEstado motivo) {
@@ -107,19 +87,6 @@ public class CatalogoServiceImpl implements CatalogoService {
     }
 
     @Override
-    public Parentesco buscarParentescoPorId(Long id){
-        logger.info("Entering in buscarPorId");
-        logger.info("param id: "+id);
-        return parentescoJpaRepo.findByParentescoId(id);
-    }
-
-    @Override
-    public List<Parentesco> buscarParentescoTodos(){
-        logger.info("Entering in buscarTodos");
-        return parentescoJpaRepo.findAll();
-    }
-
-    @Override
     public Nacionalidad buscarNacionalidadPorId(Long id){
         logger.info("Entering in buscarNacionalidadPorId");
         logger.info("param id: "+id);
@@ -142,18 +109,6 @@ public class CatalogoServiceImpl implements CatalogoService {
     public List<Municipio> buscarMunicipiosTodos(){
         logger.info("Entering in buscarMunicipiosTodos");
         return municipioJpaRepo.findAll();
-    }
-
-    @Override
-    public GradoConsanguinidad buscarGradoConsanguinidadPorId(Long id){
-        logger.info("Entering in buscarGradoConsanguinidadPorId");
-        return gradoConsanguinidadJpaRepo.findByGradoConsanguinidadId(id);
-    }
-
-    @Override
-    public List<GradoConsanguinidad> buscarGradoConsanguinidadesTodos(){
-        logger.info("Entering in buscarGradoConsanguinidadesTodos");
-        return gradoConsanguinidadJpaRepo.findAllOrderByGradoConsanguinidadId();
     }
 
     @Override

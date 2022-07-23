@@ -2,7 +2,6 @@ package com.spring.security.medi.care.app.afiliacion.service;
 
 import com.spring.security.medi.care.app.commons.domain.SolicitudAfiliacion;
 import com.spring.security.medi.care.app.afiliacion.repository.jpa.SolicitudAfiliacionJpaRepo;
-import com.spring.security.medi.care.app.afiliacion.repository.jdbc.SolicitudAfiliacionJdbcImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +16,10 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
 
     private static final Logger logger = LoggerFactory.getLogger(SolicitudAfiliacionServiceImpl.class);
 
-    private final SolicitudAfiliacionJdbcImpl solicitudAfiliacionJdbc;
-
     private final SolicitudAfiliacionJpaRepo solicitudAfiliacionJpaRepo;
 
     @Autowired
-    public SolicitudAfiliacionServiceImpl(SolicitudAfiliacionJdbcImpl solicitudAfiliacionJdbc, SolicitudAfiliacionJpaRepo solicitudAfiliacionJpaRepo) {
-        this.solicitudAfiliacionJdbc = solicitudAfiliacionJdbc;
+    public SolicitudAfiliacionServiceImpl(SolicitudAfiliacionJpaRepo solicitudAfiliacionJpaRepo) {
         this.solicitudAfiliacionJpaRepo = solicitudAfiliacionJpaRepo;
     }
 
@@ -57,6 +53,16 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
                 regimenId, estado, paging).getContent();
         return solList;
     }
+
+    @Override
+    public void procesarSolicitudAfiliacion(Long solicitudId) throws Exception{
+        logger.info("Entering in procesarSolicitudAfiliacion");
+
+
+
+
+    }
+
 
 
 }

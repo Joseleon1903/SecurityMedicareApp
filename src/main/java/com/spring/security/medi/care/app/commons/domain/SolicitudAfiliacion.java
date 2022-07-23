@@ -1,7 +1,6 @@
 package com.spring.security.medi.care.app.commons.domain;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Date;
 
 import lombok.Data;
@@ -35,9 +34,10 @@ public class SolicitudAfiliacion implements Serializable {
     private Date fechaRecepcion;
     private Long municipioId;
     private Long ciudadanoId;
+    private Long nacionalidadId;
     private Date fechaUltimoCambio;
 
-    public SolicitudAfiliacion(Long solicitudId, Integer servicioId, Integer loteId, Long entidadId, Long seguroId, Long regimenId, String tipoAfiliado, Short tipoIdentificacionId, String cedula, String nss, String cedulaTitular, String nombre, String primerApellido, Boolean automatica, Long institucionPensionadoId, Long claveInstitucionPensionado, String estado, Date fechaRecepcion, Long municipioId, Long ciudadanoId, Date fechaUltimoCambio) {
+    public SolicitudAfiliacion(Long solicitudId, Integer servicioId, Integer loteId, Long entidadId, Long seguroId, Long regimenId, String tipoAfiliado, Short tipoIdentificacionId, String cedula, String nss, String cedulaTitular, String nombre, String primerApellido, Boolean automatica, Long institucionPensionadoId, Long claveInstitucionPensionado, String estado, Date fechaRecepcion, Long municipioId, Long ciudadanoId,Long nacionalidadId, Date fechaUltimoCambio) {
         this.solicitudId = solicitudId;
         this.servicioId = servicioId;
         this.loteId = loteId;
@@ -59,6 +59,7 @@ public class SolicitudAfiliacion implements Serializable {
         this.municipioId = municipioId;
         this.ciudadanoId = ciudadanoId;
         this.fechaUltimoCambio = fechaUltimoCambio;
+        this.nacionalidadId= nacionalidadId;
     }
 
     public SolicitudAfiliacion() {

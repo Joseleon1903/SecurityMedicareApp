@@ -203,15 +203,16 @@
                         <td th:text="${sol.municipioId}">M</td>
                         <td th:text="${sol.estado}">M</td>
                         <td th:text="${sol.motivoId}">Activo</td>
+
                         <td>
-                           <!-- <button type="button" th:data-text="${ciudadano.ciudadanoId}" class="menu-button-solicitud btn btn-primary" >
+                            <button type="button" th:data-text="${sol.solicitudId}" class="menu-button-solicitud btn btn-primary" >
                                 <i class="fa-solid fa-eye"></i>
-                            </button>-->
-                        </td>
+                            </button>
+                        </td>s
                         <td>
-<!--                            <button th:data-text="${ciudadano.ciudadanoId}" type="button" class="menu-button-solicitud btn btn-danger">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </button>-->
+                            <button th:data-text="${sol.solicitudId}" type="button" class="menu-button-solicitud btn btn-primary">
+                                Procesar
+                            </button>
                         </td>
                     </tr>
                     </tbody>

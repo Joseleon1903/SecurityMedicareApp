@@ -14,10 +14,6 @@ drop table if exists MUNICIPIO;
 
 drop table if exists MOTIVO_ESTADO;
 
-drop table if exists PARENTESCO;
-
-drop table if exists GRADO_CONSANGUINIDAD;
-
 drop table if exists TIPO_USUARIO;
 
 drop table if exists NACIONALIDAD;

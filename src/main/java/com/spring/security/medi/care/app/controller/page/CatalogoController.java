@@ -5,9 +5,6 @@ import com.spring.security.medi.care.app.catalogo.dto.MunicipioPaginatedDto;
 import com.spring.security.medi.care.app.catalogo.dto.NacionalidadPaginatedDto;
 import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
-import com.spring.security.medi.care.app.commons.domain.MotivoEstado;
-import com.spring.security.medi.care.app.commons.domain.Nacionalidad;
-import com.spring.security.medi.care.app.commons.domain.Parentesco;
 import com.spring.security.medi.care.app.controller.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -18,9 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Controller
 public class CatalogoController extends ViewBaseContext {
