@@ -1,6 +1,9 @@
 package com.spring.security.medi.care.app.ciudadano.service;
 
+import com.spring.security.medi.care.app.ciudadano.type.CiudadanoPaginated;
+import com.spring.security.medi.care.app.commons.PaginationOutput;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
@@ -33,6 +36,25 @@ public class CiudadanoServiceImpl implements CiudadanoService {
         Integer pageSize = 15;
         Pageable paging = PageRequest.of(pageNo, pageSize);
         return ciudadanoJpaRepo.findAll(paging).toList();
+    }
+
+    @Override
+    public CiudadanoPaginated buscarCiudadanosPorParametros(String identificacion, String texto, String estado, int page, int size) {
+        logger.info("Entering in method buscarCiudadanosPorParametros");
+        logger.info("param : "+identificacion );
+        logger.info("param : "+texto );
+        logger.info("param : "+estado );
+        identificacion = (identificacion != null && !identificacion.isEmpty())? "%"+identificacion+"%": null;
+        texto = (texto != null && !texto.isEmpty())? "%"+texto+"%": null;
+        Pageable paging = PageRequest.of(page, size);
+        Page<Ciudadano> listado = ciudadanoJpaRepo.findByParameters(identificacion, texto, estado ,paging );
+        PaginationOutput pageOut = new PaginationOutput();
+        pageOut.setPageIndex(page);
+        pageOut.setTotalPages(listado.getTotalPages());
+        pageOut.setRowSize(size);
+        pageOut.setTotalRowCount(listado.getTotalElements());
+        CiudadanoPaginated paginated = new CiudadanoPaginated(listado.getContent(), pageOut);
+        return paginated;
     }
 
     @Override

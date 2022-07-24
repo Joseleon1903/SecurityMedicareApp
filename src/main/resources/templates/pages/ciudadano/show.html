@@ -93,6 +93,59 @@
     <button id="delete-modal-buttom" type="button" data-bs-toggle="modal" data-bs-target="#delete-ciudadano-modal" style=" display:none;">
     </button>
 
+
+        <!-- filtros para ciudadano premios -->
+
+    <div class="breadcrumbs" style="margin-right: 20px; margin-left: 20px;margin-top: 15px">
+        <nav>
+            <div class="container">
+                <form method="post" action="#" th:action="@{/listado/filter}" th:object="${CiudadanoFilterBean}" >
+
+                    <!--row con los label-->
+                    <div class="row g-3" style="margin-bottom: 0.2em;">
+
+                        <div class="col-md-2 form-group">
+                            <label for="cedula" class="despacho-inline-form-label" th:text="#{page.label.ciudadano.form.column.cedula}">cedula</label>
+                        </div>
+
+                        <div class="col-md-2 form-group">
+                            <label for="nombre" class="despacho-inline-form-label" th:text="#{page.label.ciudadano.form.column.nombre}">nombre</label>
+                        </div>
+
+                        <div class="col-md-2 form-group">
+                            <label for="estado" class="despacho-inline-form-label" th:text="#{page.label.ciudadano.form.column.estado}">estado</label>
+                        </div>
+
+                    </div>
+
+                    <!--row con los input-->
+                    <div class="row g-3">
+
+                        <div class="col-md-2 form-group">
+                            <input type="text" th:field="*{tipoIdentificacion}" th:value="${CiudadanoFilterBean.tipoIdentificacion}" class="form-control" >
+                        </div>
+
+                        <div class="col-md-2 form-group">
+                            <input type="text" th:field="*{nombre}" th:value="${CiudadanoFilterBean.nombre}" class="form-control"  >
+                        </div>
+
+                        <div id="estado" class="col-md-2 form-group">
+                            <select th:field="*{estado}" th:value="${CiudadanoFilterBean.estado}" class="form-select" aria-label="Default select example">
+                                <option value="T" selected>Todos</option>
+                                <option value="AC" > Activo</option>
+                                <option value="IN" > Incactivo</option>
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary mb-3">Aplicar</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </nav>
+    </div>
+
     <!-- ======= About Us Section ======= -->
     <section id="about" class="about" style="padding: 1em 0;">
         <div class="container aos-init aos-animate" data-aos="fade-up">
@@ -141,6 +194,14 @@
                     </tbody>
 
                 </table>
+
+                <nav aria-label="Page navigation example" style="float:right;">
+                    <ul class="pagination">
+                        <li th:if="${PaginationIndexBean > 0}" class="page-item"><a class="page-link" th:href="@{/ciudadano(indexPage=-1)}">Previous</a></li>
+                        <li class="page-item" th:text="'Page '+${PaginationIndexBean}" style="text-align: center; margin: 5px;">Previous</li>
+                        <li class="page-item"><a class="page-link" th:href="@{/ciudadano(indexPage=1)}">Next</a></li>
+                    </ul>
+                </nav>
 
             </div>
 
