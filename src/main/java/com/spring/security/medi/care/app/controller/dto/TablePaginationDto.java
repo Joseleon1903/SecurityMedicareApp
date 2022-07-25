@@ -17,6 +17,18 @@ public class TablePaginationDto implements Serializable{
         this.remainCount = remainCount;
     }
 
+    public long getRemainCount() {
+        return remainCount;
+    }
+
+    public void setRemainCount(long remainCount) {
+        if(remainCount < 0L && remainCount == 1L ){
+            this.remainCount = 0;
+        }else {
+            this.remainCount = remainCount;
+        }
+    }
+
     public TablePaginationDto() {
     }
 }
