@@ -57,9 +57,13 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
     public void procesarSolicitudAfiliacion(Long solicitudId) throws Exception{
         logger.info("Entering in procesarSolicitudAfiliacion");
 
+        //TODO validacion ciudadano por NSS y cedula validar que exista un ciudadano con Nss y cedula de la solicitud y asigna el ciudadano
 
 
 
+        //TODO si tiene asignacion pensionado y pertenece al seguro de pensiones asigna una instutucion pensionado a la solicitud
+
+        //TODO
     }
 
 

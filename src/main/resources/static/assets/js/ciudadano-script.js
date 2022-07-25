@@ -1,6 +1,5 @@
 
-
-$( ".menu-button-solicitud.btn.btn-primary" ).on( "click", function( event ) {
+  $( ".menu-button-solicitud.btn.btn-primary" ).on( "click", function( event ) {
   console.log('entereing click buttom detail ');
 
   console.log('ciudadano Id : '+ $(this).data('text'));
@@ -8,16 +7,41 @@ $( ".menu-button-solicitud.btn.btn-primary" ).on( "click", function( event ) {
 
   var request = $.ajax({
     method: "GET",
-    url: "/SecurityMedicareApp/ciudadano/"+ciudadanoId
+    url: "/SecurityMedicareApp/api/ciudadano/"+ciudadanoId
   });
 
    request.done(function( msg ) {
       console.log('ciudadano encontrado success');
+
+      var ciudadanoId = msg['ciudadanoId'];
+      var cedula = msg['cedula'];
+      var nss = msg['nss'];
+      var nombre = msg['nombre'];
+      var primerApellido = msg['primerApellido'];
+      var segundoApellido = msg['segundoApellido'];
+      var sexo = msg['genero'];
+      var fechaNacimiento = new Date(msg['fechaNacimiento']);
+
+      if(sexo == "F" ){
+        sexo = "Femenino";
+      }else if (sexo == "M"){
+        sexo = "Masculino";
+      }
+
+      $("#cedulaDetail").val(cedula);
+      $("#nssDetail").val(nss);
+      $("#nombreDetail").val(nombre);
+      $("#primerApellidoDetail").val(primerApellido);
+      $("#segundoApellidoDetail").val(segundoApellido);
+      $("#sexoDetail").val(sexo);
+      $("#fechaNacimientoDetail").val(fechaNacimiento.toLocaleDateString("en-US"));
+
       jQuery('#detail-modal-buttom').click();
 
     });
 
 });
+
 
 $(".menu-button-solicitud.btn.btn-danger" ).on( "click", function( event ) {
   console.log('entereing click buttom delete ');

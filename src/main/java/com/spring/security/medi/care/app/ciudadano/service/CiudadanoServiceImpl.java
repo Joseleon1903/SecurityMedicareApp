@@ -52,7 +52,9 @@ public class CiudadanoServiceImpl implements CiudadanoService {
         pageOut.setPageIndex(page);
         pageOut.setTotalPages(listado.getTotalPages());
         pageOut.setRowSize(size);
-        pageOut.setTotalRowCount(listado.getTotalElements());
+        long registrosRestante = listado.getTotalElements() - (page*size);
+        logger.info("Registro restante: "+ registrosRestante);
+        pageOut.setTotalRowCount(registrosRestante);
         CiudadanoPaginated paginated = new CiudadanoPaginated(listado.getContent(), pageOut);
         return paginated;
     }
