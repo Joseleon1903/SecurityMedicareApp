@@ -146,7 +146,7 @@ public class CatalogoController extends ViewBaseContext {
     }
 
     @PostMapping("/municipio/filter")
-    public String buscarMunicipiosPorParametros(@ModelAttribute MunicipioFilterDto municipioFilterDtoInput, Model model){
+    public String buscarMunicipiosPorParametros(@ModelAttribute MunicipioFilterDto municipioFilterDtoInput){
         logger.info("------- entering -----------");
         logger.info("Entering in method buscarMunicipiosPorParametros..");
         logger.info("Form values : "+municipioFilterDtoInput);
@@ -167,7 +167,7 @@ public class CatalogoController extends ViewBaseContext {
     }
 
     @PostMapping("/motivoestado/filter")
-    public String buscarMotivosEstadosPorParametros(@ModelAttribute MotivoEstadoFilterDTO motivoFilterDtoInput, Model model){
+    public String buscarMotivosEstadosPorParametros(@ModelAttribute MotivoEstadoFilterDTO motivoFilterDtoInput){
         logger.info("------- entering -----------");
         logger.info("Entering in method buscarMotivosEstadosPorParametros..");
         logger.info("Form values : "+motivoFilterDtoInput);
@@ -193,7 +193,7 @@ public class CatalogoController extends ViewBaseContext {
     }
 
     @PostMapping("/nacionalidad/filter")
-    public String buscarNacionalidadPorParametros(@ModelAttribute NacionalidadFilterDTO nacionalidadFilterInput, Model model){
+    public String buscarNacionalidadPorParametros(@ModelAttribute NacionalidadFilterDTO nacionalidadFilterInput){
         logger.info("------- entering -----------");
         logger.info("Entering in method buscarNacionalidadPorParametros..");
         logger.info("Form values : "+nacionalidadFilterInput);
