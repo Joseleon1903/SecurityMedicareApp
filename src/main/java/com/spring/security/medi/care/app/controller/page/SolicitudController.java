@@ -11,6 +11,7 @@ import com.spring.security.medi.care.app.commons.domain.SolicitudAfiliacion;
 import com.spring.security.medi.care.app.controller.dto.ErrorPageDto;
 import com.spring.security.medi.care.app.controller.dto.SolicitudFormDto;
 import com.spring.security.medi.care.app.controller.dto.SystemInfoDTO;
+import com.spring.security.medi.care.app.entidad.service.EntidadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,16 +33,19 @@ public class SolicitudController extends ViewBaseContext {
     private SolicitudAfiliacion solicitudOut = new SolicitudAfiliacion();
 
     private final CatalogoService catalogoService;
+    private final EntidadService entidadService;
+
     private final SolicitudFormDto solicitudForm;
     private final SolicitudAfiliacionService solicitudAfiliacionService;
 
     private ErrorPageDto errorPageDto;
 
     @Autowired
-    public SolicitudController(CatalogoService catalogoService,SolicitudAfiliacionService solicitudAfiliacionService, SolicitudFormDto solicitudForm, ErrorPageDto errorPageDto){
+    public SolicitudController(CatalogoService catalogoService,SolicitudAfiliacionService solicitudAfiliacionService,EntidadService entidadService, SolicitudFormDto solicitudForm, ErrorPageDto errorPageDto){
        this.catalogoService = catalogoService;
        this.solicitudForm = solicitudForm;
        this.solicitudAfiliacionService = solicitudAfiliacionService;
+       this.entidadService = entidadService;
        this.errorPageDto = errorPageDto;
     }
 
@@ -73,7 +77,7 @@ public class SolicitudController extends ViewBaseContext {
 
         solicitudIn.setServicioId(AplicationConstantUtil.SERVICIO_PANTALLA_SOLICITUD_AFILIACION);
         solicitudIn.setLoteId(AplicationConstantUtil.generateLoteId());
-        solicitudIn.setEntidadId(2001L);
+        solicitudIn.setEntidadId(entidadService.asignarAutomaticamenteEntidad(solicitudForm.getSeguroId(),solicitudForm.getRegimenId()));
         solicitudIn.setSeguroId(solicitudForm.getSeguroId());
         solicitudIn.setRegimenId(solicitudForm.getRegimenId());
         solicitudIn.setTipoAfiliado(solicitudForm.getTipoAfiliado());
