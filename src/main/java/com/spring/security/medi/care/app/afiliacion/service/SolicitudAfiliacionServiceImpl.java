@@ -36,7 +36,7 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
     }
 
     @Override
-    public List<SolicitudAfiliacion> buscarSolicitudesAfiliacionPorParametros(String cedula,Integer servicioId, Long seguroId, Long regimenId, String estado, int page, int size){
+    public List<SolicitudAfiliacion> buscarSolicitudesAfiliacionPorParametros(String cedula,Integer servicioId, Long seguroId, Integer regimenId, String estado, int page, int size){
 
         logger.info("Entering in buscarSolicitudesAfiliacionPorParametros");
         logger.info("param cedula: "+cedula);

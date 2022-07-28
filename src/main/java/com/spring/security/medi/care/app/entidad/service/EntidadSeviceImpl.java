@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class EntidadSeviceImpl implements EntidadService{
@@ -50,13 +51,23 @@ public class EntidadSeviceImpl implements EntidadService{
     }
 
     @Override
-    public Long asignarAutomaticamenteEntidad(Long seguro, Long regimen){
+    public Long asignarAutomaticamenteEntidad(Integer regimen){
         logger.info("Entering in method asignarAutomaticamenteEntidad");
-        logger.info("param seguro : "+seguro);
         logger.info("param regimen : "+regimen);
-
-
-        return 0L;
+        List<Entidad> entidades = entidadJpaRepo.findEntidadAfiliacionAutomatica(regimen);
+        int entidadSize = entidades.size();
+        logger.info("entidadSize: "+entidadSize );
+        if(entidadSize == 0){
+            return 1006L;
+        }
+        Random rand =  new Random();
+        int indiceR = rand.nextInt(entidadSize);
+        logger.info("Indice random : "+Math.abs(indiceR) );
+        Entidad ent = entidades.get(Math.abs(indiceR));
+        if(ent == null){
+            return 1006L;
+        }
+        return ent.getEntidadId();
     }
 
 

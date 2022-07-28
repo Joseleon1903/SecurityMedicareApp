@@ -14,6 +14,6 @@ public interface EntidadService {
 
     List<Entidad> buscarEntidades();
 
-    Long asignarAutomaticamenteEntidad(Long seguro, Long regimen);
+    Long asignarAutomaticamenteEntidad(Integer regimen);
 
 }

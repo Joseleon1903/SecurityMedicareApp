@@ -77,7 +77,7 @@ public class SolicitudController extends ViewBaseContext {
 
         solicitudIn.setServicioId(AplicationConstantUtil.SERVICIO_PANTALLA_SOLICITUD_AFILIACION);
         solicitudIn.setLoteId(AplicationConstantUtil.generateLoteId());
-        solicitudIn.setEntidadId(entidadService.asignarAutomaticamenteEntidad(solicitudForm.getSeguroId(),solicitudForm.getRegimenId()));
+        solicitudIn.setEntidadId(entidadService.asignarAutomaticamenteEntidad(solicitudForm.getRegimenId()));
         solicitudIn.setSeguroId(solicitudForm.getSeguroId());
         solicitudIn.setRegimenId(solicitudForm.getRegimenId());
         solicitudIn.setTipoAfiliado(solicitudForm.getTipoAfiliado());

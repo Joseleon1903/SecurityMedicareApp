@@ -44,7 +44,7 @@ public class CiudadanoController extends ViewBaseContext {
         logger.info("------- entering -----------");
         logger.info("Entering in method showPage..");
         logger.info("param: ciudadanoFilterDto "+ciudadanoFilterDto);
-        if( (this.tablePagination.getPaginationIndex() + indexPageInput) > -1){
+        if(indexPageInput != null && (this.tablePagination.getPaginationIndex() + indexPageInput) > -1){
             int result = this.tablePagination.getPaginationIndex() + indexPageInput;
             logger.info("Current page : "+result);
             this.tablePagination.setPaginationIndex(result);

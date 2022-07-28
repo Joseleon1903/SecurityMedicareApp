@@ -80,13 +80,13 @@ public class AfiliacionDtoUtil {
      * @param seguro
      * @return
      */
-    public static String convertRegimenId(Long seguro){
+    public static String convertRegimenId(Integer regimen){
         String result = "";
-        if (seguro.equals(N_REGIMEN_CONTRIBUTIVO)){
+        if (regimen.equals(N_REGIMEN_CONTRIBUTIVO)){
             return REGIMEN_CONTRIBUTIVO;
         }
 
-        if (seguro.equals(N_REGIMEN_SUBSIDIADO)){
+        if (regimen.equals(N_REGIMEN_SUBSIDIADO)){
             return REGIMEN_SUBSIDIADO;
         }
         return result;

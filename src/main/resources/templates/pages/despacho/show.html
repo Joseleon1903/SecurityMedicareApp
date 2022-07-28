@@ -160,6 +160,10 @@
         </nav>
     </div>
 
+    <!-- Button trigger modal -->
+    <button id="detail-modal-buttom" type="button" data-bs-toggle="modal" data-bs-target="#detailModal" style=" display:none;">
+    </button>
+
     <!-- ======= About Us Section ======= -->
     <section id="about" class="about" style="padding: 1em 0;">
         <div class="container aos-init aos-animate" data-aos="fade-up" style="margin: 1em;">
@@ -222,6 +226,100 @@
 
 </main><!-- End #main -->
 
+<!-- Modal detail ciudadano -->
+<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="--bs-modal-width: 750px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailModalLabel" th:text="#{page.generar.label.detail.modal.afiliacion.title}">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form>
+
+                <div class="modal-body">
+
+                    <div class="row g-2" style="margin-bottom: 0.5em;">
+
+                        <div class="col-auto">
+                            <label for="solicitudIdDetail" class="form-label" th:text="#{page.despacho.column.solicitudId}">Solicitud id</label>
+                            <input id="solicitudIdDetail" type="text" class="form-control" disabled="true" value="1156">
+                        </div>
+
+                        <div class="col-auto">
+                            <label for="cedulaDetail" class="form-label" th:text="#{page.ciudadano.column.cedula}">Cedula</label>
+                            <input id="cedulaDetail"  type="text" class="form-control"  disabled="true" value="02100032850">
+                        </div>
+
+                        <div class="col-auto">
+                            <label for="nssDetail" class="form-label" th:text="#{page.ciudadano.column.nss}">NSS</label>
+                            <input id="nssDetail" type="text" class="form-control" disabled="true" value="50307232">
+                        </div>
+
+                    </div>
+
+                    <div class="row g-2" style="margin-bottom: 0.5em;">
+
+                        <div class="col-auto">
+                            <label for="nombreDetail" class="form-label" th:text="#{page.ciudadano.column.nombre}" >Nombre</label>
+                            <input id="nombreDetail"  type="text" class="form-control" disabled="true" value="FREIDMANT">
+                        </div>
+                        <div class="col-auto">
+                            <label for="primerApellidoDetail" class="form-label" th:text="#{page.ciudadano.column.primerApellido}">Primer Apellido</label>
+                            <input id="primerApellidoDetail"  type="text" class="form-control" disabled="true" value="DOINET">
+                        </div>
+                        <div class="col-auto">
+                            <label for="segundoApellidoDetail" class="form-label" th:text="#{page.ciudadano.column.segundoApellido}">Segundo Apellido</label>
+                            <input type="text" class="form-control" id="segundoApellidoDetail" disabled="true" value="GODEK">
+                        </div>
+
+                    </div>
+
+                    <div class="row g-2" style="margin-bottom: 0.5em;">
+
+                        <div class="col-auto">
+                            <label for="tipoAfiliadoDetail" class="form-label" th:text="#{page.despacho.column.tipoAfiliado}">Tipo afiliado</label>
+                            <input type="text" class="form-control" id="tipoAfiliadoDetail" disabled="true" value="TITULAR">
+                        </div>
+
+                        <div class="col-auto">
+                            <label for="tipoDependienteDetail" class="form-label" th:text="#{page.despacho.column.tipoDependiente}">Tipo afiliado</label>
+                            <input type="text" class="form-control" id="tipoDependienteDetail" disabled="true" value="DIRECTO">
+                        </div>
+
+                        <div class="col-auto">
+                            <label for="institucionPensionadoDetail" class="form-label" th:text="#{page.despacho.column.institucionPensionado}">Tipo afiliado</label>
+                            <input type="text" class="form-control" id="institucionPensionadoDetail" disabled="true" value="ASISTENCIA FAMILIAR">
+                        </div>
+                    </div>
+
+                    <div class="row g-2" style="margin-bottom: 0.5em;">
+
+                        <div class="col-auto">
+                            <label for="entidadDetail" class="form-label" th:text="#{page.despacho.column.entidadNombre}">Entidad Nombre</label>
+                            <input type="text" class="form-control" id="entidadDetail" disabled="true" value="ARS GENERICA">
+                        </div>
+
+                        <div class="col-auto">
+                            <label for="estadoDetail" class="form-label" th:text="#{page.despacho.column.estado}">Estado</label>
+                            <input type="text" class="form-control" id="estadoDetail" disabled="true" value="OK">
+                        </div>
+
+                        <div class="col-auto">
+                            <label for="motivoDetail" class="form-label" th:text="#{page.despacho.column.motivoId}">Motivo </label>
+                            <input type="text" class="form-control" id="motivoDetail" disabled="true" value="NINGUNO">
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" th:text="#{page.generar.label.accion.cerrar}">Close</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
 
 <!-- Vendor JS Files -->
 <script th:src="@{assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>

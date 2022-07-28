@@ -49,7 +49,7 @@ public class DespachoSolicitudController extends ViewBaseContext {
         logger.info("terminando busqueda catalogo seguros");
 
         logger.info("iniciando busqueda solicitudes ");
-        Long regimenId = (solicituFromFilterDto.getRegimenId() != null && !solicituFromFilterDto.getRegimenId().isEmpty())? Long.parseLong(solicituFromFilterDto.getRegimenId()): null;
+        Integer regimenId = (solicituFromFilterDto.getRegimenId() != null && !solicituFromFilterDto.getRegimenId().isEmpty())? Integer.parseInt(solicituFromFilterDto.getRegimenId()): null;
         String estado = (solicituFromFilterDto.getEstado() != null && solicituFromFilterDto.getEstado() == "T")? null :solicituFromFilterDto.getEstado();
 
         List<SolicitudAfiliacion> solListDomain = solicitudAfiliacionService.buscarSolicitudesAfiliacionPorParametros(solicituFromFilterDto.getCedula(),
