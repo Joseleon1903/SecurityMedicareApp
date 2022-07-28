@@ -158,71 +158,71 @@
 
             </div>
         </nav>
+
+        <!-- ======= About Us Section ======= -->
+        <section id="about" class="about" style="padding: 1em 0;">
+            <div class="aos-init aos-animate" data-aos="fade-up" style="margin: 1em;">
+                <div class="row gy-4">
+
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col" th:text="#{page.despacho.column.solicitudId}">CiudadanoId</th>
+                            <th scope="col" th:text="#{page.despacho.column.servicioId}">Cedula</th>
+                            <th scope="col" th:text="#{page.despacho.column.fechaRecepcion}">Nss</th>
+                            <th scope="col" th:text="#{page.despacho.column.loteId}">Nombre</th>
+                            <th scope="col" th:text="#{page.despacho.column.entidadId}">Primer Apellido</th>
+                            <th scope="col" th:text="#{page.despacho.column.seguroId}">Segundo Apellido</th>
+                            <th scope="col" th:text="#{page.despacho.column.regimenId}">Genero</th>
+                            <th scope="col" th:text="#{page.despacho.column.tipoAfiliado}">Fecha Nacimiento</th>
+                            <th scope="col" th:text="#{page.despacho.column.cedula}">Edad</th>
+                            <th scope="col" th:text="#{page.despacho.column.nss}">Edad</th>
+                            <th scope="col" th:text="#{page.despacho.column.cedulaTitular}">Edad</th>
+                            <th scope="col" th:text="#{page.despacho.column.estado}">Estado</th>
+                            <th scope="col" th:text="#{page.despacho.column.motivoId}">Motivo</th>
+                            <th scope="col" colspan="2" th:text="#{page.generar.column.accion}">Acción</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="sol : ${SolicitudAfiliacionListBean}" th:if="${not #lists.isEmpty(SolicitudAfiliacionListBean)}">
+                            <th scope="row" th:text="${sol.solicitudId}" >1</th>
+                            <td th:text="${sol.servicioId}" >0456325896</td>
+                            <td th:text="${#dates.format(sol.fechaRecepcion,'dd/MM/yyyy')}">01/01/2000</td>
+                            <td th:text="${sol.loteId}">8965235</td>
+                            <td th:text="${sol.entidadId}">Mario</td>
+                            <td th:text="${sol.seguroId}">1</td>
+                            <td th:text="${sol.regimenId}">Cesar</td>
+                            <td th:text="${sol.tipoAfiliado}">M</td>
+                            <td th:text="${sol.cedula}">M</td>
+                            <td th:text="${sol.nss}">M</td>
+                            <td th:text="${sol.cedulaTitular}">M</td>
+                            <td th:text="${sol.estado}">M</td>
+                            <td th:text="${sol.motivoId}">Activo</td>
+
+                            <td>
+                                <button type="button" th:data-text="${sol.solicitudId}" class="menu-button-solicitud btn btn-primary" >
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                            </td>
+                            <td>
+                                <button th:data-text="${sol.solicitudId}" type="button" class="menu-button-solicitud btn btn-primary">
+                                    Procesar
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </section>
     </div>
 
     <!-- Button trigger modal -->
     <button id="detail-modal-buttom" type="button" data-bs-toggle="modal" data-bs-target="#detailModal" style=" display:none;">
     </button>
 
-    <!-- ======= About Us Section ======= -->
-    <section id="about" class="about" style="padding: 1em 0;">
-        <div class="container aos-init aos-animate" data-aos="fade-up" style="margin: 1em;">
-            <div class="row gy-4">
-
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col" th:text="#{page.despacho.column.solicitudId}">CiudadanoId</th>
-                        <th scope="col" th:text="#{page.despacho.column.servicioId}">Cedula</th>
-                        <th scope="col" th:text="#{page.despacho.column.fechaRecepcion}">Nss</th>
-                        <th scope="col" th:text="#{page.despacho.column.loteId}">Nombre</th>
-                        <th scope="col" th:text="#{page.despacho.column.entidadId}">Primer Apellido</th>
-                        <th scope="col" th:text="#{page.despacho.column.seguroId}">Segundo Apellido</th>
-                        <th scope="col" th:text="#{page.despacho.column.regimenId}">Genero</th>
-                        <th scope="col" th:text="#{page.despacho.column.tipoAfiliado}">Fecha Nacimiento</th>
-                        <th scope="col" th:text="#{page.despacho.column.cedula}">Edad</th>
-                        <th scope="col" th:text="#{page.despacho.column.nss}">Edad</th>
-                        <th scope="col" th:text="#{page.despacho.column.cedulaTitular}">Edad</th>
-                        <th scope="col" th:text="#{page.despacho.column.estado}">Estado</th>
-                        <th scope="col" th:text="#{page.despacho.column.motivoId}">Motivo</th>
-
-                        <th scope="col" colspan="2" th:text="#{page.generar.column.accion}">Acción</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="sol : ${SolicitudAfiliacionListBean}" th:if="${not #lists.isEmpty(SolicitudAfiliacionListBean)}">
-                        <th scope="row" th:text="${sol.solicitudId}" >1</th>
-                        <td th:text="${sol.servicioId}" >0456325896</td>
-                        <td th:text="${#dates.format(sol.fechaRecepcion,'dd/MM/yyyy')}">01/01/2000</td>
-                        <td th:text="${sol.loteId}">8965235</td>
-                        <td th:text="${sol.entidadId}">Mario</td>
-                        <td th:text="${sol.seguroId}">1</td>
-                        <td th:text="${sol.regimenId}">Cesar</td>
-                        <td th:text="${sol.tipoAfiliado}">M</td>
-                        <td th:text="${sol.cedula}">M</td>
-                        <td th:text="${sol.nss}">M</td>
-                        <td th:text="${sol.cedulaTitular}">M</td>
-                        <td th:text="${sol.estado}">M</td>
-                        <td th:text="${sol.motivoId}">Activo</td>
-
-                        <td>
-                            <button type="button" th:data-text="${sol.solicitudId}" class="menu-button-solicitud btn btn-primary" >
-                                <i class="fa-solid fa-eye"></i>
-                            </button>
-                        </td>
-                        <td>
-                            <button th:data-text="${sol.solicitudId}" type="button" class="menu-button-solicitud btn btn-primary">
-                                Procesar
-                            </button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-
-            </div>
-
-        </div>
-    </section>
 
 </main><!-- End #main -->
 

@@ -2,6 +2,7 @@ package com.spring.security.medi.care.app.afiliacion.service;
 
 import com.spring.security.medi.care.app.commons.domain.SolicitudAfiliacion;
 import com.spring.security.medi.care.app.afiliacion.repository.jpa.SolicitudAfiliacionJpaRepo;
+import com.spring.security.medi.care.app.controller.dto.DetalleSolicitudAfiliacionDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,20 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
                 regimenId, estado, paging).getContent();
         return solList;
     }
+
+    public SolicitudAfiliacion buscarSolicitudAfiliacionPorId(Long solicitudId){
+        logger.info("Entering in buscarSolicitudAfiliacionPorId");
+        logger.info("param solicitudId: "+solicitudId);
+        return solicitudAfiliacionJpaRepo.findById(solicitudId).get();
+    }
+
+    public DetalleSolicitudAfiliacionDto buscarSolicitudAfiliacionDetallePorId(Long id){
+
+
+
+        return null;
+    }
+
 
     @Override
     public void procesarSolicitudAfiliacion(Long solicitudId) throws Exception{

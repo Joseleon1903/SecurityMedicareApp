@@ -22,7 +22,6 @@ CREATE TABLE solicitud_afiliacion (
 	ciudadano_id int4 NULL,
 	nacionalidad_id int4 NULL,
 	fecha_ultimo_cambio date NOT NULL,
-	servivio_id int4 NULL,
 	CONSTRAINT sol_afiliacion_tipo_afi_ck CHECK (((tipo_afiliado)::text = ANY ((ARRAY['D'::character varying, 'T'::character varying])::text[]))),
 	CONSTRAINT solicitud_afiliacion_estado_ck CHECK (((estado)::text = ANY ((ARRAY['OK'::character varying, 'PE'::character varying, 'RE'::character varying])::text[]))),
 	CONSTRAINT solicitud_afiliacion_pkey PRIMARY KEY (solicitud_id)
