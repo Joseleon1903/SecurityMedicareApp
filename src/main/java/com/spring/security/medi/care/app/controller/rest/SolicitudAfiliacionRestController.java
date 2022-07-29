@@ -35,7 +35,7 @@ public class SolicitudAfiliacionRestController {
 
     @GetMapping("/detalle/{id}")
     @ResponseBody
-    public ResponseEntity<DetalleSolicitudAfiliacionDto> findById(@PathVariable("id") Long id){
+    public ResponseEntity<DetalleSolicitudAfiliacionDto> findDetailById(@PathVariable("id") Long id){
         DetalleSolicitudAfiliacionDto solicitud = solicitudAfiliacionService.buscarSolicitudAfiliacionDetallePorId(id);
         return new ResponseEntity<DetalleSolicitudAfiliacionDto>(solicitud, HttpStatus.OK);
     }

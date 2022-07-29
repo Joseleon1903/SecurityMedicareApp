@@ -31,12 +31,12 @@ public class DetalleSolicitudAfiliacionDto {
         this.solicitudId = solicitudAfiliacion.getSolicitudId();
         this.entidadNombre = entidadNombre;
         this.tipoAfiliado = solicitudAfiliacion.getTipoAfiliado();
-        this.tipoDependiente = solicitudAfiliacion.getTipoDependiente();
+        this.tipoDependiente = "";
         this.cedula = solicitudAfiliacion.getCedula();
         this.nss = solicitudAfiliacion.getNss();
         this.nombre = solicitudAfiliacion.getNombre();
         this.primerApellido = solicitudAfiliacion.getPrimerApellido();
-        this.segundoApellido = solicitudAfiliacion.getSegundoApellido();
+        this.segundoApellido = "";
         this.institucionPensionado = institucionPensionado;
         this.estado = solicitudAfiliacion.getEstado();
         this.motivo = motivo;
