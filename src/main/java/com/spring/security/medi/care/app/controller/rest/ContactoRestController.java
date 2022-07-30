@@ -37,7 +37,7 @@ public class ContactoRestController {
     @ResponseBody
     public ResponseEntity<List<Contacto>> findAll(){
         List<Contacto> contactosList = contactoService.buscarContactosSistema();
-        return new ResponseEntity<List<Contacto>>(contactosList, HttpStatus.OK);
+        return new ResponseEntity(contactosList, HttpStatus.OK);
     }
 
 

@@ -1,10 +1,9 @@
 package com.spring.security.medi.care.app.controller.dto;
 
+import com.spring.security.medi.care.app.commons.AfiliacionDtoUtil;
 import com.spring.security.medi.care.app.commons.domain.SolicitudAfiliacion;
-import lombok.Data;
 import org.springframework.stereotype.Component;
 
-@Data
 @Component
 public class DetalleSolicitudAfiliacionDto {
 
@@ -21,10 +20,9 @@ public class DetalleSolicitudAfiliacionDto {
     private String estado;
     private String motivo;
 
-    public DetalleSolicitudAfiliacionDto(){
-    }
+    private String descripcionEstado;
 
-    public DetalleSolicitudAfiliacionDto(SolicitudAfiliacion solicitudAfiliacion){
+    public DetalleSolicitudAfiliacionDto(){
     }
 
     public DetalleSolicitudAfiliacionDto(SolicitudAfiliacion solicitudAfiliacion, String entidadNombre, String segundoApellido, String institucionPensionado, String motivo) {
@@ -36,7 +34,7 @@ public class DetalleSolicitudAfiliacionDto {
         this.nss = solicitudAfiliacion.getNss();
         this.nombre = solicitudAfiliacion.getNombre();
         this.primerApellido = solicitudAfiliacion.getPrimerApellido();
-        this.segundoApellido = "";
+        this.segundoApellido = segundoApellido;
         this.institucionPensionado = institucionPensionado;
         this.estado = solicitudAfiliacion.getEstado();
         this.motivo = motivo;
@@ -136,5 +134,23 @@ public class DetalleSolicitudAfiliacionDto {
 
     public void setMotivo(String motivo) {
         this.motivo = motivo;
+    }
+
+    public String getDescripcionEstado() {
+
+        if(AfiliacionDtoUtil.C_ESTADO_PE.equals(this.estado)){
+            return "Solicitud en estado pendiente de procesar datos incompletos.";
+        }
+
+        if(AfiliacionDtoUtil.C_ESTADO_RE.equals(this.estado)){
+            return "Solicitud en estado rechazada validad motivo de rechazo y volver a enviar la soliciud.";
+        }
+
+        if(AfiliacionDtoUtil.C_ESTADO_OK.equals(this.estado)){
+            return "Solicitud en estado aceptada.";
+        }
+
+
+        return descripcionEstado;
     }
 }

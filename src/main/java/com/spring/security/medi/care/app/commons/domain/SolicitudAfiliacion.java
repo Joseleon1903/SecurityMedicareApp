@@ -3,7 +3,6 @@ package com.spring.security.medi.care.app.commons.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -35,6 +34,7 @@ public class SolicitudAfiliacion implements Serializable {
     private Long ciudadanoId;
     private Long nacionalidadId;
     private Date fechaUltimoCambio;
+    private Long motivoId;
 
     public SolicitudAfiliacion(Long solicitudId, Integer servicioId, Integer loteId, Long entidadId, Long seguroId, Integer regimenId, String tipoAfiliado, Short tipoIdentificacionId, String cedula, String nss, String cedulaTitular, String nombre, String primerApellido, Boolean automatica, Long institucionPensionadoId, Long claveInstitucionPensionado, String estado, Date fechaRecepcion, Long municipioId, Long ciudadanoId,Long nacionalidadId, Date fechaUltimoCambio) {
         this.solicitudId = solicitudId;
@@ -238,5 +238,42 @@ public class SolicitudAfiliacion implements Serializable {
 
     public void setFechaUltimoCambio(Date fechaUltimoCambio) {
         this.fechaUltimoCambio = fechaUltimoCambio;
+    }
+
+    public Long getMotivoId() {
+        return motivoId;
+    }
+
+    public void setMotivoId(Long motivoId) {
+        this.motivoId = motivoId;
+    }
+
+    @Override
+    public String toString() {
+        return "SolicitudAfiliacion{" +
+                "solicitudId=" + solicitudId +
+                ", servicioId=" + servicioId +
+                ", loteId=" + loteId +
+                ", entidadId=" + entidadId +
+                ", seguroId=" + seguroId +
+                ", regimenId=" + regimenId +
+                ", tipoAfiliado='" + tipoAfiliado + '\'' +
+                ", tipoIdentificacionId=" + tipoIdentificacionId +
+                ", cedula='" + cedula + '\'' +
+                ", nss='" + nss + '\'' +
+                ", cedulaTitular='" + cedulaTitular + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", primerApellido='" + primerApellido + '\'' +
+                ", automatica=" + automatica +
+                ", institucionPensionadoId=" + institucionPensionadoId +
+                ", claveInstitucionPensionado=" + claveInstitucionPensionado +
+                ", estado='" + estado + '\'' +
+                ", fechaRecepcion=" + fechaRecepcion +
+                ", municipioId=" + municipioId +
+                ", ciudadanoId=" + ciudadanoId +
+                ", nacionalidadId=" + nacionalidadId +
+                ", fechaUltimoCambio=" + fechaUltimoCambio +
+                ", motivoId=" + motivoId +
+                '}';
     }
 }

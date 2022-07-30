@@ -200,14 +200,21 @@
                             <td th:text="${sol.motivoId}">Activo</td>
 
                             <td>
-                                <button type="button" th:data-text="${sol.solicitudId}" class="menu-button-solicitud btn btn-primary" >
+
+                                <button type="button" th:data-text="${sol.solicitudId}" class="menu-button-solicitud btn btn-warning">
                                     <i class="fa-solid fa-eye"></i>
                                 </button>
+
                             </td>
                             <td>
-                                <button th:data-text="${sol.solicitudId}" type="button" class="menu-button-solicitud btn btn-primary">
-                                    Procesar
-                                </button>
+                                <form method="post" action="#" th:action="@{|/solicitud/procesar/${sol.solicitudId}|}" >
+
+                                    <button th:data-text="${sol.solicitudId}" type="submit" class="menu-button-solicitud btn btn-primary">
+                                        Procesar
+                                    </button>
+
+                                </form>
+
                             </td>
                         </tr>
                         </tbody>
@@ -226,7 +233,7 @@
 
 </main><!-- End #main -->
 
-<!-- Modal detail ciudadano -->
+<!-- Modal detail solicitud -->
 <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
     <div class="modal-dialog" style="--bs-modal-width: 750px;">
         <div class="modal-content">
@@ -309,6 +316,26 @@
                             <input type="text" class="form-control" id="motivoDetail" disabled="true" value="NINGUNO">
                         </div>
 
+                    </div>
+                    <div class="row g-2" style="margin-bottom: 0.5em;" >
+
+                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                        Estado Solicitud Afiliación
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <p id="estadoDescripcionDetail"></p>
+                                        <div id="motivoDescripcionDetail" class="alert alert-danger" role="alert">
+                                            A simple danger alert—check it out!
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>

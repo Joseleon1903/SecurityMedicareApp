@@ -14,4 +14,7 @@ public interface CiudadanoService {
 
     void eliminarCiudadanoId(Long ciudadanoId);
 
+    Ciudadano buscarCiudadanoPorIdentifiacion(String cedula, String nss);
+
+
 }

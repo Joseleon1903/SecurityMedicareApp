@@ -30,14 +30,14 @@ public class EntidadRestController {
     @ResponseBody
     public ResponseEntity<Entidad> findById(@PathVariable("id") Long id){
         Entidad entidad = entidadService.buscarEntidadPorId(id);
-        return new ResponseEntity<Entidad>(entidad, HttpStatus.OK);
+        return new ResponseEntity(entidad, HttpStatus.OK);
     }
 
     @GetMapping("/all")
     @ResponseBody
     public ResponseEntity<List<Entidad>> findAll(){
         List<Entidad> entidadList = entidadService.buscarEntidades();
-        return new ResponseEntity<List<Entidad>>(entidadList, HttpStatus.OK);
+        return new ResponseEntity(entidadList, HttpStatus.OK);
     }
 
     @GetMapping("/automatica")
