@@ -19,7 +19,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 @Service
-public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionService{
+public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionService {
 
     private static final Logger logger = LoggerFactory.getLogger(SolicitudAfiliacionServiceImpl.class);
 
@@ -31,14 +31,16 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
 
     private final CatalogoService catalogoService;
 
+    private final SolicitudAfiliacionJpaRepo solicitudAfiliacionJpaRepo;
 
     @Autowired
-    public SolicitudAfiliacionServiceImpl(SolicitudAfiliacionJpaRepo solicitudAfiliacionJpaRepo,EntidadService entidadService,
-                                          CatalogoService catalogoService, CiudadanoService ciudadanoService) {
+    public SolicitudAfiliacionServiceImpl(SolicitudAfiliacionJpaRepo solicitudAfiliacionJpaRepo,
+            EntidadService entidadService,
+            CatalogoService catalogoService, CiudadanoService ciudadanoService) {
         this.solicitudAfiliacionJpaRepo = solicitudAfiliacionJpaRepo;
         this.ciudadanoService = ciudadanoService;
         this.entidadService = entidadService;
-        this.catalogoService= catalogoService;
+        this.catalogoService = catalogoService;
     }
 
     @Override
@@ -49,69 +51,74 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
     @Override
     public SolicitudAfiliacion regristarSolicitudAfiliacion(SolicitudAfiliacion solicitud) throws Exception {
         logger.info("Entering in regristarSolicitudAfiliacion");
-        logger.info("pram : "+solicitud);
+        logger.info("pram : " + solicitud);
         SolicitudAfiliacion sol = solicitudAfiliacionJpaRepo.save(solicitud);
         return sol;
     }
 
     @Override
-    public List<SolicitudAfiliacion> buscarSolicitudesAfiliacionPorParametros(String cedula,Integer servicioId, Long seguroId, Integer regimenId, String estado, int page, int size){
+    public List<SolicitudAfiliacion> buscarSolicitudesAfiliacionPorParametros(String cedula, Integer servicioId,
+            Long seguroId, Integer regimenId, String estado, int page, int size) {
 
         logger.info("Entering in buscarSolicitudesAfiliacionPorParametros");
-        logger.info("param cedula: "+cedula);
-        logger.info("param servicioId: "+servicioId);
-        logger.info("param seguroId: "+seguroId);
-        logger.info("param regimenId: "+regimenId);
-        logger.info("param estado: "+estado);
-        logger.info("param page: "+page);
-        logger.info("param size: "+size);
-        cedula = (cedula == null || cedula.isEmpty())? null: "%"+cedula+"%";
+        logger.info("param cedula: " + cedula);
+        logger.info("param servicioId: " + servicioId);
+        logger.info("param seguroId: " + seguroId);
+        logger.info("param regimenId: " + regimenId);
+        logger.info("param estado: " + estado);
+        logger.info("param page: " + page);
+        logger.info("param size: " + size);
+        cedula = (cedula == null || cedula.isEmpty()) ? null : "%" + cedula + "%";
         Pageable paging = PageRequest.of(page, size);
-        List<SolicitudAfiliacion> solList = solicitudAfiliacionJpaRepo.findSolicitudAfiliacionesByParameters(cedula, servicioId, seguroId,
-                regimenId, estado, paging).getContent();
+        List<SolicitudAfiliacion> solList = solicitudAfiliacionJpaRepo
+                .findSolicitudAfiliacionesByParameters(cedula, servicioId, seguroId,
+                        regimenId, estado, paging)
+                .getContent();
         return solList;
     }
 
-    public SolicitudAfiliacion buscarSolicitudAfiliacionPorId(Long solicitudId){
+    public SolicitudAfiliacion buscarSolicitudAfiliacionPorId(Long solicitudId) {
         logger.info("Entering in buscarSolicitudAfiliacionPorId");
-        logger.info("param solicitudId: "+solicitudId);
+        logger.info("param solicitudId: " + solicitudId);
         return solicitudAfiliacionJpaRepo.findById(solicitudId).get();
     }
 
-    public DetalleSolicitudAfiliacionDto buscarSolicitudAfiliacionDetallePorId(Long id){
+    public DetalleSolicitudAfiliacionDto buscarSolicitudAfiliacionDetallePorId(Long id) {
         logger.info("Entering in buscarSolicitudAfiliacionDetallePorId");
-        logger.info("param id : "+ id);
+        logger.info("param id : " + id);
         SolicitudAfiliacion sol = solicitudAfiliacionJpaRepo.findById(id).get();
-        logger.info("returning :"+ sol);
+        logger.info("returning :" + sol);
         String nombreEntidad = entidadService.buscarEntidadPorId(sol.getEntidadId()).getDescripcion();
         Ciudadano ciu = ciudadanoService.buscarCiudadanoPorCiudadanoId(sol.getCiudadanoId());
         MotivoEstado mot = catalogoService.buscarMotivoPorId(sol.getMotivoId());
         String descmotivo = null;
-        if(mot != null){
-            descmotivo = mot.getMotivoId() + ":"+mot.getDescripcion();
+        if (mot != null) {
+            descmotivo = mot.getMotivoId() + ":" + mot.getDescripcion();
         }
 
         String segundoApellido = null;
-        if(ciu != null){
+        if (ciu != null) {
             segundoApellido = ciu.getSegundoApellido();
         }
 
         String institucionpensionado = "";
-        return new DetalleSolicitudAfiliacionDto(sol, nombreEntidad,segundoApellido, institucionpensionado, descmotivo );
+        return new DetalleSolicitudAfiliacionDto(sol, nombreEntidad, segundoApellido, institucionpensionado,
+                descmotivo);
     }
 
-
     @Override
-    public void procesarSolicitudAfiliacion(Long solicitudId) throws Exception{
+    public void procesarSolicitudAfiliacion(Long solicitudId) throws Exception {
         logger.info("Entering in procesarSolicitudAfiliacion");
 
         SolicitudAfiliacion sol = solicitudAfiliacionJpaRepo.findById(solicitudId).get();
-        //TODO validacion ciudadano por NSS y cedula validar que exista un ciudadano con Nss y cedula de la solicitud y asigna el ciudadano
+        // TODO validacion ciudadano por NSS y cedula validar que exista un ciudadano
+        // con Nss y cedula de la solicitud y asigna el ciudadano
 
         Ciudadano ciudadano = ciudadanoService.buscarCiudadanoPorIdentifiacion(sol.getCedula(), sol.getNss());
 
-        if(ciudadano == null){
-            Long motivo = catalogoService.buscarMotivoPorId(AplicationConstantUtil.NO_EXISTE_IDENTIFICACION_SOLICITUD).getMotivoId();
+        if (ciudadano == null) {
+            Long motivo = catalogoService.buscarMotivoPorId(AplicationConstantUtil.NO_EXISTE_IDENTIFICACION_SOLICITUD)
+                    .getMotivoId();
             sol.setMotivoId(motivo);
             sol.setEstado(AfiliacionDtoUtil.C_ESTADO_RE);
             solicitudAfiliacionJpaRepo.save(sol);
@@ -123,16 +130,14 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
         sol.setCedula(ciudadano.getCedula());
         sol.setNss(ciudadano.getNss());
 
+        // TODO si tiene asignacion pensionado y pertenece al seguro de pensiones asigna
+        // una instutucion pensionado a la solicitud
 
-        //TODO si tiene asignacion pensionado y pertenece al seguro de pensiones asigna una instutucion pensionado a la solicitud
+        // TODO
 
-        //TODO
-
-        //TODO realizando persistencia de datos
+        // TODO realizando persistencia de datos
         sol.setEstado(AfiliacionDtoUtil.C_ESTADO_OK);
         solicitudAfiliacionJpaRepo.save(sol);
     }
-
-
 
 }
