@@ -15,13 +15,15 @@ public class ErrorPageDto implements Serializable {
 
     private boolean isError = false;
 
-    public ErrorPageDto(Integer codigoError,String descripcionError, boolean isError) {
+    public ErrorPageDto(Integer codigoError, String descripcionError, boolean isError) {
         this.descripcionError = descripcionError;
         this.codigoError = codigoError;
         this.isError = isError;
     }
 
-    public ErrorPageDto() {}
+    public ErrorPageDto() {
+        isError = false;
+    }
 
     @Override
     public String toString() {

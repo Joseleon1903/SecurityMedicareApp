@@ -198,19 +198,20 @@
                         <h4 th:text="#{page.error.query.no.data.text}" >No existen registros con los parametros proporcionados</h4>
                     </div>
 
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-end">
-                            <li class="page-item disabled">
-                                <a class="page-link">Previous</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
+                    <div id="table-pagination-bottom-motivo">
+                        <nav aria-label="Page navigation example" style="float:left;">
+                            <p class="page-item" th:text="'Registros restantes: '+${MotivoMaginationBean.remainCount}" style="text-align: center; margin: 5px;">Remain</p>
+                        </nav>
+
+                        <nav aria-label="Page navigation example" style="float:right;">
+                            <ul class="pagination">
+                                <li th:if="${MotivoMaginationBean.paginationIndex > 1}" class="page-item"><a class="page-link" th:href="@{/catalogo(motivoIndexPage=-1)}">Previous</a></li>
+                                <li class="page-item current-page" th:text="'Page '+${MotivoMaginationBean.paginationIndex}" >Previous</li>
+                                <li class="page-item"><a class="page-link" th:href="@{/catalogo(motivoIndexPage=1)}">Next</a></li>
+                            </ul>
+                        </nav>
+
+                    </div>
                 </div>
 
             </div>
@@ -275,19 +276,20 @@
                         <h4 th:text="#{page.error.query.no.data.text}">No existen registros con los parametros proporcionados</h4>
                     </div>
 
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-end">
-                            <li class="page-item disabled">
-                                <a class="page-link">Previous</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
+                    <div id="table-pagination-bottom-municipio">
+                        <nav aria-label="Page navigation example" style="float:left;">
+                            <p class="page-item" th:text="'Registros restantes: '+${MunicipioPaginationBean.remainCount}" style="text-align: center; margin: 5px;">Remain</p>
+                        </nav>
+
+                        <nav aria-label="Page navigation example" style="float:right;">
+                            <ul class="pagination">
+                                <li th:if="${MunicipioPaginationBean.paginationIndex > 0}" class="page-item"><a class="page-link" th:href="@{/catalogo(municipioIndexPage=-1)}">Previous</a></li>
+                                <li class="page-item current-page" th:text="'Page '+${MunicipioPaginationBean.paginationIndex}" >Previous</li>
+                                <li class="page-item"><a class="page-link" th:href="@{/catalogo(municipioIndexPage=1)}">Next</a></li>
+                            </ul>
+                        </nav>
+
+                    </div>
                 </div>
 
             </div>
@@ -346,19 +348,20 @@
                         <h4 th:text="#{page.error.query.no.data.text}">No existen registros con los parametros proporcionados</h4>
                     </div>
 
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-end">
-                            <li class="page-item disabled">
-                                <a class="page-link">Previous</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
+                    <div id="table-pagination-bottom-nacionalidad">
+                        <nav aria-label="Page navigation example" style="float:left;">
+                            <p class="page-item" th:text="'Registros restantes: '+${NacionalidadPaginationBean.remainCount}" style="text-align: center; margin: 5px;">Remain</p>
+                        </nav>
+
+                        <nav aria-label="Page navigation example" style="float:right;">
+                            <ul class="pagination">
+                                <li th:if="${NacionalidadPaginationBean.paginationIndex > 0}" class="page-item"><a class="page-link" th:href="@{/catalogo(nacionalidadIndexPage=-1)}">Previous</a></li>
+                                <li class="page-item current-page" th:text="'Page '+${NacionalidadPaginationBean.paginationIndex}" >Previous</li>
+                                <li class="page-item"><a class="page-link" th:href="@{/catalogo(nacionalidadIndexPage=1)}">Next</a></li>
+                            </ul>
+                        </nav>
+
+                    </div>
                 </div>
 
             </div>

@@ -5,12 +5,13 @@ import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.commons.AplicationConstantUtil;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
 import com.spring.security.medi.care.app.commons.domain.Municipio;
-import com.spring.security.medi.care.app.commons.domain.Parentesco;
+import com.spring.security.medi.care.app.commons.domain.Nacionalidad;
 import com.spring.security.medi.care.app.commons.domain.Seguro;
 import com.spring.security.medi.care.app.commons.domain.SolicitudAfiliacion;
 import com.spring.security.medi.care.app.controller.dto.ErrorPageDto;
 import com.spring.security.medi.care.app.controller.dto.SolicitudFormDto;
 import com.spring.security.medi.care.app.controller.dto.SystemInfoDTO;
+import com.spring.security.medi.care.app.entidad.service.EntidadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,25 +30,29 @@ public class SolicitudController extends ViewBaseContext {
 
     private List<Seguro> segurosSistema;
     private List<Municipio> municipiosSistema;
-    private List<Parentesco> parentescosSistema;
+    private List<Nacionalidad> nacionalidadesSistema;
     private SolicitudAfiliacion solicitudOut = new SolicitudAfiliacion();
 
     private final CatalogoService catalogoService;
+    private final EntidadService entidadService;
+
     private final SolicitudFormDto solicitudForm;
     private final SolicitudAfiliacionService solicitudAfiliacionService;
 
     private ErrorPageDto errorPageDto;
 
     @Autowired
-    public SolicitudController(CatalogoService catalogoService,SolicitudAfiliacionService solicitudAfiliacionService, SolicitudFormDto solicitudForm, ErrorPageDto errorPageDto){
-       this.catalogoService = catalogoService;
-       this.solicitudForm = solicitudForm;
-       this.solicitudAfiliacionService = solicitudAfiliacionService;
-       this.errorPageDto = errorPageDto;
+    public SolicitudController(CatalogoService catalogoService, SolicitudAfiliacionService solicitudAfiliacionService,
+            EntidadService entidadService, SolicitudFormDto solicitudForm, ErrorPageDto errorPageDto) {
+        this.catalogoService = catalogoService;
+        this.solicitudForm = solicitudForm;
+        this.solicitudAfiliacionService = solicitudAfiliacionService;
+        this.entidadService = entidadService;
+        this.errorPageDto = errorPageDto;
     }
 
     @GetMapping("/solicitud")
-    public String solicituPage(Model model){
+    public String solicituPage(Model model) {
         logger.info("------- entering -----------");
         logger.info("Entering in method solicituPage..");
         cargarCatalogoSeguro();
@@ -56,7 +61,7 @@ public class SolicitudController extends ViewBaseContext {
 
         model.addAttribute("ListaSeguroBean", segurosSistema);
         model.addAttribute("ListaMunicipioBean", municipiosSistema);
-        model.addAttribute("ListaparentescoBean", parentescosSistema);
+        model.addAttribute("ListaNacionalidadBean", nacionalidadesSistema);
         model.addAttribute("SystemInfoBean", systemInfoDTO);
         model.addAttribute("SolicitudFormBean", solicitudForm);
         model.addAttribute("SolicitudReponseBean", solicitudOut);
@@ -66,15 +71,15 @@ public class SolicitudController extends ViewBaseContext {
     }
 
     @PostMapping("/solicitud")
-    public String formSolicituAfiPage(@ModelAttribute SolicitudFormDto solicitudForm, Model model){
+    public String formSolicituAfiPage(@ModelAttribute SolicitudFormDto solicitudForm, Model model) {
         logger.info("------- entering -----------");
         logger.info("Entering in method formSolicituAfiPage..");
-        logger.info("Param : "+solicitudForm);
+        logger.info("Param : " + solicitudForm);
         SolicitudAfiliacion solicitudIn = new SolicitudAfiliacion();
 
         solicitudIn.setServicioId(AplicationConstantUtil.SERVICIO_PANTALLA_SOLICITUD_AFILIACION);
         solicitudIn.setLoteId(AplicationConstantUtil.generateLoteId());
-        solicitudIn.setEntidadId(2001L);
+        solicitudIn.setEntidadId(entidadService.asignarAutomaticamenteEntidad(solicitudForm.getRegimenId()));
         solicitudIn.setSeguroId(solicitudForm.getSeguroId());
         solicitudIn.setRegimenId(solicitudForm.getRegimenId());
         solicitudIn.setTipoAfiliado(solicitudForm.getTipoAfiliado());
@@ -89,14 +94,17 @@ public class SolicitudController extends ViewBaseContext {
         solicitudIn.setFechaRecepcion(new Date());
         solicitudIn.setMunicipioId(solicitudForm.getMunicipioId());
         solicitudIn.setFechaUltimoCambio(new Date());
+        solicitudIn.setNacionalidadId(solicitudForm.getNacionalidadId());
         logger.info("Inicinado registro de la solicitud");
         try {
-            this.solicitudOut= solicitudAfiliacionService.regristarSolicitudAfiliacion(solicitudIn);
+            this.solicitudOut = solicitudAfiliacionService.regristarSolicitudAfiliacion(solicitudIn);
+            this.errorPageDto = new ErrorPageDto();
         } catch (Exception e) {
             logger.info(e.getLocalizedMessage());
+            this.errorPageDto = new ErrorPageDto(500, "Internal server error : " + e.getLocalizedMessage(), true);
             e.printStackTrace();
         }
-        logger.info("Solicitud realizado con exito : "+ this.solicitudOut);
+        logger.info("Solicitud realizado con exito : " + this.solicitudOut);
         return "redirect:solicitud";
     }
 
@@ -104,27 +112,29 @@ public class SolicitudController extends ViewBaseContext {
     protected void init() {
         logger.info("entering init method ");
         logger.info("Generando systemInfoDTO");
-        if(this.errorPageDto == null){this.errorPageDto =  new ErrorPageDto();}
-        systemInfoDTO = new SystemInfoDTO("Solicitudes",new Date());
-        logger.info("systemInfoDTO: "+ systemInfoDTO);
+        if (this.errorPageDto == null) {
+            this.errorPageDto = new ErrorPageDto();
+        }
+        systemInfoDTO = new SystemInfoDTO("Solicitudes", new Date());
+        logger.info("systemInfoDTO: " + systemInfoDTO);
         logger.info("existing init method ");
     }
 
-    public void cargarCatalogoSeguro(){
+    public void cargarCatalogoSeguro() {
         logger.info("entering cargarCatalogoSeguro");
         this.segurosSistema = catalogoService.buscarSegurosSistema();
         logger.info("exiting cargarCatalogoSeguro");
     }
 
-    public void cargarCatalogoMunicipio(){
+    public void cargarCatalogoMunicipio() {
         logger.info("entering cargarCatalogoMunicipio");
         this.municipiosSistema = catalogoService.buscarMunicipiosTodos();
         logger.info("exiting cargarCatalogoMunicipio");
     }
 
-    public void cargarCatalogoParentesco(){
+    public void cargarCatalogoParentesco() {
         logger.info("entering cargarCatalogoParentesco");
-        this.parentescosSistema = catalogoService.buscarParentescoTodos();
+        this.nacionalidadesSistema = catalogoService.buscarNacionalidadTodos();
         logger.info("exiting cargarCatalogoParentesco");
     }
 

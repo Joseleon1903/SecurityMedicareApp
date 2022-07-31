@@ -410,3 +410,169 @@ The REST API to the example app is described below.
     "totalPages": 1
     }
     }
+
+## Get Seguro by Id
+
+### Request
+
+`GET /api/seguro/{id}`
+
+    curl -i -H 'Accept: application/json' http://localhost:8080/SecurityMedicareApp/api/seguro/1
+
+### Response
+
+    HTTP/1.1 200 OK
+    Date: Thu, 24 Feb 2011 12:36:30 GMT
+    Status: 200 OK
+    Connection: close
+    Content-Type: application/json
+    {
+    "seguroId": 1,
+    "descripcion": "SEGURO DE VEJEZ, DISCAPACIDAD Y SOBREVIVENCIA",
+    "estado": "AC"
+    }
+
+## Get All Seguros
+
+### Request
+
+`GET /api/seguro/all`
+
+    curl -i -H 'Accept: application/json' http://localhost:8080/SecurityMedicareApp/api/seguro/all
+
+### Response
+
+    HTTP/1.1 200 OK
+    Date: Thu, 24 Feb 2011 12:36:30 GMT
+    Status: 200 OK
+    Connection: close
+    Content-Type: application/json
+    [
+      {
+      "seguroId": 1,
+      "descripcion": "SEGURO DE VEJEZ, DISCAPACIDAD Y SOBREVIVENCIA",
+      "estado": "AC"
+    },
+    {
+    "seguroId": 2,
+    "descripcion": "SEGURO FAMILIAR DE SALUD",
+    "estado": "AC"
+    },
+    {
+    "seguroId": 3,
+    "descripcion": "SEGURO DE RIESGOS LABORALES",
+    "estado": "AC"
+    }
+    ]
+
+## Get All Entidad
+
+### Request
+
+`GET /api/entidad/all`
+
+    curl -i -H 'Accept: application/json' http://localhost:8080/SecurityMedicareApp/api/entidad/all
+
+### Response
+
+    HTTP/1.1 200 OK
+    Date: Thu, 24 Feb 2011 12:36:30 GMT
+    Status: 200 OK
+    Connection: close
+    Content-Type: application/json
+    [
+      {
+      "entidadId": 1001,
+      "tipoEntidadId": 1,
+      "claveEntidad": 1,
+      "sigla": "SIPE",
+      "descripcion": "SUPERINTENDENCIA DE PENSIONES (SIPEN)",
+      "regimenId": null,
+      "participaAfiliacionAutomatica": null,
+      "rnc": null,
+      "entidadSupervisoraId": null,
+      "estado": "AC",
+      "municipioId": null
+    },
+    {
+    "entidadId": 1002,
+    "tipoEntidadId": 1,
+    "claveEntidad": 2,
+    "sigla": "TSS",
+    "descripcion": "TESORERIA DE LA SEGURIDAD SOCIAL (TSS)",
+    "regimenId": null,
+    "participaAfiliacionAutomatica": null,
+    "rnc": null,
+    "entidadSupervisoraId": null,
+    "estado": "AC",
+    "municipioId": null
+    },
+    {
+    "entidadId": 1003,
+    "tipoEntidadId": 1,
+    "claveEntidad": 3,
+    "sigla": "SISALRIL",
+    "descripcion": "SUPERINTENDENCIA DE SALUD Y RIESGOS LABORALES (SISALRIL)",
+    "regimenId": null,
+    "participaAfiliacionAutomatica": null,
+    "rnc": null,
+    "entidadSupervisoraId": null,
+    "estado": "AC",
+    "municipioId": null
+    },
+    {
+    "entidadId": 1004,
+    "tipoEntidadId": 1,
+    "claveEntidad": 4,
+    "sigla": "DIDA",
+    "descripcion": "DIRECCION GENERAL DE INFORMACIÃ“N Y DEFENSA DE LOS AFILIADOS (DIDA)",
+    "regimenId": null,
+    "participaAfiliacionAutomatica": null,
+    "rnc": null,
+    "entidadSupervisoraId": null,
+    "estado": "AC",
+    "municipioId": null
+    },
+    {
+    "entidadId": 1005,
+    "tipoEntidadId": 1,
+    "claveEntidad": 5,
+    "sigla": "CNSS",
+    "descripcion": "CONSEJO NACIONAL DE SEGURIDAD SOCIAL (CNSS)",
+    "regimenId": null,
+    "participaAfiliacionAutomatica": null,
+    "rnc": null,
+    "entidadSupervisoraId": null,
+    "estado": "AC",
+    "municipioId": null
+    }
+    ]
+
+## Get Entidad by Id
+
+### Request
+
+`GET /api/entidad/{Id}`
+
+    curl -i -H 'Accept: application/json' http://localhost:8080/SecurityMedicareApp/api/entidad/1001
+
+### Response
+
+    HTTP/1.1 200 OK
+    Date: Thu, 24 Feb 2011 12:36:30 GMT
+    Status: 200 OK
+    Connection: close
+    Content-Type: application/json
+    {
+      "entidadId": 1001,
+      "tipoEntidadId": 1,
+      "claveEntidad": 1,
+      "sigla": "SIPE",
+      "descripcion": "SUPERINTENDENCIA DE PENSIONES (SIPEN)",
+      "regimenId": null,
+      "participaAfiliacionAutomatica": null,
+      "rnc": null,
+      "entidadSupervisoraId": null,
+      "estado": "AC",
+      "municipioId": null
+    }

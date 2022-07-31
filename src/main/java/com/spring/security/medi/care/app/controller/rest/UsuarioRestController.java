@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping(value="/api/usuario/",produces=MediaType.APPLICATION_JSON_VALUE)
 public class UsuarioRestController {
 
-    private static final Logger logger = LoggerFactory.getLogger(ParentescoRestController.class);
+    private static final Logger logger = LoggerFactory.getLogger(UsuarioRestController.class);
 
     private final UsuarioService usuarioService;
 
