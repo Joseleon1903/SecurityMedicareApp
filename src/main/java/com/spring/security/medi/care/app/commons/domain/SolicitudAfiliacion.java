@@ -36,7 +36,11 @@ public class SolicitudAfiliacion implements Serializable {
     private Date fechaUltimoCambio;
     private Long motivoId;
 
-    public SolicitudAfiliacion(Long solicitudId, Integer servicioId, Integer loteId, Long entidadId, Long seguroId, Integer regimenId, String tipoAfiliado, Short tipoIdentificacionId, String cedula, String nss, String cedulaTitular, String nombre, String primerApellido, Boolean automatica, Long institucionPensionadoId, Long claveInstitucionPensionado, String estado, Date fechaRecepcion, Long municipioId, Long ciudadanoId,Long nacionalidadId, Date fechaUltimoCambio) {
+    public SolicitudAfiliacion(Long solicitudId, Integer servicioId, Integer loteId, Long entidadId, Long seguroId,
+            Integer regimenId, String tipoAfiliado, Short tipoIdentificacionId, String cedula, String nss,
+            String cedulaTitular, String nombre, String primerApellido, Boolean automatica,
+            Long institucionPensionadoId, Long claveInstitucionPensionado, String estado, Date fechaRecepcion,
+            Long municipioId, Long ciudadanoId, Long nacionalidadId, Date fechaUltimoCambio) {
         this.solicitudId = solicitudId;
         this.servicioId = servicioId;
         this.loteId = loteId;
@@ -58,7 +62,7 @@ public class SolicitudAfiliacion implements Serializable {
         this.municipioId = municipioId;
         this.ciudadanoId = ciudadanoId;
         this.fechaUltimoCambio = fechaUltimoCambio;
-        this.nacionalidadId= nacionalidadId;
+        this.nacionalidadId = nacionalidadId;
     }
 
     public SolicitudAfiliacion() {

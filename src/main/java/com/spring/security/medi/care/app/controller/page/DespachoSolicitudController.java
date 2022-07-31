@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import java.util.Date;
-import java.util.List;
-
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class DespachoSolicitudController extends ViewBaseContext {
@@ -34,14 +34,15 @@ public class DespachoSolicitudController extends ViewBaseContext {
     private final CatalogoService catalogoService;
 
     @Autowired
-    public DespachoSolicitudController(SolicitudAfiliacionService solicitudAfiliacionService,CatalogoService catalogoService, SolicituFromFilterDto solicituFromFilterDto){
+    public DespachoSolicitudController(SolicitudAfiliacionService solicitudAfiliacionService,
+            CatalogoService catalogoService, SolicituFromFilterDto solicituFromFilterDto) {
         this.solicitudAfiliacionService = solicitudAfiliacionService;
         this.catalogoService = catalogoService;
         this.solicituFromFilterDto = solicituFromFilterDto;
     }
 
     @GetMapping("/despacho")
-    public String showPage(Model model){
+    public String showPage(Model model) {
         logger.info("------- entering -----------");
         logger.info("Entering in method showPage:{/despacho}");
 
@@ -50,10 +51,15 @@ public class DespachoSolicitudController extends ViewBaseContext {
         logger.info("terminando busqueda catalogo seguros");
 
         logger.info("iniciando busqueda solicitudes ");
-        Integer regimenId = (solicituFromFilterDto.getRegimenId() != null && !solicituFromFilterDto.getRegimenId().isEmpty())? Integer.parseInt(solicituFromFilterDto.getRegimenId()): null;
-        String estado = (solicituFromFilterDto.getEstado() != null && solicituFromFilterDto.getEstado() == "T")? null :solicituFromFilterDto.getEstado();
+        Integer regimenId = (solicituFromFilterDto.getRegimenId() != null
+                && !solicituFromFilterDto.getRegimenId().isEmpty())
+                        ? Integer.parseInt(solicituFromFilterDto.getRegimenId())
+                        : null;
+        String estado = (solicituFromFilterDto.getEstado() != null && solicituFromFilterDto.getEstado() == "T") ? null
+                : solicituFromFilterDto.getEstado();
 
-        List<SolicitudAfiliacion> solListDomain = solicitudAfiliacionService.buscarSolicitudesAfiliacionPorParametros(solicituFromFilterDto.getCedula(),
+        List<SolicitudAfiliacion> solListDomain = solicitudAfiliacionService.buscarSolicitudesAfiliacionPorParametros(
+                solicituFromFilterDto.getCedula(),
                 solicituFromFilterDto.getServicioId(),
                 solicituFromFilterDto.getSeguroId(),
                 regimenId,
@@ -68,24 +74,25 @@ public class DespachoSolicitudController extends ViewBaseContext {
     }
 
     @PostMapping("/solicitud/filter")
-    public String buscarSolicitudesPorParametros(@ModelAttribute SolicituFromFilterDto solicituFromFilterInput, Model model){
+    public String buscarSolicitudesPorParametros(@ModelAttribute SolicituFromFilterDto solicituFromFilterInput,
+            Model model) {
         logger.info("------- entering -----------");
         logger.info("Entering in method buscarSolicitudesPorParametros..");
-        logger.info("Form values : "+solicituFromFilterInput);
+        logger.info("Form values : " + solicituFromFilterInput);
 
-        if(solicituFromFilterInput != null && solicituFromFilterInput.getCedula().isEmpty()){
+        if (solicituFromFilterInput != null && solicituFromFilterInput.getCedula().isEmpty()) {
             solicituFromFilterInput.setCedula(null);
         }
 
-        if(solicituFromFilterInput != null && solicituFromFilterInput.getServicioId() == 0){
+        if (solicituFromFilterInput != null && solicituFromFilterInput.getServicioId() == 0) {
             solicituFromFilterInput.setServicioId(null);
         }
 
-        if(solicituFromFilterInput != null && solicituFromFilterInput.getRegimenId() == "T" ){
+        if (solicituFromFilterInput != null && solicituFromFilterInput.getRegimenId() == "T") {
             solicituFromFilterInput.setRegimenId(null);
         }
 
-        if(solicituFromFilterInput != null && solicituFromFilterInput.getEstado().isEmpty() ){
+        if (solicituFromFilterInput != null && solicituFromFilterInput.getEstado().isEmpty()) {
             solicituFromFilterInput.setEstado(null);
         }
         this.solicituFromFilterDto = solicituFromFilterInput;
@@ -94,14 +101,14 @@ public class DespachoSolicitudController extends ViewBaseContext {
     }
 
     @PostMapping("/solicitud/procesar/{solicitudId}")
-    public String procesarSolicitud(@PathVariable("solicitudId")String solicitudId, Model model){
+    public String procesarSolicitud(@PathVariable("solicitudId") String solicitudId, Model model) {
         logger.info("Entering in procesarSolicitud");
-        logger.info("param solicitudId: "+solicitudId);
+        logger.info("param solicitudId: " + solicitudId);
         Long solId = Long.parseLong(solicitudId);
-        try{
+        try {
             solicitudAfiliacionService.procesarSolicitudAfiliacion(solId);
-        }catch(Exception ex){
-            logger.info("Error : "+ ex.getMessage());
+        } catch (Exception ex) {
+            logger.info("Error : " + ex.getMessage());
         }
         return "redirect:/despacho";
     }
@@ -110,16 +117,15 @@ public class DespachoSolicitudController extends ViewBaseContext {
     protected void init() {
         logger.info("entering init method ");
         logger.info("Generando systemInfoDTO");
-        systemInfoDTO = new SystemInfoDTO("Despacho solicitudes",new Date());
-        logger.info("systemInfoDTO: "+ systemInfoDTO);
+        systemInfoDTO = new SystemInfoDTO("Despacho solicitudes", new Date());
+        logger.info("systemInfoDTO: " + systemInfoDTO);
         logger.info("existing init method ");
     }
 
-    public void cargarCatalogoSeguro(){
+    public void cargarCatalogoSeguro() {
         logger.info("entering cargarCatalogoSeguro");
         this.segurosSistema = catalogoService.buscarSegurosSistema();
         logger.info("exiting cargarCatalogoSeguro");
     }
-
 
 }

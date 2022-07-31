@@ -10,7 +10,7 @@ import java.util.Date;
 
 @Data
 @Component
-public class SolicitudAfiliacionOutputDto implements Serializable{
+public class SolicitudAfiliacionOutputDto implements Serializable {
 
     private Long solicitudId;
     private Integer servicioId;
@@ -28,7 +28,9 @@ public class SolicitudAfiliacionOutputDto implements Serializable{
     private Long municipioId;
     private Long motivoId;
 
-    public SolicitudAfiliacionOutputDto(Long solicitudId, Integer servicioId, Integer loteId, String seguroId, String regimenId, String tipoAfiliado, String cedula, String nss, String cedulaTitular, Long entidadId, Boolean automatica, String estado, Date fechaRecepcion, Long municipioId) {
+    public SolicitudAfiliacionOutputDto(Long solicitudId, Integer servicioId, Integer loteId, String seguroId,
+            String regimenId, String tipoAfiliado, String cedula, String nss, String cedulaTitular, Long entidadId,
+            Boolean automatica, String estado, Date fechaRecepcion, Long municipioId) {
         this.solicitudId = solicitudId;
         this.servicioId = servicioId;
         this.loteId = loteId;
@@ -53,18 +55,16 @@ public class SolicitudAfiliacionOutputDto implements Serializable{
         this.servicioId = solicitud.getServicioId();
         this.loteId = solicitud.getLoteId();
         this.seguroId = AfiliacionDtoUtil.convertSeguroId(solicitud.getSeguroId());
-        this.regimenId =AfiliacionDtoUtil.convertRegimenId(solicitud.getRegimenId()) ;
-        this.tipoAfiliado =AfiliacionDtoUtil.convertTipoAfiliado(solicitud.getTipoAfiliado());
+        this.regimenId = AfiliacionDtoUtil.convertRegimenId(solicitud.getRegimenId());
+        this.tipoAfiliado = AfiliacionDtoUtil.convertTipoAfiliado(solicitud.getTipoAfiliado());
         this.cedula = solicitud.getCedula();
         this.nss = solicitud.getNss();
         this.cedulaTitular = solicitud.getCedulaTitular();
         this.entidadId = solicitud.getEntidadId();
         this.automatica = solicitud.getAutomatica();
-        this.estado =AfiliacionDtoUtil.convertEstado(solicitud.getEstado());
+        this.estado = AfiliacionDtoUtil.convertEstado(solicitud.getEstado());
         this.fechaRecepcion = solicitud.getFechaRecepcion();
         this.municipioId = solicitud.getMunicipioId();
     }
-
-
 
 }

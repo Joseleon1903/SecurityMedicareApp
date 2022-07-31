@@ -12,33 +12,30 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 @RestController
-@RequestMapping(value="/api/seguro/")
+@RequestMapping(value = "/api/seguro/")
 public class SeguroRestController {
-
 
     private static final Logger logger = LoggerFactory.getLogger(SeguroRestController.class);
 
     private final CatalogoService catalogoService;
 
     @Autowired
-    public SeguroRestController (CatalogoService catalogoService){
-        this.catalogoService= catalogoService;
+    public SeguroRestController(CatalogoService catalogoService) {
+        this.catalogoService = catalogoService;
     }
 
     @GetMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<Seguro> findById(@PathVariable("id") Long id){
+    public ResponseEntity<Seguro> findById(@PathVariable("id") Long id) {
         Seguro seguroOut = catalogoService.buscarSegurosSistemaPorId(id);
         return new ResponseEntity<Seguro>(seguroOut, HttpStatus.OK);
     }
 
     @GetMapping("/all")
     @ResponseBody
-    public ResponseEntity<List<Seguro>> findAll(){
+    public ResponseEntity<List<Seguro>> findAll() {
         List<Seguro> segurosList = catalogoService.buscarSegurosSistema();
         return new ResponseEntity<List<Seguro>>(segurosList, HttpStatus.OK);
     }
-
-
 
 }
