@@ -174,7 +174,7 @@ CREATE TABLE CIUDADANO
 (
   CIUDADANO_ID                  SERIAL PRIMARY KEY,
   CEDULA                        VARCHAR(11),
-  NSS                           INT    NOT NULL,
+  NSS                           VARCHAR(11)    NOT NULL,
   NOMBRE                        VARCHAR(50) NOT NULL,
   PRIMER_APELLIDO               VARCHAR(40) NOT NULL,
   SEGUNDO_APELLIDO              VARCHAR(40),

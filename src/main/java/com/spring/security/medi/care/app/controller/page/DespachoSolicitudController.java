@@ -14,9 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import java.util.Date;
 import java.util.List;
 
@@ -50,7 +50,7 @@ public class DespachoSolicitudController extends ViewBaseContext {
         logger.info("terminando busqueda catalogo seguros");
 
         logger.info("iniciando busqueda solicitudes ");
-        Long regimenId = (solicituFromFilterDto.getRegimenId() != null && !solicituFromFilterDto.getRegimenId().isEmpty())? Long.parseLong(solicituFromFilterDto.getRegimenId()): null;
+        Integer regimenId = (solicituFromFilterDto.getRegimenId() != null && !solicituFromFilterDto.getRegimenId().isEmpty())? Integer.parseInt(solicituFromFilterDto.getRegimenId()): null;
         String estado = (solicituFromFilterDto.getEstado() != null && solicituFromFilterDto.getEstado() == "T")? null :solicituFromFilterDto.getEstado();
 
         List<SolicitudAfiliacion> solListDomain = solicitudAfiliacionService.buscarSolicitudesAfiliacionPorParametros(solicituFromFilterDto.getCedula(),
@@ -90,6 +90,19 @@ public class DespachoSolicitudController extends ViewBaseContext {
         }
         this.solicituFromFilterDto = solicituFromFilterInput;
         logger.info("Exiting in method buscarSolicitudesPorParametros..");
+        return "redirect:/despacho";
+    }
+
+    @PostMapping("/solicitud/procesar/{solicitudId}")
+    public String procesarSolicitud(@PathVariable("solicitudId")String solicitudId, Model model){
+        logger.info("Entering in procesarSolicitud");
+        logger.info("param solicitudId: "+solicitudId);
+        Long solId = Long.parseLong(solicitudId);
+        try{
+            solicitudAfiliacionService.procesarSolicitudAfiliacion(solId);
+        }catch(Exception ex){
+            logger.info("Error : "+ ex.getMessage());
+        }
         return "redirect:/despacho";
     }
 

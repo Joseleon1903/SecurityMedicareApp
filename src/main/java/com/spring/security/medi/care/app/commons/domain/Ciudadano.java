@@ -13,7 +13,7 @@ public class Ciudadano implements Serializable {
     @Id
     private Long ciudadanoId;
     private String cedula;
-    private Integer nss;
+    private String nss;
     private String nombre;
     private String primerApellido;
     private String segundoApellido;
@@ -28,7 +28,7 @@ public class Ciudadano implements Serializable {
     public Ciudadano() {
     }
 
-    public Ciudadano(Long ciudadanoId, String cedula, Integer nss, String nombre, String primerApellido, String segundoApellido, Long municipioId, Long nacionalidadId, Boolean estranjero, String genero, Date fechaNacimiento, String estado) {
+    public Ciudadano(Long ciudadanoId, String cedula, String nss, String nombre, String primerApellido, String segundoApellido, Long municipioId, Long nacionalidadId, Boolean estranjero, String genero, Date fechaNacimiento, String estado) {
         this.ciudadanoId = ciudadanoId;
         this.cedula = cedula;
         this.nss = nss;

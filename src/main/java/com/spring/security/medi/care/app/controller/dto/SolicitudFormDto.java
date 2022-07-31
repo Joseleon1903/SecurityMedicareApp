@@ -17,10 +17,10 @@ public class SolicitudFormDto implements Serializable {
     private String tipoDependiente;
     private Long nacionalidadId;
     private Long seguroId;
-    private Long regimenId;
+    private Integer regimenId;
     private Boolean aplicaInsitucionAutomtica;
 
-    public SolicitudFormDto(Short tipoIdentificacion, String cedula, String nss, Long municipioId, String cedulaTitular, String tipoAfiliado, String tipoDependiente, Long nacionalidadId, Long seguroId, Long regimenId, Boolean aplicaInsitucionAutomtica) {
+    public SolicitudFormDto(Short tipoIdentificacion, String cedula, String nss, Long municipioId, String cedulaTitular, String tipoAfiliado, String tipoDependiente, Long nacionalidadId, Long seguroId, Integer regimenId, Boolean aplicaInsitucionAutomtica) {
         this.tipoIdentificacion = tipoIdentificacion;
         this.cedula = cedula;
         this.nss = nss;

@@ -16,7 +16,7 @@ public class Entidad implements Serializable {
     private String sigla;
     private String descripcion;
     private Integer regimenId;
-    private Boolean participaAfiliacionAutomatica;
+    private Boolean participaAfiliacionAut;
     private String rnc;
     private Long entidadSupervisoraId;
     private String estado;
@@ -35,7 +35,7 @@ public class Entidad implements Serializable {
         this.sigla = sigla;
         this.descripcion = descripcion;
         this.regimenId = regimenId;
-        this.participaAfiliacionAutomatica = participaAfiliacionAutomatica;
+        this.participaAfiliacionAut = participaAfiliacionAutomatica;
         this.rnc = rnc;
         this.entidadSupervisoraId = entidadSupervisoraId;
         this.estado = estado;

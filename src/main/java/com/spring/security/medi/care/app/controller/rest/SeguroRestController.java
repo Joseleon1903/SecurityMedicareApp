@@ -1,6 +1,5 @@
 package com.spring.security.medi.care.app.controller.rest;
 
-
 import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.commons.domain.Seguro;
 import org.springframework.beans.factory.annotation.Autowired;

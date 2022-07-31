@@ -2,9 +2,6 @@ package com.spring.security.medi.care.app.controller.rest;
 
 import com.spring.security.medi.care.app.ciudadano.service.CiudadanoService;
 import com.spring.security.medi.care.app.commons.domain.Ciudadano;
-import com.spring.security.medi.care.app.commons.domain.Contacto;
-import com.spring.security.medi.care.app.usuario.service.ContactoService;
-import com.spring.security.medi.care.app.usuario.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -32,6 +29,14 @@ public class CiudadanoRestController {
     public ResponseEntity<Ciudadano> findById(@PathVariable("ciudadanoId") Long id){
         Ciudadano ciudadano = ciudadanoService.buscarCiudadanoPorCiudadanoId(id);
         return new ResponseEntity<Ciudadano>(ciudadano, HttpStatus.OK);
+    }
+
+    @GetMapping("/find")
+    @ResponseBody
+    public ResponseEntity<Ciudadano> findByIdentifiacacion(@RequestParam(value = "cedula", required = false) String cedula,
+                                                           @RequestParam(value = "nss",required = false) String nss){
+        Ciudadano ciudadano = ciudadanoService.buscarCiudadanoPorIdentifiacion(cedula, nss);
+        return new ResponseEntity(ciudadano, HttpStatus.OK);
     }
 
     @GetMapping("/all")
