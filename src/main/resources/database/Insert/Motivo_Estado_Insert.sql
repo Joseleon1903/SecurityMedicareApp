@@ -804,3 +804,5 @@ INSERT INTO MOTIVO_ESTADO (MOTIVO_ID, DESCRIPCION,  ESTADO) VALUES (10606, 'Vali
 INSERT INTO MOTIVO_ESTADO (MOTIVO_ID, DESCRIPCION,  ESTADO) VALUES (10607, 'Número telefónico inválido',  'AC');
 INSERT INTO MOTIVO_ESTADO (MOTIVO_ID, DESCRIPCION,  ESTADO) VALUES (10608, 'Probable anomalía en los datos escritos por el afiliado',  'AC');
 INSERT INTO MOTIVO_ESTADO (MOTIVO_ID, DESCRIPCION,  ESTADO) VALUES (10609, 'Datos no fueron suscritos por el afiliado',  'AC');
+INSERT INTO MOTIVO_ESTADO (MOTIVO_ID, DESCRIPCION,  ESTADO) VALUES (800, 'No existe un ciudadano en el sistema con el NSS o la cedula de la solicitud',  'AC');
+INSERT INTO MOTIVO_ESTADO (MOTIVO_ID, DESCRIPCION,  ESTADO) VALUES (801, 'El ciudadnao ya tiene una solicitud acpetada para otra entidad',  'AC');
