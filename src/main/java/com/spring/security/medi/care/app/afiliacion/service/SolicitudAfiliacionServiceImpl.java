@@ -31,8 +31,6 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
 
     private final CatalogoService catalogoService;
 
-    private final SolicitudAfiliacionJpaRepo solicitudAfiliacionJpaRepo;
-
     @Autowired
     public SolicitudAfiliacionServiceImpl(SolicitudAfiliacionJpaRepo solicitudAfiliacionJpaRepo,
             EntidadService entidadService,
