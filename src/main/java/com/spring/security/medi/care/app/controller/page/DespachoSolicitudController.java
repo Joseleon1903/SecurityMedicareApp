@@ -115,6 +115,7 @@ public class DespachoSolicitudController extends ViewBaseContext {
             solicitudAfiliacionService.procesarSolicitudAfiliacion(solId);
         } catch (Exception ex) {
             logger.info("Error : " + ex.getMessage());
+
         }
         return "redirect:/despacho";
     }

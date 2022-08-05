@@ -35,16 +35,19 @@ public class CatalogoServiceImpl implements CatalogoService {
 
     private final SeguroJpaRepo seguroJpaRepo;
 
+    private final InstitucionPensionadoJpaRepo institucionPensionadoJpaRepo;
+
     @Autowired
     public CatalogoServiceImpl(MotivoEstadoJdbcImpl motivoEstadoJdbc, NacionalidadJdbcImpl nacionalidadJdbcImpl,
             MotivoEstadoJpaRepo motivoEstadoJpaRepo, NacionalidadJpaRepo nacionalidadJpaRepo,
-            MunicipioJpaRepo municipioJpaRepo, SeguroJpaRepo seguroJpaRepo) {
+            MunicipioJpaRepo municipioJpaRepo, SeguroJpaRepo seguroJpaRepo, InstitucionPensionadoJpaRepo institucionPensionadoJpaRepo) {
         this.motivoEstadoJdbc = motivoEstadoJdbc;
         this.nacionalidadJdbcImpl = nacionalidadJdbcImpl;
         this.motivoEstadoJpaRepo = motivoEstadoJpaRepo;
         this.nacionalidadJpaRepo = nacionalidadJpaRepo;
         this.municipioJpaRepo = municipioJpaRepo;
         this.seguroJpaRepo = seguroJpaRepo;
+        this.institucionPensionadoJpaRepo = institucionPensionadoJpaRepo;
     }
 
     @Override
@@ -166,7 +169,19 @@ public class CatalogoServiceImpl implements CatalogoService {
     public Seguro buscarSegurosSistemaPorId(Long id) {
         logger.info("Entering in buscarSegurosSistema");
         return seguroJpaRepo.findBySeguroId(id);
-
     }
+
+    @Override
+    public List<InstitucionPensionado> buscarInstitucionPensionadoTodas(){
+        logger.info("Entering in buscarInstitucionPensionadoTodas");
+        return institucionPensionadoJpaRepo.findAllInstitucionPensionados();
+    }
+    @Override
+    public InstitucionPensionado buscarPorInstitucionPensionadoId(Long id){
+        logger.info("Entering in buscarPorInstitucionPensionadoId");
+        return institucionPensionadoJpaRepo.findById(id).get();
+    }
+
+
 
 }

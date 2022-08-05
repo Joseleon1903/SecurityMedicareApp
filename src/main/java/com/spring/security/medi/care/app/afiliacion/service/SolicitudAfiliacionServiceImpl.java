@@ -5,6 +5,7 @@ import com.spring.security.medi.care.app.ciudadano.service.CiudadanoService;
 import com.spring.security.medi.care.app.commons.AfiliacionDtoUtil;
 import com.spring.security.medi.care.app.commons.AplicationConstantUtil;
 import com.spring.security.medi.care.app.commons.domain.Ciudadano;
+import com.spring.security.medi.care.app.commons.domain.InstitucionPensionado;
 import com.spring.security.medi.care.app.commons.domain.MotivoEstado;
 import com.spring.security.medi.care.app.commons.domain.SolicitudAfiliacion;
 import com.spring.security.medi.care.app.afiliacion.repository.jpa.SolicitudAfiliacionJpaRepo;
@@ -137,5 +138,31 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
         sol.setEstado(AfiliacionDtoUtil.C_ESTADO_OK);
         solicitudAfiliacionJpaRepo.save(sol);
     }
+
+    @Override
+    public void agregarMotivoSolicitudAfiliacion(Long solicitudId , Long motivoId){
+        logger.info("Entering in agregarMotivoSolicitudAfiliacion");
+        logger.info("Param motivoId: "+motivoId);
+
+        MotivoEstado mot = catalogoService.buscarMotivoPorId(motivoId);
+
+        SolicitudAfiliacion sol = solicitudAfiliacionJpaRepo.findById(solicitudId).get();
+
+        sol.setMotivoId(mot.getMotivoId());
+        sol.setEstado(AfiliacionDtoUtil.C_ESTADO_RE);
+
+        solicitudAfiliacionJpaRepo.save(sol);
+    }
+
+    @Override
+    public Long asignarAutoInstitucionPensionadiSolicitud(){
+        logger.info("Entering in asignarAutoInstitucionPensionadiSolicitud");
+        List<InstitucionPensionado> institucionList = catalogoService.buscarInstitucionPensionadoTodas();
+
+        int size = institucionList.size();
+
+
+    }
+
 
 }
