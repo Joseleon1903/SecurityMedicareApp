@@ -12,7 +12,7 @@ public interface SolicitudAfiliacionJpaRepo extends JpaRepository<SolicitudAfili
             " and (:servicioId is null or s.servicioId = :servicioId)" +
             " and (:seguroId is null or s.seguroId = :seguroId)" +
             " and (:regimenId is null or s.regimenId = :regimenId)" +
-            " and (:estado is null or s.estado = :estado) order by s.solicitudId asc")
+            " and (:estado is null or s.estado = :estado) order by s.solicitudId desc")
     Page<SolicitudAfiliacion> findSolicitudAfiliacionesByParameters(
             String cedula, Integer servicioId, Long seguroId, Integer regimenId, String estado,
             Pageable paging);

@@ -4,10 +4,7 @@ import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.ciudadano.service.CiudadanoService;
 import com.spring.security.medi.care.app.commons.AfiliacionDtoUtil;
 import com.spring.security.medi.care.app.commons.AplicationConstantUtil;
-import com.spring.security.medi.care.app.commons.domain.Ciudadano;
-import com.spring.security.medi.care.app.commons.domain.InstitucionPensionado;
-import com.spring.security.medi.care.app.commons.domain.MotivoEstado;
-import com.spring.security.medi.care.app.commons.domain.SolicitudAfiliacion;
+import com.spring.security.medi.care.app.commons.domain.*;
 import com.spring.security.medi.care.app.afiliacion.repository.jpa.SolicitudAfiliacionJpaRepo;
 import com.spring.security.medi.care.app.controller.dto.DetalleSolicitudAfiliacionDto;
 import com.spring.security.medi.care.app.entidad.service.EntidadService;
@@ -18,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionService {
@@ -99,8 +97,11 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
         if (ciu != null) {
             segundoApellido = ciu.getSegundoApellido();
         }
-
         String institucionpensionado = "";
+
+        if(sol.getInstitucionPensionadoId() != null){
+            institucionpensionado = catalogoService.buscarPorInstitucionPensionadoId(sol.getInstitucionPensionadoId()).getDescripcion();
+        }
         return new DetalleSolicitudAfiliacionDto(sol, nombreEntidad, segundoApellido, institucionpensionado,
                 descmotivo);
     }
@@ -108,10 +109,13 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
     @Override
     public void procesarSolicitudAfiliacion(Long solicitudId) throws Exception {
         logger.info("Entering in procesarSolicitudAfiliacion");
+        logger.info("param solicitudId : "+solicitudId);
 
         SolicitudAfiliacion sol = solicitudAfiliacionJpaRepo.findById(solicitudId).get();
         // TODO validacion ciudadano por NSS y cedula validar que exista un ciudadano
         // con Nss y cedula de la solicitud y asigna el ciudadano
+        logger.info(">> Iniciando validaciones ");
+        logger.info("A) Nss y cedula de la solicitud y asigna el ciudadano");
 
         Ciudadano ciudadano = ciudadanoService.buscarCiudadanoPorIdentifiacion(sol.getCedula(), sol.getNss());
 
@@ -129,10 +133,11 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
         sol.setCedula(ciudadano.getCedula());
         sol.setNss(ciudadano.getNss());
 
+        logger.info("B) asignacion pensionado y pertenece al seguro de pensiones asigna");
         // TODO si tiene asignacion pensionado y pertenece al seguro de pensiones asigna
-        // una instutucion pensionado a la solicitud
-
-        // TODO
+        if(sol.getAutomatica()){
+            sol.setInstitucionPensionadoId(asignarAutoInstitucionPensionadiSolicitud());
+        }
 
         // TODO realizando persistencia de datos
         sol.setEstado(AfiliacionDtoUtil.C_ESTADO_OK);
@@ -161,7 +166,14 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
 
         int size = institucionList.size();
 
-
+        Random rand =  new Random();
+        int indiceR = rand.nextInt(size);
+        logger.info("Indice random : "+Math.abs(indiceR) );
+        InstitucionPensionado inst = institucionList.get(Math.abs(indiceR));
+        if(inst == null){
+            return 1L;
+        }
+        return inst.getInstitucionPensionadoId();
     }
 
 

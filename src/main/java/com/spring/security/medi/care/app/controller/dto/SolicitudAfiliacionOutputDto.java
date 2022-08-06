@@ -65,6 +65,7 @@ public class SolicitudAfiliacionOutputDto implements Serializable {
         this.estado = AfiliacionDtoUtil.convertEstado(solicitud.getEstado());
         this.fechaRecepcion = solicitud.getFechaRecepcion();
         this.municipioId = solicitud.getMunicipioId();
+        this.motivoId =  solicitud.getMotivoId();
     }
 
 }
