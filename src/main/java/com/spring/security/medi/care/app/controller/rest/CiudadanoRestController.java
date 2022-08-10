@@ -1,6 +1,8 @@
 package com.spring.security.medi.care.app.controller.rest;
 
 import com.spring.security.medi.care.app.ciudadano.service.CiudadanoService;
+import com.spring.security.medi.care.app.ciudadano.type.CiudadanoPaginated;
+import com.spring.security.medi.care.app.commons.DaoUtil;
 import com.spring.security.medi.care.app.commons.domain.Ciudadano;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,6 +39,17 @@ public class CiudadanoRestController {
                                                            @RequestParam(value = "nss",required = false) String nss){
         Ciudadano ciudadano = ciudadanoService.buscarCiudadanoPorIdentifiacion(cedula, nss);
         return new ResponseEntity(ciudadano, HttpStatus.OK);
+    }
+
+    @GetMapping("/find/parameters")
+    @ResponseBody
+    public ResponseEntity<CiudadanoPaginated> findCiudadanosByParameters(@RequestParam(value = "tipoIdentificacion", required = false) String tipoIdentificacion,
+                                                      @RequestParam(value = "texto", required = false) String texto,
+                                                      @RequestParam(value = "estado",required = false) String estado){
+        int page = DaoUtil.DEFAULT_PAGE;
+        int size = DaoUtil.DEFAULT_ROW_COUNT;
+        CiudadanoPaginated ciudadanoPaginated = ciudadanoService.buscarCiudadanosPorParametros(tipoIdentificacion, texto, estado, page, size);
+        return new ResponseEntity(ciudadanoPaginated, HttpStatus.OK);
     }
 
     @GetMapping("/all")

@@ -41,12 +41,14 @@ public class CiudadanoServiceImpl implements CiudadanoService {
     @Override
     public CiudadanoPaginated buscarCiudadanosPorParametros(String identificacion, String texto, String estado, int page, int size) {
         logger.info("Entering in method buscarCiudadanosPorParametros");
-        logger.info("param : "+identificacion );
-        logger.info("param : "+texto );
-        logger.info("param : "+estado );
         identificacion = (identificacion != null && !identificacion.isEmpty())? "%"+identificacion+"%": null;
-        texto = (texto != null && !texto.isEmpty())? "%"+texto+"%": null;
+        texto = (texto != null && !texto.isEmpty())? "%"+texto.toUpperCase()+"%": null;
         Pageable paging = PageRequest.of(page, size);
+        logger.info("param page: "+page );
+        logger.info("param size : "+size );
+        logger.info("param identificacion: "+identificacion );
+        logger.info("param texto: "+texto );
+        logger.info("param estado: "+estado );
         Page<Ciudadano> listado = ciudadanoJpaRepo.findByParameters(identificacion, texto, estado ,paging );
         PaginationOutput pageOut = new PaginationOutput();
         pageOut.setPageIndex(page);
