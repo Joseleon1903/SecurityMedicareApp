@@ -9,10 +9,10 @@ import java.util.List;
 @Data
 public class CiudadanoPaginated {
 
-    private List<Ciudadano> ciudadanos;
+    private List<CiudadanoDto> ciudadanos;
     private PaginationOutput pagination;
 
-    public CiudadanoPaginated(List<Ciudadano> ciudadanos, PaginationOutput pagination) {
+    public CiudadanoPaginated(List<CiudadanoDto> ciudadanos, PaginationOutput pagination) {
         this.ciudadanos = ciudadanos;
         this.pagination = pagination;
     }

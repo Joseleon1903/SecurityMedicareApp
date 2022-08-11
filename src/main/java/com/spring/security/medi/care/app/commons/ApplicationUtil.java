@@ -7,6 +7,9 @@ package com.spring.security.medi.care.app.commons;
 // import com.pluto.aplication.service.interfaces.ErrorExceptionService;
 // import org.springframework.ui.Model;
 
+import com.spring.security.medi.care.app.ciudadano.type.CiudadanoDto;
+import com.spring.security.medi.care.app.commons.domain.Ciudadano;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
