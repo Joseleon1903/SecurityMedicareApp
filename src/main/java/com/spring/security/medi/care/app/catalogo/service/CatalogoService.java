@@ -3,6 +3,7 @@ package com.spring.security.medi.care.app.catalogo.service;
 import com.spring.security.medi.care.app.catalogo.dto.MotivoEstadoPaginatedDto;
 import com.spring.security.medi.care.app.catalogo.dto.MunicipioPaginatedDto;
 import com.spring.security.medi.care.app.catalogo.dto.NacionalidadPaginatedDto;
+import com.spring.security.medi.care.app.catalogo.repository.jpa.InstitucionPensionadoJpaRepo;
 import com.spring.security.medi.care.app.commons.domain.*;
 
 import java.util.List;
@@ -38,5 +39,9 @@ public interface CatalogoService {
     List<Seguro> buscarSegurosSistema();
 
     Seguro buscarSegurosSistemaPorId(Long id);
+
+    List<InstitucionPensionado> buscarInstitucionPensionadoTodas();
+
+    InstitucionPensionado buscarPorInstitucionPensionadoId(Long id);
 
 }

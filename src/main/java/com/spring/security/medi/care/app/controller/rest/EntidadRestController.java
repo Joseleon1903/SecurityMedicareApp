@@ -20,7 +20,6 @@ public class EntidadRestController {
 
     private final EntidadService entidadService;
 
-
     @Autowired
     public EntidadRestController(EntidadService entidadService){
         this.entidadService = entidadService;
