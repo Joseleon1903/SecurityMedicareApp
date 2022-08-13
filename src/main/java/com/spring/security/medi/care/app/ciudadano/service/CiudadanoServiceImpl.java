@@ -1,5 +1,7 @@
 package com.spring.security.medi.care.app.ciudadano.service;
 
+import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
+import com.spring.security.medi.care.app.ciudadano.type.CiudadanoDto;
 import com.spring.security.medi.care.app.ciudadano.type.CiudadanoPaginated;
 import com.spring.security.medi.care.app.commons.PaginationOutput;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
+
+import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,9 +24,12 @@ public class CiudadanoServiceImpl implements CiudadanoService {
 
     private final CiudadanoJpaRepo ciudadanoJpaRepo;
 
+    private final CatalogoService catalogoService;
+
     @Autowired
-    public CiudadanoServiceImpl(CiudadanoJpaRepo ciudadanoJpaRepo){
+    public CiudadanoServiceImpl(CiudadanoJpaRepo ciudadanoJpaRepo, CatalogoService catalogoService){
         this.ciudadanoJpaRepo = ciudadanoJpaRepo;
+        this.catalogoService = catalogoService;
     }
 
     @Override
@@ -41,12 +48,14 @@ public class CiudadanoServiceImpl implements CiudadanoService {
     @Override
     public CiudadanoPaginated buscarCiudadanosPorParametros(String identificacion, String texto, String estado, int page, int size) {
         logger.info("Entering in method buscarCiudadanosPorParametros");
-        logger.info("param : "+identificacion );
-        logger.info("param : "+texto );
-        logger.info("param : "+estado );
         identificacion = (identificacion != null && !identificacion.isEmpty())? "%"+identificacion+"%": null;
-        texto = (texto != null && !texto.isEmpty())? "%"+texto+"%": null;
+        texto = (texto != null && !texto.isEmpty())? "%"+texto.toUpperCase()+"%": null;
         Pageable paging = PageRequest.of(page, size);
+        logger.info("param page: "+page );
+        logger.info("param size : "+size );
+        logger.info("param identificacion: "+identificacion );
+        logger.info("param texto: "+texto );
+        logger.info("param estado: "+estado );
         Page<Ciudadano> listado = ciudadanoJpaRepo.findByParameters(identificacion, texto, estado ,paging );
         PaginationOutput pageOut = new PaginationOutput();
         pageOut.setPageIndex(page);
@@ -55,7 +64,12 @@ public class CiudadanoServiceImpl implements CiudadanoService {
         long registrosRestante = listado.getTotalElements() - (page*size);
         logger.info("Registro restante: "+ registrosRestante);
         pageOut.setTotalRowCount(registrosRestante);
-        CiudadanoPaginated paginated = new CiudadanoPaginated(listado.getContent(), pageOut);
+        List<CiudadanoDto> ciudadanoDtos = new ArrayList<>();
+        for (Ciudadano ciu: listado) {
+            ciudadanoDtos.add(new CiudadanoDto(ciu, catalogoService.buscarNacionalidadPorId(ciu.getNacionalidadId()).getDescripcion(),
+                    catalogoService.buscarMunicipioPorId(ciu.getMunicipioId()).getDescripcion()));
+        }
+        CiudadanoPaginated paginated = new CiudadanoPaginated(ciudadanoDtos, pageOut);
         return paginated;
     }
 

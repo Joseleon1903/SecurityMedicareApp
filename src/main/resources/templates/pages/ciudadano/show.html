@@ -133,11 +133,11 @@
                     <div class="row g-3">
 
                         <div class="col-md-2 form-group">
-                            <input type="text" th:field="*{tipoIdentificacion}" th:value="${CiudadanoFilterBean.tipoIdentificacion}" class="form-control" >
+                            <input id="cedula" type="text" th:field="*{tipoIdentificacion}" th:value="${CiudadanoFilterBean.tipoIdentificacion}" class="form-control" >
                         </div>
 
                         <div class="col-md-2 form-group">
-                            <input type="text" th:field="*{nombre}" th:value="${CiudadanoFilterBean.nombre}" class="form-control"  >
+                            <input id="nombre" type="text" th:field="*{nombre}" th:value="${CiudadanoFilterBean.nombre}" class="form-control"  >
                         </div>
 
                         <div id="estado" class="col-md-2 form-group">
@@ -174,7 +174,8 @@
                         <th scope="col" th:text="#{page.ciudadano.column.segundoApellido}">Segundo Apellido</th>
                         <th scope="col" th:text="#{page.ciudadano.column.genero}">Genero</th>
                         <th scope="col" th:text="#{page.ciudadano.column.fechaNacimiento}">Fecha Nacimiento</th>
-                        <th scope="col" th:text="#{page.ciudadano.column.edad}">Edad</th>
+                        <th scope="col" th:text="#{page.ciudadano.column.nacionalidad}">Edad</th>
+                        <th scope="col" th:text="#{page.ciudadano.column.municipio}">Edad</th>
                         <th scope="col" th:text="#{page.ciudadano.column.estado}">Estado</th>
                         <th scope="col" colspan="2" th:text="#{page.generar.column.accion}">Acción</th>
                     </tr>
@@ -189,7 +190,8 @@
                         <td th:text="${ciudadano.segundoApellido}">Cesar</td>
                         <td th:text="${ciudadano.genero}">M</td>
                         <td th:text="${#dates.format(ciudadano.fechaNacimiento,'dd/MM/yyyy')}">01/01/2000</td>
-                        <td>22</td>
+                        <td th:text="${ciudadano.nacionalidad}">22</td>
+                        <td th:text="${ciudadano.municipio}">Azua</td>
                         <td th:text="${ciudadano.estado}">Activo</td>
                         <td>
                             <button type="button" th:data-text="${ciudadano.ciudadanoId}" class="menu-button-solicitud btn btn-primary" >
@@ -208,7 +210,6 @@
 
                 <div id="table-pagination-bottom">
 
-
                     <nav aria-label="Page navigation example" style="float:left;">
                         <p class="page-item" th:text="'Registros restantes: '+${TablePaginationBean.remainCount}" style="text-align: center; margin: 5px;">Previous</p>
                     </nav>
@@ -220,8 +221,6 @@
                             <li class="page-item"><a class="page-link" th:href="@{/ciudadano(indexPage=1)}">Next</a></li>
                         </ul>
                     </nav>
-
-
 
                 </div>
 

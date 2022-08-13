@@ -1,6 +1,7 @@
 package com.spring.security.medi.care.app.controller.page;
 
 import com.spring.security.medi.care.app.ciudadano.service.CiudadanoService;
+import com.spring.security.medi.care.app.ciudadano.type.CiudadanoDto;
 import com.spring.security.medi.care.app.ciudadano.type.CiudadanoPaginated;
 import com.spring.security.medi.care.app.commons.DaoUtil;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
@@ -23,7 +24,7 @@ public class CiudadanoController extends ViewBaseContext {
 
     private final CiudadanoService ciudadanoService;
 
-    private List<Ciudadano> ciudadanos;
+    private List<CiudadanoDto> ciudadanos;
 
     private Ciudadano detailCiudadano = new Ciudadano();
 

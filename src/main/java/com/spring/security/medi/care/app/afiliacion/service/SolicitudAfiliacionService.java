@@ -18,5 +18,9 @@ public interface SolicitudAfiliacionService {
 
     void procesarSolicitudAfiliacion(Long solicitudId) throws Exception;
 
+    void agregarMotivoSolicitudAfiliacion(Long solicitudId, Long motivoId);
+
+    Long asignarAutoInstitucionPensionadiSolicitud();
+
     DetalleSolicitudAfiliacionDto buscarSolicitudAfiliacionDetallePorId(Long id);
 }
