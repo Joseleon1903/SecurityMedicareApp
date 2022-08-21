@@ -44,6 +44,17 @@ $( ".menu-button-solicitud.btn.btn-warning" ).on( "click", function( event ) {
        $("#estadoDescripcionDetail").text(descripcionEstado);
        $("#motivoDescripcionDetail").text(motivo);
 
+       if(estado == "RE"){
+          console.log("removiendo visibilidad descripcion motivo");
+          var element = document.getElementById("motivoDescripcionDetail");
+          element.style.display = "inline";
+       }
+
+       if(estado == "PE" || estado == "OK" ){
+          console.log("habilitando visibilidad descripcion motivo");
+          var element = document.getElementById("motivoDescripcionDetail");
+          element.style.display = "none";
+       }
       jQuery('#detail-modal-buttom').click();
     });
 
