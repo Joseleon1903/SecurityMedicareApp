@@ -110,6 +110,7 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
     public void procesarSolicitudAfiliacion(Long solicitudId) throws Exception {
         logger.info("Entering in procesarSolicitudAfiliacion");
         logger.info("param solicitudId : "+solicitudId);
+        
         SolicitudAfiliacion sol = solicitudAfiliacionJpaRepo.findById(solicitudId).get();
 
         //validando estado solicitud
