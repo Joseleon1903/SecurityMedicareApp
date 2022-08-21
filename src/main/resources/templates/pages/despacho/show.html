@@ -209,7 +209,12 @@
                             <td>
                                 <form method="post" action="#" th:action="@{|/solicitud/procesar/${sol.solicitudId}|}" >
 
-                                    <button th:data-text="${sol.solicitudId}" type="submit" class="menu-button-solicitud btn btn-primary">
+                                    <button th:data-text="${sol.solicitudId}" type="submit" class="menu-button-solicitud btn btn-primary" th:if="${sol.estado != 'PENDIENTE'}" >
+                                        Procesar
+                                    </button>
+
+
+                                    <button th:data-text="${sol.solicitudId}" type="submit" class="menu-button-solicitud btn btn-primary" th:if="${sol.estado == 'PENDIENTE'}" disabled>
                                         Procesar
                                     </button>
 
