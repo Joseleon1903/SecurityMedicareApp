@@ -12,20 +12,16 @@ public class SolicitudFormDto implements Serializable {
     private String cedula;
     private String nss;
     private Long municipioId;
-    private String cedulaTitular;
     private String tipoAfiliado;
-    private String tipoDependiente;
     private Long nacionalidadId;
     private Long seguroId;
     private Integer regimenId;
     private Boolean aplicaInsitucionAutomtica;
 
-    public SolicitudFormDto(Short tipoIdentificacion, String cedula, String nss, Long municipioId, String cedulaTitular,
-            String tipoAfiliado, String tipoDependiente, Long nacionalidadId, Long seguroId, Integer regimenId,
+    public SolicitudFormDto(Short tipoIdentificacion, String cedula, String nss, Long municipioId,
+            String tipoAfiliado, Long nacionalidadId, Long seguroId, Integer regimenId,
             Boolean aplicaInsitucionAutomtica) {
-        this.cedulaTitular = cedulaTitular;
         this.tipoAfiliado = tipoAfiliado;
-        this.tipoDependiente = tipoDependiente;
         this.nacionalidadId = nacionalidadId;
         this.seguroId = seguroId;
         this.regimenId = regimenId;
@@ -42,9 +38,7 @@ public class SolicitudFormDto implements Serializable {
                 ", cedula='" + cedula + '\'' +
                 ", nss='" + nss + '\'' +
                 ", municipioId='" + municipioId + '\'' +
-                ", cedulaTitular='" + cedulaTitular + '\'' +
                 ", tipoAfiliado='" + tipoAfiliado + '\'' +
-                ", tipoDependiente='" + tipoDependiente + '\'' +
                 ", nacionalidadId=" + nacionalidadId +
                 ", seguroId=" + seguroId +
                 ", regimenId=" + regimenId +

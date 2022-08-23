@@ -22,7 +22,6 @@ public class SolicitudAfiliacion implements Serializable {
     private Short tipoIdentificacionId;
     private String cedula;
     private String nss;
-    private String cedulaTitular;
     private String nombre;
     private String primerApellido;
     private Boolean automatica;
@@ -38,7 +37,7 @@ public class SolicitudAfiliacion implements Serializable {
 
     public SolicitudAfiliacion(Long solicitudId, Integer servicioId, Integer loteId, Long entidadId, Long seguroId,
             Integer regimenId, String tipoAfiliado, Short tipoIdentificacionId, String cedula, String nss,
-            String cedulaTitular, String nombre, String primerApellido, Boolean automatica,
+            String nombre, String primerApellido, Boolean automatica,
             Long institucionPensionadoId, Long claveInstitucionPensionado, String estado, Date fechaRecepcion,
             Long municipioId, Long ciudadanoId, Long nacionalidadId, Date fechaUltimoCambio) {
         this.solicitudId = solicitudId;
@@ -51,7 +50,6 @@ public class SolicitudAfiliacion implements Serializable {
         this.tipoIdentificacionId = tipoIdentificacionId;
         this.cedula = cedula;
         this.nss = nss;
-        this.cedulaTitular = cedulaTitular;
         this.nombre = nombre;
         this.primerApellido = primerApellido;
         this.automatica = automatica;
@@ -146,14 +144,6 @@ public class SolicitudAfiliacion implements Serializable {
 
     public void setNss(String nss) {
         this.nss = nss;
-    }
-
-    public String getCedulaTitular() {
-        return cedulaTitular;
-    }
-
-    public void setCedulaTitular(String cedulaTitular) {
-        this.cedulaTitular = cedulaTitular;
     }
 
     public String getNombre() {
@@ -265,7 +255,6 @@ public class SolicitudAfiliacion implements Serializable {
                 ", tipoIdentificacionId=" + tipoIdentificacionId +
                 ", cedula='" + cedula + '\'' +
                 ", nss='" + nss + '\'' +
-                ", cedulaTitular='" + cedulaTitular + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", primerApellido='" + primerApellido + '\'' +
                 ", automatica=" + automatica +

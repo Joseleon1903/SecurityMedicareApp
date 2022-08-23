@@ -213,13 +213,6 @@
                         <div id="datos-titular" style="display:none">
 
                             <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <label for="cedulaTitular" class="form-label" th:text="#{page.label.solicitud.datos.titular.cedula}">Email address</label>
-                                    <input type="text" th:field="*{cedulaTitular}" th:value="${SolicitudFormBean.cedulaTitular}" name="cedulaTitular" class="form-control" id="cedulaTitular" placeholder="Cedula titular">
-                                </div>
-                            </div>
-
-                            <div class="row">
 
                                 <div class="col-md-8 form-group">
                                     <label class="form-label" th:text="#{page.label.solicitud.datos.titular.tipoAfiliado}">Email address</label>
@@ -228,15 +221,6 @@
                                         <option value="D">Dependiente</option>
                                     </select>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <label class="form-label" th:text="#{page.label.solicitud.datos.titular.tipoDependiente}">Email address</label>
-                                <select th:field="*{tipoDependiente}" th:value="${SolicitudFormBean.tipoDependiente}" class="form-select" aria-label="Default select example">
-                                    <option value="0" selected th:text="#{page.generar.label.abrir.menu}">Open this select menu</option>
-                                    <option value="1">Directo</option>
-                                    <option value="2">Adiccional</option>
-                                </select>
                             </div>
 
                             <div class="row">

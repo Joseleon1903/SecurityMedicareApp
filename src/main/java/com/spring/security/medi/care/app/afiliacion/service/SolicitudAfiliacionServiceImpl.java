@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -139,6 +141,7 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
         sol.setPrimerApellido(ciudadano.getPrimerApellido());
         sol.setCedula(ciudadano.getCedula());
         sol.setNss(ciudadano.getNss());
+        sol.setFechaUltimoCambio(new Date());
 
         logger.info("B) asignacion pensionado y pertenece al seguro de pensiones asigna");
         // TODO si tiene asignacion pensionado y pertenece al seguro de pensiones asigna
