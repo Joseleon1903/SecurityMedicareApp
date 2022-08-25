@@ -4,13 +4,13 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import javax.persistence.JoinColumn;
 
 @Data
 @Entity
 public class Usuario implements Serializable {
 
     @Id
+    @GeneratedValue
     private Long usuarioId;
     private String codigo;
 
