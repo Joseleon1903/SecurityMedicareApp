@@ -1,47 +1,37 @@
 package com.spring.security.medi.care.app.commons.domain;
 
 import lombok.Data;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-
 
 @Data
 @Entity
 public class Contacto implements Serializable {
 
     @Id
+    @GeneratedValue
     private Long contactoId;
-    private Integer tipoPersona;
-    @OneToOne
-    @JoinColumn(name="entidadId")
-    private Entidad entidadId;
-    private Long ciudadanoId;
+
     private String descripcion;
-    private String correoCoorporativo;
+    private String correoPrimario;
     private String correoAlterno;
     private String posicion;
     private LocalDate fechaCreacion;
     private LocalDate fechaUltimoCambio;
-    private Boolean tieneHijos;
     private String estado;
 
     public Contacto() {
     }
 
-    public Contacto(Long contactoId, Integer tipoPersona, Entidad entidadId, Long ciudadanoId, String descripcion, String correoCoorporativo, String correoAlterno, String posicion, LocalDate fechaCreacion, LocalDate fechaUltimoCambio, Boolean tieneHijos, String estado) {
+    public Contacto(Long contactoId, String descripcion, String correoPrimario, String correoAlterno, String posicion, LocalDate fechaCreacion, LocalDate fechaUltimoCambio, String estado) {
         this.contactoId = contactoId;
-        this.tipoPersona = tipoPersona;
-        this.entidadId = entidadId;
-        this.ciudadanoId = ciudadanoId;
         this.descripcion = descripcion;
-        this.correoCoorporativo = correoCoorporativo;
+        this.correoPrimario = correoPrimario;
         this.correoAlterno = correoAlterno;
         this.posicion = posicion;
         this.fechaCreacion = fechaCreacion;
         this.fechaUltimoCambio = fechaUltimoCambio;
-        this.tieneHijos = tieneHijos;
         this.estado = estado;
     }
 

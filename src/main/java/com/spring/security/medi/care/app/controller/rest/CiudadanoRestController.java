@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 @RestController
-@RequestMapping(value= "/api/ciudadano/" , produces=MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value= "/api/ciudadano")
 public class CiudadanoRestController {
 
     private static final Logger logger = LoggerFactory.getLogger(CiudadanoRestController.class);

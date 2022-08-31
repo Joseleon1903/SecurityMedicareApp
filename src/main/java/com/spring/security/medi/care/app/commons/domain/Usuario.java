@@ -17,7 +17,11 @@ public class Usuario implements Serializable {
     @OneToOne
     @JoinColumn(name="contactoId")
     private Contacto contactoId;
-    private Long tipousuarioId;
+
+    @OneToOne
+    @JoinColumn(name="tipoUsuarioId")
+    private TipoUsuario tipoUsuarioId;
+
     private String llaveEncriptacion;
     private LocalDate fechaUltimoCambio;
     private String estado;
@@ -25,11 +29,10 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(Long usuarioId, String codigo, Contacto contactoId, Long tipousuarioId, String llaveEncriptacion, LocalDate fechaUltimoCambio, String estado) {
+    public Usuario(Long usuarioId, String codigo, Contacto contactoId, String llaveEncriptacion, LocalDate fechaUltimoCambio, String estado) {
         this.usuarioId = usuarioId;
         this.codigo = codigo;
         this.contactoId = contactoId;
-        this.tipousuarioId = tipousuarioId;
         this.llaveEncriptacion = llaveEncriptacion;
         this.fechaUltimoCambio = fechaUltimoCambio;
         this.estado = estado;

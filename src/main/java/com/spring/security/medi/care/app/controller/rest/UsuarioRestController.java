@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Random;
 
 @RestController
-@RequestMapping(value="/api/usuario/", produces=MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value="/api/usuario")
 public class UsuarioRestController {
 
     private static final Logger logger = LoggerFactory.getLogger(UsuarioRestController.class);
@@ -35,7 +35,7 @@ public class UsuarioRestController {
         return new ResponseEntity<Usuario>(user, HttpStatus.OK);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     @ResponseBody
     public ResponseEntity<List<Usuario>> findAll(){
         List<Usuario> usersList = usuarioService.buscarUsuariosSistemaJpa();

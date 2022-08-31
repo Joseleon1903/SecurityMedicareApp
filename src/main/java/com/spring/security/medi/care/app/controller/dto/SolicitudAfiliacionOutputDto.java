@@ -4,7 +4,6 @@ import com.spring.security.medi.care.app.commons.AfiliacionDtoUtil;
 import com.spring.security.medi.care.app.commons.domain.SolicitudAfiliacion;
 import lombok.Data;
 import org.springframework.stereotype.Component;
-
 import java.io.Serializable;
 import java.util.Date;
 

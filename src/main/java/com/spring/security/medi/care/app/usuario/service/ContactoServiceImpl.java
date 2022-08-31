@@ -29,4 +29,9 @@ public class ContactoServiceImpl implements ContactoService{
     public List<Contacto> buscarContactosSistema() {
         return contactoJpaRepo.findAll();
     }
+
+    @Override
+    public Contacto guardarContacto(Contacto contacto) {
+        return contactoJpaRepo.save(contacto);
+    }
 }

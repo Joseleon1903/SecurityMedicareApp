@@ -2,18 +2,17 @@ package com.spring.security.medi.care.app.controller.rest;
 
 import com.spring.security.medi.care.app.commons.domain.Contacto;
 import com.spring.security.medi.care.app.usuario.service.ContactoService;
-import com.spring.security.medi.care.app.usuario.service.UsuarioService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
-@RequestMapping(value="/api/contacto/" ,produces=MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value="/api/contacto")
 public class ContactoRestController {
 
 
@@ -30,17 +29,22 @@ public class ContactoRestController {
     @ResponseBody
     public ResponseEntity<Contacto> findById(@PathVariable("contactoId") Long id){
         Contacto contacto = contactoService.buscarContactoPorId(id);
-        return new ResponseEntity<Contacto>(contacto, HttpStatus.OK);
+        return new ResponseEntity(contacto, HttpStatus.OK);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     @ResponseBody
     public ResponseEntity<List<Contacto>> findAll(){
         List<Contacto> contactosList = contactoService.buscarContactosSistema();
         return new ResponseEntity(contactosList, HttpStatus.OK);
     }
 
-
+    @PostMapping
+    @ResponseBody
+    public ResponseEntity<Contacto> saveContacto(@RequestBody Contacto contacto){
+       Contacto contactoOutput = contactoService.guardarContacto(contacto);
+        return new ResponseEntity(contactoOutput, HttpStatus.OK);
+    }
 
 
 
