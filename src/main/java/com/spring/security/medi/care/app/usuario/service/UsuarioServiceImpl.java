@@ -41,4 +41,11 @@ public class UsuarioServiceImpl implements  UsuarioService{
     public Usuario buscarUsuariosSistemaporCodigoJpa(String codigo){
         return usuarioJpaRepo.findByCodigo(codigo.toUpperCase());
     }
+
+    @Override
+    public Usuario saveOrUpdateUser(Usuario user){
+        return usuarioJpaRepo.save(user);
+    }
+
+
 }

@@ -23,8 +23,8 @@ public class AfiliacionDtoUtil {
     /**
      * Regimen
      */
-    public static long N_REGIMEN_CONTRIBUTIVO = 1;
-    public static long N_REGIMEN_SUBSIDIADO = 2;
+    public static int N_REGIMEN_CONTRIBUTIVO = 1;
+    public static int N_REGIMEN_SUBSIDIADO = 2;
 
     public static String REGIMEN_CONTRIBUTIVO = "CONTRIBUTIVO";
     public static String REGIMEN_SUBSIDIADO = "SUBSIDIADO";

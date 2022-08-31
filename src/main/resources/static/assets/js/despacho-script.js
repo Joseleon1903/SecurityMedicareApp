@@ -36,7 +36,6 @@ $( ".menu-button-solicitud.btn.btn-warning" ).on( "click", function( event ) {
        $("#segundoApellidoDetail").val(segundoApellido);
        $("#tipoAfiliadoDetail").val(tipoAfiliado);
 
-       $("#tipoDependienteDetail").val(tipoDependiente);
        $("#institucionPensionadoDetail").val(institucionPensionado);
        $("#entidadDetail").val(entidadNombre);
        $("#estadoDetail").val(estado);
@@ -55,6 +54,7 @@ $( ".menu-button-solicitud.btn.btn-warning" ).on( "click", function( event ) {
           var element = document.getElementById("motivoDescripcionDetail");
           element.style.display = "none";
        }
+
       jQuery('#detail-modal-buttom').click();
     });
 

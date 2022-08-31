@@ -20,7 +20,6 @@ public class SolicitudAfiliacionOutputDto implements Serializable {
     private String tipoAfiliado;
     private String cedula;
     private String nss;
-    private String cedulaTitular;
     private Long entidadId;
     private Boolean automatica;
     private String estado;
@@ -39,7 +38,6 @@ public class SolicitudAfiliacionOutputDto implements Serializable {
         this.tipoAfiliado = tipoAfiliado;
         this.cedula = cedula;
         this.nss = nss;
-        this.cedulaTitular = cedulaTitular;
         this.entidadId = entidadId;
         this.automatica = automatica;
         this.estado = estado;
@@ -59,7 +57,6 @@ public class SolicitudAfiliacionOutputDto implements Serializable {
         this.tipoAfiliado = AfiliacionDtoUtil.convertTipoAfiliado(solicitud.getTipoAfiliado());
         this.cedula = solicitud.getCedula();
         this.nss = solicitud.getNss();
-        this.cedulaTitular = solicitud.getCedulaTitular();
         this.entidadId = solicitud.getEntidadId();
         this.automatica = solicitud.getAutomatica();
         this.estado = AfiliacionDtoUtil.convertEstado(solicitud.getEstado());

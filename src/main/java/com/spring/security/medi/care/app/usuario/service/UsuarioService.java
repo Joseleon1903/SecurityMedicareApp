@@ -14,5 +14,5 @@ public interface UsuarioService {
 
     Usuario buscarUsuariosSistemaporCodigoJpa(String codigo);
 
-
+    Usuario saveOrUpdateUser(Usuario user);
 }
