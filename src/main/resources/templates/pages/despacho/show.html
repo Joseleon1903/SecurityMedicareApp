@@ -138,8 +138,8 @@
                         <div class="col-md-2 form-group">
                             <select id="regimenId" th:field="*{regimenId}" th:value="${SolicituFromFilterBean.regimenId}"  class="form-select" aria-label="Default select example">
                                 <option value="" selected>Todos</option>
-                                <option value="1">Subsidiado</option>
-                                <option value="2">Contributivo</option>
+                                <option value="2">Subsidiado</option>
+                                <option value="1">Contributivo</option>
                             </select>
                         </div>
                         <div class="col-md-2 form-group">
@@ -177,7 +177,6 @@
                             <th scope="col" th:text="#{page.despacho.column.tipoAfiliado}">Fecha Nacimiento</th>
                             <th scope="col" th:text="#{page.despacho.column.cedula}">Edad</th>
                             <th scope="col" th:text="#{page.despacho.column.nss}">Edad</th>
-                            <th scope="col" th:text="#{page.despacho.column.cedulaTitular}">Edad</th>
                             <th scope="col" th:text="#{page.despacho.column.estado}">Estado</th>
                             <th scope="col" th:text="#{page.despacho.column.motivoId}">Motivo</th>
                             <th scope="col" colspan="2" th:text="#{page.generar.column.accion}">Acción</th>
@@ -195,7 +194,6 @@
                             <td th:text="${sol.tipoAfiliado}">M</td>
                             <td th:text="${sol.cedula}">M</td>
                             <td th:text="${sol.nss}">M</td>
-                            <td th:text="${sol.cedulaTitular}">M</td>
                             <td th:text="${sol.estado}">M</td>
                             <td th:text="${sol.motivoId}">Activo</td>
 
@@ -291,11 +289,6 @@
                         <div class="col-auto">
                             <label for="tipoAfiliadoDetail" class="form-label" th:text="#{page.despacho.column.tipoAfiliado}">Tipo afiliado</label>
                             <input type="text" class="form-control" id="tipoAfiliadoDetail" disabled="true" value="TITULAR">
-                        </div>
-
-                        <div class="col-auto" style="width: 200px">
-                            <label for="tipoDependienteDetail" class="form-label" th:text="#{page.despacho.column.tipoDependiente}">Tipo afiliado</label>
-                            <input type="text" class="form-control" id="tipoDependienteDetail" disabled="true" value="DIRECTO">
                         </div>
 
                         <div class="col-auto" style="width: 300px">

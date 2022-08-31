@@ -86,7 +86,6 @@ public class SolicitudController extends ViewBaseContext {
         solicitudIn.setTipoIdentificacionId(solicitudForm.getTipoIdentificacion());
         solicitudIn.setCedula(solicitudForm.getCedula());
         solicitudIn.setNss(solicitudForm.getNss());
-        solicitudIn.setCedulaTitular(solicitudForm.getCedulaTitular());
         solicitudIn.setNombre(AplicationConstantUtil.PARAMETRO_PENDIENTE_DEFINICION);
         solicitudIn.setPrimerApellido(AplicationConstantUtil.PARAMETRO_PENDIENTE_DEFINICION);
         solicitudIn.setAutomatica(solicitudForm.getAplicaInsitucionAutomtica());

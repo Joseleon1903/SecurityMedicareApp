@@ -10,7 +10,6 @@ public class DetalleSolicitudAfiliacionDto {
     private Long solicitudId;
     private String entidadNombre;
     private String tipoAfiliado;
-    private String tipoDependiente;
     private String cedula;
     private String nss;
     private String nombre;
@@ -29,7 +28,6 @@ public class DetalleSolicitudAfiliacionDto {
         this.solicitudId = solicitudAfiliacion.getSolicitudId();
         this.entidadNombre = entidadNombre;
         this.tipoAfiliado = solicitudAfiliacion.getTipoAfiliado();
-        this.tipoDependiente = "";
         this.cedula = solicitudAfiliacion.getCedula();
         this.nss = solicitudAfiliacion.getNss();
         this.nombre = solicitudAfiliacion.getNombre();
@@ -62,14 +60,6 @@ public class DetalleSolicitudAfiliacionDto {
 
     public void setTipoAfiliado(String tipoAfiliado) {
         this.tipoAfiliado = tipoAfiliado;
-    }
-
-    public String getTipoDependiente() {
-        return tipoDependiente;
-    }
-
-    public void setTipoDependiente(String tipoDependiente) {
-        this.tipoDependiente = tipoDependiente;
     }
 
     public String getCedula() {
