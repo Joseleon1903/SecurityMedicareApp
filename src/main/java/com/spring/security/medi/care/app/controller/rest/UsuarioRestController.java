@@ -30,16 +30,16 @@ public class UsuarioRestController {
 
     @GetMapping("/{codigo}")
     @ResponseBody
-    public ResponseEntity<Usuario> findById(@PathVariable("codigo") String code){
+    public ResponseEntity<Usuario> findById(@PathVariable("codigo") String code) {
         Usuario user = usuarioService.buscarUsuariosSistemaporCodigoJpa(code);
-        return new ResponseEntity<Usuario>(user, HttpStatus.OK);
+        return new ResponseEntity(user, HttpStatus.OK);
     }
 
     @GetMapping
     @ResponseBody
     public ResponseEntity<List<Usuario>> findAll(){
         List<Usuario> usersList = usuarioService.buscarUsuariosSistemaJpa();
-        return new ResponseEntity<List<Usuario>>(usersList, HttpStatus.OK);
+        return new ResponseEntity(usersList, HttpStatus.OK);
     }
 
     @PostMapping("/save")
@@ -50,6 +50,6 @@ public class UsuarioRestController {
         String llave = securityService.hash256String(texto);
         user.setLlaveEncriptacion(llave);
         Usuario userOutput = usuarioService.saveOrUpdateUser(user);
-        return new ResponseEntity<Usuario>(userOutput, HttpStatus.OK);
+        return new ResponseEntity(userOutput, HttpStatus.OK);
     }
 }

@@ -24,6 +24,10 @@ public class Contacto implements Serializable {
     public Contacto() {
     }
 
+    public Contacto(Long contactoId) {
+        this.contactoId = contactoId;
+    }
+
     public Contacto(Long contactoId, String descripcion, String correoPrimario, String correoAlterno, String posicion, LocalDate fechaCreacion, LocalDate fechaUltimoCambio, String estado) {
         this.contactoId = contactoId;
         this.descripcion = descripcion;

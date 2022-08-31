@@ -21,7 +21,7 @@ public class InstitucionPensionadoRestController {
     private final CatalogoService catalogoService;
 
     @Autowired
-    public InstitucionPensionadoRestController (CatalogoService catalogoService){
+    public InstitucionPensionadoRestController(CatalogoService catalogoService){
         this.catalogoService= catalogoService;
     }
 
