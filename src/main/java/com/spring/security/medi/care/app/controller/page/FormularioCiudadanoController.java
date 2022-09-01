@@ -2,16 +2,11 @@ package com.spring.security.medi.care.app.controller.page;
 
 import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.ciudadano.service.CiudadanoService;
-import com.spring.security.medi.care.app.ciudadano.type.CiudadanoDto;
-import com.spring.security.medi.care.app.commons.AplicationConstantUtil;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
 import com.spring.security.medi.care.app.commons.domain.Ciudadano;
 import com.spring.security.medi.care.app.commons.domain.Municipio;
 import com.spring.security.medi.care.app.commons.domain.Nacionalidad;
-import com.spring.security.medi.care.app.commons.domain.SolicitudAfiliacion;
 import com.spring.security.medi.care.app.controller.dto.CiudadanoFormDto;
-import com.spring.security.medi.care.app.controller.dto.ErrorPageDto;
-import com.spring.security.medi.care.app.controller.dto.SolicitudFormDto;
 import com.spring.security.medi.care.app.controller.dto.SystemInfoDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +18,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -40,7 +34,6 @@ public class FormularioCiudadanoController extends ViewBaseContext {
     private List<Municipio> listaMunicipio;
 
     private final CatalogoService catalogoService;
-
     private final CiudadanoService ciudadanoService;
 
     private CiudadanoFormDto ciudadanoDto;
@@ -89,7 +82,6 @@ public class FormularioCiudadanoController extends ViewBaseContext {
         logger.info("SAVE CIUDADANO : " + ciudadanoOut);
         return "redirect:form_ciudadano";
     }
-
 
     @Override
     protected void init() {
