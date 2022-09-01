@@ -89,4 +89,9 @@ public class CiudadanoServiceImpl implements CiudadanoService {
         return ciudadanoJpaRepo.findByCedulaAndNss(cedula, nss);
     }
 
+    @Override
+    public Ciudadano guardarCiudadano(Ciudadano ciudadano){
+        return ciudadanoJpaRepo.save(ciudadano);
+    }
+
 }

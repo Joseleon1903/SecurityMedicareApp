@@ -228,10 +228,10 @@ public class CatalogoController extends ViewBaseContext {
 
     @Override
     protected void init() {
-        logger.info("entering init method ");
-        logger.info("Generando systemInfoDTO");
+        logger.debug("entering init method ");
+        logger.debug("Generando systemInfoDTO");
         systemInfoDTO = new SystemInfoDTO("Catalogos", new Date());
-        logger.info("systemInfoDTO: " + systemInfoDTO);
-        logger.info("existing init method ");
+        logger.debug("systemInfoDTO: " + systemInfoDTO);
+        logger.debug("existing init method ");
     }
 }

@@ -47,5 +47,9 @@ public class UsuarioServiceImpl implements  UsuarioService{
         return usuarioJpaRepo.save(user);
     }
 
+    @Override
+    public Usuario buscarUsuarioPorId(Long id){
+        return usuarioJpaRepo.findByUsuarioId(id);
+    }
 
 }
