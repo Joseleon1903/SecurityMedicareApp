@@ -1,7 +1,6 @@
 package com.spring.security.medi.care.app.controller.dto;
 
 import org.springframework.stereotype.Component;
-
 import java.io.Serializable;
 
 @Component

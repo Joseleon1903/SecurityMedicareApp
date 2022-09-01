@@ -25,8 +25,7 @@ public class Ciudadano implements Serializable {
     private Date fechaNacimiento;
     private String estado;
 
-    public Ciudadano(){
-    }
+    public Ciudadano(){}
 
     public Ciudadano(Long ciudadanoId, String cedula, String nss, String nombre, String primerApellido, String segundoApellido, Long municipioId, Long nacionalidadId, Boolean estranjero, String genero, Date fechaNacimiento, String estado) {
         this.ciudadanoId = ciudadanoId;
