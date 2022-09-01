@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 @RestController
-@RequestMapping(value="/api/motivoestado/", produces=MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value="/api/motivoestado", produces=MediaType.APPLICATION_JSON_VALUE)
 public class MotivoEstadoRestController {
 
     private static final Logger logger = LoggerFactory.getLogger(MotivoEstadoRestController.class);
@@ -32,7 +32,7 @@ public class MotivoEstadoRestController {
         return new ResponseEntity<MotivoEstado>(motivo, HttpStatus.OK);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     @ResponseBody
     public ResponseEntity<List<MotivoEstado>> findAll(){
         List<MotivoEstado> motivosList = catalogoService.buscarMotivosTodos();

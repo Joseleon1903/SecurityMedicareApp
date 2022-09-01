@@ -32,7 +32,7 @@ public class InstitucionPensionadoRestController {
         return new ResponseEntity(institucionPensionado, HttpStatus.OK);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     @ResponseBody
     public ResponseEntity<List<MotivoEstado>> findAll(){
         List<InstitucionPensionado> institucionPensionadoList = catalogoService.buscarInstitucionPensionadoTodas();

@@ -52,7 +52,7 @@ public class CiudadanoRestController {
         return new ResponseEntity(ciudadanoPaginated, HttpStatus.OK);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     @ResponseBody
     public ResponseEntity<List<Ciudadano>> findAll(){
         List<Ciudadano> ciudadanos = ciudadanoService.buscarTodosCiudadanos();
@@ -63,6 +63,6 @@ public class CiudadanoRestController {
     @ResponseBody
     public ResponseEntity<Void> deleteById(@PathVariable("ciudadanoId") Long id){
         ciudadanoService.eliminarCiudadanoId(id);
-        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }
