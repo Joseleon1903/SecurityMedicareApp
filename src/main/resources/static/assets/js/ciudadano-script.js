@@ -28,6 +28,8 @@
         sexo = "Masculino";
       }
 
+      $("#ciudadanoIdDetail").val(ciudadanoId);
+
       $("#cedulaDetail").val(cedula);
       $("#nssDetail").val(nss);
       $("#nombreDetail").val(nombre);

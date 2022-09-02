@@ -18,7 +18,7 @@ public interface CiudadanoJpaRepo extends PagingAndSortingRepository<Ciudadano, 
     Page<Ciudadano> findAll(Pageable paging);
 
     @Query("select c from Ciudadano c where (:identificacion is null or c.cedula like :identificacion or c.nss like :identificacion) and" +
-            " (:texto is null or c.nombre like :texto or c.primerApellido like :texto or c.segundoApellido like :texto) and " +
+            " (:texto is null or upper(c.nombre) like :texto or upper(c.primerApellido) like :texto or upper(c.segundoApellido) like :texto) and " +
             " (:estado is null or c.estado like :estado)" +
             " order by c.ciudadanoId asc")
     Page<Ciudadano> findByParameters(String identificacion, String texto, String estado, Pageable paging);

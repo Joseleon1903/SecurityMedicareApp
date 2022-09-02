@@ -3,22 +3,25 @@ package com.spring.security.medi.care.app.controller.page;
 import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.ciudadano.service.CiudadanoService;
 import com.spring.security.medi.care.app.commons.AfiliacionDtoUtil;
+import com.spring.security.medi.care.app.commons.AplicationConstantUtil;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
 import com.spring.security.medi.care.app.commons.domain.Ciudadano;
+import com.spring.security.medi.care.app.commons.domain.MotivoEstado;
 import com.spring.security.medi.care.app.commons.domain.Municipio;
 import com.spring.security.medi.care.app.commons.domain.Nacionalidad;
 import com.spring.security.medi.care.app.controller.dto.CiudadanoFormDto;
+import com.spring.security.medi.care.app.controller.dto.ErrorPageDto;
 import com.spring.security.medi.care.app.controller.dto.SystemInfoDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -39,18 +42,23 @@ public class FormularioCiudadanoController extends ViewBaseContext {
 
     private CiudadanoFormDto ciudadanoDto;
 
+    private ErrorPageDto errorPageBean;
+
     @Autowired
-    public FormularioCiudadanoController(CiudadanoFormDto ciudadanoDto, CatalogoService catalogoService, CiudadanoService ciudadanoService) {
+    public FormularioCiudadanoController(ErrorPageDto errorPageBean, CiudadanoFormDto ciudadanoDto, CatalogoService catalogoService, CiudadanoService ciudadanoService) {
         this.catalogoService = catalogoService;
         this.ciudadanoService = ciudadanoService;
         this.ciudadanoDto = ciudadanoDto;
+        this.errorPageBean = errorPageBean;
     }
 
-    @RequestMapping(value = "/form_ciudadano", method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
-    public String show(Model model) {
+    @GetMapping("/form_ciudadano")
+    public String show( @RequestParam(value = "hasError" ,  required = false) Boolean hasError,  Model model) {
         logger.info("entering  in show formulario ciudadano");
         cargarCatalogoNacionalidad();
         cargarCatalogoMunicipio();
+        logger.info("Entering validation error : "+ hasError);
+        validateError(hasError, model);
         model.addAttribute("SystemInfoBean", systemInfoDTO);
         model.addAttribute("ListadoNacionalidadBean", listaNacionalidad);
         model.addAttribute("ListadoMunicipioBean", listaMunicipio);
@@ -73,15 +81,27 @@ public class FormularioCiudadanoController extends ViewBaseContext {
                 ciudadanoForm.getSegundoApellido(), ciudadanoForm.getMunicipio(), ciudadanoForm.getNacionalidad(),
                 ciudadanoForm.getGenero(), Date.from(date.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()), AfiliacionDtoUtil.C_ESTADO_AC);
 
-        if(ciudadanoService.buscarCiudadanoPorIdentifiacion(ciudadanoForm.getCedula(), ciudadanoForm.getNss()) != null){
-            logger.info("Error existe un ciudadano con la misma identificacion");
-            logger.info("ABORT REGISTRATION");
-            return "redirect:form_ciudadano";
+        try{
+            if(ciudadanoService.buscarCiudadanoPorIdentifiacion(ciudadanoForm.getCedula(), ciudadanoForm.getNss()) != null){
+                logger.info("Error existe un ciudadano con la misma identificacion");
+                logger.info("ABORT REGISTRATION");
+                MotivoEstado mot = catalogoService.buscarMotivoPorId(AplicationConstantUtil.EXISTE_ACTIVO_CON_IDENTIFCACION);
+                this.errorPageBean = new ErrorPageDto(mot.getMotivoId(), mot.getDescripcion(), true);
+                this.ciudadanoDto = ciudadanoForm;
+                return "redirect:form_ciudadano?hasError=true";
+            }
+            this.errorPageBean = new ErrorPageDto();
+            Ciudadano ciudadanoOut = ciudadanoService.guardarCiudadano(ciudadano);
+            logger.info("SAVE CIUDADANO : " + ciudadanoOut);
         }
-
-        Ciudadano ciudadanoOut = ciudadanoService.guardarCiudadano(ciudadano);
-        logger.info("SAVE CIUDADANO : " + ciudadanoOut);
-        return "redirect:form_ciudadano";
+        catch (Exception ex){
+            logger.info("Error existe un ciudadano con la misma identificacion");
+            MotivoEstado mot = catalogoService.buscarMotivoPorId(AplicationConstantUtil.GENERAL_ERROR_INTERNO);
+            this.errorPageBean = new ErrorPageDto(mot.getMotivoId(), mot.getDescripcion(), true);
+            this.ciudadanoDto = ciudadanoForm;
+            return "redirect:form_ciudadano?hasError=true";
+        }
+        return "redirect:form_ciudadano?hasError=false";
     }
 
     @Override
@@ -103,6 +123,15 @@ public class FormularioCiudadanoController extends ViewBaseContext {
         logger.info("entering cargarCatalogoMunicipio");
         this.listaMunicipio = catalogoService.buscarMunicipiosTodos();
         logger.info("exiting cargarCatalogoMunicipio");
+    }
+
+    private void validateError(Boolean hasError, Model model ){
+        if(hasError == null || !hasError){
+            model.addAttribute("ErrorPageBean", new ErrorPageDto());
+            this.ciudadanoDto = new CiudadanoFormDto();
+        }else{
+            model.addAttribute("ErrorPageBean",this.errorPageBean );
+        }
     }
 
 }

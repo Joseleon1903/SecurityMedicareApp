@@ -100,7 +100,7 @@ public class SolicitudController extends ViewBaseContext {
             this.errorPageDto = new ErrorPageDto();
         } catch (Exception e) {
             logger.info(e.getLocalizedMessage());
-            this.errorPageDto = new ErrorPageDto(500, "Internal server error : " + e.getLocalizedMessage(), true);
+            this.errorPageDto = new ErrorPageDto(500L, "Internal server error : " + e.getLocalizedMessage(), true);
             e.printStackTrace();
         }
         logger.info("Solicitud realizado con exito : " + this.solicitudOut);

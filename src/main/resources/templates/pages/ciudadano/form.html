@@ -82,10 +82,10 @@
 
             <div class="col-lg-8">
 
-<!--
-                <div th:replace="fragments/fragment_panel :: panel_section(type='info',title='Error en formulario', content='existen datos requeridos no proporcionados')"></div>
--->
+                <div th:if="${ErrorPageBean.isError}">
 
+                    <div th:replace="fragments/fragment_panel :: panel_section(type='danger',title=|Error :${ErrorPageBean.codigoError}|, content=${ErrorPageBean.descripcionError})"></div>
+                </div>
 
                 <form method="post" action="#" th:action="@{/inscription}" th:object="${CiudadanoBean}" role="form" class="php-email-form">
                     <div class="row">
@@ -120,14 +120,14 @@
 
                     <div class="row">
                         <div class="col-md-6 form-group">
-                            <select th:field="*{municipio}" th:value="${CiudadanoBean.municipio}" class="form-select" aria-label="Default select example">
+                            <select th:field="*{municipio}" th:value="${CiudadanoBean.municipio}" class="form-select" aria-label="Default select example" required>
                                 <option value="0" selected >Seleciona un municipio</option>
                                 <option th:each="municipio : ${ListadoMunicipioBean}" th:value="${municipio.municipioId}" th:text="${municipio.descripcion}" ></option>
                             </select>
                         </div>
 
                         <div class="col-md-6 form-group">
-                            <select th:field="*{genero}" th:value="${CiudadanoBean.genero}" class="form-select" aria-label="Default select example">
+                            <select th:field="*{genero}" th:value="${CiudadanoBean.genero}" class="form-select" aria-label="Default select example" required>
                                 <option value="0" selected >Seleciona el Genero</option>
                                 <option value="M" >Masculino</option>
                                 <option value="F" >Femenino</option>
