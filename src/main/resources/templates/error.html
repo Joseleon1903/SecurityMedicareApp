@@ -30,34 +30,9 @@
 </head>
 <body data-aos-easing="ease-in-out" data-aos-duration="1000" data-aos-delay="0">
 
-<!-- ======= Header ======= -->
-<header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-
-        <a th:href="@{/home}" class="logo d-flex align-items-center">
-            <h1>Security Medicare</h1>
-        </a>
-
-        <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-        <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-        <nav id="navbar" class="navbar">
-            <ul>
-                <li><a th:href="@{/home}" >Home</a></li>
-                <li class="dropdown"><a href="#"><span>Ciudadano</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-                    <ul>
-                        <li><a th:href="@{/ciudadano}" class="active">Listado</a></li>
-                        <li><a th:href="@{form_ciudadano}">Formulario</a></li>
-                    </ul>
-                </li>
-                <li><a th:href="@{/solicitud}" >Solicitudes</a></li>
-                <li><a th:href="@{/despacho}" >Despacho</a></li>
-                <li><a th:href="@{/catalogo}" >Catalogos</a></li>
-            </ul>
-        </nav><!-- .navbar -->
-
-    </div>
-</header><!-- End Header -->
-<!-- End Header -->
+<!--=============== init Header Section ===============-->
+<div th:insert="fragments/header_page :: header_section"></div>
+<!--=============== End Header Section ===============-->
 
 <main id="main">
 
@@ -79,6 +54,10 @@
     </div><!-- End Breadcrumbs -->
 
 </main><!-- End #main -->
+
+<!-- init Footer Section -->
+<div th:insert="fragments/footer_page :: footer_section"></div>
+<!-- End Footer Section -->
 
 <!-- Vendor JS Files -->
 <script th:src="@{assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>

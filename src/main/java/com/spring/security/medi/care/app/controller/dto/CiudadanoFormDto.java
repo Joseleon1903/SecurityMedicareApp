@@ -1,6 +1,5 @@
 package com.spring.security.medi.care.app.controller.dto;
 
-import java.util.Date;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
@@ -20,9 +19,8 @@ public class CiudadanoFormDto {
 
     private String genero;
     private String fechaNacimiento;
-    private String estado;
 
-    public CiudadanoFormDto(Long ciudadanoId, String cedula, String nss, String nombre, String primerApellido, String segundoApellido, Long nacionalidad, Long municipio, String genero, String fechaNacimiento, String estado) {
+    public CiudadanoFormDto(Long ciudadanoId, String cedula, String nss, String nombre, String primerApellido, String segundoApellido, Long nacionalidad, Long municipio, String genero, String fechaNacimiento) {
         this.ciudadanoId = ciudadanoId;
         this.cedula = cedula;
         this.nss = nss;
@@ -33,7 +31,6 @@ public class CiudadanoFormDto {
         this.municipio = municipio;
         this.genero = genero;
         this.fechaNacimiento = fechaNacimiento;
-        this.estado = estado;
     }
 
     public CiudadanoFormDto() {
@@ -53,7 +50,6 @@ public class CiudadanoFormDto {
                 ", municipio='" + municipio + '\'' +
                 ", genero='" + genero + '\'' +
                 ", fechaNacimiento=" + fechaNacimiento +
-                ", estado='" + estado + '\'' +
                 '}';
     }
 }

@@ -2,6 +2,7 @@ package com.spring.security.medi.care.app.controller.page;
 
 import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.ciudadano.service.CiudadanoService;
+import com.spring.security.medi.care.app.commons.AfiliacionDtoUtil;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
 import com.spring.security.medi.care.app.commons.domain.Ciudadano;
 import com.spring.security.medi.care.app.commons.domain.Municipio;
@@ -70,7 +71,7 @@ public class FormularioCiudadanoController extends ViewBaseContext {
 
         Ciudadano ciudadano =  new Ciudadano(ciudadanoForm.getCedula(), ciudadanoForm.getNss(), ciudadanoForm.getNombre(), ciudadanoForm.getPrimerApellido(),
                 ciudadanoForm.getSegundoApellido(), ciudadanoForm.getMunicipio(), ciudadanoForm.getNacionalidad(),
-                ciudadanoForm.getGenero(), Date.from(date.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()),  ciudadanoForm.getEstado());
+                ciudadanoForm.getGenero(), Date.from(date.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()), AfiliacionDtoUtil.C_ESTADO_AC);
 
         if(ciudadanoService.buscarCiudadanoPorIdentifiacion(ciudadanoForm.getCedula(), ciudadanoForm.getNss()) != null){
             logger.info("Error existe un ciudadano con la misma identificacion");
