@@ -14,5 +14,4 @@ public class ThymeleafConfig{
         return messageSource;
     }
 
-
 }

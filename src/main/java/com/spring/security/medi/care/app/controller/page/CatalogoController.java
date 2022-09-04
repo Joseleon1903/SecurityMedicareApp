@@ -7,10 +7,12 @@ import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
 import com.spring.security.medi.care.app.controller.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
 
@@ -152,7 +154,7 @@ public class CatalogoController extends ViewBaseContext {
         model.addAttribute("NacionalidadPaginationBean", nacionalidadPaginationDto);
         model.addAttribute("MunicipioPaginationBean", municipioPaginationDto);
 
-        return "pages/catalogo/show";
+        return "pages/catalogo/showCatalogosPage";
     }
 
     @PostMapping("/municipio/filter")
@@ -230,7 +232,8 @@ public class CatalogoController extends ViewBaseContext {
     protected void init() {
         logger.debug("entering init method ");
         logger.debug("Generando systemInfoDTO");
-        systemInfoDTO = new SystemInfoDTO("Catalogos", new Date());
+        systemInfoDTO = new SystemInfoDTO("Catalogos","Simplificar el catálogo de servicios únicamente a los servicios previamente acordados entre cliente y proveedor,\n" +
+                " en automático reduce la carga de trabajo al eliminar la opción para tramitar solicitudes indebidas.", new Date());
         logger.debug("systemInfoDTO: " + systemInfoDTO);
         logger.debug("existing init method ");
     }

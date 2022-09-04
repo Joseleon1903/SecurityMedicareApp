@@ -4,13 +4,13 @@ import com.spring.security.medi.care.app.ciudadano.service.CiudadanoService;
 import com.spring.security.medi.care.app.ciudadano.type.CiudadanoPaginated;
 import com.spring.security.medi.care.app.commons.DaoUtil;
 import com.spring.security.medi.care.app.commons.domain.Ciudadano;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -56,7 +56,14 @@ public class CiudadanoRestController {
     @ResponseBody
     public ResponseEntity<List<Ciudadano>> findAll(){
         List<Ciudadano> ciudadanos = ciudadanoService.buscarTodosCiudadanos();
-        return new ResponseEntity<List<Ciudadano>>(ciudadanos, HttpStatus.OK);
+        return new ResponseEntity(ciudadanos, HttpStatus.OK);
+    }
+
+    @PostMapping
+    @ResponseBody
+    public ResponseEntity<Void> registerCiudadano(@RequestBody Ciudadano ciudadano){
+        Ciudadano ciudOut = ciudadanoService.guardarCiudadano(ciudadano);
+        return new ResponseEntity(ciudOut, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{ciudadanoId}")

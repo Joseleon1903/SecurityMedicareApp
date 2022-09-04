@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<body>
-
-<div th:fragment="header_section">
+<body >
 
     <!-- ======= Header ======= -->
-    <header id="header" class="header d-flex align-items-center fixed-top">
+    <header th:fragment="header_section" id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
             <a th:href="@{/home}" class="logo d-flex align-items-center">
@@ -33,8 +31,6 @@
 
         </div>
     </header><!-- End Header -->
-
-</div>
 
 </body>
 </html>
