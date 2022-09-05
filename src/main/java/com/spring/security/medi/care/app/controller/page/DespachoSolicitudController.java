@@ -70,7 +70,7 @@ public class DespachoSolicitudController extends ViewBaseContext {
         model.addAttribute("SolicitudAfiliacionListBean", solicitudList);
         model.addAttribute("ListaSeguroBean", segurosSistema);
         model.addAttribute("SystemInfoBean", systemInfoDTO);
-        return "pages/despacho/show";
+        return "pages/despacho/showDespachoPage";
     }
 
     @PostMapping("/solicitud/filter")

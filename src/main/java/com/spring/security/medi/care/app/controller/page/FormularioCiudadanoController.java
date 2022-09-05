@@ -65,7 +65,7 @@ public class FormularioCiudadanoController extends ViewBaseContext {
 
         logger.info("Return the view to use for rendering the response");
         // Return the view to use for rendering the response
-        return "/pages/ciudadano/form";
+        return "/pages/ciudadano/formularioCiudadanoPage";
     }
 
     @PostMapping("/inscription")
@@ -107,7 +107,7 @@ public class FormularioCiudadanoController extends ViewBaseContext {
     protected void init() {
         logger.info("entering init method ");
         logger.info("Generando systemInfoDTO");
-        systemInfoDTO = new SystemInfoDTO("Formulario Ciudadano",new Date());
+        systemInfoDTO = new SystemInfoDTO("Formulario Ciudadano","Es un Formulario que permite al ciudadano registrarse, en la Plataforma de Servicios en Línea, a través del cual podrá solicitar cualquier servicio o trámite de forma electrónica.", new Date());
         logger.info("systemInfoDTO: "+ systemInfoDTO);
         logger.info("existing init method ");
     }

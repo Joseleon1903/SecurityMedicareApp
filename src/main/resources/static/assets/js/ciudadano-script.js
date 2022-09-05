@@ -61,7 +61,6 @@ $(".menu-button-solicitud.btn.btn-danger" ).on( "click", function( event ) {
     let htmlcontent = '<div class="section-header"> <span>Se ha eliminado el ciudadano '+ ciudadanoId+' de forma exitosa</span><h2>Se ha eliminado el ciudadano '+ ciudadanoId+' de forma exitosa</h2></div>';
     $( "#delete-modal-body" ).html(htmlcontent );
     jQuery('#delete-modal-buttom').click();
-
   });
 
   request.fail(function( jqXHR, textStatus ) {

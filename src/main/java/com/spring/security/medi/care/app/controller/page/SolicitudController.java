@@ -66,7 +66,7 @@ public class SolicitudController extends ViewBaseContext {
         model.addAttribute("SolicitudReponseBean", solicitudOut);
         model.addAttribute("ErrorPageBean", errorPageDto);
 
-        return "pages/solicitud/show";
+        return "pages/solicitud/showSolicitudPage";
     }
 
     @PostMapping("/solicitud")
@@ -113,7 +113,10 @@ public class SolicitudController extends ViewBaseContext {
         if (this.errorPageDto == null) {
             this.errorPageDto = new ErrorPageDto();
         }
-        systemInfoDTO = new SystemInfoDTO("Solicitudes", new Date());
+        systemInfoDTO = new SystemInfoDTO("Solicitudes","Soliciudes realizadas por un afiliado a los servicios de salud (medicamentos, procedimientos,\n" +
+                " medios diagnósticos, pruebas de laboratorio, materiales, terapias, etc.)\n" +
+                " dentro del Plan de Servicios de Salud (PDSS), así como la disponibilidad económica o agotamiento para\n" +
+                " que pueda gestionar la colaboración por otros medios.", new Date());
         logger.info("systemInfoDTO: " + systemInfoDTO);
         logger.info("existing init method ");
     }
