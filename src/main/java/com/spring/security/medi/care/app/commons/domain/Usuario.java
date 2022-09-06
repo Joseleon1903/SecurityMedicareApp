@@ -37,4 +37,17 @@ public class Usuario implements Serializable {
         this.fechaUltimoCambio = fechaUltimoCambio;
         this.estado = estado;
     }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "usuarioId=" + usuarioId +
+                ", codigo='" + codigo + '\'' +
+                ", contactoId=" + contactoId +
+                ", tipoUsuarioId=" + tipoUsuarioId +
+                ", llaveEncriptacion='" + llaveEncriptacion + '\'' +
+                ", fechaUltimoCambio=" + fechaUltimoCambio +
+                ", estado='" + estado + '\'' +
+                '}';
+    }
 }

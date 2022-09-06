@@ -1,0 +1,16 @@
+CREATE TABLE SERVICIO_SISTEMA
+(
+  SERVICIO_ID        SERIAL PRIMARY KEY,
+  DESCRIPCION        VARCHAR(250) NOT NULL,
+  FECHA_CREACION     DATE NOT NULL,
+  ESTADO             VARCHAR(2)   NOT NULL
+);
+
+COMMENT ON TABLE SERVICIO_SISTEMA IS 'Catalogo de servicios de entidades asociadas al Sistema';
+
+COMMENT ON COLUMN SERVICIO_SISTEMA.SERVICIO_ID IS 'Codigo que identifica el servicio sistema';
+COMMENT ON COLUMN SERVICIO_SISTEMA.DESCRIPCION IS 'Descripcion del servicio sistema';
+COMMENT ON COLUMN SERVICIO_SISTEMA.FECHA_CREACION IS 'Fecha creacion del registro con el servicio sistema.';
+COMMENT ON COLUMN SERVICIO_SISTEMA.ESTADO IS 'Estado del servicio. Posibles valores: AC = Activo, IN = Inactivo';
+
+ALTER TABLE SERVICIO_SISTEMA ADD CONSTRAINT SERVICIO_SISTEMA_ESTADO_CK CHECK (ESTADO in ('AC', 'IN'));

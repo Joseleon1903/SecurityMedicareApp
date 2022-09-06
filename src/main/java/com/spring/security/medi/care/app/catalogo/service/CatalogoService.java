@@ -44,4 +44,9 @@ public interface CatalogoService {
 
     InstitucionPensionado buscarPorInstitucionPensionadoId(Long id);
 
+    List<ServicioSistema> buscarServiciosSistemas();
+
+    ServicioSistema buscarServicioSistemaPorId(Long id);
+
+    ServicioSistema registrarServicioSistema(ServicioSistema servicioSistema);
 }
