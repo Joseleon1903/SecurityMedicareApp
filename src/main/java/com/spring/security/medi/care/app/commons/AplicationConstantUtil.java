@@ -7,7 +7,7 @@ public class AplicationConstantUtil {
     private AplicationConstantUtil() {
     }
 
-    public static Integer SERVICIO_PANTALLA_SOLICITUD_AFILIACION = 301;
+    public static Long SERVICIO_PANTALLA_SOLICITUD_AFILIACION = 301L;
     public static String PARAMETRO_PENDIENTE_DEFINICION = "Valor no definido";
     public static String ESTADO_PE = "PE";
 

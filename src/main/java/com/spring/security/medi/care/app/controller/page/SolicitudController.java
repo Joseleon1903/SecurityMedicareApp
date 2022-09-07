@@ -4,10 +4,7 @@ import com.spring.security.medi.care.app.afiliacion.service.SolicitudAfiliacionS
 import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.commons.AplicationConstantUtil;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
-import com.spring.security.medi.care.app.commons.domain.Municipio;
-import com.spring.security.medi.care.app.commons.domain.Nacionalidad;
-import com.spring.security.medi.care.app.commons.domain.Seguro;
-import com.spring.security.medi.care.app.commons.domain.SolicitudAfiliacion;
+import com.spring.security.medi.care.app.commons.domain.*;
 import com.spring.security.medi.care.app.controller.dto.ErrorPageDto;
 import com.spring.security.medi.care.app.controller.dto.SolicitudFormDto;
 import com.spring.security.medi.care.app.controller.dto.SystemInfoDTO;
@@ -70,16 +67,17 @@ public class SolicitudController extends ViewBaseContext {
     }
 
     @PostMapping("/solicitud")
-    public String formSolicituAfiPage(@ModelAttribute SolicitudFormDto solicitudForm, Model model) {
+    public String formSolicituAfiPage(@ModelAttribute SolicitudFormDto solicitudForm) {
         logger.info("------- entering -----------");
         logger.info("Entering in method formSolicituAfiPage..");
         logger.info("Param : " + solicitudForm);
         SolicitudAfiliacion solicitudIn = new SolicitudAfiliacion();
-
-        solicitudIn.setServicioId(AplicationConstantUtil.SERVICIO_PANTALLA_SOLICITUD_AFILIACION);
+        ServicioSistema servicioEntity = catalogoService.buscarServicioSistemaPorId(AplicationConstantUtil.SERVICIO_PANTALLA_SOLICITUD_AFILIACION);
+        solicitudIn.setServicioId(servicioEntity);
         solicitudIn.setLoteId(AplicationConstantUtil.generateLoteId());
         solicitudIn.setEntidadId(entidadService.asignarAutomaticamenteEntidad(solicitudForm.getRegimenId()));
-        solicitudIn.setSeguroId(solicitudForm.getSeguroId());
+        Seguro seguroEntity = catalogoService.buscarSegurosSistemaPorId(solicitudForm.getSeguroId());
+        solicitudIn.setSeguroId(seguroEntity);
         solicitudIn.setRegimenId(solicitudForm.getRegimenId());
         solicitudIn.setTipoAfiliado(solicitudForm.getTipoAfiliado());
         solicitudIn.setTipoIdentificacionId(solicitudForm.getTipoIdentificacion());

@@ -41,8 +41,8 @@ public class EntidadRestController {
 
     @GetMapping("/automatica")
     @ResponseBody
-    public ResponseEntity<Long> asignarEntidadAutomatica(@RequestParam("regimenId") Integer regimenId){
-        Long entidad = entidadService.asignarAutomaticamenteEntidad(regimenId);
+    public ResponseEntity<Entidad> asignarEntidadAutomatica(@RequestParam("regimenId") Integer regimenId){
+        Entidad entidad = entidadService.asignarAutomaticamenteEntidad(regimenId);
         return new ResponseEntity(entidad, HttpStatus.OK);
     }
 }

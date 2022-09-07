@@ -118,7 +118,7 @@ public class DespachoSolicitudController extends ViewBaseContext {
     protected void init() {
         logger.info("entering init method ");
         logger.info("Generando systemInfoDTO");
-        systemInfoDTO = new SystemInfoDTO("Despacho solicitudes", new Date());
+        systemInfoDTO = new SystemInfoDTO("Despacho solicitudes","Disfruta de nuestros Planes de Beneficios Humano Sonrisas, procesar tu solicitud de manera exitosa en nuestra pagina web.", new Date());
         logger.info("systemInfoDTO: " + systemInfoDTO);
         logger.info("existing init method ");
     }

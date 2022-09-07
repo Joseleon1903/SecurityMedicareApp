@@ -87,7 +87,7 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
         logger.info("param id : " + id);
         SolicitudAfiliacion sol = solicitudAfiliacionJpaRepo.findById(id).get();
         logger.info("returning :" + sol);
-        String nombreEntidad = entidadService.buscarEntidadPorId(sol.getEntidadId()).getDescripcion();
+        String nombreEntidad = entidadService.buscarEntidadPorId(sol.getEntidadId().getEntidadId()).getDescripcion();
         Ciudadano ciu = ciudadanoService.buscarCiudadanoPorCiudadanoId(sol.getCiudadanoId());
         MotivoEstado mot = catalogoService.buscarMotivoPorId(sol.getMotivoId());
         String descmotivo = null;

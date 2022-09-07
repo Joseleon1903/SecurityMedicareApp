@@ -12,7 +12,7 @@ import java.util.Date;
 public class SolicitudAfiliacionOutputDto implements Serializable {
 
     private Long solicitudId;
-    private Integer servicioId;
+    private Long servicioId;
     private Integer loteId;
     private String seguroId;
     private String regimenId;
@@ -26,8 +26,8 @@ public class SolicitudAfiliacionOutputDto implements Serializable {
     private Long municipioId;
     private Long motivoId;
 
-    public SolicitudAfiliacionOutputDto(Long solicitudId, Integer servicioId, Integer loteId, String seguroId,
-            String regimenId, String tipoAfiliado, String cedula, String nss, String cedulaTitular, Long entidadId,
+    public SolicitudAfiliacionOutputDto(Long solicitudId, Long servicioId, Integer loteId, String seguroId,
+            String regimenId, String tipoAfiliado, String cedula, String nss, Long entidadId,
             Boolean automatica, String estado, Date fechaRecepcion, Long municipioId) {
         this.solicitudId = solicitudId;
         this.servicioId = servicioId;
@@ -49,14 +49,14 @@ public class SolicitudAfiliacionOutputDto implements Serializable {
 
     public SolicitudAfiliacionOutputDto(SolicitudAfiliacion solicitud) {
         this.solicitudId = solicitud.getSolicitudId();
-        this.servicioId = solicitud.getServicioId();
+        this.servicioId = solicitud.getServicioId().getServicioId();
         this.loteId = solicitud.getLoteId();
-        this.seguroId = AfiliacionDtoUtil.convertSeguroId(solicitud.getSeguroId());
+        this.seguroId = AfiliacionDtoUtil.convertSeguroId(solicitud.getSeguroId().getSeguroId());
         this.regimenId = AfiliacionDtoUtil.convertRegimenId(solicitud.getRegimenId());
         this.tipoAfiliado = AfiliacionDtoUtil.convertTipoAfiliado(solicitud.getTipoAfiliado());
         this.cedula = solicitud.getCedula();
         this.nss = solicitud.getNss();
-        this.entidadId = solicitud.getEntidadId();
+        this.entidadId = solicitud.getEntidadId().getEntidadId();
         this.automatica = solicitud.getAutomatica();
         this.estado = AfiliacionDtoUtil.convertEstado(solicitud.getEstado());
         this.fechaRecepcion = solicitud.getFechaRecepcion();

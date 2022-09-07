@@ -23,6 +23,10 @@ public class ServicioSistema implements Serializable {
     public ServicioSistema() {
     }
 
+    public ServicioSistema(Long servicioId) {
+        this.servicioId = servicioId;
+    }
+
     public ServicioSistema(Long servicioId, String descripcion, Date fechaCreacion, String estado) {
         this.servicioId = servicioId;
         this.descripcion = descripcion;
