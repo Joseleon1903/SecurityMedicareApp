@@ -43,6 +43,9 @@ public class AfiliacionDtoUtil {
     public static String C_ESTADO_RE = "RE";
     public static String C_ESTADO_OK = "OK";
 
+    public static String C_ESTADO_AC = "AC";
+    public static String C_ESTADO_IN = "IN";
+
     public static String V_ESTADO_PE = "PENDIENTE";
     public static String V_ESTADO_RE = "RECHAZADO";
     public static String V_ESTADO_OK = "ACEPTADO";

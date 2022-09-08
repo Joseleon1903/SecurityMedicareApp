@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 @RestController
-@RequestMapping(value="/api/municipio/", produces=MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value="/api/municipio")
 public class MunicipioRestController {
 
     private static final Logger logger = LoggerFactory.getLogger(MunicipioRestController.class);
@@ -32,7 +32,7 @@ public class MunicipioRestController {
         return new ResponseEntity(municipio, HttpStatus.OK);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     @ResponseBody
     public ResponseEntity<List<Municipio>> findAll(){
         List<Municipio> municipiosList = catalogoService.buscarMunicipiosTodos();

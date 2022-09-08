@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/seguro/")
+@RequestMapping(value = "/api/seguro")
 public class SeguroRestController {
 
     private static final Logger logger = LoggerFactory.getLogger(SeguroRestController.class);
@@ -31,7 +31,7 @@ public class SeguroRestController {
         return new ResponseEntity<Seguro>(seguroOut, HttpStatus.OK);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     @ResponseBody
     public ResponseEntity<List<Seguro>> findAll() {
         List<Seguro> segurosList = catalogoService.buscarSegurosSistema();

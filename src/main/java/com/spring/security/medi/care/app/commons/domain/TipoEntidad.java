@@ -1,7 +1,6 @@
 package com.spring.security.medi.care.app.commons.domain;
 
 import lombok.Data;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.Serializable;

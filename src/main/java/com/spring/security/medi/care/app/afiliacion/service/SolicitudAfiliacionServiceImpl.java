@@ -14,12 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
 @Service
+@Transactional
 public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionService {
 
     private static final Logger logger = LoggerFactory.getLogger(SolicitudAfiliacionServiceImpl.class);
@@ -87,7 +89,7 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
         logger.info("param id : " + id);
         SolicitudAfiliacion sol = solicitudAfiliacionJpaRepo.findById(id).get();
         logger.info("returning :" + sol);
-        String nombreEntidad = entidadService.buscarEntidadPorId(sol.getEntidadId()).getDescripcion();
+        String nombreEntidad = entidadService.buscarEntidadPorId(sol.getEntidadId().getEntidadId()).getDescripcion();
         Ciudadano ciu = ciudadanoService.buscarCiudadanoPorCiudadanoId(sol.getCiudadanoId());
         MotivoEstado mot = catalogoService.buscarMotivoPorId(sol.getMotivoId());
         String descmotivo = null;

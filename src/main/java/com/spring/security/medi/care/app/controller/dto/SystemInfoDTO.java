@@ -8,9 +8,11 @@ import java.util.Date;
 @Component
 public class SystemInfoDTO implements Serializable {
 
-    public String pageName;
+    private String pageName;
 
-    public Date sysDate;
+    private String descripcion;
+
+    private Date sysDate;
 
     public SystemInfoDTO() {
     }
@@ -18,6 +20,21 @@ public class SystemInfoDTO implements Serializable {
     public SystemInfoDTO(String pageName, Date sysDate) {
         this.pageName = pageName;
         this.sysDate = sysDate;
+        this.descripcion = "";
+    }
+
+    public SystemInfoDTO(String pageName, String descripcion, Date sysDate) {
+        this.pageName = pageName;
+        this.descripcion = descripcion;
+        this.sysDate = sysDate;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public String getPageName() {
@@ -38,8 +55,9 @@ public class SystemInfoDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "SistemInfoDTO{" +
+        return "SystemInfoDTO{" +
                 "pageName='" + pageName + '\'' +
+                ", descripcion='" + descripcion + '\'' +
                 ", sysDate=" + sysDate +
                 '}';
     }

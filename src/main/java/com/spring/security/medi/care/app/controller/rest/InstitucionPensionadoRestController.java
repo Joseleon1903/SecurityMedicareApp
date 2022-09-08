@@ -21,7 +21,7 @@ public class InstitucionPensionadoRestController {
     private final CatalogoService catalogoService;
 
     @Autowired
-    public InstitucionPensionadoRestController (CatalogoService catalogoService){
+    public InstitucionPensionadoRestController(CatalogoService catalogoService){
         this.catalogoService= catalogoService;
     }
 
@@ -32,17 +32,12 @@ public class InstitucionPensionadoRestController {
         return new ResponseEntity(institucionPensionado, HttpStatus.OK);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     @ResponseBody
     public ResponseEntity<List<MotivoEstado>> findAll(){
         List<InstitucionPensionado> institucionPensionadoList = catalogoService.buscarInstitucionPensionadoTodas();
         return new ResponseEntity(institucionPensionadoList, HttpStatus.OK);
     }
-
-
-
-
-
 
 
 }

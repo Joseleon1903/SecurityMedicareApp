@@ -14,6 +14,6 @@ public interface EntidadService {
 
     List<Entidad> buscarEntidades();
 
-    Long asignarAutomaticamenteEntidad(Integer regimen);
+    Entidad asignarAutomaticamenteEntidad(Integer regimen);
 
 }

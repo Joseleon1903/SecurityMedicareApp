@@ -67,7 +67,7 @@ public class CiudadanoController extends ViewBaseContext {
         model.addAttribute("DetailCiudadanoBean", detailCiudadano);
         model.addAttribute("TablePaginationBean", tablePagination);
         model.addAttribute("CiudadanoFilterBean", ciudadanoFilterDto);
-        return "pages/ciudadano/show";
+        return "pages/ciudadano/showCiudadanoPage";
     }
 
     @PostMapping("/listado/filter")
@@ -98,7 +98,7 @@ public class CiudadanoController extends ViewBaseContext {
         model.addAttribute("DetailCiudadanoBean", detailCiudadano);
         model.addAttribute("TablePaginationBean", tablePagination);
         model.addAttribute("CiudadanoFilterBean", ciudadanoFilterDto);
-        return "pages/ciudadano/show";
+        return "pages/ciudadano/showCiudadanoPage";
     }
 
     @PostMapping("/delete")
@@ -124,7 +124,7 @@ public class CiudadanoController extends ViewBaseContext {
     protected void init() {
         logger.info("entering init method ");
         logger.info("Generando systemInfoDTO");
-        systemInfoDTO = new SystemInfoDTO("Ciudadano", new Date());
+        systemInfoDTO = new SystemInfoDTO("Ciudadano","Se considera como ciudadano de un Estado a aquella persona que posee derechos civiles y políticos dentro del territorio y es considerado como tal.", new Date());
         logger.info("systemInfoDTO: " + systemInfoDTO);
         logger.info("existing init method ");
     }

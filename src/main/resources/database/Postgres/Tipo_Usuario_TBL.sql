@@ -1,8 +1,8 @@
+
 CREATE TABLE TIPO_USUARIO
 (
   TIPO_USUARIO_ID  SERIAL PRIMARY KEY,
   DESCRIPCION      VARCHAR(150) NOT NULL,
-  TIPO_PERSONA     INT     NOT NULL,
   ESTADO           VARCHAR(2)   NOT NULL
 );
 
@@ -10,8 +10,6 @@ COMMENT ON TABLE TIPO_USUARIO IS 'Código único que identifica el tipo de conta
 
 COMMENT ON COLUMN TIPO_USUARIO.TIPO_USUARIO_ID IS 'Código único que identifica el tipo de usuario';
 COMMENT ON COLUMN TIPO_USUARIO.DESCRIPCION IS 'Descripción del tipo de usuario';
-COMMENT ON COLUMN TIPO_USUARIO.TIPO_PERSONA IS 'Tipo Persona a la cual pertenece el Tipo de Usuario. Posibles valores: 1-Fisica, 2-Moral';
 COMMENT ON COLUMN TIPO_USUARIO.ESTADO IS 'Estado del tipo de contacto. Posibles valores: AC = Activo, IN = Inactivo';
 
 ALTER TABLE TIPO_USUARIO ADD CONSTRAINT TIPO_USUARIO_ESTADO_CK CHECK (ESTADO in ('AC', 'IN'));
-ALTER TABLE TIPO_USUARIO ADD CONSTRAINT TIPO_USUARIO_TIPO_PERSONA_CK CHECK (TIPO_PERSONA in (1, 2));

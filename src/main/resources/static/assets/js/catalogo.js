@@ -99,5 +99,7 @@ window.onload = function loadPreviouspageState(){
     }
 
     resetView(localStorage.getItem('SeccionMotivo'), localStorage.getItem('SeccionMunicipio'), localStorage.getItem('SeccionNacionalidad'));
-    window.scrollTo(0, document.body.scrollHeight);
+/*
+    window.scrollTo(200, document.body.scrollHeight);
+*/
 }
