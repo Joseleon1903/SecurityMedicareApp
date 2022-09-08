@@ -6,9 +6,12 @@ import com.spring.security.medi.care.app.usuario.repository.jpa.ContactoJpaRepo;
 import com.spring.security.medi.care.app.usuario.repository.jpa.UsuarioJpaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service
+@Transactional
 public class ContactoServiceImpl implements ContactoService{
 
 

@@ -6,10 +6,12 @@ import com.spring.security.medi.care.app.usuario.repository.jdbc.UsuarioJdbcImpl
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.spring.security.medi.care.app.commons.domain.Usuario;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class UsuarioServiceImpl implements  UsuarioService{
 
     private final UsuarioJdbcImpl usuarioJdbc;

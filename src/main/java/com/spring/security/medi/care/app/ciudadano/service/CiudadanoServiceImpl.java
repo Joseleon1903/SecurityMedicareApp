@@ -16,8 +16,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.spring.security.medi.care.app.ciudadano.repository.jpa.CiudadanoJpaRepo;
 import com.spring.security.medi.care.app.commons.domain.Ciudadano;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class CiudadanoServiceImpl implements CiudadanoService {
 
     private static final Logger logger = LoggerFactory.getLogger(CiudadanoServiceImpl.class);

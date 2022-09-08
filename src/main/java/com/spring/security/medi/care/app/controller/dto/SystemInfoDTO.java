@@ -55,8 +55,9 @@ public class SystemInfoDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "SistemInfoDTO{" +
+        return "SystemInfoDTO{" +
                 "pageName='" + pageName + '\'' +
+                ", descripcion='" + descripcion + '\'' +
                 ", sysDate=" + sysDate +
                 '}';
     }
