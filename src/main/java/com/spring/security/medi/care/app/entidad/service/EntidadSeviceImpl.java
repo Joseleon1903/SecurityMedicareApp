@@ -9,10 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Random;
 
 @Service
+@Transactional
 public class EntidadSeviceImpl implements EntidadService{
 
     private static final Logger logger = LoggerFactory.getLogger(EntidadRestController.class);
@@ -51,23 +54,23 @@ public class EntidadSeviceImpl implements EntidadService{
     }
 
     @Override
-    public Long asignarAutomaticamenteEntidad(Integer regimen){
+    public Entidad asignarAutomaticamenteEntidad(Integer regimen){
         logger.info("Entering in method asignarAutomaticamenteEntidad");
         logger.info("param regimen : "+regimen);
         List<Entidad> entidades = entidadJpaRepo.findEntidadAfiliacionAutomatica(regimen);
         int entidadSize = entidades.size();
         logger.info("entidadSize: "+entidadSize );
         if(entidadSize == 0){
-            return 1006L;
+            return entidadJpaRepo.findById(1006L).get();
         }
         Random rand =  new Random();
         int indiceR = rand.nextInt(entidadSize);
         logger.info("Indice random : "+Math.abs(indiceR) );
         Entidad ent = entidades.get(Math.abs(indiceR));
         if(ent == null){
-            return 1006L;
+            return entidadJpaRepo.findById(1006L).get();
         }
-        return ent.getEntidadId();
+        return ent;
     }
 
 

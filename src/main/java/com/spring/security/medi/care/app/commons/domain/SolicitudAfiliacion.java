@@ -3,9 +3,7 @@ package com.spring.security.medi.care.app.commons.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class SolicitudAfiliacion implements Serializable {
@@ -13,10 +11,19 @@ public class SolicitudAfiliacion implements Serializable {
     @Id
     @GeneratedValue
     private Long solicitudId;
-    private Integer servicioId;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "servicio_id", referencedColumnName = "servicioId")
+    private ServicioSistema servicioId;
     private Integer loteId;
-    private Long entidadId;
-    private Long seguroId;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "entidad_id", referencedColumnName = "entidadId")
+    private Entidad entidadId;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "seguro_id", referencedColumnName = "seguroId")
+    private Seguro seguroId;
     private Integer regimenId;
     private String tipoAfiliado;
     private Short tipoIdentificacionId;
@@ -35,7 +42,7 @@ public class SolicitudAfiliacion implements Serializable {
     private Date fechaUltimoCambio;
     private Long motivoId;
 
-    public SolicitudAfiliacion(Long solicitudId, Integer servicioId, Integer loteId, Long entidadId, Long seguroId,
+    public SolicitudAfiliacion(Long solicitudId, ServicioSistema servicioId, Integer loteId, Entidad entidadId, Seguro seguroId,
             Integer regimenId, String tipoAfiliado, Short tipoIdentificacionId, String cedula, String nss,
             String nombre, String primerApellido, Boolean automatica,
             Long institucionPensionadoId, Long claveInstitucionPensionado, String estado, Date fechaRecepcion,
@@ -74,11 +81,11 @@ public class SolicitudAfiliacion implements Serializable {
         this.solicitudId = solicitudId;
     }
 
-    public Integer getServicioId() {
+    public ServicioSistema getServicioId() {
         return servicioId;
     }
 
-    public void setServicioId(Integer servicioId) {
+    public void setServicioId(ServicioSistema servicioId) {
         this.servicioId = servicioId;
     }
 
@@ -90,19 +97,19 @@ public class SolicitudAfiliacion implements Serializable {
         this.loteId = loteId;
     }
 
-    public Long getEntidadId() {
+    public Entidad getEntidadId() {
         return entidadId;
     }
 
-    public void setEntidadId(Long entidadId) {
+    public void setEntidadId(Entidad entidadId) {
         this.entidadId = entidadId;
     }
 
-    public Long getSeguroId() {
+    public Seguro getSeguroId() {
         return seguroId;
     }
 
-    public void setSeguroId(Long seguroId) {
+    public void setSeguroId(Seguro seguroId) {
         this.seguroId = seguroId;
     }
 

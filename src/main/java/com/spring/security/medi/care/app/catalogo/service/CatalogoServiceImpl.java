@@ -17,8 +17,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class CatalogoServiceImpl implements CatalogoService {
 
     private static final Logger logger = LoggerFactory.getLogger(MotivoEstadoRestController.class);
@@ -37,10 +39,13 @@ public class CatalogoServiceImpl implements CatalogoService {
 
     private final InstitucionPensionadoJpaRepo institucionPensionadoJpaRepo;
 
+    private final ServicioSistemaJpaRepo servicioSistemaJpaRepo;
+
     @Autowired
     public CatalogoServiceImpl(MotivoEstadoJdbcImpl motivoEstadoJdbc, NacionalidadJdbcImpl nacionalidadJdbcImpl,
             MotivoEstadoJpaRepo motivoEstadoJpaRepo, NacionalidadJpaRepo nacionalidadJpaRepo,
-            MunicipioJpaRepo municipioJpaRepo, SeguroJpaRepo seguroJpaRepo, InstitucionPensionadoJpaRepo institucionPensionadoJpaRepo) {
+            MunicipioJpaRepo municipioJpaRepo, SeguroJpaRepo seguroJpaRepo, InstitucionPensionadoJpaRepo institucionPensionadoJpaRepo,
+                               ServicioSistemaJpaRepo servicioSistemaJpaRepo) {
         this.motivoEstadoJdbc = motivoEstadoJdbc;
         this.nacionalidadJdbcImpl = nacionalidadJdbcImpl;
         this.motivoEstadoJpaRepo = motivoEstadoJpaRepo;
@@ -48,11 +53,12 @@ public class CatalogoServiceImpl implements CatalogoService {
         this.municipioJpaRepo = municipioJpaRepo;
         this.seguroJpaRepo = seguroJpaRepo;
         this.institucionPensionadoJpaRepo = institucionPensionadoJpaRepo;
+        this.servicioSistemaJpaRepo = servicioSistemaJpaRepo;
     }
 
     @Override
-    public List<MotivoEstado> buscarCatalogomotivoEstadooPorParametros(Long motivoId, String descripcion,
-            int rowCount) {
+    public List<MotivoEstado> buscarCatalogoMotivoEstadooPorParametros(Long motivoId, String descripcion,
+                                                                       int rowCount) {
         return motivoEstadoJdbc.buscarCatalogoMotivoEstado(motivoId, descripcion, rowCount);
     }
 
@@ -182,6 +188,20 @@ public class CatalogoServiceImpl implements CatalogoService {
         return institucionPensionadoJpaRepo.findById(id).get();
     }
 
+    @Override
+    public List<ServicioSistema> buscarServiciosSistemas(){
+        return servicioSistemaJpaRepo.findAll();
+    }
+
+    @Override
+    public ServicioSistema buscarServicioSistemaPorId(Long id){
+        return servicioSistemaJpaRepo.findById(id).get();
+    }
+
+    @Override
+    public ServicioSistema registrarServicioSistema(ServicioSistema servicioSistema){
+        return servicioSistemaJpaRepo.save(servicioSistema);
+    }
 
 
 }

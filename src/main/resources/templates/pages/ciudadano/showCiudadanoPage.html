@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+      xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout_base_simple}">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Listado Ciudadanos</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+<!--
+    unique style for the page
+-->
+    <style>
+        #table-pagination-bottom{
+            margin-top: 0;
+        }
+
+        .current-page{
+            text-align: center; margin: 5px;
+        }
+
+    </style>
+</head>
+<body id="app" data-aos-easing="ease-in-out" data-aos-duration="1000" data-aos-delay="0">
+
+
+<section layout:fragment="content" style="padding: 10px;">
+
+    <!-- Button trigger modal -->
+    <button id="detail-modal-buttom" type="button" data-bs-toggle="modal" data-bs-target="#detailModal" style=" display:none;">
+    </button>
+
+    <button id="delete-modal-buttom" type="button" data-bs-toggle="modal" data-bs-target="#delete-ciudadano-modal" style=" display:none;">
+    </button>
+
+
+        <!-- filtros para ciudadano premios -->
+
+    <div class="breadcrumbs" style="margin-right: 20px; margin-left: 20px;">
+        <nav>
+            <div class="container">
+                <form method="post" action="#" th:action="@{/listado/filter}" th:object="${CiudadanoFilterBean}" >
+
+                    <!--row con los label-->
+                    <div class="row g-3" style="margin-bottom: 0.2em;">
+
+                        <div class="col-md-2 form-group">
+                            <label for="cedula" class="despacho-inline-form-label" th:text="#{page.label.ciudadano.form.column.cedula}">cedula</label>
+                        </div>
+
+                        <div class="col-md-2 form-group">
+                            <label for="nombre" class="despacho-inline-form-label" th:text="#{page.label.ciudadano.form.column.nombre}">nombre</label>
+                        </div>
+
+                        <div class="col-md-2 form-group">
+                            <label for="estado" class="despacho-inline-form-label" th:text="#{page.label.ciudadano.form.column.estado}">estado</label>
+                        </div>
+
+                    </div>
+
+                    <!--row con los input-->
+                    <div class="row g-3">
+
+                        <div class="col-md-2 form-group">
+                            <input id="cedula" type="text" th:field="*{tipoIdentificacion}" th:value="${CiudadanoFilterBean.tipoIdentificacion}" class="form-control" >
+                        </div>
+
+                        <div class="col-md-2 form-group">
+                            <input id="nombre" type="text" th:field="*{nombre}" th:value="${CiudadanoFilterBean.nombre}" class="form-control"  >
+                        </div>
+
+                        <div id="estado" class="col-md-2 form-group">
+                            <select th:field="*{estado}" th:value="${CiudadanoFilterBean.estado}" class="form-select" aria-label="Default select example">
+                                <option value="T" selected>Todos</option>
+                                <option value="AC" > Activo</option>
+                                <option value="IN" > Incactivo</option>
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary mb-3">Aplicar</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </nav>
+    </div>
+
+    <!-- ======= About Us Section ======= -->
+    <section id="about" class="about" style="padding: 1em 0;">
+        <div class="container aos-init aos-animate" data-aos="fade-up">
+
+            <div class="row gy-4">
+
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col" th:text="#{page.ciudadano.column.ciudadanoId}">CiudadanoId</th>
+                        <th scope="col" th:text="#{page.ciudadano.column.cedula}">Cedula</th>
+                        <th scope="col" th:text="#{page.ciudadano.column.nss}">Nss</th>
+                        <th scope="col" th:text="#{page.ciudadano.column.nombre}">Nombre</th>
+                        <th scope="col" th:text="#{page.ciudadano.column.primerApellido}">Primer Apellido</th>
+                        <th scope="col" th:text="#{page.ciudadano.column.segundoApellido}">Segundo Apellido</th>
+                        <th scope="col" th:text="#{page.ciudadano.column.genero}">Genero</th>
+                        <th scope="col" th:text="#{page.ciudadano.column.fechaNacimiento}">Fecha Nacimiento</th>
+                        <th scope="col" th:text="#{page.ciudadano.column.nacionalidad}">Edad</th>
+                        <th scope="col" th:text="#{page.ciudadano.column.municipio}">Edad</th>
+                        <th scope="col" th:text="#{page.ciudadano.column.estado}">Estado</th>
+                        <th scope="col" colspan="2" th:text="#{page.generar.column.accion}">Acción</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="ciudadano : ${CiudadanosList}" th:if="${not #lists.isEmpty(CiudadanosList)}">
+                        <th scope="row" th:text="${ciudadano.ciudadanoId}" >1</th>
+                        <td th:text="${ciudadano.cedula}" >0456325896</td>
+                        <td th:text="${ciudadano.nss}">8965235</td>
+                        <td th:text="${ciudadano.nombre}">Mario</td>
+                        <td th:text="${ciudadano.primerApellido}">1</td>
+                        <td th:text="${ciudadano.segundoApellido}">Cesar</td>
+                        <td th:text="${ciudadano.genero}">M</td>
+                        <td th:text="${#dates.format(ciudadano.fechaNacimiento,'dd/MM/yyyy')}">01/01/2000</td>
+                        <td th:text="${ciudadano.nacionalidad}">22</td>
+                        <td th:text="${ciudadano.municipio}">Azua</td>
+                        <td th:text="${ciudadano.estado}">Activo</td>
+                        <td>
+                            <button type="button" th:data-text="${ciudadano.ciudadanoId}" class="menu-button-solicitud btn btn-primary" >
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button th:data-text="${ciudadano.ciudadanoId}" type="button" class="menu-button-solicitud btn btn-danger">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+
+                </table>
+
+                <div id="table-pagination-bottom">
+
+                    <nav aria-label="Page navigation example" style="float:left;">
+                        <p class="page-item" th:text="'Registros restantes: '+${TablePaginationBean.remainCount}" style="text-align: center; margin: 5px;">Previous</p>
+                    </nav>
+
+                    <nav aria-label="Page navigation example" style="float:right;">
+                        <ul class="pagination">
+                            <li th:if="${TablePaginationBean.paginationIndex > 1}" class="page-item"><a class="page-link" th:href="@{/ciudadano(indexPage=-1)}">Previous</a></li>
+                            <li class="page-item current-page" th:text="'Page '+${TablePaginationBean.paginationIndex}" >Previous</li>
+                            <li class="page-item"><a class="page-link" th:href="@{/ciudadano(indexPage=1)}">Next</a></li>
+                        </ul>
+                    </nav>
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </section><!-- End About Us Section -->
+
+
+</section><!-- End #section -->
+
+<div layout:fragment="custom-panel">
+
+    <!-- Modal detail ciudadano -->
+    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailModalLabel" th:text="#{page.generar.label.detail.modal.title}">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form>
+
+                    <div class="modal-body">
+
+                        <div class="mb-3">
+                            <label for="ciudadanoIdDetail" class="form-label" th:text="#{page.ciudadano.column.ciudadanoId}">Ciudadano Id</label>
+                            <input id="ciudadanoIdDetail" type="text" class="form-control" disabled="true" value="1156">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="cedulaDetail" class="form-label" th:text="#{page.ciudadano.column.cedula}">Cedula</label>
+                            <input id="cedulaDetail"  type="text" class="form-control"  disabled="true" value="02100032850">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="nssDetail" class="form-label" th:text="#{page.ciudadano.column.nss}">NSS</label>
+                            <input id="nssDetail" type="text" class="form-control" disabled="true" value="50307232">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="nombreDetail" class="form-label" th:text="#{page.ciudadano.column.nombre}" >Nombre</label>
+                            <input id="nombreDetail"  type="text" class="form-control" value="FREIDMANT">
+                        </div>
+                        <div class="mb-3">
+                            <label for="primerApellidoDetail" class="form-label" th:text="#{page.ciudadano.column.primerApellido}">Primer Apellido</label>
+                            <input id="primerApellidoDetail"  type="text" class="form-control" value="DOINET">
+                        </div>
+                        <div class="mb-3">
+                            <label for="segundoApellidoDetail" class="form-label" th:text="#{page.ciudadano.column.segundoApellido}">Segundo Apellido</label>
+                            <input type="text" class="form-control" id="segundoApellidoDetail" value="GODEK">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="sexoDetail" class="form-label" th:text="#{page.ciudadano.column.genero}">Segundo Apellido</label>
+                            <input type="text" class="form-control" id="sexoDetail" disabled="true" value="Masculino">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="fechaNacimientoDetail" class="form-label" th:text="#{page.ciudadano.column.fechaNacimiento}">Segundo Apellido</label>
+                            <input type="text" class="form-control" id="fechaNacimientoDetail" disabled="true" value="05/Jan/1990">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" th:text="#{page.generar.label.accion.cerrar}">Close</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal delete ciudadano -->
+    <div class="modal fade" id="delete-ciudadano-modal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel" th:text="#{page.generar.label.delete.modal.title}">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="reloadPage()"></button>
+                </div>
+                <div id="delete-modal-body" class="modal-body" >
+                    <!-- <h4 >
+                         Woo-hoo, you're reading this text in a modal!
+                     </h4>-->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" th:text="#{page.generar.label.accion.cerrar}" onclick="location.reload();">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div layout:fragment="custom-script">
+
+    <script th:src="@{assets/js/ciudadano-script.js}"></script>
+
+</div>
+
+<!-- ciudadano JS File -->
+
+</body>
+</html>

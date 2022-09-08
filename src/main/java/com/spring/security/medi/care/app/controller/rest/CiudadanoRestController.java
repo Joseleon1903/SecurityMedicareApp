@@ -4,17 +4,17 @@ import com.spring.security.medi.care.app.ciudadano.service.CiudadanoService;
 import com.spring.security.medi.care.app.ciudadano.type.CiudadanoPaginated;
 import com.spring.security.medi.care.app.commons.DaoUtil;
 import com.spring.security.medi.care.app.commons.domain.Ciudadano;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
-@RequestMapping(value= "/api/ciudadano/" , produces=MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value= "/api/ciudadano")
 public class CiudadanoRestController {
 
     private static final Logger logger = LoggerFactory.getLogger(CiudadanoRestController.class);
@@ -52,17 +52,24 @@ public class CiudadanoRestController {
         return new ResponseEntity(ciudadanoPaginated, HttpStatus.OK);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     @ResponseBody
     public ResponseEntity<List<Ciudadano>> findAll(){
         List<Ciudadano> ciudadanos = ciudadanoService.buscarTodosCiudadanos();
-        return new ResponseEntity<List<Ciudadano>>(ciudadanos, HttpStatus.OK);
+        return new ResponseEntity(ciudadanos, HttpStatus.OK);
+    }
+
+    @PostMapping
+    @ResponseBody
+    public ResponseEntity<Void> registerCiudadano(@RequestBody Ciudadano ciudadano){
+        Ciudadano ciudOut = ciudadanoService.guardarCiudadano(ciudadano);
+        return new ResponseEntity(ciudOut, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{ciudadanoId}")
     @ResponseBody
     public ResponseEntity<Void> deleteById(@PathVariable("ciudadanoId") Long id){
         ciudadanoService.eliminarCiudadanoId(id);
-        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }

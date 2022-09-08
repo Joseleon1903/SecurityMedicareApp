@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+      xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+<div th:fragment="top_page_section(title, description)" class="breadcrumbs">
+<!-- ======= Breadcrumbs ======= -->
+    <div class="page-header d-flex align-items-center" style="background-image: url('../assets/img/page-header.jpg');">
+        <div class="container position-relative">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-6 text-center">
+                    <h2 th:text="${title}">Pagina Generica</h2>
+                    <p th:text="${description}">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav>
+        <div class="container">
+            <ol>
+                <li><a th:href="@{/home}" >Home</a></li>
+                <li th:text="${title}">Pagina Generica</li>
+            </ol>
+        </div>
+    </nav>
+</div>
+<!-- End Breadcrumbs -->
+
+</body>
+</html>

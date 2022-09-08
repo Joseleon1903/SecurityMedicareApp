@@ -16,5 +16,6 @@ public interface CiudadanoService {
 
     Ciudadano buscarCiudadanoPorIdentifiacion(String cedula, String nss);
 
+    Ciudadano guardarCiudadano(Ciudadano ciudadano);
 
 }

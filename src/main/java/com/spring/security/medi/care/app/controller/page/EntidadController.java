@@ -3,8 +3,8 @@ package com.spring.security.medi.care.app.controller.page;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
 import com.spring.security.medi.care.app.controller.dto.EntidadFilterDTO;
 import com.spring.security.medi.care.app.controller.dto.SystemInfoDTO;
-import com.spring.security.medi.care.app.entidad.types.EntidadType;
 import com.spring.security.medi.care.app.entidad.service.EntidadService;
+import com.spring.security.medi.care.app.entidad.types.EntidadType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import java.util.Date;
 import java.util.List;
 

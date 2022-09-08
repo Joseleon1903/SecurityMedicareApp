@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 @RestController
-@RequestMapping(value= "/api/entidad/" , produces=MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value= "/api/entidad" , produces=MediaType.APPLICATION_JSON_VALUE)
 public class EntidadRestController {
 
     private static final Logger logger = LoggerFactory.getLogger(EntidadRestController.class);
@@ -32,7 +32,7 @@ public class EntidadRestController {
         return new ResponseEntity(entidad, HttpStatus.OK);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     @ResponseBody
     public ResponseEntity<List<Entidad>> findAll(){
         List<Entidad> entidadList = entidadService.buscarEntidades();
@@ -41,8 +41,8 @@ public class EntidadRestController {
 
     @GetMapping("/automatica")
     @ResponseBody
-    public ResponseEntity<Long> asignarEntidadAutomatica(@RequestParam("regimenId") Integer regimenId){
-        Long entidad = entidadService.asignarAutomaticamenteEntidad(regimenId);
+    public ResponseEntity<Entidad> asignarEntidadAutomatica(@RequestParam("regimenId") Integer regimenId){
+        Entidad entidad = entidadService.asignarAutomaticamenteEntidad(regimenId);
         return new ResponseEntity(entidad, HttpStatus.OK);
     }
 }

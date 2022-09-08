@@ -9,4 +9,5 @@ public interface ContactoService {
 
     List<Contacto> buscarContactosSistema();
 
+    Contacto guardarContacto(Contacto contacto);
 }

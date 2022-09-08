@@ -10,9 +10,8 @@ public class ThymeleafConfig{
     @Bean
     public ResourceBundleMessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename("Messages");
+        messageSource.setBasename("i18n/messages");
         return messageSource;
     }
-
 
 }

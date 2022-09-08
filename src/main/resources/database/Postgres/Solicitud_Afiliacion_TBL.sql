@@ -38,3 +38,4 @@ ALTER TABLE public.solicitud_afiliacion ADD CONSTRAINT sol_afiliacion_instt_pen_
 ALTER TABLE public.solicitud_afiliacion ADD CONSTRAINT sol_afiliacion_municipio_fk FOREIGN KEY (municipio_id) REFERENCES public.municipio(municipio_id);
 ALTER TABLE public.solicitud_afiliacion ADD CONSTRAINT solicitud_afiliacion_seguro_fk FOREIGN KEY (seguro_id) REFERENCES public.seguro(seguro_id);
 ALTER TABLE public.solicitud_afiliacion ADD CONSTRAINT solicitud_afiliacion_motivo_fk FOREIGN KEY (motivo_id) REFERENCES public.motivo_estado(motivo_id);
+ALTER TABLE public.solicitud_afiliacion ADD CONSTRAINT solicitud_afiliacion_servicio_sistema_fk FOREIGN KEY (servicio_id) REFERENCES public.servicio_sistema(servicio_id);

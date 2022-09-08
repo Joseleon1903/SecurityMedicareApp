@@ -22,7 +22,7 @@ public interface CatalogoService {
 
     List<Municipio> buscarMunicipiosTodos();
 
-    List<MotivoEstado> buscarCatalogomotivoEstadooPorParametros(Long motivoId, String descripcion, int rowCount);
+    List<MotivoEstado> buscarCatalogoMotivoEstadooPorParametros(Long motivoId, String descripcion, int rowCount);
 
     List<Nacionalidad> buscarCatalogoNacionalidad(String paisId, String nombrePais, int rowCount);
 
@@ -44,4 +44,9 @@ public interface CatalogoService {
 
     InstitucionPensionado buscarPorInstitucionPensionadoId(Long id);
 
+    List<ServicioSistema> buscarServiciosSistemas();
+
+    ServicioSistema buscarServicioSistemaPorId(Long id);
+
+    ServicioSistema registrarServicioSistema(ServicioSistema servicioSistema);
 }

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+      xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <!--=============== INIT Header Section ===============-->
+
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Security Medicare App</title>
+    <!--=============== init Link Section ===============-->
+    <!-- browser icon -->
+    <link th:href="@{assets/img/logo/SecurityMedicCareApp_Logo.png}" rel="icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link th:href="@{assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+    <link th:href="@{assets/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet">
+    <link th:href="@{assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
+    <link th:href="@{assets/vendor/aos/aos.css}" rel="stylesheet">
+    <link th:href="@{css/security-medicare-app.css}" rel="stylesheet">
+
+    <!-- jQuery Core version 3.6.0 File -->
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+
+    <!-- Template Main CSS File -->
+    <link th:href="@{assets/css/main.css}" rel="stylesheet">
+    <!--=============== END Header Section ===============-->
+
+</head>
+<body id="app" data-aos-easing="ease-in-out" data-aos-duration="1000" data-aos-delay="0">
+
+    <!--=============== init Header Section ===============-->
+    <header th:replace="fragments/header_page :: header_section"></header>
+    <!--=============== End Header Section ===============-->
+
+    <!--=============== init Main Section ===============-->
+
+    <main id="main">
+
+        <div layout:fragment="top_section">
+            <!--=============== init Header Section ===============-->
+            <div th:replace="fragments/top_page_simple :: top_page_section(title=${SystemInfoBean.pageName}, description=${SystemInfoBean.descripcion})"></div>
+            <!--=============== End Header Section ===============-->
+        </div>
+
+        <section layout:fragment="content">
+
+            <p>Page content goes here</p>
+
+        </section>
+
+
+    </main><!-- End #main -->
+
+
+    <footer>
+        <!-- init Footer Section -->
+        <div th:insert="fragments/footer_page :: footer_section"></div>
+        <!-- End Footer Section -->
+    </footer>
+
+    <div layout:fragment="custom-panel">
+
+        <p>Page panel goes here</p>
+
+    </div>
+
+<!--=============== init Script Section ===============-->
+<!-- Vendor JS Files -->
+<script th:src="@{assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{assets/vendor/glightbox/js/glightbox.min.js}"></script>
+<script th:src="@{assets/vendor/aos/aos.js}"></script>
+<!--=============== init Script Section ===============-->
+<div layout:fragment="custom-script">
+
+    <p>Page custom script goes here</p>
+
+</div>
+
+</body>
+</html>

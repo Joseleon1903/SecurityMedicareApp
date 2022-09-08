@@ -2,6 +2,7 @@ package com.spring.security.medi.care.app.commons.domain;
 
 import lombok.Data;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
@@ -11,6 +12,7 @@ import java.util.Date;
 public class Ciudadano implements Serializable {
 
     @Id
+    @GeneratedValue
     private Long ciudadanoId;
     private String cedula;
     private String nss;
@@ -20,15 +22,13 @@ public class Ciudadano implements Serializable {
 
     private Long municipioId;
     private Long nacionalidadId;
-    private Boolean estranjero;
     private String genero;
     private Date fechaNacimiento;
     private String estado;
 
-    public Ciudadano(){
-    }
+    public Ciudadano(){}
 
-    public Ciudadano(Long ciudadanoId, String cedula, String nss, String nombre, String primerApellido, String segundoApellido, Long municipioId, Long nacionalidadId, Boolean estranjero, String genero, Date fechaNacimiento, String estado) {
+    public Ciudadano(Long ciudadanoId, String cedula, String nss, String nombre, String primerApellido, String segundoApellido, Long municipioId, Long nacionalidadId, String genero, Date fechaNacimiento, String estado) {
         this.ciudadanoId = ciudadanoId;
         this.cedula = cedula;
         this.nss = nss;
@@ -37,11 +37,21 @@ public class Ciudadano implements Serializable {
         this.segundoApellido = segundoApellido;
         this.municipioId = municipioId;
         this.nacionalidadId = nacionalidadId;
-        this.estranjero = estranjero;
         this.genero = genero;
         this.fechaNacimiento = fechaNacimiento;
         this.estado = estado;
     }
 
-
+    public Ciudadano(String cedula, String nss, String nombre, String primerApellido, String segundoApellido, Long municipioId, Long nacionalidadId,  String genero, Date fechaNacimiento, String estado) {
+        this.cedula = cedula;
+        this.nss = nss;
+        this.nombre = nombre;
+        this.primerApellido = primerApellido;
+        this.segundoApellido = segundoApellido;
+        this.municipioId = municipioId;
+        this.nacionalidadId = nacionalidadId;
+        this.genero = genero;
+        this.fechaNacimiento = fechaNacimiento;
+        this.estado = estado;
+    }
 }

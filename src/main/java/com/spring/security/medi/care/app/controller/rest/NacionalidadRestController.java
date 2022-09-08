@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Locale;
 
 @RestController
-@RequestMapping(value="/api/nacionalidad/", produces=MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value="/api/nacionalidad")
 public class NacionalidadRestController {
 
     private static final Logger logger = LoggerFactory.getLogger(NacionalidadRestController.class);
@@ -33,11 +33,11 @@ public class NacionalidadRestController {
         return new ResponseEntity<Nacionalidad>(nacionalidad, HttpStatus.OK);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     @ResponseBody
     public ResponseEntity<List<Nacionalidad>> findAll(){
         List<Nacionalidad> nacionalidadesList = catalogoService.buscarNacionalidadTodos();
-        return new ResponseEntity<List<Nacionalidad>>(nacionalidadesList, HttpStatus.OK);
+        return new ResponseEntity(nacionalidadesList, HttpStatus.OK);
     }
 
     @GetMapping("/find")
