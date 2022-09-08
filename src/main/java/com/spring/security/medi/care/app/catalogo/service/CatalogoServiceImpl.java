@@ -57,8 +57,8 @@ public class CatalogoServiceImpl implements CatalogoService {
     }
 
     @Override
-    public List<MotivoEstado> buscarCatalogomotivoEstadooPorParametros(Long motivoId, String descripcion,
-            int rowCount) {
+    public List<MotivoEstado> buscarCatalogoMotivoEstadooPorParametros(Long motivoId, String descripcion,
+                                                                       int rowCount) {
         return motivoEstadoJdbc.buscarCatalogoMotivoEstado(motivoId, descripcion, rowCount);
     }
 

@@ -1,6 +1,5 @@
 package com.spring.security.medi.care;
 
-
 import com.spring.security.medi.care.app.SecurityMedicareAppApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;

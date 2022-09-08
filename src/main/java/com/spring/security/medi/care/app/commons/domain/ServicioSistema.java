@@ -2,7 +2,6 @@ package com.spring.security.medi.care.app.commons.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-
 import javax.persistence.GeneratedValue;
 import lombok.Data;
 import javax.persistence.Entity;
