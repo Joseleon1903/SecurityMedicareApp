@@ -153,6 +153,22 @@
                         </tbody>
                     </table>
 
+                    <div id="table-pagination-bottom" style="margin-top: 0px;">
+
+                        <nav aria-label="Page navigation example" style="float:left;">
+                            <p class="page-item" th:text="'Registros restantes: '+${TablePaginationBean.remainCount}" style="text-align: center; margin: 5px;">Registros restantes:</p>
+                        </nav>
+
+                        <nav aria-label="Page navigation example" style="float:right;">
+                            <ul class="pagination">
+                                <li th:if="${TablePaginationBean.paginationIndex > 0}" class="page-item"><a class="page-link" th:href="@{/despacho(indexPage=-1)}">Previous</a></li>
+                                <li class="page-item current-page" th:text="'Page '+${TablePaginationBean.paginationIndex}" >Previous</li>
+                                <li class="page-item"><a class="page-link" th:href="@{/despacho(indexPage=1)}">Next</a></li>
+                            </ul>
+                        </nav>
+
+                    </div>
+
                 </div>
 
             </div>

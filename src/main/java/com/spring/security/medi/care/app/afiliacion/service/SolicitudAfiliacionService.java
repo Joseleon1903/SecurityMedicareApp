@@ -1,5 +1,6 @@
 package com.spring.security.medi.care.app.afiliacion.service;
 
+import com.spring.security.medi.care.app.afiliacion.types.PaginatedSolAfiliacionDto;
 import com.spring.security.medi.care.app.commons.domain.SolicitudAfiliacion;
 import com.spring.security.medi.care.app.controller.dto.DetalleSolicitudAfiliacionDto;
 
@@ -13,8 +14,8 @@ public interface SolicitudAfiliacionService {
 
     SolicitudAfiliacion buscarSolicitudAfiliacionPorId(Long solicitudId);
 
-    List<SolicitudAfiliacion> buscarSolicitudesAfiliacionPorParametros(String cedula, Integer servicioId, Long seguroId,
-            Integer regimenId, String estado, int page, int size);
+    PaginatedSolAfiliacionDto buscarSolicitudesAfiliacionPorParametros(String cedula, Integer servicioId, Long seguroId,
+                                                                       Integer regimenId, String estado, int page, int size);
 
     void procesarSolicitudAfiliacion(Long solicitudId) throws Exception;
 
