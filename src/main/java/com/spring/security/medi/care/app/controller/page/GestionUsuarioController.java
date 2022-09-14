@@ -1,6 +1,5 @@
 package com.spring.security.medi.care.app.controller.page;
 
-import com.spring.security.medi.care.app.commons.AplicationConstantUtil;
 import com.spring.security.medi.care.app.commons.DaoUtil;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
 import com.spring.security.medi.care.app.controller.dto.SystemInfoDTO;
@@ -47,7 +46,6 @@ public class GestionUsuarioController extends ViewBaseContext {
             this.tablePagination.setPaginationIndex(result);
         }
         logger.info("terminado validar  paginacion");
-
 
         logger.info("iniciando busqueda ususario");
         paginatedUsuario =usuarioService.buscarUsuariosPorParametros(null, null, null, tablePagination.getPaginationIndex(), DaoUtil.DEFAULT_ROW_COUNT);

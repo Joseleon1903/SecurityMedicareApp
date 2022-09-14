@@ -7,7 +7,6 @@ import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.commons.DaoUtil;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
 import com.spring.security.medi.care.app.commons.domain.Seguro;
-import com.spring.security.medi.care.app.commons.domain.SolicitudAfiliacion;
 import com.spring.security.medi.care.app.controller.dto.SolicituFromFilterDto;
 import com.spring.security.medi.care.app.controller.dto.SolicitudAfiliacionOutputDto;
 import com.spring.security.medi.care.app.controller.dto.SystemInfoDTO;
