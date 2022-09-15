@@ -1,9 +1,7 @@
 package com.spring.security.medi.care.app.commons.domain;
 
 import lombok.Data;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Data
@@ -11,6 +9,7 @@ import java.io.Serializable;
 public class InstitucionPensionado implements Serializable {
 
     @Id
+    @GeneratedValue
     private Long institucionPensionadoId;
     private String descripcion;
     private String estado;
