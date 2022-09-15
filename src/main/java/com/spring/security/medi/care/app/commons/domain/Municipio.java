@@ -3,6 +3,7 @@ package com.spring.security.medi.care.app.commons.domain;
 import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
 import java.io.Serializable;
 
 @Data
@@ -10,6 +11,7 @@ import java.io.Serializable;
 public class Municipio implements Serializable {
 
     @Id
+    @GeneratedValue
     private Long municipioId;
     private String descripcion;
     private String codigoMunicipio;

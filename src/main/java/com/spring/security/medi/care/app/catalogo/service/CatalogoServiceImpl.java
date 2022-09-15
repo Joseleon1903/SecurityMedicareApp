@@ -182,6 +182,7 @@ public class CatalogoServiceImpl implements CatalogoService {
         logger.info("Entering in buscarInstitucionPensionadoTodas");
         return institucionPensionadoJpaRepo.findAllInstitucionPensionados();
     }
+
     @Override
     public InstitucionPensionado buscarPorInstitucionPensionadoId(Long id){
         logger.info("Entering in buscarPorInstitucionPensionadoId");
