@@ -11,30 +11,55 @@
 
     <meta content="" name="description">
     <meta content="" name="keywords">
+
+    <link th:href="@{../css/gestion-usuario.css}" rel="stylesheet">
+
 </head>
 <body>
 
 <section layout:fragment="content">
-
-
 
 <!--
     first row datos usuario actualmente logueado...
 -->
     <div class="row">
 
-        <div class="card mb-3" style="max-width: 640px; background-color: white; margin: 2em;">
-            <div class="row gy-4">
-                <div class="col-md-4" style="border-color: white; border: solid 2px;">
-                    <img th:src="@{../assets/img/icon/anonymous-vector-icon-profile.jpg}" class="img-fluid rounded-start" alt="Error loading">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">Profile Name </h5>
-                        <p class="card-text">Role name</p>
-                        <p class="card-text">Tipo usuario</p>
-                        <p class="card-text">Correo Primario</p>
-                        <p class="card-text"><small>las time login in Hours/minutes 85</small></p>
+        <div class="profile-info">
+            <div class="row">
+
+                <div class="row">
+                    <div class="col-6">
+
+                        <img th:src="@{../assets/img/icon/anonymous-vector-icon-profile.jpg}" class="profile-pic" alt="Error loading">
+
+                    </div>
+                    <div class="col-6">
+
+                        <form>
+
+                            <div class="mb-3">
+                                <label for="profileNameInput" class="form-label" th:text="#{gestion.usuario.label.name}">Email address</label>
+                                <input type="text" class="form-control" id="profileNameInput" th:value="${UsuarioBean.name}" disabled>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="profileTipoInput" class="form-label" th:text="#{gestion.usuario.label.tipoUsuario}">Email address</label>
+                                <input type="text" class="form-control" id="profileTipoInput" th:value="${UsuarioBean.tipoUsuario}" disabled>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="profileCorreoInput" class="form-label" th:text="#{gestion.usuario.label.primaryEmail}">Email address</label>
+                                <input type="email" class="form-control" id="profileCorreoInput" th:value="${UsuarioBean.correoprimario}" disabled>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="profileEstadoInput" class="form-label" th:text="#{gestion.usuario.label.estado}">Email address</label>
+                                <input type="text" class="form-control" id="profileEstadoInput" th:value="${UsuarioBean.estado}" disabled>
+                            </div>
+
+                            <p class="card-text"><small th:text="|#{gestion.usuario.label.lastTimeLogin} ${UsuarioBean.timeLogin} minutos|">las time login in Hours/minutes 85</small></p>
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -44,20 +69,20 @@
         <div class="mb-3" style="background-color: white; margin: 2em; width: 50%;">
             <div class="row gy-4" >
 
-                <div class="card" style="width: 15rem;">
+                <div class="card" style="width: 15rem; margin: 0.5em;">
                     <img th:src="@{../assets/img/app/img_usuarios_totales.png}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h4 class="card-text">Usuarios Totales <span class="purecounter">10</span></h4>
                     </div>
                 </div><!-- End Stats Item -->
 
-                <div class="card" style="width: 15rem;">
+                <div class="card" style="width: 15rem; margin: 0.5em;">
                     <img th:src="@{../assets/img/app/img_usuarios_activos.png}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h4 class="card-text">Usuarios Activos <span class="purecounter">10</span></h4>                    </div>
                 </div><!-- End Stats Item -->
 
-                <div class="card" style="width: 15rem;">
+                <div class="card" style="width: 15rem; margin: 0.5em;">
                     <img th:src="@{../assets/img/app/img_usuarios_inactivos.jpg}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h4 class="card-text">Usuarios Inactivos <span class="purecounter">10</span></h4>

@@ -1,0 +1,17 @@
+.profile-pic{
+    height:  -webkit-fill-available;
+    width: -webkit-fill-available;
+    padding: 0.25rem;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    max-width: 100%;
+}
+
+.profile-info{
+    margin-left: 2em;
+    margin-bottom: 1rem!important;
+    padding: 1em 0;
+    max-width: 640px;
+    background-color: white;
+}

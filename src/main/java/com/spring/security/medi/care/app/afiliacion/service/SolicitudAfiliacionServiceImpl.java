@@ -1,5 +1,6 @@
 package com.spring.security.medi.care.app.afiliacion.service;
 
+import com.spring.security.medi.care.app.afiliacion.repository.jpa.SolicitudAfiliacionJpaRepo;
 import com.spring.security.medi.care.app.afiliacion.types.PaginatedSolAfiliacionDto;
 import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.ciudadano.service.CiudadanoService;
@@ -7,22 +8,20 @@ import com.spring.security.medi.care.app.commons.AfiliacionDtoUtil;
 import com.spring.security.medi.care.app.commons.AplicationConstantUtil;
 import com.spring.security.medi.care.app.commons.DaoUtil;
 import com.spring.security.medi.care.app.commons.PaginationOutput;
-import com.spring.security.medi.care.app.commons.domain.*;
-import com.spring.security.medi.care.app.afiliacion.repository.jpa.SolicitudAfiliacionJpaRepo;
+import com.spring.security.medi.care.app.commons.domain.Ciudadano;
+import com.spring.security.medi.care.app.commons.domain.InstitucionPensionado;
+import com.spring.security.medi.care.app.commons.domain.MotivoEstado;
+import com.spring.security.medi.care.app.commons.domain.SolicitudAfiliacion;
 import com.spring.security.medi.care.app.controller.dto.DetalleSolicitudAfiliacionDto;
-import com.spring.security.medi.care.app.controller.dto.UsuarioDto;
 import com.spring.security.medi.care.app.entidad.service.EntidadService;
-import com.spring.security.medi.care.app.usuario.types.PaginatedUsuario;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Service;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;

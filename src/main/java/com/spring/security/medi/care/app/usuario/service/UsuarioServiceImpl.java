@@ -58,7 +58,7 @@ public class UsuarioServiceImpl implements  UsuarioService{
 
     @Override
     public Usuario buscarUsuariosSistemaporCodigoJpa(String codigo){
-        return usuarioJpaRepo.findByCodigo(codigo.toUpperCase());
+        return usuarioJpaRepo.findByCodigoIgnoreCase(codigo.toUpperCase());
     }
 
     @Override
