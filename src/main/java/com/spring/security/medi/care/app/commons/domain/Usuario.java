@@ -3,7 +3,7 @@ package com.spring.security.medi.care.app.commons.domain;
 import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @Entity
@@ -23,13 +23,13 @@ public class Usuario implements Serializable {
     private TipoUsuario tipoUsuarioId;
 
     private String llaveEncriptacion;
-    private LocalDate fechaUltimoCambio;
+    private Date fechaUltimoCambio;
     private String estado;
 
     public Usuario() {
     }
 
-    public Usuario(Long usuarioId, String codigo, Contacto contactoId, String llaveEncriptacion, LocalDate fechaUltimoCambio, String estado) {
+    public Usuario(Long usuarioId, String codigo, Contacto contactoId, String llaveEncriptacion, Date fechaUltimoCambio, String estado) {
         this.usuarioId = usuarioId;
         this.codigo = codigo;
         this.contactoId = contactoId;

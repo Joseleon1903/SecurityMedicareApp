@@ -44,7 +44,7 @@ public class UsuarioController {
         logger.info("systemInfoDTO: "+ systemInfoDTO);
         model.addAttribute("UsuarioFormBean", new UsuarioFormDTO());
         model.addAttribute("SystemInfoBean", systemInfoDTO);
-        usuarioUnipagoList =  usuarioService.buscarusuariosSistemaporCodigo("");
+        usuarioUnipagoList =  usuarioService.buscarUsuariosSistemaporCodigo("");
         model.addAttribute("UsuarioUnipagoList", usuarioUnipagoList);
         return "pages/usuario/UsuarioPage";
     }
@@ -57,7 +57,7 @@ public class UsuarioController {
         systemInfoDTO = new SystemInfoDTO("Unipago Usuario Sistema ",new Date());
         logger.info("systemInfoDTO: "+ systemInfoDTO);
         logger.info("Form values : "+usuarioFormDTO);
-        usuarioUnipagoList = usuarioService.buscarusuariosSistemaporCodigo(usuarioFormDTO.getCodigo());
+        usuarioUnipagoList = usuarioService.buscarUsuariosSistemaporCodigo(usuarioFormDTO.getCodigo());
         logger.info("usuario list size :  "+usuarioUnipagoList.size());
         model.addAttribute("UsuarioUnipagoList", usuarioUnipagoList);
         model.addAttribute("UsuarioFormBean", new UsuarioFormDTO());

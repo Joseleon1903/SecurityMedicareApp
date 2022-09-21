@@ -3,6 +3,7 @@ package com.spring.security.medi.care.app.controller.rest;
 import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.commons.domain.InstitucionPensionado;
 import com.spring.security.medi.care.app.commons.domain.MotivoEstado;
+import com.spring.security.medi.care.app.commons.domain.Seguro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -34,10 +35,16 @@ public class InstitucionPensionadoRestController {
 
     @GetMapping
     @ResponseBody
-    public ResponseEntity<List<MotivoEstado>> findAll(){
+    public ResponseEntity<List<InstitucionPensionado>> findAll(){
         List<InstitucionPensionado> institucionPensionadoList = catalogoService.buscarInstitucionPensionadoTodas();
         return new ResponseEntity(institucionPensionadoList, HttpStatus.OK);
     }
 
+    @PostMapping
+    @ResponseBody
+    public ResponseEntity<InstitucionPensionado> saveOrUpdate(@RequestBody InstitucionPensionado institucionPensionado) {
+        InstitucionPensionado intitucionOutput = catalogoService.guardarInstitucionPensionado(institucionPensionado);
+        return new ResponseEntity(intitucionOutput, HttpStatus.OK);
+    }
 
 }

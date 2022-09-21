@@ -7,7 +7,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Transactional(readOnly=true)
 public interface SolicitudAfiliacionJpaRepo extends JpaRepository<SolicitudAfiliacion, Long> {
 

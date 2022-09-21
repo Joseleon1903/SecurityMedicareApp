@@ -16,4 +16,12 @@ public class DaoUtil {
         return "INACTIVO";
     }
 
+    public static Long getRegistrosRestantes(long total, int page, int size){
+        long registros = total - (page*size);
+        if(registros <= 0 ){
+            return 0L;
+        }
+        return registros;
+    }
+
 }

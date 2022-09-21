@@ -28,14 +28,21 @@ public class SeguroRestController {
     @ResponseBody
     public ResponseEntity<Seguro> findById(@PathVariable("id") Long id) {
         Seguro seguroOut = catalogoService.buscarSegurosSistemaPorId(id);
-        return new ResponseEntity<Seguro>(seguroOut, HttpStatus.OK);
+        return new ResponseEntity(seguroOut, HttpStatus.OK);
     }
 
     @GetMapping
     @ResponseBody
     public ResponseEntity<List<Seguro>> findAll() {
         List<Seguro> segurosList = catalogoService.buscarSegurosSistema();
-        return new ResponseEntity<List<Seguro>>(segurosList, HttpStatus.OK);
+        return new ResponseEntity(segurosList, HttpStatus.OK);
+    }
+
+    @PostMapping
+    @ResponseBody
+    public ResponseEntity<Seguro> saveOrUpdate(@RequestBody Seguro seguro) {
+        Seguro seguroOutput = catalogoService.guardarSeguroSistema(seguro);
+        return new ResponseEntity(seguroOutput, HttpStatus.OK);
     }
 
 }
