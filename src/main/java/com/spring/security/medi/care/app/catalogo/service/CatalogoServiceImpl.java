@@ -182,6 +182,7 @@ public class CatalogoServiceImpl implements CatalogoService {
         logger.info("Entering in buscarInstitucionPensionadoTodas");
         return institucionPensionadoJpaRepo.findAllInstitucionPensionados();
     }
+
     @Override
     public InstitucionPensionado buscarPorInstitucionPensionadoId(Long id){
         logger.info("Entering in buscarPorInstitucionPensionadoId");
@@ -203,5 +204,14 @@ public class CatalogoServiceImpl implements CatalogoService {
         return servicioSistemaJpaRepo.save(servicioSistema);
     }
 
+    @Override
+    public Seguro guardarSeguroSistema(Seguro seguro){
+        return seguroJpaRepo.save(seguro);
+    }
+
+    @Override
+    public InstitucionPensionado guardarInstitucionPensionado(InstitucionPensionado intitucionPensionado){
+        return institucionPensionadoJpaRepo.save(intitucionPensionado);
+    }
 
 }

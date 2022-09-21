@@ -1,6 +1,10 @@
 package com.spring.security.medi.care.servicetest;
 
 import com.spring.security.medi.care.BaseTest;
+import com.spring.security.medi.care.app.catalogo.dto.MotivoEstadoPaginatedDto;
+import com.spring.security.medi.care.app.catalogo.dto.MunicipioPaginatedDto;
+import com.spring.security.medi.care.app.catalogo.dto.NacionalidadPaginatedDto;
+import com.spring.security.medi.care.app.catalogo.repository.jpa.MunicipioJpaRepo;
 import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.commons.AplicationConstantUtil;
 import com.spring.security.medi.care.app.commons.domain.MotivoEstado;
@@ -26,8 +30,13 @@ import static org.junit.Assert.assertTrue;
         locations = "classpath:application-data-jpa-test.properties")
 public class CatalogoServiceTest extends BaseTest {
 
+    public static long EXISTE_SOLICITUD_AC_PARA_CIUDADANO_TEST = 801;
+
     @Autowired
     private CatalogoService catalogoService;
+
+    @Autowired
+    private MunicipioJpaRepo municipioJpaRepo;
 
     public CatalogoServiceTest() {
     }
@@ -108,6 +117,11 @@ public class CatalogoServiceTest extends BaseTest {
         createDefaultDBMunicipio();
         Municipio municipio = catalogoService.buscarMunicipioPorId(10L);
         assertNotNull(municipio);
+
+        Municipio municipioUpdate = municipioJpaRepo.findById(10L).get();
+        municipioUpdate.setEstado("IN");
+        Municipio municipioUpdated = catalogoService.actualizarMunicipio(municipioUpdate);
+        assertTrue("IN".equals(municipioUpdated.getEstado()));
     }
 
     @Test
@@ -118,17 +132,18 @@ public class CatalogoServiceTest extends BaseTest {
         assertNotNull(municipioList);
     }
 
-  /*  @Test
-    @DisplayName(">>>> DisplayName : testBuscarCatalogomotivoEstadooPorParametros  <<<<<")
-    public void testBuscarCatalogomotivoEstadooPorParametros() {
-        Long motivoId = AplicationConstantUtil.EXISTE_SOLICITUD_AC_PARA_CIUDADANO;
-        String descripcion = "El ciudadnao ya tiene una solicitud acpetada para otra entidad";
-        List<MotivoEstado> motivosList = catalogoService.buscarCatalogomotivoEstadooPorParametros(motivoId, descripcion, 500);
-        assertNotNull(motivosList);
-    }*/
-
     @Test
     @Order(7)
+    @DisplayName(">>>> DisplayName : buscarMotivosPorParametros  <<<<<")
+    public void testBuscarCatalogomotivoEstadooPorParametros() {
+        Long motivoId = EXISTE_SOLICITUD_AC_PARA_CIUDADANO_TEST;
+        String descripcion = "El ciudadnao ya tiene una solicitud acpetada para otra entidad";
+        MotivoEstadoPaginatedDto motivosList = catalogoService.buscarMotivosPorParametros(motivoId, descripcion, 0, 500);
+        assertNotNull(motivosList.getMotivos());
+    }
+
+    @Test
+    @Order(8)
     @DisplayName(">>>> DisplayName : testActualizarMotivoEstado  <<<<<")
     public void testActualizarMotivoEstado() {
         MotivoEstado motivo = new MotivoEstado(AplicationConstantUtil.EXISTE_SOLICITUD_AC_PARA_CIUDADANO, "Motivo Actualizado", "IN");
@@ -137,16 +152,25 @@ public class CatalogoServiceTest extends BaseTest {
     }
 
     @Test
-    @Order(8)
-    @DisplayName(">>>> DisplayName : testActualizarMunicipio  <<<<<")
-    public void testActualizarMunicipio() {
-        Municipio municipio = new Municipio(1L, "texto test", "string", 1, "IN");
-        Municipio municipioUpdated = catalogoService.actualizarMunicipio(municipio);
-        assertTrue("IN".equals(municipioUpdated.getEstado()));
+    @Order(9)
+    @DisplayName(">>>> DisplayName : buscarMunicipioPorParametros  <<<<<")
+    public void testBuscarMunicipioPorParametros() {
+        MunicipioPaginatedDto municipioList = catalogoService.buscarMunicipioPorParametros("001", null, 0, 500);
+        assertNotNull(municipioList.getMunicipios());
     }
 
     @Test
-    @DisplayName(">>>> DisplayName : testBuscarServicioSistemaPorId  <<<<<")
+    @Order(10)
+    @DisplayName(">>>> DisplayName : buscarCatalogoNacionalidad  <<<<<")
+    public void testBuscarCatalogoNacionalidad() {
+        NacionalidadPaginatedDto  nacionalidadPaginatedDto= catalogoService.buscarNacionalidadPorParametros("ZZZ", 0, 500);
+        assertNotNull(nacionalidadPaginatedDto.getNacionalidades());
+    }
+
+
+    @Test
+    @Order(11)
+    @DisplayName(">>>> DisplayName : testBuscarServicioSistemaPorId <<<<<")
     public void testBuscarServicioSistemaPorId() {
         createDefaultDBServicioSistema();
         ServicioSistema servicio = catalogoService.buscarServicioSistemaPorId(301L);
