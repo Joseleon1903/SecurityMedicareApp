@@ -14,11 +14,11 @@ public class Usuario implements Serializable {
     private Long usuarioId;
     private String codigo;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name="contactoId")
     private Contacto contactoId;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="tipoUsuarioId")
     private TipoUsuario tipoUsuarioId;
 

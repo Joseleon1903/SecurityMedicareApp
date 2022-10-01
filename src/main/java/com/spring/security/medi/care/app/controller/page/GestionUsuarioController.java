@@ -15,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.security.Principal;
 import java.util.Date;
 
@@ -71,7 +70,6 @@ public class GestionUsuarioController extends ViewBaseContext {
         model.addAttribute("UsuarioBean", usuarioInfoDto);
         return "pages/usuario/ShowGestionUsuario";
     }
-
 
     @Override
     protected void init() {
