@@ -1,13 +1,18 @@
 package com.spring.security.medi.care.app.controller.rest;
 
+import com.spring.security.medi.care.app.commons.domain.ImagedStored;
 import com.spring.security.medi.care.app.commons.domain.Usuario;
 import com.spring.security.medi.care.app.commons.service.SecurityService;
+import com.spring.security.medi.care.app.file.service.FileService;
 import com.spring.security.medi.care.app.usuario.service.UsuarioService;
 import com.spring.security.medi.care.app.usuario.types.PaginatedUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
@@ -17,9 +22,11 @@ public class UsuarioRestController {
 
     private final UsuarioService usuarioService;
     private final SecurityService securityService;
+    private final FileService fileService;
 
     @Autowired
-    public UsuarioRestController (UsuarioService usuarioService, SecurityService securityService){
+    public UsuarioRestController (UsuarioService usuarioService, SecurityService securityService, FileService fileService){
+        this.fileService = fileService;
         this.usuarioService= usuarioService;
         this.securityService = securityService;
     }
@@ -64,5 +71,19 @@ public class UsuarioRestController {
         user.setLlaveEncriptacion(llave);
         Usuario userOutput = usuarioService.saveOrUpdateUser(user);
         return new ResponseEntity(userOutput, HttpStatus.OK);
+    }
+
+
+    @PostMapping("/fileUpload")
+    public ResponseEntity<ImagedStored> updateProfilePicture(@RequestParam("myFile") MultipartFile myFile) {
+
+        ImagedStored image = null;
+        try{
+            image =fileService.createImage(myFile);
+        }catch(IOException ex){
+            System.out.println("error update image");
+        }
+        // Redirect to a successful upload page
+        return new ResponseEntity(image, HttpStatus.OK);
     }
 }
