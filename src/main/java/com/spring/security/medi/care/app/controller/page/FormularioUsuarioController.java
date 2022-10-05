@@ -3,14 +3,12 @@ package com.spring.security.medi.care.app.controller.page;
 import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.commons.AplicationConstantUtil;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
-import com.spring.security.medi.care.app.commons.domain.Contacto;
-import com.spring.security.medi.care.app.commons.domain.MotivoEstado;
-import com.spring.security.medi.care.app.commons.domain.TipoUsuario;
-import com.spring.security.medi.care.app.commons.domain.Usuario;
+import com.spring.security.medi.care.app.commons.domain.*;
 import com.spring.security.medi.care.app.commons.service.SecurityService;
 import com.spring.security.medi.care.app.controller.dto.CreateUserFormData;
 import com.spring.security.medi.care.app.controller.dto.ErrorPageDto;
 import com.spring.security.medi.care.app.controller.dto.SystemInfoDTO;
+import com.spring.security.medi.care.app.file.service.FileService;
 import com.spring.security.medi.care.app.usuario.service.TipoUsuarioService;
 import com.spring.security.medi.care.app.usuario.service.UsuarioService;
 import org.slf4j.Logger;
@@ -22,7 +20,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -35,6 +34,7 @@ public class FormularioUsuarioController extends ViewBaseContext {
     private final TipoUsuarioService tipoUsuarioService;
     private final CatalogoService catalogoService;
     private final SecurityService securityService;
+    private final FileService fileService;
 
     private SystemInfoDTO systemInfoDTO;
     private CreateUserFormData createUserFormData;
@@ -42,15 +42,18 @@ public class FormularioUsuarioController extends ViewBaseContext {
     private List<TipoUsuario> listaTipoUsuario;
     private ErrorPageDto errorPageBean;
 
+    private String defaultProfilePicture = "../assets/img/app/unknown-user-Image.png";
+
     @Autowired
     public FormularioUsuarioController(UsuarioService usuarioService, TipoUsuarioService tipoUsuarioService,
                                        CatalogoService catalogoService,CreateUserFormData createUserFormData,
-                                       SecurityService securityService) {
+                                       SecurityService securityService, FileService fileService) {
         this.usuarioService = usuarioService;
         this.tipoUsuarioService = tipoUsuarioService;
         this.createUserFormData = createUserFormData;
         this.catalogoService = catalogoService;
         this.securityService = securityService;
+        this.fileService = fileService;
     }
 
     @GetMapping("/formulario/usuario")
@@ -66,6 +69,7 @@ public class FormularioUsuarioController extends ViewBaseContext {
         model.addAttribute("SystemInfoBean", systemInfoDTO);
         model.addAttribute("TipoUsuarioListBean", listaTipoUsuario);
         model.addAttribute("CreateUserFormBean", createUserFormData);
+        model.addAttribute("ProfilePictureBean", defaultProfilePicture);
         return "pages/usuario/ShowUserForm";
     }
 
@@ -113,6 +117,7 @@ public class FormularioUsuarioController extends ViewBaseContext {
         user.setEstado("AC");
         user.setContactoId(cont);
         user.setTipoUsuarioId(tipo);
+        user.setProfilePicture(defaultProfilePicture);
         try{
             logger.info("empezando registracion usuario");
             logger.info("usuario: "+ user);
@@ -126,6 +131,19 @@ public class FormularioUsuarioController extends ViewBaseContext {
             return "redirect:/formulario/usuario?hasError=true";
         }
         return "redirect:/gestion/usuario";
+    }
+
+    @PostMapping("/upload/picture")
+    public String uploadProfilePicture(@RequestParam("file") MultipartFile file, Model model) throws IOException {
+        logger.info("Entering in uploadProfilePicture");
+        logger.info("param : "+file.getOriginalFilename());
+        logger.info("param : "+file.getContentType());
+
+        ImagedStored img = fileService.createImage(file);
+
+        defaultProfilePicture = img.getFileViewUri();
+
+        return "redirect:/formulario/usuario";
     }
 
     private void validateError(Boolean hasError, Model model ){

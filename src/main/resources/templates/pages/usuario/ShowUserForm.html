@@ -70,12 +70,14 @@
 
                     <div class="row" >
 
-                        <img src="https://ddrg.farmasi.unej.ac.id/wp-content/uploads/sites/6/2017/10/unknown-person-icon-Image-from.png"
-                             class="rounded mx-auto d-block" style="height: 250px; width: 250px;" alt="...">
-                        <div class="input-group mb-3">
-                            <input type="file" accept="image/*" class="form-control" placeholder="Profile picture" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                            <button type="button" class="btn btn-primary btn-sm">Upload</button>
-                        </div>
+                        <form action="#" th:action="@{/upload/picture}" method="post" enctype="multipart/form-data">
+                            <img th:src="${ProfilePictureBean}"
+                                 class="rounded mx-auto d-block" style="height: 250px; width: 250px; margin-bottom: 0.5em;" alt="...">
+                            <div class="input-group mb-3">
+                                <input type="file" name="file" accept="image/*" class="form-control" placeholder="Profile picture" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <button type="submit" class="btn btn-primary btn-sm">Upload</button>
+                            </div>
+                        </form>
                     </div>
 
                     <form method="post" action="" th:action="@{/create/usuario}" th:object="${CreateUserFormBean}"  role="form" class="php-email-form">
