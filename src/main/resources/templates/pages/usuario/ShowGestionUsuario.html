@@ -19,6 +19,9 @@
 
 <section layout:fragment="content">
 
+    <button id="detail-modal-buttom" type="button" data-bs-toggle="modal" data-bs-target="#detailModal" style=" display:none;">
+    </button>
+
 <!--
     first row datos usuario actualmente logueado...
 -->
@@ -135,7 +138,7 @@
                         <th scope="col" th:text="#{page.column.gestion.usuario.correoPrimario}">Nombre</th>
                         <th scope="col" th:text="#{page.column.gestion.usuario.fechaUltimoCambio}">Primer Apellido</th>
                         <th scope="col" th:text="#{page.column.gestion.usuario.estado}">AC</th>
-                        <th scope="col" colspan="1" th:text="#{page.generar.column.accion}">Acción</th>
+                        <th scope="col" colspan="2" th:text="#{page.generar.column.accion}">Acción</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -146,11 +149,11 @@
                          <td th:text="${usuario.correoPrimario}" >8965235</td>
                          <td th:text="${usuario.fechaUltimoCambio}">Mario</td>
                          <td th:text="${usuario.estado}">1</td>
-                        <!-- <td>
-                             <button type="button" class="menu-button-solicitud btn btn-warning">
+                        <td>
+                             <button type="button"  th:data-text="${usuario.usuarioId}" class="menu-button-solicitud btn btn-warning">
                                  <i class="fa-solid fa-eye"></i>
                              </button>
-                         </td>-->
+                         </td>
                          <td>
                              <form id="deleteForm" enctype="multipart/form-data" th:method="delete"
                                   th:action="@{/delete/{id}(id = ${usuario.usuarioId})}">
@@ -186,5 +189,84 @@
 
 </section>
 
+<div  layout:fragment="custom-panel">
+
+    <!-- Modal detail ciudadano -->
+    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailModalLabel" th:text="#{page.generar.label.detail.modal.gestion.usuario.title}">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form>
+
+                    <div class="modal-body">
+
+                        <div class="mb-3">
+                            <img id="profileUrlDetail" src="../assets/img/app/unknown-user-Image.png" class="rounded mx-auto d-block" style="height: 150px; width: 180px;" alt="...">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="usuarioIdDetail" class="form-label" th:text="#{page.gestion.usuario.column.usuarioId}">usuario Id</label>
+                            <input id="usuarioIdDetail" type="text" class="form-control" disabled="true" value="1156">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="codigoDetail" class="form-label" th:text="#{page.gestion.usuario.column.codigo}">Cedula</label>
+                            <input id="codigoDetail"  type="text" class="form-control"  disabled="true" value="02100032850">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="tipoUsuarioIdDetail" class="form-label" th:text="#{page.gestion.usuario.column.tipoUsuarioId}">NSS</label>
+                            <input id="tipoUsuarioIdDetail" type="text" class="form-control" disabled="true" value="50307232">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="descripcionTipoUsuarioDetail" class="form-label" th:text="#{page.gestion.usuario.column.descripcionTipoUsuario}" >Nombre</label>
+                            <input id="descripcionTipoUsuarioDetail"  type="text" class="form-control" value="FREIDMANT">
+                        </div>
+                        <div class="mb-3">
+                            <label for="contactoIdDetail" class="form-label" th:text="#{page.gestion.usuario.column.contactoId}">Primer Apellido</label>
+                            <input id="contactoIdDetail"  type="text" class="form-control" value="DOINET">
+                        </div>
+                        <div class="mb-3">
+                            <label for="descripcionContactoDetail" class="form-label" th:text="#{page.gestion.usuario.column.descripcionContacto}">Segundo Apellido</label>
+                            <input type="text" class="form-control" id="descripcionContactoDetail" value="GODEK">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="correoPrimarioDetail" class="form-label" th:text="#{page.gestion.usuario.column.correoPrimario}">Segundo Apellido</label>
+                            <input type="text" class="form-control" id="correoPrimarioDetail" disabled="true" value="Masculino">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="posicionDetail" class="form-label" th:text="#{page.gestion.usuario.column.posicion}">Segundo Apellido</label>
+                            <input type="text" class="form-control" id="posicionDetail" disabled="true" value="05/Jan/1990">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="estadoDetail" class="form-label" th:text="#{page.gestion.usuario.column.estado}">Segundo Apellido</label>
+                            <input type="text" class="form-control" id="estadoDetail" disabled="true" value="05/Jan/1990">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" th:text="#{page.generar.label.accion.cerrar}">Close</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<div  layout:fragment="custom-script">
+
+    <script th:src="@{../assets/js/gestion-usuario-script.js}"></script>
+
+</div>
 </body>
 </html>

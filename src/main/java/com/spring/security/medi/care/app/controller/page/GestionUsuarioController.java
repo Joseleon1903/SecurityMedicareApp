@@ -33,6 +33,7 @@ public class GestionUsuarioController extends ViewBaseContext {
     private final TablePaginationDto tablePagination;
 
     private String usarnametest= "Administrador";
+    private String defaultProfilePicture = "../assets/img/app/unknown-user-Image.png";
 
 
     @Autowired

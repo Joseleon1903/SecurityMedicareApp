@@ -130,6 +130,7 @@ public class FormularioUsuarioController extends ViewBaseContext {
             this.createUserFormData = createUserFormDataInput;
             return "redirect:/formulario/usuario?hasError=true";
         }
+        this.defaultProfilePicture = "../assets/img/app/unknown-user-Image.png";
         return "redirect:/gestion/usuario";
     }
 
