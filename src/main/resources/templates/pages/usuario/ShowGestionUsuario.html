@@ -135,7 +135,7 @@
                         <th scope="col" th:text="#{page.column.gestion.usuario.correoPrimario}">Nombre</th>
                         <th scope="col" th:text="#{page.column.gestion.usuario.fechaUltimoCambio}">Primer Apellido</th>
                         <th scope="col" th:text="#{page.column.gestion.usuario.estado}">AC</th>
-                        <th scope="col" colspan="2" th:text="#{page.generar.column.accion}">Acción</th>
+                        <th scope="col" colspan="1" th:text="#{page.generar.column.accion}">Acción</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -146,15 +146,18 @@
                          <td th:text="${usuario.correoPrimario}" >8965235</td>
                          <td th:text="${usuario.fechaUltimoCambio}">Mario</td>
                          <td th:text="${usuario.estado}">1</td>
-                         <td>
+                        <!-- <td>
                              <button type="button" class="menu-button-solicitud btn btn-warning">
                                  <i class="fa-solid fa-eye"></i>
                              </button>
-                         </td>
+                         </td>-->
                          <td>
+                             <form id="deleteForm" enctype="multipart/form-data" th:method="delete"
+                                  th:action="@{/delete/{id}(id = ${usuario.usuarioId})}">
                              <button  type="submit" class="menu-button-solicitud btn btn-primary">
                                  Delete
                              </button>
+                             </form>
                          </td>
                      </tr>
                     </tbody>

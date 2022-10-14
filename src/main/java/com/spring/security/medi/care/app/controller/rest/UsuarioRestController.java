@@ -63,6 +63,13 @@ public class UsuarioRestController {
         return new ResponseEntity(usersList, HttpStatus.OK);
     }
 
+    @GetMapping("/find/email")
+    @ResponseBody
+    public ResponseEntity<Usuario> findUsuarioByParameterEmail(@RequestParam(value = "email") String email){
+        Usuario userEmail = usuarioService.buscarUsuariosSistemaPorEmailJpa(email);
+        return new ResponseEntity(userEmail, HttpStatus.OK);
+    }
+
     @PostMapping("/save")
     @ResponseBody
     public ResponseEntity<Usuario> saveUsuario(@RequestBody Usuario user){

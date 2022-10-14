@@ -16,10 +16,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.Date;
@@ -74,10 +72,12 @@ public class FormularioUsuarioController extends ViewBaseContext {
     }
 
     @PostMapping("/create/usuario")
-    public String processForm(@ModelAttribute CreateUserFormData createUserFormDataInput, Model model) {
+    public String processForm(@ModelAttribute CreateUserFormData createUserFormDataInput, BindingResult bindingResult, Model model) {
         logger.info("------- entering -----------");
         logger.info("Entering in method processForm");
         logger.info("param: "+createUserFormDataInput);
+
+        logger.info("bindingResult: "+ bindingResult.hasErrors());
 
         if(!createUserFormDataInput.getPassword().equals(createUserFormDataInput.getConfirmPassword())){
             logger.info("Error PASSWORD_DE_CONFIRMACION_DIFERENTES");
@@ -89,7 +89,7 @@ public class FormularioUsuarioController extends ViewBaseContext {
         }
 
         if(createUserFormDataInput.getUsername().isEmpty() || createUserFormDataInput.getCorreoprimario().isEmpty()
-                || createUserFormDataInput.getTipoUsuarioId().equals(0L)){
+                || createUserFormDataInput.getTipoUsuarioId().equals(0L) || bindingResult.hasErrors()){
             logger.info("Error EXISTEN_DATOS_REQUERIDO_FORMULARIO_USUAARIO");
             logger.info("ABORT REGISTRATION");
             MotivoEstado mot = catalogoService.buscarMotivoPorId(AplicationConstantUtil.EXISTEN_DATOS_REQUERIDO_FORMULARIO_USUAARIO);

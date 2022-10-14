@@ -18,7 +18,11 @@ public interface UsuarioService {
 
     Usuario buscarUsuariosSistemaporCodigoJpa(String codigo);
 
+    Usuario buscarUsuariosSistemaPorEmailJpa(String email);
+
     Usuario saveOrUpdateUser(Usuario user);
+
+    void deleteUsuarioById(Long userId);
 
     Usuario buscarUsuarioPorId(Long id);
 

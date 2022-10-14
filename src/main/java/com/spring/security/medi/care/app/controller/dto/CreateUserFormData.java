@@ -1,5 +1,6 @@
 package com.spring.security.medi.care.app.controller.dto;
 
+import com.spring.security.medi.care.app.commons.htmvalidation.NotExistingUser;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
@@ -8,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 
 @Component
 @Data
+@NotExistingUser
 public class CreateUserFormData {
 
     @NotBlank

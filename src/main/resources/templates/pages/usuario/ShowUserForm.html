@@ -131,8 +131,10 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="CorreoInput" class="form-label" th:text="#{formulario.creacion.usuario.correoprimario}">Email address</label>
-                                <input type="text" class="form-control" id="CorreoInput" aria-describedby="correoHelp" th:field="*{correoprimario}" th:value="${CreateUserFormBean.correoprimario}">
+                                <label for="correoprimario" class="form-label" th:text="#{formulario.creacion.usuario.correoprimario}">Email address</label>
+                                <input type="email" class="form-control" id="correoprimario" aria-describedby="correoHelp" th:field="*{correoprimario}" th:value="${CreateUserFormBean.correoprimario}">
+
+                                <p th:if="${#fields.hasErrors('correoprimario')}" class="mt-2 text-sm text-red-600" id="firstName-error">The first name cannot be empty.</p>
                                 <div id="correoHelp" class="form-text" th:text="#{formulario.creacion.usuario.correoprimario.detail}">We'll never share your email with anyone else.</div>
                             </div>
 
