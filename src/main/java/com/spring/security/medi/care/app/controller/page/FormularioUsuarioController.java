@@ -156,7 +156,6 @@ public class FormularioUsuarioController extends ViewBaseContext {
         }
     }
 
-
     @Override
     protected void init() {
         logger.info("entering init method ");
