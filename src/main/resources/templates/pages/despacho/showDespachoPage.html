@@ -116,7 +116,7 @@
                         <tr th:each="sol : ${SolicitudAfiliacionListBean}" th:if="${not #lists.isEmpty(SolicitudAfiliacionListBean)}">
                             <th scope="row" th:text="${sol.solicitudId}" >1</th>
                             <td th:text="${sol.servicioId}" >0456325896</td>
-                            <td th:text="${#dates.format(sol.fechaRecepcion,'dd/MM/yyyy')}">01/01/2000</td>
+                            <td th:text="${#temporals.format(sol.fechaRecepcion,'dd/MM/yyyy')}">01/01/2000</td>
                             <td th:text="${sol.loteId}">8965235</td>
                             <td th:text="${sol.entidadId}">Mario</td>
                             <td th:text="${sol.seguroId}">1</td>

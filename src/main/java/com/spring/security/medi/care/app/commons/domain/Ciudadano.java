@@ -1,10 +1,12 @@
 package com.spring.security.medi.care.app.commons.domain;
 
 import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -23,12 +25,12 @@ public class Ciudadano implements Serializable {
     private Long municipioId;
     private Long nacionalidadId;
     private String genero;
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
     private String estado;
 
     public Ciudadano(){}
 
-    public Ciudadano(Long ciudadanoId, String cedula, String nss, String nombre, String primerApellido, String segundoApellido, Long municipioId, Long nacionalidadId, String genero, Date fechaNacimiento, String estado) {
+    public Ciudadano(Long ciudadanoId, String cedula, String nss, String nombre, String primerApellido, String segundoApellido, Long municipioId, Long nacionalidadId, String genero, LocalDate fechaNacimiento, String estado) {
         this.ciudadanoId = ciudadanoId;
         this.cedula = cedula;
         this.nss = nss;
@@ -42,7 +44,7 @@ public class Ciudadano implements Serializable {
         this.estado = estado;
     }
 
-    public Ciudadano(String cedula, String nss, String nombre, String primerApellido, String segundoApellido, Long municipioId, Long nacionalidadId,  String genero, Date fechaNacimiento, String estado) {
+    public Ciudadano(String cedula, String nss, String nombre, String primerApellido, String segundoApellido, Long municipioId, Long nacionalidadId,  String genero, LocalDate fechaNacimiento, String estado) {
         this.cedula = cedula;
         this.nss = nss;
         this.nombre = nombre;

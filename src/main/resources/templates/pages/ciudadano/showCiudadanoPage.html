@@ -122,7 +122,7 @@
                         <td th:text="${ciudadano.primerApellido}">1</td>
                         <td th:text="${ciudadano.segundoApellido}">Cesar</td>
                         <td th:text="${ciudadano.genero}">M</td>
-                        <td th:text="${#dates.format(ciudadano.fechaNacimiento,'dd/MM/yyyy')}">01/01/2000</td>
+                        <td th:text="${#temporals.format(ciudadano.fechaNacimiento,'dd/MM/yyyy')}">01/01/2000</td>
                         <td th:text="${ciudadano.nacionalidad}">22</td>
                         <td th:text="${ciudadano.municipio}">Azua</td>
                         <td th:text="${ciudadano.estado}">Activo</td>

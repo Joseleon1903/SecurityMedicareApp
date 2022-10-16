@@ -1,10 +1,13 @@
 package com.spring.security.medi.care.app.ciudadano.type;
 
 import com.spring.security.medi.care.app.commons.domain.Ciudadano;
+import lombok.Data;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
+@Data
 public class CiudadanoDto implements Serializable {
 
     private Long ciudadanoId;
@@ -18,10 +21,10 @@ public class CiudadanoDto implements Serializable {
     private String municipio;
 
     private String genero;
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
     private String estado;
 
-    public CiudadanoDto(Long ciudadanoId, String cedula, String nss, String nombre, String primerApellido, String segundoApellido, String nacionalidad,String municipio, String genero, Date fechaNacimiento, String estado) {
+    public CiudadanoDto(Long ciudadanoId, String cedula, String nss, String nombre, String primerApellido, String segundoApellido, String nacionalidad,String municipio, String genero, LocalDate fechaNacimiento, String estado) {
         this.ciudadanoId = ciudadanoId;
         this.cedula = cedula;
         this.nss = nss;
@@ -50,94 +53,6 @@ public class CiudadanoDto implements Serializable {
     }
 
     public CiudadanoDto() {
-    }
-
-    public Long getCiudadanoId() {
-        return ciudadanoId;
-    }
-
-    public void setCiudadanoId(Long ciudadanoId) {
-        this.ciudadanoId = ciudadanoId;
-    }
-
-    public String getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
-
-    public String getNss() {
-        return nss;
-    }
-
-    public void setNss(String nss) {
-        this.nss = nss;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getPrimerApellido() {
-        return primerApellido;
-    }
-
-    public void setPrimerApellido(String primerApellido) {
-        this.primerApellido = primerApellido;
-    }
-
-    public String getSegundoApellido() {
-        return segundoApellido;
-    }
-
-    public void setSegundoApellido(String segundoApellido) {
-        this.segundoApellido = segundoApellido;
-    }
-
-    public String getNacionalidad() {
-        return nacionalidad;
-    }
-
-    public void setNacionalidad(String nacionalidad) {
-        this.nacionalidad = nacionalidad;
-    }
-
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
-
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getMunicipio() {
-        return municipio;
-    }
-
-    public void setMunicipio(String municipio) {
-        this.municipio = municipio;
     }
 
     @Override

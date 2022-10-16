@@ -809,3 +809,5 @@ INSERT INTO MOTIVO_ESTADO (MOTIVO_ID, DESCRIPCION,  ESTADO) VALUES (800, 'No exi
 INSERT INTO MOTIVO_ESTADO (MOTIVO_ID, DESCRIPCION,  ESTADO) VALUES (801, 'El ciudadnao ya tiene una solicitud acpetada para otra entidad',  'AC');
 INSERT INTO MOTIVO_ESTADO (MOTIVO_ID, DESCRIPCION,  ESTADO) VALUES (804, 'Ya existe un ciudadano en el sistema con la misma identificación',  'AC');
 INSERT INTO MOTIVO_ESTADO (MOTIVO_ID, DESCRIPCION,  ESTADO) VALUES (500, 'Error interno del sistema, contactar un administrador',  'AC');
+INSERT INTO MOTIVO_ESTADO (MOTIVO_ID, DESCRIPCION,  ESTADO) VALUES (805, 'La password no conincide con la password de confirmación',  'AC');
+INSERT INTO MOTIVO_ESTADO (MOTIVO_ID, DESCRIPCION,  ESTADO) VALUES (806, 'Existen datos requerido no proprocionados [username, correo primario y tipo usuario]',  'AC');

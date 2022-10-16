@@ -1,7 +1,8 @@
 package com.spring.security.medi.care.app.controller.dto;
 
 import lombok.Data;
-import java.util.Date;
+import java.time.LocalDateTime;
+
 
 @Data
 public class UsuarioDto {
@@ -10,10 +11,11 @@ public class UsuarioDto {
     private String nombre;
     private String tipoUsuarioId;
     private String correoPrimario;
-    private Date fechaUltimoCambio;
+    private LocalDateTime fechaUltimoCambio;
     private String estado;
 
-    public UsuarioDto(Long usuarioId, String nombre, String tipoUsuarioId, String correoPrimario, Date fechaUltimoCambio, String estado) {
+    public UsuarioDto(Long usuarioId, String nombre, String tipoUsuarioId, String correoPrimario, LocalDateTime fechaUltimoCambio, String estado) {
+
         this.usuarioId = usuarioId;
         this.nombre = nombre;
         this.tipoUsuarioId = tipoUsuarioId;
