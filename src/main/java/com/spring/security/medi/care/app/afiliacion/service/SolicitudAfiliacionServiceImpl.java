@@ -22,7 +22,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -140,9 +140,9 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
         logger.info(">> Iniciando validaciones ");
         logger.info("A) Nss y cedula de la solicitud y asigna el ciudadano");
 
-       Boolean existeCiudadano = ciudadanoService.buscarCiudadanoPorIdentifiacion(sol.getCedula(), sol.getNss()).isEmpty();
+        Ciudadano ciudadano = ciudadanoService.buscarCiudadanoPorIdentifiacion(sol.getCedula(), sol.getNss());
 
-        if (existeCiudadano) {
+        if (ciudadano == null) {
             Long motivo = catalogoService.buscarMotivoPorId(AplicationConstantUtil.NO_EXISTE_IDENTIFICACION_SOLICITUD)
                     .getMotivoId();
             sol.setMotivoId(motivo);
@@ -150,12 +150,12 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
             solicitudAfiliacionJpaRepo.save(sol);
             return;
         }
-        Ciudadano ciudadano = ciudadanoService.buscarCiudadanoPorIdentifiacion(sol.getCedula(), sol.getNss()).get(0);
+
         sol.setNombre(ciudadano.getNombre());
         sol.setPrimerApellido(ciudadano.getPrimerApellido());
         sol.setCedula(ciudadano.getCedula());
         sol.setNss(ciudadano.getNss());
-        sol.setFechaUltimoCambio(LocalDateTime.now());
+        sol.setFechaUltimoCambio(new Date());
 
         logger.info("B) asignacion pensionado y pertenece al seguro de pensiones asigna");
         // TODO si tiene asignacion pensionado y pertenece al seguro de pensiones asigna

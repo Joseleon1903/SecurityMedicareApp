@@ -13,8 +13,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.security.Principal;
 import java.util.Date;
 
@@ -32,7 +33,7 @@ public class GestionUsuarioController extends ViewBaseContext {
     private final TablePaginationDto tablePagination;
 
     private String usarnametest= "Administrador";
-    private String defaultProfilePicture = "../assets/img/app/unknown-user-Image.png";
+
 
     @Autowired
     public GestionUsuarioController(UsuarioService usuarioService, TablePaginationDto tablePagination, UsuarioInfoDto usuarioInfoDto){
@@ -71,13 +72,6 @@ public class GestionUsuarioController extends ViewBaseContext {
         return "pages/usuario/ShowGestionUsuario";
     }
 
-    @DeleteMapping("/delete/{id}")
-    public String doDeleteUser(@PathVariable("id") Long userId, RedirectAttributes redirectAttributes) {
-        usuarioService.deleteUsuarioById(userId);
-
-        redirectAttributes.addFlashAttribute("deletedUserName", usarnametest);
-        return "redirect:/gestion/usuario";
-    }
 
     @Override
     protected void init() {

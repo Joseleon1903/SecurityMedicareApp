@@ -4,9 +4,8 @@ import com.spring.security.medi.care.app.commons.domain.Usuario;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 import java.io.Serializable;
-import java.time.Duration;
-import java.time.LocalDateTime;
-
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 @Data
 @Component
@@ -31,8 +30,8 @@ public class UsuarioInfoDto implements Serializable {
         this.estado = usuario.getEstado();
         this.tipoUsuario =  usuario.getTipoUsuarioId().getDescripcion();
         this.correoprimario = usuario.getContactoId().getCorreoPrimario();
-        long diferencia= Duration.between(LocalDateTime.now(), usuario.getFechaUltimoCambio()).toMinutes();
-        this.timeLogin = diferencia;
+        long diferencia= new Date().getTime()-usuario.getFechaUltimoCambio().getTime();
+        this.timeLogin = TimeUnit.MILLISECONDS.toMinutes(diferencia);
     }
 
     public UsuarioInfoDto() {

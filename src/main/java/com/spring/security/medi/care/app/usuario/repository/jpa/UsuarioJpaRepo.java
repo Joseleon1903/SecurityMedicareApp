@@ -16,7 +16,4 @@ public interface UsuarioJpaRepo extends PagingAndSortingRepository<Usuario, Long
     Page<Usuario> findByParameters(Long usuarioId, String codigo, String estado, Pageable paging);
 
     Usuario findByCodigoIgnoreCase(String codigo);
-
-    @Query("select us from Usuario us where :email like us.contactoId.correoPrimario ")
-    Usuario findByEmail(String email);
 }

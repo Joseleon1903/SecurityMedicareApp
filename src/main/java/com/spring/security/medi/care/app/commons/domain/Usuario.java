@@ -3,7 +3,7 @@ package com.spring.security.medi.care.app.commons.domain;
 import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @Entity
@@ -14,30 +14,25 @@ public class Usuario implements Serializable {
     private Long usuarioId;
     private String codigo;
 
-    private String profilePicture;
-
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name="contactoId")
     private Contacto contactoId;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne
     @JoinColumn(name="tipoUsuarioId")
     private TipoUsuario tipoUsuarioId;
 
     private String llaveEncriptacion;
-    private LocalDateTime fechaUltimoCambio;
-
+    private Date fechaUltimoCambio;
     private String estado;
 
     public Usuario() {
     }
 
-    public Usuario(Long usuarioId, String codigo, String profilePicture, Contacto contactoId, TipoUsuario tipoUsuarioId, String llaveEncriptacion, LocalDateTime fechaUltimoCambio, String estado) {
+    public Usuario(Long usuarioId, String codigo, Contacto contactoId, String llaveEncriptacion, Date fechaUltimoCambio, String estado) {
         this.usuarioId = usuarioId;
         this.codigo = codigo;
-        this.profilePicture = profilePicture;
         this.contactoId = contactoId;
-        this.tipoUsuarioId = tipoUsuarioId;
         this.llaveEncriptacion = llaveEncriptacion;
         this.fechaUltimoCambio = fechaUltimoCambio;
         this.estado = estado;
@@ -48,7 +43,6 @@ public class Usuario implements Serializable {
         return "Usuario{" +
                 "usuarioId=" + usuarioId +
                 ", codigo='" + codigo + '\'' +
-                ", profilePicture='" + profilePicture + '\'' +
                 ", contactoId=" + contactoId +
                 ", tipoUsuarioId=" + tipoUsuarioId +
                 ", llaveEncriptacion='" + llaveEncriptacion + '\'' +
