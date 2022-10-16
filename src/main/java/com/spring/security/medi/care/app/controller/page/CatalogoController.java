@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Controller
@@ -233,7 +234,7 @@ public class CatalogoController extends ViewBaseContext {
         logger.debug("entering init method ");
         logger.debug("Generando systemInfoDTO");
         systemInfoDTO = new SystemInfoDTO("Catalogos","Simplificar el catálogo de servicios únicamente a los servicios previamente acordados entre cliente y proveedor,\n" +
-                " en automático reduce la carga de trabajo al eliminar la opción para tramitar solicitudes indebidas.", new Date());
+                " en automático reduce la carga de trabajo al eliminar la opción para tramitar solicitudes indebidas.", LocalDate.now());
         logger.debug("systemInfoDTO: " + systemInfoDTO);
         logger.debug("existing init method ");
     }

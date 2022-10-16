@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -85,7 +86,7 @@ public class EntidadController extends ViewBaseContext {
     protected void init() {
         logger.info("entering init method ");
         logger.info("Generando systemInfoDTO");
-        systemInfoDTO = new SystemInfoDTO("Unipago Entidades del sistema de seguridad social",new Date());
+        systemInfoDTO = new SystemInfoDTO("Unipago Entidades del sistema de seguridad social", LocalDate.now());
         logger.info("systemInfoDTO: "+ systemInfoDTO);
         logger.info("existing init method ");
     }

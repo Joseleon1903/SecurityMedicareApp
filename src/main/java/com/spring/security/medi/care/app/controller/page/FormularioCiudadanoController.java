@@ -109,7 +109,7 @@ public class FormularioCiudadanoController extends ViewBaseContext {
     protected void init() {
         logger.info("entering init method ");
         logger.info("Generando systemInfoDTO");
-        systemInfoDTO = new SystemInfoDTO("Formulario Ciudadano","Es un Formulario que permite al ciudadano registrarse, en la Plataforma de Servicios en Línea, a través del cual podrá solicitar cualquier servicio o trámite de forma electrónica.", new Date());
+        systemInfoDTO = new SystemInfoDTO("Formulario Ciudadano","Es un Formulario que permite al ciudadano registrarse, en la Plataforma de Servicios en Línea, a través del cual podrá solicitar cualquier servicio o trámite de forma electrónica.", LocalDate.now());
         logger.info("systemInfoDTO: "+ systemInfoDTO);
         logger.info("existing init method ");
     }

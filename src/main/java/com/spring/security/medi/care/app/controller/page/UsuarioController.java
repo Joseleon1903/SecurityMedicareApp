@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class UsuarioController {
         logger.info("------- entering -----------");
         logger.info("Entering in method usuarioPage..");
         logger.info("Generando systemInfoDTO");
-        systemInfoDTO = new SystemInfoDTO("Unipago Usuario Sistema ",new Date());
+        systemInfoDTO = new SystemInfoDTO("Unipago Usuario Sistema ", LocalDate.now());
         logger.info("systemInfoDTO: "+ systemInfoDTO);
         model.addAttribute("UsuarioFormBean", new UsuarioFormDTO());
         model.addAttribute("SystemInfoBean", systemInfoDTO);
@@ -54,7 +55,7 @@ public class UsuarioController {
         logger.info("------- entering -----------");
         logger.info("Entering in method buscarUsuarioPage..");
         logger.info("Generando systemInfoDTO");
-        systemInfoDTO = new SystemInfoDTO("Unipago Usuario Sistema ",new Date());
+        systemInfoDTO = new SystemInfoDTO("Unipago Usuario Sistema ",LocalDate.now());
         logger.info("systemInfoDTO: "+ systemInfoDTO);
         logger.info("Form values : "+usuarioFormDTO);
         usuarioUnipagoList = usuarioService.buscarUsuariosSistemaporCodigo(usuarioFormDTO.getCodigo());

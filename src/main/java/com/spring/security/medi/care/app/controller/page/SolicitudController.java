@@ -116,7 +116,7 @@ public class SolicitudController extends ViewBaseContext {
         systemInfoDTO = new SystemInfoDTO("Solicitudes","Soliciudes realizadas por un afiliado a los servicios de salud (medicamentos, procedimientos,\n" +
                 " medios diagnósticos, pruebas de laboratorio, materiales, terapias, etc.)\n" +
                 " dentro del Plan de Servicios de Salud (PDSS), así como la disponibilidad económica o agotamiento para\n" +
-                " que pueda gestionar la colaboración por otros medios.", new Date());
+                " que pueda gestionar la colaboración por otros medios.", LocalDate.now());
         logger.info("systemInfoDTO: " + systemInfoDTO);
         logger.info("existing init method ");
     }

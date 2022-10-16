@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Controller
@@ -30,7 +31,7 @@ public class HomeControllerPage extends ViewBaseContext {
     protected void init() {
         logger.info("entering init method ");
         logger.info("Generando systemInfoDTO");
-        systemInfoDTO = new SystemInfoDTO("Home Page",new Date());
+        systemInfoDTO = new SystemInfoDTO("Home Page", LocalDate.now());
         logger.info("systemInfoDTO: "+ systemInfoDTO);
         logger.info("existing init method ");
     }
