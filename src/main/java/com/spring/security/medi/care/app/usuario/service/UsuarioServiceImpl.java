@@ -64,6 +64,7 @@ public class UsuarioServiceImpl implements  UsuarioService{
     @Override
     public Usuario buscarUsuariosSistemaPorEmailJpa(String email) {
         return usuarioJpaRepo.findByEmail(email.toLowerCase());
+
     }
 
     @Override

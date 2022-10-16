@@ -19,4 +19,5 @@ public interface UsuarioJpaRepo extends PagingAndSortingRepository<Usuario, Long
 
     @Query("select us from Usuario us where :email like us.contactoId.correoPrimario ")
     Usuario findByEmail(String email);
+
 }

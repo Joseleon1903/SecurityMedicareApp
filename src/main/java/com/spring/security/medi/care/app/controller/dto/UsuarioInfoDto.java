@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-
 @Data
 @Component
 public class UsuarioInfoDto implements Serializable {
