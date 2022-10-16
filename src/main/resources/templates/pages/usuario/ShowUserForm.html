@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout_base}" xmlns="http://www.w3.org/1999/html">
+<head>
+
+    <title>Formulario Usuario</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+
+</head>
+<body>
+
+<section layout:fragment="content" id="contact" class="contact" style="padding: 0px; margin-bottom: 3em;">
+
+        <div class="container aos-init aos-animate" data-aos="fade-up">
+
+            <div class="row gy-4 mt-4">
+
+                <div class="col-lg-4 col-md-6 d-flex">
+                    <div class="member">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuLTLxN7ObCU24VCbV1orSablNz7l7JSL2ZA&usqp=CAU" class="img-fluid" alt="">
+                        <div class="member-content">
+                            <div class="row gy-4 mt-4">
+
+                                <div class="col-lg-8">
+
+                                    <div class="info-item d-flex">
+                                        <i class="bi bi-geo-alt flex-shrink-0"></i>
+                                        <div>
+                                            <h4>Location:</h4>
+                                            <p>A108 Adam Street, New York, NY 535022</p>
+                                        </div>
+                                    </div><!-- End Info Item -->
+
+                                    <div class="info-item d-flex">
+                                        <i class="bi bi-envelope flex-shrink-0"></i>
+                                        <div>
+                                            <h4>Email:</h4>
+                                            <p>info@example.com</p>
+                                        </div>
+                                    </div><!-- End Info Item -->
+
+                                    <div class="info-item d-flex">
+                                        <i class="bi bi-phone flex-shrink-0"></i>
+                                        <div>
+                                            <h4>Call:</h4>
+                                            <p>+1 5589 55488 55</p>
+                                        </div>
+                                    </div><!-- End Info Item -->
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+
+                    <div th:if="${ErrorPageBean.isError}">
+
+                        <div th:replace="fragments/fragment_panel :: panel_section(type='danger',title=|Error :${ErrorPageBean.codigoError}|, content=${ErrorPageBean.descripcionError})"></div>
+                    </div>
+
+                    <div class="row" >
+
+                        <form action="#" th:action="@{/upload/picture}" method="post" enctype="multipart/form-data">
+                            <img th:src="${ProfilePictureBean}"
+                                 class="rounded mx-auto d-block" style="height: 250px; width: 250px; margin-bottom: 0.5em;" alt="...">
+                            <div class="input-group mb-3">
+                                <input type="file" name="file" accept="image/*" class="form-control" placeholder="Profile picture" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <button type="submit" class="btn btn-primary btn-sm">Upload</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <form method="post" action="" th:action="@{/create/usuario}" th:object="${CreateUserFormBean}"  role="form" class="php-email-form">
+
+                        <div class="row">
+                            <div class="mb-3">
+                                <label for="usernameInput" class="form-label" th:text="#{formulario.creacion.usuario.username}">Email address</label>
+                                <input type="text" class="form-control" id="usernameInput" aria-describedby="usernameHelp" th:field="*{username}" th:value="${CreateUserFormBean.username}">
+                                <div id="usernameHelp" class="form-text" th:text="#{formulario.creacion.usuario.username.detail}">We'll never share your email with anyone else.</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="passwordInput" class="form-label" th:text="#{formulario.creacion.usuario.password}">Email address</label>
+                                <input type="password" class="form-control" id="passwordInput" aria-describedby="passwordHelp" th:field="*{password}" th:value="${CreateUserFormBean.password}">
+                                <div id="passwordHelp" class="form-text" th:text="#{formulario.creacion.usuario.password.detail}">We'll never share your email with anyone else.</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="ConfirmPasswordInput" class="form-label" th:text="#{formulario.creacion.usuario.confirmPassword}">Email address</label>
+                                <input type="password" class="form-control" id="ConfirmPasswordInput" aria-describedby="passworConfirmdHelp" th:field="*{confirmPassword}" th:value="${CreateUserFormBean.confirmPassword}">
+                                <div id="passworConfirmdHelp" class="form-text" th:text="#{formulario.creacion.usuario.confirmPassword.detail}">We'll never share your email with anyone else.</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" th:text="#{formulario.creacion.usuario.posicion}">Email address</label>
+                                <select  class="form-select" aria-label="Default select example" th:field="*{posicion}" th:value="${CreateUserFormBean.posicion}" required>
+                                    <option value="0" selected >Seleciona una posicion</option>
+                                    <option value="JUNIOR DESARROLLADOR" >JR. DESARROLLADOR</option>
+                                    <option value="SENIOR DESARROLLADOR" >SN. DESARROLLADOR</option>
+                                    <option value="ANALISTA DE REQUERIMIENTO" >ANALISTA DE REQUERIMIENTO</option>
+                                    <option value="ANALISTA DE PRODUCTO" >ANALISTA DE PRODUCTO</option>
+                                    <option value="SERVICIO AL CLIENTE" >SERVICIO AL CLIENTE</option>
+                                    <option value="RECEPCION" >RECEPCION</option>
+                                </select>
+                                <div  class="form-text" th:text="#{formulario.creacion.usuario.posicion.detail}">We'll never share your email with anyone else.</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="DetallesInput" class="form-label" th:text="#{formulario.creacion.usuario.detalle}">Email address</label>
+                                <input type="text" class="form-control" id="DetallesInput" aria-describedby="detallesHelp" th:field="*{detalle}" th:value="${CreateUserFormBean.detalle}">
+                                <div id="detallesHelp" class="form-text" th:text="#{formulario.creacion.usuario.detalle.detail}">We'll never share your email with anyone else.</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" th:text="#{formulario.creacion.usuario.tipoUsuarioId}">Email address</label>
+                                <select  class="form-select" aria-label="Default select example" th:field="*{tipoUsuarioId}" th:value="${CreateUserFormBean.tipoUsuarioId}" required>
+                                    <option value="0" selected >Seleciona una rol</option>
+                                    <option th:each="tipoUsuario : ${TipoUsuarioListBean}" th:value="${tipoUsuario.tipoUsuarioId}" th:text="${tipoUsuario.descripcion}" ></option>
+                                </select>
+                                <div class="form-text" th:text="#{formulario.creacion.usuario.posicion.detail}">We'll never share your email with anyone else.</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="correoprimario" class="form-label" th:text="#{formulario.creacion.usuario.correoprimario}">Email address</label>
+                                <input type="email" class="form-control" id="correoprimario" aria-describedby="correoHelp" th:field="*{correoprimario}" th:value="${CreateUserFormBean.correoprimario}">
+
+                                <p th:if="${#fields.hasErrors('correoprimario')}" class="mt-2 text-sm text-red-600" id="firstName-error">The first name cannot be empty.</p>
+                                <div id="correoHelp" class="form-text" th:text="#{formulario.creacion.usuario.correoprimario.detail}">We'll never share your email with anyone else.</div>
+                            </div>
+
+                        </div>
+
+                        <div class="text-center"><button type="submit">Enviar Formulario</button></div>
+                    </form>
+                </div>
+                <!-- End usuario Form -->
+
+            </div>
+
+        </div>
+
+</section>
+
+</body>
+</html>

@@ -15,6 +15,8 @@ public class AplicationConstantUtil {
     public static long NO_EXISTE_IDENTIFICACION_SOLICITUD = 800;
     public static long EXISTE_SOLICITUD_AC_PARA_CIUDADANO = 801;
     public static long EXISTE_ACTIVO_CON_IDENTIFCACION = 804;
+    public static long PASSWORD_DE_CONFIRMACION_DIFERENTES = 805;
+    public static long EXISTEN_DATOS_REQUERIDO_FORMULARIO_USUAARIO = 806;
 
     public static Integer generateLoteId() {
         Random ran = new Random();

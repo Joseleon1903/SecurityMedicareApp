@@ -33,6 +33,7 @@ public class GestionUsuarioController extends ViewBaseContext {
     private final TablePaginationDto tablePagination;
 
     private String usarnametest= "Administrador";
+    private String defaultProfilePicture = "../assets/img/app/unknown-user-Image.png";
 
 
     @Autowired
@@ -72,6 +73,13 @@ public class GestionUsuarioController extends ViewBaseContext {
         return "pages/usuario/ShowGestionUsuario";
     }
 
+    @DeleteMapping("/delete/{id}")
+    public String doDeleteUser(@PathVariable("id") Long userId, RedirectAttributes redirectAttributes) {
+        usuarioService.deleteUsuarioById(userId);
+
+        redirectAttributes.addFlashAttribute("deletedUserName", usarnametest);
+        return "redirect:/gestion/usuario";
+    }
 
     @Override
     protected void init() {

@@ -62,8 +62,19 @@ public class UsuarioServiceImpl implements  UsuarioService{
     }
 
     @Override
+    public Usuario buscarUsuariosSistemaPorEmailJpa(String email) {
+        return usuarioJpaRepo.findByEmail(email.toLowerCase());
+
+    }
+
+    @Override
     public Usuario saveOrUpdateUser(Usuario user){
         return usuarioJpaRepo.save(user);
+    }
+
+    @Override
+    public void deleteUsuarioById(Long userId) {
+        usuarioJpaRepo.deleteById(userId);
     }
 
     @Override

@@ -14,7 +14,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -104,7 +108,8 @@ public class CatalogoServiceImpl implements CatalogoService {
     @Override
     public List<Nacionalidad> buscarNacionalidadTodos() {
         logger.info("Entering in buscarNacionalidadTodos");
-        return nacionalidadJpaRepo.findAll();
+        return nacionalidadJpaRepo.findAll().stream().sorted(Comparator.comparing(Nacionalidad::getDescripcion))
+                .collect(Collectors.toList());
     }
 
     @Override
