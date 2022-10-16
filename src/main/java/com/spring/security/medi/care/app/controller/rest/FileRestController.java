@@ -1,5 +1,6 @@
 package com.spring.security.medi.care.app.controller.rest;
 
+import com.spring.security.medi.care.app.commons.domain.ImagedStored;
 import com.spring.security.medi.care.app.file.service.FileService;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/file")
@@ -53,4 +55,13 @@ public class FileRestController {
                 .contentType(MediaType.parseMediaType( MediaType.IMAGE_JPEG_VALUE))
                 .body(new InputStreamResource(in.getInputStream()));
     }
+
+    @GetMapping
+    @ResponseBody
+    public ResponseEntity<List<ImagedStored>> getImageStored() throws IOException {
+        List<ImagedStored> listout = imageServiceImpl.findAllImagedStored();
+        return ResponseEntity.ok().body(listout);
+    }
+
+
 }

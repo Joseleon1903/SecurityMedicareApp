@@ -20,7 +20,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class FileServiceImpl implements FileService{
@@ -65,7 +67,7 @@ public class FileServiceImpl implements FileService{
 
             if(entity ==null){
                 entity= new ImagedStored();
-                entity.setCreationDate(new Date());
+                entity.setCreationDate(LocalDateTime.now());
             }
 
             entity.setName(fileName);
@@ -84,7 +86,7 @@ public class FileServiceImpl implements FileService{
             entity.setFileViewUri(fileViewUri);
             entity.setFileType(file.getContentType());
             entity.setSize(file.getSize());
-            entity.setUpdateDate(new Date());
+            entity.setUpdateDate(LocalDateTime.now());
             // Copy file to the target location (Replacing existing file with the same name)
             Path targetLocation = this.fileStorageLocation.resolve(fileName);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
@@ -115,7 +117,7 @@ public class FileServiceImpl implements FileService{
 
         attachment.setFileName(fileName);
         attachment.setUserName(username);
-        attachment.setUploadDate(new Date());
+        attachment.setUploadDate(LocalDateTime.now());
 
         try {
             // Check if the file's name contains invalid characters
@@ -152,6 +154,15 @@ public class FileServiceImpl implements FileService{
     @Override
     public ImagedStored findById(long id){
         return imagesDataRepository.findById(id).get();
+    }
+
+    @Override
+    public List<ImagedStored> findAllImagedStored() {
+        List<ImagedStored> imagelist =  new ArrayList<>();
+        imagesDataRepository.findAll().forEach( img ->{
+            imagelist.add(img);
+        });
+        return imagelist;
     }
 
 }

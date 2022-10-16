@@ -1,9 +1,13 @@
 package com.spring.security.medi.care.app.commons.domain;
 
 import lombok.Data;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -20,8 +24,8 @@ public class ImagedStored implements Serializable {
     private String fileViewUri;
     private String fileType;
     private long size;
-    private Date creationDate;
-    private Date updateDate;
+    private LocalDateTime creationDate;
+    private LocalDateTime updateDate;
 
     public ImagedStored(String name, String fileDownloadUri, String fileViewUri, String fileType, long size) {
         this.name = name;

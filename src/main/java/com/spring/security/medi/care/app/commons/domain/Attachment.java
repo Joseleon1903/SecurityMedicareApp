@@ -3,7 +3,7 @@ package com.spring.security.medi.care.app.commons.domain;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Created by jose eduardo on 3/25/2020.
@@ -25,13 +25,13 @@ public class Attachment {
 
     private String userName;
 
-    private Date uploadDate;
+    private LocalDateTime uploadDate;
 
     private String downloadUri;
 
     private String viewUri;
 
-    public Attachment(Long id, String fileName, String fileDetail, String documentType, String userName, Date uploadDate, String downloadUri, String viewUri) {
+    public Attachment(Long id, String fileName, String fileDetail, String documentType, String userName, LocalDateTime uploadDate, String downloadUri, String viewUri) {
         this.id = id;
         this.fileName = fileName;
         this.fileDetail = fileDetail;

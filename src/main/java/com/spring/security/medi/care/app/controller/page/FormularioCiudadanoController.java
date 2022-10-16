@@ -78,13 +78,14 @@ public class FormularioCiudadanoController extends ViewBaseContext {
 
         Ciudadano ciudadano =  new Ciudadano(ciudadanoForm.getCedula(), ciudadanoForm.getNss(), ciudadanoForm.getNombre(), ciudadanoForm.getPrimerApellido(),
                 ciudadanoForm.getSegundoApellido(), ciudadanoForm.getMunicipio(), ciudadanoForm.getNacionalidad(),
-                ciudadanoForm.getGenero(), Date.from(date.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()), AfiliacionDtoUtil.C_ESTADO_AC);
+                ciudadanoForm.getGenero(), date, AfiliacionDtoUtil.C_ESTADO_AC);
 
         try{
-            if(ciudadanoService.buscarCiudadanoPorIdentifiacion(ciudadanoForm.getCedula(), ciudadanoForm.getNss()) != null){
+            if(!ciudadanoService.buscarCiudadanoPorIdentifiacion(ciudadanoForm.getCedula(), ciudadanoForm.getNss()).isEmpty()){
                 logger.info("Error existe un ciudadano con la misma identificacion");
                 logger.info("ABORT REGISTRATION");
                 MotivoEstado mot = catalogoService.buscarMotivoPorId(AplicationConstantUtil.EXISTE_ACTIVO_CON_IDENTIFCACION);
+                logger.error("Throw motivo : "+ mot);
                 this.errorPageBean = new ErrorPageDto(mot.getMotivoId(), mot.getDescripcion(), true);
                 this.ciudadanoDto = ciudadanoForm;
                 return "redirect:form_ciudadano?hasError=true";
@@ -95,6 +96,7 @@ public class FormularioCiudadanoController extends ViewBaseContext {
         }
         catch (Exception ex){
             logger.info("Error existe un ciudadano con la misma identificacion");
+            logger.error("error no identificado..", ex);
             MotivoEstado mot = catalogoService.buscarMotivoPorId(AplicationConstantUtil.GENERAL_ERROR_INTERNO);
             this.errorPageBean = new ErrorPageDto(mot.getMotivoId(), mot.getDescripcion(), true);
             this.ciudadanoDto = ciudadanoForm;

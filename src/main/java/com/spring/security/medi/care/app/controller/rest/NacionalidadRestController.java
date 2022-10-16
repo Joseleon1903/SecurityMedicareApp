@@ -30,7 +30,7 @@ public class NacionalidadRestController {
     @ResponseBody
     public ResponseEntity<Nacionalidad> findById(@PathVariable("id") Long id){
         Nacionalidad nacionalidad = catalogoService.buscarNacionalidadPorId(id);
-        return new ResponseEntity<Nacionalidad>(nacionalidad, HttpStatus.OK);
+        return new ResponseEntity(nacionalidad, HttpStatus.OK);
     }
 
     @GetMapping

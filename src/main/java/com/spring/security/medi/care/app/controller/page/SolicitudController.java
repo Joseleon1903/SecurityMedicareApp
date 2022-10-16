@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -87,9 +89,9 @@ public class SolicitudController extends ViewBaseContext {
         solicitudIn.setPrimerApellido(AplicationConstantUtil.PARAMETRO_PENDIENTE_DEFINICION);
         solicitudIn.setAutomatica(solicitudForm.getAplicaInsitucionAutomtica());
         solicitudIn.setEstado(AplicationConstantUtil.ESTADO_PE);
-        solicitudIn.setFechaRecepcion(new Date());
+        solicitudIn.setFechaRecepcion(LocalDate.now());
         solicitudIn.setMunicipioId(solicitudForm.getMunicipioId());
-        solicitudIn.setFechaUltimoCambio(new Date());
+        solicitudIn.setFechaUltimoCambio(LocalDateTime.now());
         solicitudIn.setNacionalidadId(solicitudForm.getNacionalidadId());
         logger.info("Inicinado registro de la solicitud");
         try {

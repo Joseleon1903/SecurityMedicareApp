@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Transactional(readOnly=true)
 public interface CiudadanoJpaRepo extends PagingAndSortingRepository<Ciudadano, Long>{
 
@@ -23,6 +25,6 @@ public interface CiudadanoJpaRepo extends PagingAndSortingRepository<Ciudadano, 
     Page<Ciudadano> findByParameters(String identificacion, String texto, String estado, Pageable paging);
 
     @Query("select c from Ciudadano c where :cedula = c.cedula or :nss= c.nss")
-    Ciudadano findByCedulaAndNss(String cedula, String nss);
+    List<Ciudadano> findByCedulaAndNss(String cedula, String nss);
 
 }

@@ -84,7 +84,7 @@ public class CiudadanoServiceImpl implements CiudadanoService {
     }
 
     @Override
-    public Ciudadano buscarCiudadanoPorIdentifiacion(String cedula, String nss) {
+    public List<Ciudadano> buscarCiudadanoPorIdentifiacion(String cedula, String nss) {
         logger.info("Entering in method buscarCiudadanoPorIdentifiacion");
         logger.info("param : "+cedula );
         logger.info("param : "+nss );

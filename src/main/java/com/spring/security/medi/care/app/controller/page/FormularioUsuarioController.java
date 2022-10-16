@@ -20,6 +20,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -104,8 +105,8 @@ public class FormularioUsuarioController extends ViewBaseContext {
         Contacto cont = new Contacto();
         cont.setDescripcion(createUserFormDataInput.getDetalle());
         cont.setEstado("AC");
-        cont.setFechaCreacion(new Date());
-        cont.setFechaUltimoCambio(new Date());
+        cont.setFechaCreacion(LocalDateTime.now());
+        cont.setFechaUltimoCambio(LocalDateTime.now());
         cont.setPosicion(createUserFormDataInput.getPosicion());
         cont.setCorreoPrimario(createUserFormDataInput.getCorreoprimario());
 
@@ -113,7 +114,7 @@ public class FormularioUsuarioController extends ViewBaseContext {
 
         user.setCodigo(createUserFormDataInput.getUsername());
         user.setLlaveEncriptacion(llaveEncript);
-        user.setFechaUltimoCambio(new Date());
+        user.setFechaUltimoCambio(LocalDateTime.now());
         user.setEstado("AC");
         user.setContactoId(cont);
         user.setTipoUsuarioId(tipo);

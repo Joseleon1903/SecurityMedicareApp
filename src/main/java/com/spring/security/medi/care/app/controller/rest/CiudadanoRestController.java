@@ -35,9 +35,9 @@ public class CiudadanoRestController {
 
     @GetMapping("/find")
     @ResponseBody
-    public ResponseEntity<Ciudadano> findByIdentifiacacion(@RequestParam(value = "cedula", required = false) String cedula,
+    public ResponseEntity<List<Ciudadano>> findByIdentifiacacion(@RequestParam(value = "cedula", required = false) String cedula,
                                                            @RequestParam(value = "nss",required = false) String nss){
-        Ciudadano ciudadano = ciudadanoService.buscarCiudadanoPorIdentifiacion(cedula, nss);
+        List<Ciudadano> ciudadano = ciudadanoService.buscarCiudadanoPorIdentifiacion(cedula, nss);
         return new ResponseEntity(ciudadano, HttpStatus.OK);
     }
 

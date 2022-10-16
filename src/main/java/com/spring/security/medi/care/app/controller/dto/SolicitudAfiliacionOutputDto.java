@@ -5,7 +5,8 @@ import com.spring.security.medi.care.app.commons.domain.SolicitudAfiliacion;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Component
@@ -22,13 +23,13 @@ public class SolicitudAfiliacionOutputDto implements Serializable {
     private Long entidadId;
     private Boolean automatica;
     private String estado;
-    private Date fechaRecepcion;
+    private LocalDate fechaRecepcion;
     private Long municipioId;
     private Long motivoId;
 
     public SolicitudAfiliacionOutputDto(Long solicitudId, Long servicioId, Integer loteId, String seguroId,
             String regimenId, String tipoAfiliado, String cedula, String nss, Long entidadId,
-            Boolean automatica, String estado, Date fechaRecepcion, Long municipioId) {
+            Boolean automatica, String estado, LocalDate fechaRecepcion, Long municipioId) {
         this.solicitudId = solicitudId;
         this.servicioId = servicioId;
         this.loteId = loteId;
