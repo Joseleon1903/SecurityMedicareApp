@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -127,7 +129,7 @@ public class DespachoSolicitudController extends ViewBaseContext {
     protected void init() {
         logger.info("entering init method ");
         logger.info("Generando systemInfoDTO");
-        systemInfoDTO = new SystemInfoDTO("Despacho solicitudes","Disfruta de nuestros Planes de Beneficios Humano Sonrisas, procesar tu solicitud de manera exitosa en nuestra pagina web.", new Date());
+        systemInfoDTO = new SystemInfoDTO("Despacho solicitudes","Disfruta de nuestros Planes de Beneficios Humano Sonrisas, procesar tu solicitud de manera exitosa en nuestra pagina web.", LocalDate.now());
         logger.info("systemInfoDTO: " + systemInfoDTO);
         logger.info("existing init method ");
     }
