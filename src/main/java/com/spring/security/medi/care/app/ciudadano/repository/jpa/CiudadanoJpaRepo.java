@@ -7,8 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Transactional(readOnly=true)
 public interface CiudadanoJpaRepo extends PagingAndSortingRepository<Ciudadano, Long>{
 

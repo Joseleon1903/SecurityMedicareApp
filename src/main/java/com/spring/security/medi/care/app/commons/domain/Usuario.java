@@ -4,7 +4,6 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 @Entity
@@ -27,6 +26,7 @@ public class Usuario implements Serializable {
 
     private String llaveEncriptacion;
     private LocalDateTime fechaUltimoCambio;
+
     private String estado;
 
     public Usuario() {
