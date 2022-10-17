@@ -18,6 +18,8 @@ public class AplicationConstantUtil {
     public static long PASSWORD_DE_CONFIRMACION_DIFERENTES = 805;
     public static long EXISTEN_DATOS_REQUERIDO_FORMULARIO_USUAARIO = 806;
 
+    public static long EXISTEN_MOTIVO_ESTADO_SISTEMA = 807;
+
     public static Integer generateLoteId() {
         Random ran = new Random();
         return ran.nextInt(Integer.SIZE - 1);
