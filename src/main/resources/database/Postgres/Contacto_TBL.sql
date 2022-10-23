@@ -2,11 +2,11 @@ CREATE TABLE CONTACTO
 (
   CONTACTO_ID                  SERIAL PRIMARY KEY,
   DESCRIPCION                  VARCHAR(150),
-  CORREO_PRIMARIO           VARCHAR(128) NOT NULL,
+  CORREO_PRIMARIO              VARCHAR(128) NOT NULL,
   CORREO_ALTERNO               VARCHAR(128),
   POSICION                     VARCHAR(60),
   FECHA_CREACION               DATE          NOT NULL,
-  FECHA_ULTIMO_CAMBIO          DATE,
+  FECHA_ULTIMO_CAMBIO          timestamp,
   ESTADO                       VARCHAR(2)   NOT NULL
 );
 

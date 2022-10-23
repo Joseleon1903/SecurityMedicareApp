@@ -31,7 +31,7 @@ public class UsuarioInfoDto implements Serializable {
         this.tipoUsuario =  usuario.getTipoUsuarioId().getDescripcion();
         this.correoprimario = usuario.getContactoId().getCorreoPrimario();
         long diferencia= Duration.between(LocalDateTime.now(), usuario.getFechaUltimoCambio()).toMinutes();
-        this.timeLogin = diferencia;
+        this.timeLogin =Math.abs(diferencia);
     }
 
     public UsuarioInfoDto() {
