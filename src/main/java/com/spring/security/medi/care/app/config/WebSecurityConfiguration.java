@@ -1,0 +1,72 @@
+package com.spring.security.medi.care.app.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+@Configuration
+@EnableGlobalMethodSecurity(securedEnabled = true)
+public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    private final PasswordEncoder passwordEncoder;
+    private final UserDetailsService userDetailsService;
+
+    public WebSecurityConfiguration(PasswordEncoder passwordEncoder, UserDetailsService userDetailsService) {
+        this.passwordEncoder = passwordEncoder;
+        this.userDetailsService = userDetailsService;
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+    }
+
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//
+//        auth.inMemoryAuthentication()
+//        .withUser("user")
+//        .password(passwordEncoder.encode("verysecure"))
+//        .roles("USER")
+//        .and()
+//        .withUser("admin")
+//        .password(passwordEncoder.encode("evenmoresecure"))
+//        .roles("USER", "ADMIN");
+//    }
+
+    @Override
+    protected void configure(HttpSecurity http)throws Exception {
+        http.authorizeRequests()
+//                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll'()'
+
+                .antMatchers("/img/*", "/assets/**",  "/css/**","/img/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .and()
+                .logout().permitAll();
+
+
+    }
+
+
+//    @Override
+//    protected void configure(HttpSecurity http)throws Exception {
+//        http.authorizeRequests()
+//                .antMatchers("/formulario/usuario").hasRole("ADMIN")
+//                .antMatchers("/users/*/delete").hasRole("ADMIN")
+//                .antMatchers(HttpMethod.GET, "/home/*").hasRole("USER")
+//                .antMatchers(HttpMethod.POST, "/home/*").hasRole("ADMIN")
+//                .and()
+//                .formLogin().permitAll()
+//                .and()
+//                .logout().permitAll();
+//    }
+
+}

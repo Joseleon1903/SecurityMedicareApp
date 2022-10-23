@@ -14,15 +14,19 @@ import com.spring.security.medi.care.app.usuario.service.UsuarioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -35,6 +39,7 @@ public class FormularioUsuarioController extends ViewBaseContext {
     private final CatalogoService catalogoService;
     private final SecurityService securityService;
     private final FileService fileService;
+    private final PasswordEncoder passwordEncoder;
 
     private SystemInfoDTO systemInfoDTO;
     private CreateUserFormData createUserFormData;
@@ -47,13 +52,14 @@ public class FormularioUsuarioController extends ViewBaseContext {
     @Autowired
     public FormularioUsuarioController(UsuarioService usuarioService, TipoUsuarioService tipoUsuarioService,
                                        CatalogoService catalogoService,CreateUserFormData createUserFormData,
-                                       SecurityService securityService, FileService fileService) {
+                                       SecurityService securityService, FileService fileService,PasswordEncoder passwordEncoder) {
         this.usuarioService = usuarioService;
         this.tipoUsuarioService = tipoUsuarioService;
         this.createUserFormData = createUserFormData;
         this.catalogoService = catalogoService;
         this.securityService = securityService;
         this.fileService = fileService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/formulario/usuario")
@@ -111,7 +117,8 @@ public class FormularioUsuarioController extends ViewBaseContext {
         cont.setPosicion(createUserFormDataInput.getPosicion());
         cont.setCorreoPrimario(createUserFormDataInput.getCorreoprimario());
 
-        String llaveEncript = securityService.hash256String(createUserFormDataInput.getPassword());
+//        String llaveEncript = securityService.hash256String();
+          String llaveEncript = passwordEncoder.encode(createUserFormDataInput.getPassword());
 
         user.setCodigo(createUserFormDataInput.getUsername());
         user.setLlaveEncriptacion(llaveEncript);

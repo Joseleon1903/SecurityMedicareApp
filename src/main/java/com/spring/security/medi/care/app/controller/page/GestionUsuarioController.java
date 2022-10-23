@@ -51,8 +51,8 @@ public class GestionUsuarioController extends ViewBaseContext {
     public String GestionUsuarioPage(@RequestParam(value = "indexPage", required = false) Integer indexPageInput, Model model, Principal principal){
         logger.info("------- entering -----------");
         logger.info("Entering in method GestionUsuarioPage..");
-        logger.info("nombre usuario : "+usarnametest);
-
+        logger.info("nombre usuario : "+principal.getName());
+        usarnametest = principal.getName();
         Usuario user = usuarioService.buscarUsuariosSistemaporCodigoJpa(usarnametest);
         this.usuarioInfoDto = new UsuarioInfoDto(user);
 

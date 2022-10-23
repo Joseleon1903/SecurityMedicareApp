@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+      xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Security Medicare App</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- browser icon -->
+    <link th:href="@{assets/img/logo/SecurityMedicCareApp_Logo.png}" rel="icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link th:href="@{../assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{../assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+    <link th:href="@{../assets/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet">
+    <link th:href="@{../assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
+    <link th:href="@{../assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
+    <link th:href="@{../assets/vendor/aos/aos.css}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link th:href="@{../assets/css/main.css}" rel="stylesheet">
+</head>
+<body data-aos-easing="ease-in-out" data-aos-duration="1000" data-aos-delay="0">
+
+<!--=============== init Header Section ===============-->
+<div th:insert="fragments/header_page :: header_section"></div>
+<!--=============== End Header Section ===============-->
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+        <div class="page-header d-flex align-items-center" style="background-image: url('assets/img/page-header.jpg');">
+            <div class="container position-relative">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-12 text-center">
+                        <h2  th:text="#{page.error.403.text}" >INTERNAL SERVER ERROR</h2>
+                        <h2  th:text="#{page.error.subtitle.text}" >CONTACTAR EL ADMINISTRADOR DEL SISTEMA</h2>
+                       <!-- <div class="alert alert-danger" role="alert">
+                            Unexpected error (type=<span data-text="${error}">Bad</span>, status=<span data-text="${status}">500</span>).
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- End Breadcrumbs -->
+
+</main><!-- End #main -->
+
+<!-- init Footer Section -->
+<div th:insert="fragments/footer_page :: footer_section"></div>
+<!-- End Footer Section -->
+
+<!-- Vendor JS Files -->
+<script th:src="@{assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+<script th:src="@{assets/vendor/glightbox/js/glightbox.min.js}"></script>
+<script th:src="@{assets/vendor/swiper/swiper-bundle.min.js}"></script>
+<script th:src="@{assets/vendor/aos/aos.js}"></script>
+
+<!-- Template Main JS File -->
+<script th:src="@{assets/js/main.js}"></script>
+
+</body>
+</html>
