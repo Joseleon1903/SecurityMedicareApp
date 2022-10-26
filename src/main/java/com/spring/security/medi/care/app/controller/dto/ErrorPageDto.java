@@ -9,6 +9,7 @@ import java.io.Serializable;
 @Component
 public class ErrorPageDto implements Serializable {
 
+    private static final long serialVersionUID = -742209968383196712L;
     private String descripcionError;
 
     private Long codigoError;

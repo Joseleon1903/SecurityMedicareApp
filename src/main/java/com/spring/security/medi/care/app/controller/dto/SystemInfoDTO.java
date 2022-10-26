@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Component
 public class SystemInfoDTO implements Serializable {
 
+    private static final long serialVersionUID = 7947773125506486793L;
     private String pageName;
 
     private String descripcion;

@@ -13,6 +13,7 @@ import java.io.Serializable;
 @DupicatedMotivoEstado
 public class MotivoEstadoFormDTO implements Serializable {
 
+    private static final long serialVersionUID = 5774481794489170592L;
     private Long motivoId;
 
     @NotEmpty

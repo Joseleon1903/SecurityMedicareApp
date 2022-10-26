@@ -7,6 +7,7 @@ import java.io.Serializable;
 @Component
 public class TitularFilterDTO implements Serializable {
 
+    private static final long serialVersionUID = -5213039614102084959L;
     private String ciudadanoId;
     private String entidadId;
     private String numeroContrato;

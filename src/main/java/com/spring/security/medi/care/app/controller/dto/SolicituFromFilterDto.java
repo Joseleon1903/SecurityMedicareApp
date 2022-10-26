@@ -9,6 +9,7 @@ import java.io.Serializable;
 @Component
 public class SolicituFromFilterDto implements Serializable{
 
+    private static final long serialVersionUID = 4443438312137408841L;
     private String cedula;
     private Integer servicioId;
     private Long seguroId;

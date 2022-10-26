@@ -4,9 +4,12 @@ import com.spring.security.medi.care.app.commons.AfiliacionDtoUtil;
 import com.spring.security.medi.care.app.commons.domain.SolicitudAfiliacion;
 import org.springframework.stereotype.Component;
 
-@Component
-public class DetalleSolicitudAfiliacionDto {
+import java.io.Serializable;
 
+@Component
+public class DetalleSolicitudAfiliacionDto implements Serializable {
+
+    private static final long serialVersionUID = 6130293591590128900L;
     private Long solicitudId;
     private String entidadNombre;
     private String tipoAfiliado;

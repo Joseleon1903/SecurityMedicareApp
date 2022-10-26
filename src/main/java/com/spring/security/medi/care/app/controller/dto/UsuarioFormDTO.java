@@ -2,9 +2,12 @@ package com.spring.security.medi.care.app.controller.dto;
 
 import org.springframework.stereotype.Component;
 
-@Component
-public class UsuarioFormDTO {
+import java.io.Serializable;
 
+@Component
+public class UsuarioFormDTO implements Serializable {
+
+    private static final long serialVersionUID = 5032108072315310780L;
     private String codigo;
 
     public UsuarioFormDTO(String codigo) {

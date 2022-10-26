@@ -1,11 +1,14 @@
 package com.spring.security.medi.care.app.controller.dto;
 
 import lombok.Data;
+
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
-public class UsuarioDto {
+public class UsuarioDto implements Serializable {
 
+    private static final long serialVersionUID = 7988627269453128482L;
     private Long usuarioId;
     private String nombre;
     private String tipoUsuarioId;

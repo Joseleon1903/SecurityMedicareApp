@@ -8,6 +8,7 @@ import lombok.Data;
 @Component
 public class TablePaginationDto implements Serializable{
 
+    private static final long serialVersionUID = -780035502660559259L;
     private int paginationIndex = 0;
 
     private long remainCount= 0;

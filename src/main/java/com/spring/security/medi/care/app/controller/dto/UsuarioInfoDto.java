@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Component
 public class UsuarioInfoDto implements Serializable {
 
+    private static final long serialVersionUID = 228498016431915789L;
     private String name;
     private String estado;
     private String tipoUsuario;

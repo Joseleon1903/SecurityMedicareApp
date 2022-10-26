@@ -6,6 +6,7 @@ import java.io.Serializable;
 @Component
 public class SolicitudDepFilterDTO implements Serializable {
 
+    private static final long serialVersionUID = 6217250970516596318L;
     private Long solicitudAfiTitular;
     private String estado;
     private String tipoDependiente;

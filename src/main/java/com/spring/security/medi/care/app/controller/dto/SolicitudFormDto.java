@@ -8,6 +8,7 @@ import java.io.Serializable;
 @Component
 public class SolicitudFormDto implements Serializable {
 
+    private static final long serialVersionUID = -3948955345809935618L;
     private Short tipoIdentificacion;
     private String cedula;
     private String nss;

@@ -3,9 +3,12 @@ package com.spring.security.medi.care.app.controller.dto;
 import com.spring.security.medi.care.app.commons.DaoUtil;
 import org.springframework.stereotype.Component;
 
-@Component
-public class MunicipioFilterDto {
+import java.io.Serializable;
 
+@Component
+public class MunicipioFilterDto implements Serializable {
+
+    private static final long serialVersionUID = 3944801580736727929L;
     private String codigoMunicipio;
     private String descripcion;
     private int rowCounter = DaoUtil.DEFAULT_ROW_COUNT;

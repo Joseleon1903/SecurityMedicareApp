@@ -6,6 +6,7 @@ import java.io.Serializable;
 @Component
 public class ParentescoFilterDTO implements Serializable {
 
+    private static final long serialVersionUID = -5618315096569578958L;
     private String tipoDependiente;
     private String genero;
     private String rowCounter;

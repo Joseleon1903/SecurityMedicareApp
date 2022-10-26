@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Component
 public class SolicitudAfiliacionOutputDto implements Serializable {
 
+    private static final long serialVersionUID = 3362705426220746481L;
     private Long solicitudId;
     private Long servicioId;
     private Integer loteId;

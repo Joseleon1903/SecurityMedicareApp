@@ -9,6 +9,8 @@ import java.io.Serializable;
 @Component
 public class CiudadanoFilterDto implements Serializable {
 
+    private static final long serialVersionUID = 6241179542950394650L;
+
     private String nombre;
     private String tipoIdentificacion;
     private String estado;

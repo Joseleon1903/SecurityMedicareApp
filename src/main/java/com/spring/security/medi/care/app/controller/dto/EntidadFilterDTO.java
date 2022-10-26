@@ -7,6 +7,7 @@ import java.io.Serializable;
 public class EntidadFilterDTO implements Serializable {
 
 
+    private static final long serialVersionUID = 3923042551200298956L;
     private String seguroId;
     private String regimenId;
     private String texto;
