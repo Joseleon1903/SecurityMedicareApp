@@ -6,6 +6,8 @@ import com.spring.security.medi.care.app.commons.service.SecurityService;
 import com.spring.security.medi.care.app.file.service.FileService;
 import com.spring.security.medi.care.app.usuario.service.UsuarioService;
 import com.spring.security.medi.care.app.usuario.types.PaginatedUsuario;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,8 @@ public class UsuarioRestController {
     private final UsuarioService usuarioService;
     private final SecurityService securityService;
     private final FileService fileService;
+
+    private static final Logger logger = LoggerFactory.getLogger(UsuarioRestController.class);
 
     @Autowired
     public UsuarioRestController (UsuarioService usuarioService, SecurityService securityService, FileService fileService){
@@ -83,14 +87,12 @@ public class UsuarioRestController {
 
     @PostMapping("/fileUpload")
     public ResponseEntity<ImagedStored> updateProfilePicture(@RequestParam("myFile") MultipartFile myFile) {
-
         ImagedStored image = null;
         try{
             image =fileService.createImage(myFile);
         }catch(IOException ex){
-            System.out.println("error update image");
+            logger.error("error update image", ex);
         }
-        // Redirect to a successful upload page
         return new ResponseEntity(image, HttpStatus.OK);
     }
 }

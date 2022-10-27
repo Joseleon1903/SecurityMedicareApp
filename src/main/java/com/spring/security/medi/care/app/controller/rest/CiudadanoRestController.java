@@ -16,8 +16,6 @@ import java.util.List;
 @RequestMapping(value= "/api/ciudadano")
 public class CiudadanoRestController {
 
-    private static final Logger logger = LoggerFactory.getLogger(CiudadanoRestController.class);
-
     private final CiudadanoService ciudadanoService;
 
     @Autowired
@@ -60,7 +58,7 @@ public class CiudadanoRestController {
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity<Void> registerCiudadano(@RequestBody Ciudadano ciudadano){
+    public ResponseEntity<Ciudadano> registerCiudadano(@RequestBody Ciudadano ciudadano){
         Ciudadano ciudOut = ciudadanoService.guardarCiudadano(ciudadano);
         return new ResponseEntity(ciudOut, HttpStatus.CREATED);
     }

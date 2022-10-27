@@ -26,25 +26,20 @@ import java.util.Date;
 @Controller
 public class GestionUsuarioController extends ViewBaseContext {
 
-    private static final Logger logger = LoggerFactory.getLogger(GestionUsuarioController.class);
-
-    private SystemInfoDTO systemInfoDTO;
     private final UsuarioService usuarioService;
 
+    private SystemInfoDTO systemInfoDTO;
     private PaginatedUsuario paginatedUsuario;
     private UsuarioInfoDto usuarioInfoDto;
-
-    private final TablePaginationDto tablePagination;
+    private TablePaginationDto tablePagination;
 
     private String usarnametest= "Administrador";
     private String defaultProfilePicture = "../assets/img/app/unknown-user-Image.png";
 
 
     @Autowired
-    public GestionUsuarioController(UsuarioService usuarioService, TablePaginationDto tablePagination, UsuarioInfoDto usuarioInfoDto){
+    public GestionUsuarioController(UsuarioService usuarioService){
         this.usuarioService = usuarioService;
-        this.tablePagination =tablePagination;
-        this.usuarioInfoDto = usuarioInfoDto;
     }
 
     @RequestMapping("/gestion/usuario")
@@ -80,7 +75,6 @@ public class GestionUsuarioController extends ViewBaseContext {
     @DeleteMapping("/delete/{id}")
     public String doDeleteUser(@PathVariable("id") Long userId, RedirectAttributes redirectAttributes) {
         usuarioService.deleteUsuarioById(userId);
-
         redirectAttributes.addFlashAttribute("deletedUserName", usarnametest);
         return "redirect:/gestion/usuario";
     }
@@ -89,6 +83,9 @@ public class GestionUsuarioController extends ViewBaseContext {
     protected void init() {
         logger.info("entering init method ");
         logger.info("Generando systemInfoDTO");
+        paginatedUsuario = new PaginatedUsuario();
+        usuarioInfoDto = new UsuarioInfoDto();
+        tablePagination= new TablePaginationDto();
         systemInfoDTO = new SystemInfoDTO("Gestion Usuario", LocalDate.now());
         logger.info("SystemInfoDTO: "+ systemInfoDTO);
         logger.info("existing init method ");

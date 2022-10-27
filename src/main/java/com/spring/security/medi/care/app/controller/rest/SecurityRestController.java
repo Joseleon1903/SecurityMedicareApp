@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import java.security.MessageDigest;
 
 @RestController
-@RequestMapping(value="/api/security", produces=MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value="/api/security")
 public class SecurityRestController {
 
     private static final Logger logger = LoggerFactory.getLogger(SeguroRestController.class);

@@ -29,21 +29,21 @@ public class MotivoEstadoRestController {
     @ResponseBody
     public ResponseEntity<MotivoEstado> findById(@PathVariable("id") Long id){
         MotivoEstado motivo = catalogoService.buscarMotivoPorId(id);
-        return new ResponseEntity<MotivoEstado>(motivo, HttpStatus.OK);
+        return new ResponseEntity(motivo, HttpStatus.OK);
     }
 
     @GetMapping
     @ResponseBody
     public ResponseEntity<List<MotivoEstado>> findAll(){
         List<MotivoEstado> motivosList = catalogoService.buscarMotivosTodos();
-        return new ResponseEntity<List<MotivoEstado>>(motivosList, HttpStatus.OK);
+        return new ResponseEntity(motivosList, HttpStatus.OK);
     }
 
     @PutMapping
     @ResponseBody
     public ResponseEntity<MotivoEstado> updateEntity(@RequestBody MotivoEstado motivo){
         MotivoEstado motivoOut = catalogoService.actualizarMotivoEstado(motivo);
-        return new ResponseEntity<MotivoEstado>(motivoOut, HttpStatus.OK);
+        return new ResponseEntity(motivoOut, HttpStatus.OK);
     }
 
     @GetMapping("/find")

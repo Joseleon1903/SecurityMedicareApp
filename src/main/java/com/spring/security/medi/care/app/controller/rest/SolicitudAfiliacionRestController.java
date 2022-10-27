@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.*;
 public class SolicitudAfiliacionRestController {
 
 
-    private static final Logger logger = LoggerFactory.getLogger(SolicitudAfiliacionRestController.class);
-
     private final SolicitudAfiliacionService solicitudAfiliacionService;
 
     @Autowired

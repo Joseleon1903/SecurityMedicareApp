@@ -18,6 +18,9 @@ public class TablePaginationDto implements Serializable{
         this.remainCount = remainCount;
     }
 
+    public TablePaginationDto() {
+    }
+
     public long getRemainCount() {
         return remainCount;
     }
@@ -30,6 +33,4 @@ public class TablePaginationDto implements Serializable{
         }
     }
 
-    public TablePaginationDto() {
-    }
 }

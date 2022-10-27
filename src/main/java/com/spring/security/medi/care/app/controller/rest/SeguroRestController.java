@@ -15,7 +15,6 @@ import java.util.List;
 @RequestMapping(value = "/api/seguro")
 public class SeguroRestController {
 
-    private static final Logger logger = LoggerFactory.getLogger(SeguroRestController.class);
 
     private final CatalogoService catalogoService;
 

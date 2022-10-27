@@ -15,9 +15,6 @@ import java.util.List;
 @RequestMapping(value = "/api/servicio/sistema")
 public class ServicioSistemaRestController {
 
-
-    private static final Logger logger = LoggerFactory.getLogger(ServicioSistemaRestController.class);
-
     private final CatalogoService catalogoService;
 
     @Autowired

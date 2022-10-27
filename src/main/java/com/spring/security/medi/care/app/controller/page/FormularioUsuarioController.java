@@ -11,8 +11,6 @@ import com.spring.security.medi.care.app.controller.dto.SystemInfoDTO;
 import com.spring.security.medi.care.app.file.service.FileService;
 import com.spring.security.medi.care.app.usuario.service.TipoUsuarioService;
 import com.spring.security.medi.care.app.usuario.service.UsuarioService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -32,8 +30,6 @@ import java.util.List;
 @Controller
 public class FormularioUsuarioController extends ViewBaseContext {
 
-    private static final Logger logger = LoggerFactory.getLogger(GestionUsuarioController.class);
-
     private final UsuarioService usuarioService;
     private final TipoUsuarioService tipoUsuarioService;
     private final CatalogoService catalogoService;
@@ -43,19 +39,18 @@ public class FormularioUsuarioController extends ViewBaseContext {
 
     private SystemInfoDTO systemInfoDTO;
     private CreateUserFormData createUserFormData;
+    private ErrorPageDto errorPageBean;
 
     private List<TipoUsuario> listaTipoUsuario;
-    private ErrorPageDto errorPageBean;
 
     private String defaultProfilePicture = "../assets/img/app/unknown-user-Image.png";
 
     @Autowired
     public FormularioUsuarioController(UsuarioService usuarioService, TipoUsuarioService tipoUsuarioService,
-                                       CatalogoService catalogoService,CreateUserFormData createUserFormData,
-                                       SecurityService securityService, FileService fileService,PasswordEncoder passwordEncoder) {
+                                       CatalogoService catalogoService,SecurityService securityService, FileService fileService,
+                                       PasswordEncoder passwordEncoder) {
         this.usuarioService = usuarioService;
         this.tipoUsuarioService = tipoUsuarioService;
-        this.createUserFormData = createUserFormData;
         this.catalogoService = catalogoService;
         this.securityService = securityService;
         this.fileService = fileService;
@@ -169,6 +164,8 @@ public class FormularioUsuarioController extends ViewBaseContext {
     protected void init() {
         logger.info("entering init method ");
         logger.info("Generando systemInfoDTO");
+        createUserFormData = new CreateUserFormData();
+        errorPageBean= new ErrorPageDto();
         systemInfoDTO = new SystemInfoDTO("Registrar Usuario","Regístrate con nosotros, Si te registras con nosotros, estarás recibiendo periódicamente noticias de la comunidad.", LocalDate.now());
         logger.info("systemInfoDTO: " + systemInfoDTO);
         logger.info("existing init method ");

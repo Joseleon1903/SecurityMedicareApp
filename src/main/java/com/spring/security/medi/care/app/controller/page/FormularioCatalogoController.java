@@ -4,16 +4,9 @@ import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.commons.AplicationConstantUtil;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
 import com.spring.security.medi.care.app.commons.domain.MotivoEstado;
-import com.spring.security.medi.care.app.commons.service.SecurityService;
-import com.spring.security.medi.care.app.controller.dto.CreateUserFormData;
 import com.spring.security.medi.care.app.controller.dto.ErrorPageDto;
 import com.spring.security.medi.care.app.controller.dto.MotivoEstadoFormDTO;
 import com.spring.security.medi.care.app.controller.dto.SystemInfoDTO;
-import com.spring.security.medi.care.app.file.service.FileService;
-import com.spring.security.medi.care.app.usuario.service.TipoUsuarioService;
-import com.spring.security.medi.care.app.usuario.service.UsuarioService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,9 +22,6 @@ import java.time.LocalDate;
 @Controller
 public class FormularioCatalogoController extends ViewBaseContext {
 
-
-    private static final Logger logger = LoggerFactory.getLogger(FormularioCatalogoController.class);
-
     private final CatalogoService catalogoService;
 
     private MotivoEstadoFormDTO motivoEstadoFormDTO;
@@ -39,9 +29,8 @@ public class FormularioCatalogoController extends ViewBaseContext {
     private SystemInfoDTO systemInfoDTO;
 
     @Autowired
-    public FormularioCatalogoController(CatalogoService catalogoService, MotivoEstadoFormDTO motivoEstadoFormDTO) {
+    public FormularioCatalogoController(CatalogoService catalogoService) {
         this.catalogoService = catalogoService;
-        this.motivoEstadoFormDTO = motivoEstadoFormDTO;
     }
 
     @GetMapping("/form_catalogo")
@@ -89,6 +78,8 @@ public class FormularioCatalogoController extends ViewBaseContext {
     protected void init() {
         logger.info("entering init method ");
         logger.info("Generando systemInfoDTO");
+        motivoEstadoFormDTO =  new MotivoEstadoFormDTO();
+        errorPageBean = new ErrorPageDto();
         systemInfoDTO = new SystemInfoDTO("Formulario Catalogo","Pagina que te permite agregar informacion al catalogo de informaciones..", LocalDate.now());
         logger.info("systemInfoDTO: " + systemInfoDTO);
         logger.info("existing init method ");

@@ -16,8 +16,6 @@ import java.util.List;
 @RequestMapping(value="/api/municipio")
 public class MunicipioRestController {
 
-    private static final Logger logger = LoggerFactory.getLogger(MunicipioRestController.class);
-
     private final CatalogoService catalogoService;
 
     @Autowired

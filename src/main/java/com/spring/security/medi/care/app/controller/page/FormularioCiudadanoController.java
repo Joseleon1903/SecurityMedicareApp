@@ -12,8 +12,6 @@ import com.spring.security.medi.care.app.commons.domain.Nacionalidad;
 import com.spring.security.medi.care.app.controller.dto.CiudadanoFormDto;
 import com.spring.security.medi.care.app.controller.dto.ErrorPageDto;
 import com.spring.security.medi.care.app.controller.dto.SystemInfoDTO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,17 +19,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 
 @Controller
 public class FormularioCiudadanoController extends ViewBaseContext {
-
-    private static final Logger logger = LoggerFactory.getLogger(FormularioCiudadanoController.class);
-
-    private SystemInfoDTO systemInfoDTO;
 
     private List<Nacionalidad> listaNacionalidad;
     private List<Municipio> listaMunicipio;
@@ -39,16 +32,14 @@ public class FormularioCiudadanoController extends ViewBaseContext {
     private final CatalogoService catalogoService;
     private final CiudadanoService ciudadanoService;
 
+    private SystemInfoDTO systemInfoDTO;
     private CiudadanoFormDto ciudadanoDto;
-
     private ErrorPageDto errorPageBean;
 
     @Autowired
-    public FormularioCiudadanoController(ErrorPageDto errorPageBean, CiudadanoFormDto ciudadanoDto, CatalogoService catalogoService, CiudadanoService ciudadanoService) {
+    public FormularioCiudadanoController(CatalogoService catalogoService, CiudadanoService ciudadanoService) {
         this.catalogoService = catalogoService;
         this.ciudadanoService = ciudadanoService;
-        this.ciudadanoDto = ciudadanoDto;
-        this.errorPageBean = errorPageBean;
     }
 
     @GetMapping("/form_ciudadano")
@@ -109,6 +100,8 @@ public class FormularioCiudadanoController extends ViewBaseContext {
     protected void init() {
         logger.info("entering init method ");
         logger.info("Generando systemInfoDTO");
+        ciudadanoDto = new CiudadanoFormDto();
+        errorPageBean = new ErrorPageDto();
         systemInfoDTO = new SystemInfoDTO("Formulario Ciudadano","Es un Formulario que permite al ciudadano registrarse, en la Plataforma de Servicios en Línea, a través del cual podrá solicitar cualquier servicio o trámite de forma electrónica.", LocalDate.now());
         logger.info("systemInfoDTO: "+ systemInfoDTO);
         logger.info("existing init method ");

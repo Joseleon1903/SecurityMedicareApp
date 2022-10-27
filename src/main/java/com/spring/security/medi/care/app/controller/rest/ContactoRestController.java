@@ -15,7 +15,6 @@ import java.util.List;
 @RequestMapping(value="/api/contacto")
 public class ContactoRestController {
 
-
     private static final Logger logger = LoggerFactory.getLogger(ContactoRestController.class);
 
     private final ContactoService contactoService;
