@@ -9,7 +9,6 @@ import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 @Data
-@Component
 @DupicatedMotivoEstado
 public class MotivoEstadoFormDTO implements Serializable {
 

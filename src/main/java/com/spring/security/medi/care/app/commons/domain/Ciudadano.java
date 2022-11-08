@@ -56,4 +56,21 @@ public class Ciudadano implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
         this.estado = estado;
     }
+
+    @Override
+    public String toString() {
+        return "Ciudadano{" +
+                "ciudadanoId=" + ciudadanoId +
+                ", cedula='" + cedula + '\'' +
+                ", nss='" + nss + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", primerApellido='" + primerApellido + '\'' +
+                ", segundoApellido='" + segundoApellido + '\'' +
+                ", municipioId=" + municipioId +
+                ", nacionalidadId=" + nacionalidadId +
+                ", genero='" + genero + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
+                ", estado='" + estado + '\'' +
+                '}';
+    }
 }

@@ -99,11 +99,9 @@ public class CatalogoController extends ViewBaseContext {
         }
         logger.info("termiando busqueda Nacionalidad");
         logger.info("Terminando busqueda para Nacionalidad..");
-
         // catalogo nacionalidad FIN
 
         // catalogo municipio INICIO
-
         if (municipioIndexInput != null
                 && (this.municipioPaginationDto.getPaginationIndex() + municipioIndexInput) > -1) {
             int result = this.municipioPaginationDto.getPaginationIndex() + municipioIndexInput;
@@ -134,7 +132,6 @@ public class CatalogoController extends ViewBaseContext {
         model.addAttribute("PaginatedNacionalidadBean", paginatedNacionalidad);
         model.addAttribute("PaginatedMotivosBean", paginatedMotivoEstado);
         model.addAttribute("SystemInfoBean", systemInfoDTO);
-
         model.addAttribute("MotivoMaginationBean", motivoPaginationDto);
         model.addAttribute("NacionalidadPaginationBean", nacionalidadPaginationDto);
         model.addAttribute("MunicipioPaginationBean", municipioPaginationDto);

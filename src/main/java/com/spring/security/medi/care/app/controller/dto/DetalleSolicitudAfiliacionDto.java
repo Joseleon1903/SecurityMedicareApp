@@ -2,11 +2,12 @@ package com.spring.security.medi.care.app.controller.dto;
 
 import com.spring.security.medi.care.app.commons.AfiliacionDtoUtil;
 import com.spring.security.medi.care.app.commons.domain.SolicitudAfiliacion;
+import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
-@Component
+@Data
 public class DetalleSolicitudAfiliacionDto implements Serializable {
 
     private static final long serialVersionUID = 6130293591590128900L;
@@ -38,94 +39,6 @@ public class DetalleSolicitudAfiliacionDto implements Serializable {
         this.segundoApellido = segundoApellido;
         this.institucionPensionado = institucionPensionado;
         this.estado = solicitudAfiliacion.getEstado();
-        this.motivo = motivo;
-    }
-
-    public Long getSolicitudId() {
-        return solicitudId;
-    }
-
-    public void setSolicitudId(Long solicitudId) {
-        this.solicitudId = solicitudId;
-    }
-
-    public String getEntidadNombre() {
-        return entidadNombre;
-    }
-
-    public void setEntidadNombre(String entidadNombre) {
-        this.entidadNombre = entidadNombre;
-    }
-
-    public String getTipoAfiliado() {
-        return tipoAfiliado;
-    }
-
-    public void setTipoAfiliado(String tipoAfiliado) {
-        this.tipoAfiliado = tipoAfiliado;
-    }
-
-    public String getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
-
-    public String getNss() {
-        return nss;
-    }
-
-    public void setNss(String nss) {
-        this.nss = nss;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getPrimerApellido() {
-        return primerApellido;
-    }
-
-    public void setPrimerApellido(String primerApellido) {
-        this.primerApellido = primerApellido;
-    }
-
-    public String getSegundoApellido() {
-        return segundoApellido;
-    }
-
-    public void setSegundoApellido(String segundoApellido) {
-        this.segundoApellido = segundoApellido;
-    }
-
-    public String getInstitucionPensionado() {
-        return institucionPensionado;
-    }
-
-    public void setInstitucionPensionado(String institucionPensionado) {
-        this.institucionPensionado = institucionPensionado;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getMotivo() {
-        return motivo;
-    }
-
-    public void setMotivo(String motivo) {
         this.motivo = motivo;
     }
 

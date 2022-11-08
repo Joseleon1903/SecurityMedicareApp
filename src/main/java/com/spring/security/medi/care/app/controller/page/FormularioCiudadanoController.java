@@ -72,7 +72,7 @@ public class FormularioCiudadanoController extends ViewBaseContext {
                 ciudadanoForm.getGenero(), date, AfiliacionDtoUtil.C_ESTADO_AC);
 
         try{
-            if(!ciudadanoService.buscarCiudadanoPorIdentifiacion(ciudadanoForm.getCedula(), ciudadanoForm.getNss()).isEmpty()){
+            if(ciudadanoService.buscarCiudadanoPorIdentifiacion(ciudadanoForm.getCedula(), ciudadanoForm.getNss()) != null){
                 logger.info("Error existe un ciudadano con la misma identificacion");
                 logger.info("ABORT REGISTRATION");
                 MotivoEstado mot = catalogoService.buscarMotivoPorId(AplicationConstantUtil.EXISTE_ACTIVO_CON_IDENTIFCACION);

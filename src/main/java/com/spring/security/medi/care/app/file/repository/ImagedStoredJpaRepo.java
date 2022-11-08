@@ -3,7 +3,9 @@ package com.spring.security.medi.care.app.file.repository;
 import com.spring.security.medi.care.app.commons.domain.ImagedStored;
 import org.springframework.data.repository.CrudRepository;
 
-public interface ImagedStoredJpaRepository extends CrudRepository<ImagedStored, Long> {
+import java.util.Optional;
 
-    ImagedStored findByName(String name);
+public interface ImagedStoredJpaRepo extends CrudRepository<ImagedStored, Long> {
+
+    Optional<ImagedStored> findByName(String name);
 }

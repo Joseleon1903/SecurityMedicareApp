@@ -1,12 +1,10 @@
 package com.spring.security.medi.care.app.controller.dto;
 
 import lombok.Data;
-import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
 @Data
-@Component
 public class CiudadanoFilterDto implements Serializable {
 
     private static final long serialVersionUID = 6241179542950394650L;

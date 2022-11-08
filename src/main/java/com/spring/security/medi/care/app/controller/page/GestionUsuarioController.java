@@ -8,8 +8,6 @@ import com.spring.security.medi.care.app.controller.dto.TablePaginationDto;
 import com.spring.security.medi.care.app.controller.dto.UsuarioInfoDto;
 import com.spring.security.medi.care.app.usuario.service.UsuarioService;
 import com.spring.security.medi.care.app.usuario.types.PaginatedUsuario;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,13 +19,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Controller
 public class GestionUsuarioController extends ViewBaseContext {
 
     private final UsuarioService usuarioService;
-
     private SystemInfoDTO systemInfoDTO;
     private PaginatedUsuario paginatedUsuario;
     private UsuarioInfoDto usuarioInfoDto;

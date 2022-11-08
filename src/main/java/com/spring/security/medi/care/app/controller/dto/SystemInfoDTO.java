@@ -1,11 +1,11 @@
 package com.spring.security.medi.care.app.controller.dto;
 
-import org.springframework.stereotype.Component;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
-@Component
+@Data
 public class SystemInfoDTO implements Serializable {
 
     private static final long serialVersionUID = 7947773125506486793L;
@@ -27,30 +27,6 @@ public class SystemInfoDTO implements Serializable {
     public SystemInfoDTO(String pageName, String descripcion, LocalDate sysDate) {
         this.pageName = pageName;
         this.descripcion = descripcion;
-        this.sysDate = sysDate;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public String getPageName() {
-        return pageName;
-    }
-
-    public void setPageName(String pageName) {
-        this.pageName = pageName;
-    }
-
-    public LocalDate getSysDate() {
-        return sysDate;
-    }
-
-    public void setSysDate(LocalDate sysDate) {
         this.sysDate = sysDate;
     }
 

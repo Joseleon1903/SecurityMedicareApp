@@ -30,25 +30,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
     }
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//
-//        auth.inMemoryAuthentication()
-//        .withUser("user")
-//        .password(passwordEncoder.encode("verysecure"))
-//        .roles("USER")
-//        .and()
-//        .withUser("admin")
-//        .password(passwordEncoder.encode("evenmoresecure"))
-//        .roles("USER", "ADMIN");
-//    }
-
     @Override
     protected void configure(HttpSecurity http)throws Exception {
         http.authorizeRequests()
-//                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll'()'
-
                 .antMatchers("/img/*", "/assets/**",  "/css/**","/img/**").permitAll()
+                .antMatchers("/api/**").permitAll()
+                .antMatchers("/formulario/usuario").permitAll()
+                .antMatchers("/upload/picture").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -56,22 +44,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll().successHandler(new UserAuthenticationSuccessHandler(usuarioService))
                 .and()
                 .logout().permitAll();
-
-
     }
-
-
-//    @Override
-//    protected void configure(HttpSecurity http)throws Exception {
-//        http.authorizeRequests()
-//                .antMatchers("/formulario/usuario").hasRole("ADMIN")
-//                .antMatchers("/users/*/delete").hasRole("ADMIN")
-//                .antMatchers(HttpMethod.GET, "/home/*").hasRole("USER")
-//                .antMatchers(HttpMethod.POST, "/home/*").hasRole("ADMIN")
-//                .and()
-//                .formLogin().permitAll()
-//                .and()
-//                .logout().permitAll();
-//    }
 
 }

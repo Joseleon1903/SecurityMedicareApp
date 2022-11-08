@@ -10,6 +10,9 @@ public class Rol implements GrantedAuthority {
         this.id = id;
     }
 
+    public Rol() {
+    }
+
     public String getId() {
         return id;
     }
@@ -27,4 +30,6 @@ public class Rol implements GrantedAuthority {
     public String toString() {
         return id;
     }
+
+
 }

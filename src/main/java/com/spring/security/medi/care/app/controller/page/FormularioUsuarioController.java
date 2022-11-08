@@ -4,6 +4,8 @@ import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.commons.AplicationConstantUtil;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
 import com.spring.security.medi.care.app.commons.domain.*;
+import com.spring.security.medi.care.app.commons.exception.InternalServerException;
+import com.spring.security.medi.care.app.commons.exception.ResourceNotFoundException;
 import com.spring.security.medi.care.app.commons.service.SecurityService;
 import com.spring.security.medi.care.app.controller.dto.CreateUserFormData;
 import com.spring.security.medi.care.app.controller.dto.ErrorPageDto;
@@ -22,7 +24,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -111,9 +112,9 @@ public class FormularioUsuarioController extends ViewBaseContext {
         cont.setFechaUltimoCambio(LocalDateTime.now());
         cont.setPosicion(createUserFormDataInput.getPosicion());
         cont.setCorreoPrimario(createUserFormDataInput.getCorreoprimario());
-
-//        String llaveEncript = securityService.hash256String();
-          String llaveEncript = passwordEncoder.encode(createUserFormDataInput.getPassword());
+        logger.info("iniciando encriptacion clave..");
+        String llaveEncript = passwordEncoder.encode(createUserFormDataInput.getPassword());
+        logger.info("terminado encriptacion clave..");
 
         user.setCodigo(createUserFormDataInput.getUsername());
         user.setLlaveEncriptacion(llaveEncript);
@@ -139,15 +140,21 @@ public class FormularioUsuarioController extends ViewBaseContext {
     }
 
     @PostMapping("/upload/picture")
-    public String uploadProfilePicture(@RequestParam("file") MultipartFile file, Model model) throws IOException {
+    public String uploadProfilePicture(@RequestParam("file") MultipartFile file) {
         logger.info("Entering in uploadProfilePicture");
         logger.info("param : "+file.getOriginalFilename());
         logger.info("param : "+file.getContentType());
-
-        ImagedStored img = fileService.createImage(file);
-
+        ImagedStored img = null;
+        try {
+            img = fileService.createImage(file);
+        } catch (ResourceNotFoundException | InternalServerException e) {
+            logger.info("Error "+e.getMessage());
+            logger.error("Internal Server Error", e);
+            MotivoEstado mot = catalogoService.buscarMotivoPorId(AplicationConstantUtil.GENERAL_ERROR_INTERNO);
+            this.errorPageBean = new ErrorPageDto(mot.getMotivoId(), mot.getDescripcion(), true);
+            return "redirect:/formulario/usuario?hasError=true";
+        }
         defaultProfilePicture = img.getFileViewUri();
-
         return "redirect:/formulario/usuario";
     }
 

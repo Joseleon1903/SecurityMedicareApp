@@ -1,11 +1,11 @@
 package com.spring.security.medi.care.app.controller.dto;
 
 import com.spring.security.medi.care.app.commons.DaoUtil;
-import org.springframework.stereotype.Component;
+import lombok.Data;
 
 import java.io.Serializable;
 
-@Component
+@Data
 public class NacionalidadFilterDTO implements Serializable {
 
     private static final long serialVersionUID = -4108035206230330792L;
@@ -18,30 +18,6 @@ public class NacionalidadFilterDTO implements Serializable {
     }
 
     public NacionalidadFilterDTO() {
-    }
-
-    public String getPaisId() {
-        return paisId;
-    }
-
-    public void setPaisId(String paisId) {
-        this.paisId = paisId;
-    }
-
-    public int getRowCounter() {
-        return rowCounter;
-    }
-
-    public void setRowCounter(int rowCounter) {
-        this.rowCounter = rowCounter;
-    }
-
-    public int getPage() {
-        return page;
-    }
-
-    public void setPage(int page) {
-        this.page = page;
     }
 
     @Override

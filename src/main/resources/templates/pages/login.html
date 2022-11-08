@@ -83,7 +83,7 @@
                     </div>
 
                     <div class="divider d-flex align-items-center my-4">
-                        <p class="text-center fw-bold mx-3 mb-0 title-color">Or</p>
+                        <p class="text-center fw-bold mx-3 mb-0 title-color">Here</p>
                     </div>
 
                     <!-- Email input -->
@@ -102,6 +102,8 @@
                         <button type="submit" class="btn btn-primary btn-lg"
                                 style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
                         <p class="small fw-bold mt-2 pt-1 mb-0 text-form" th:text="#{login.text.fomr.remenber}">Don't have an account? Contact the Administrator</p>
+                        </br>
+                        <a class="footer-links"  th:href="@{/formulario/usuario}"> <h4 th:text="#{login.text.form.register}">Register Account </h4> </a>
                     </div>
 
                 </form>

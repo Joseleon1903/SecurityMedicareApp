@@ -2,8 +2,6 @@ package com.spring.security.medi.care.app.controller.rest;
 
 import com.spring.security.medi.care.app.commons.domain.Contacto;
 import com.spring.security.medi.care.app.usuario.service.ContactoService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +12,6 @@ import java.util.List;
 @RestController
 @RequestMapping(value="/api/contacto")
 public class ContactoRestController {
-
-    private static final Logger logger = LoggerFactory.getLogger(ContactoRestController.class);
 
     private final ContactoService contactoService;
 
@@ -44,9 +40,5 @@ public class ContactoRestController {
        Contacto contactoOutput = contactoService.guardarContacto(contacto);
         return new ResponseEntity(contactoOutput, HttpStatus.OK);
     }
-
-
-
-
 
 }

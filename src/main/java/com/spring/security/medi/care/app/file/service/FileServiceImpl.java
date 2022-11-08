@@ -3,8 +3,10 @@ package com.spring.security.medi.care.app.file.service;
 import com.spring.security.medi.care.app.afiliacion.service.SolicitudAfiliacionServiceImpl;
 import com.spring.security.medi.care.app.commons.domain.Attachment;
 import com.spring.security.medi.care.app.commons.domain.ImagedStored;
-import com.spring.security.medi.care.app.file.repository.AttachmentJpaRepository;
-import com.spring.security.medi.care.app.file.repository.ImagedStoredJpaRepository;
+import com.spring.security.medi.care.app.commons.exception.InternalServerException;
+import com.spring.security.medi.care.app.commons.exception.ResourceNotFoundException;
+import com.spring.security.medi.care.app.file.repository.AttachmentJpaRepo;
+import com.spring.security.medi.care.app.file.repository.ImagedStoredJpaRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +35,13 @@ public class FileServiceImpl implements FileService{
 
     private final ResourceLoader resourceLoader;
 
-    private final ImagedStoredJpaRepository imagesDataRepository;
+    private final ImagedStoredJpaRepo imagesDataRepository;
 
-    private final AttachmentJpaRepository attachmentRepository;
+    private final AttachmentJpaRepo attachmentRepository;
 
 
     @Autowired
-    public FileServiceImpl(ResourceLoader resourceLoader,ImagedStoredJpaRepository imagesDataRepository, AttachmentJpaRepository attachmentRepository) {
+    public FileServiceImpl(ResourceLoader resourceLoader, ImagedStoredJpaRepo imagesDataRepository, AttachmentJpaRepo attachmentRepository) {
         this.attachmentRepository = attachmentRepository;
         this.resourceLoader = resourceLoader;
         this.imagesDataRepository = imagesDataRepository;
@@ -54,10 +56,10 @@ public class FileServiceImpl implements FileService{
     }
 
     @Override
-    public ImagedStored createImage(MultipartFile file) throws IOException{
+    public ImagedStored createImage(MultipartFile file) throws ResourceNotFoundException, InternalServerException {
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        ImagedStored entity =imagesDataRepository.findByName(fileName);
+        ImagedStored entity =imagesDataRepository.findByName(fileName).orElseThrow( ()-> new ResourceNotFoundException("not found file "));
 
         try {
             // Check if the file's name contains invalid characters
@@ -92,7 +94,7 @@ public class FileServiceImpl implements FileService{
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
             imagesDataRepository.save(entity);
         } catch (IOException ex) {
-            throw new IOException("Could not store file " + fileName + ". Please try again!", ex);
+            throw new InternalServerException("Could not store file " + fileName + ". Please try again!", ex);
         }
         return entity;
     }

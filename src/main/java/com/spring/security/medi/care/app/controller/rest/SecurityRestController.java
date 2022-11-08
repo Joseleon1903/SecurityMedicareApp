@@ -14,7 +14,7 @@ import java.security.MessageDigest;
 @RequestMapping(value="/api/security")
 public class SecurityRestController {
 
-    private static final Logger logger = LoggerFactory.getLogger(SeguroRestController.class);
+    private static final Logger logger = LoggerFactory.getLogger(SecurityRestController.class);
 
     private final SecurityService securityService;
 

@@ -1,9 +1,9 @@
 package com.spring.security.medi.care.app.controller.dto;
 
-import org.springframework.stereotype.Component;
+import lombok.Data;
 import java.io.Serializable;
 
-@Component
+@Data
 public class EntidadFilterDTO implements Serializable {
 
 

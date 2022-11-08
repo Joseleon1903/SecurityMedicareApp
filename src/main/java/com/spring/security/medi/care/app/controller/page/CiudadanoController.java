@@ -64,7 +64,7 @@ public class CiudadanoController extends ViewBaseContext {
     }
 
     @PostMapping("/listado/filter")
-    public String filterCiudadanoPage(@ModelAttribute CiudadanoFilterDto ciudadanoFilterInput, Model model) {
+    public String filterCiudadanoPage(@ModelAttribute CiudadanoFilterDto ciudadanoFilterInput) {
         logger.info("------- entering -----------");
         logger.info("Entering in method filterCiudadanoPage..");
         logger.info("param ciudadanoFilterDto " + ciudadanoFilterDto);

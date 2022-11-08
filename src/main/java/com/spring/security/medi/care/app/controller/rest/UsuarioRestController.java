@@ -2,12 +2,12 @@ package com.spring.security.medi.care.app.controller.rest;
 
 import com.spring.security.medi.care.app.commons.domain.ImagedStored;
 import com.spring.security.medi.care.app.commons.domain.Usuario;
+import com.spring.security.medi.care.app.commons.exception.InternalServerException;
+import com.spring.security.medi.care.app.commons.exception.ResourceNotFoundException;
 import com.spring.security.medi.care.app.commons.service.SecurityService;
 import com.spring.security.medi.care.app.file.service.FileService;
 import com.spring.security.medi.care.app.usuario.service.UsuarioService;
 import com.spring.security.medi.care.app.usuario.types.PaginatedUsuario;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +25,6 @@ public class UsuarioRestController {
     private final UsuarioService usuarioService;
     private final SecurityService securityService;
     private final FileService fileService;
-
-    private static final Logger logger = LoggerFactory.getLogger(UsuarioRestController.class);
 
     @Autowired
     public UsuarioRestController (UsuarioService usuarioService, SecurityService securityService, FileService fileService){
@@ -90,8 +88,8 @@ public class UsuarioRestController {
         ImagedStored image = null;
         try{
             image =fileService.createImage(myFile);
-        }catch(IOException ex){
-            logger.error("error update image", ex);
+        }catch(InternalServerException | ResourceNotFoundException ex){
+            return new ResponseEntity("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity(image, HttpStatus.OK);
     }

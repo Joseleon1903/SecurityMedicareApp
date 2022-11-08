@@ -8,8 +8,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
-import java.util.UUID;
-
 @Configuration
 public class ThymeleafConfig{
 
@@ -19,7 +17,6 @@ public class ThymeleafConfig{
         messageSource.setBasename("i18n/messages");
         return messageSource;
     }
-
 
     @Bean
     public LocalValidatorFactoryBean localValidatorFactoryBean(MessageSource messageSource) {

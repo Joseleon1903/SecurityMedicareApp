@@ -1,12 +1,10 @@
 package com.spring.security.medi.care.app.controller.dto;
 
 import lombok.Data;
-import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
 @Data
-@Component
 public class ErrorPageDto implements Serializable {
 
     private static final long serialVersionUID = -742209968383196712L;

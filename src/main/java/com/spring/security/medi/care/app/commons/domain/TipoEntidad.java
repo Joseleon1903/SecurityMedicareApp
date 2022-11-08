@@ -15,10 +15,6 @@ public class TipoEntidad implements Serializable {
     private Integer seguroId;
     private String estado;
 
-    public TipoEntidad(Long tipoEntidadId) {
-        this.tipoEntidadId = tipoEntidadId;
-    }
-
     public TipoEntidad() {
     }
 
@@ -27,5 +23,15 @@ public class TipoEntidad implements Serializable {
         this.descripcion = descripcion;
         this.seguroId = seguroId;
         this.estado = estado;
+    }
+
+    @Override
+    public String toString() {
+        return "TipoEntidad{" +
+                "tipoEntidadId=" + tipoEntidadId +
+                ", descripcion='" + descripcion + '\'' +
+                ", seguroId=" + seguroId +
+                ", estado='" + estado + '\'' +
+                '}';
     }
 }
