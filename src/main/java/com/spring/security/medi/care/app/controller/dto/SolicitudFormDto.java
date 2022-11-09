@@ -1,13 +1,13 @@
 package com.spring.security.medi.care.app.controller.dto;
 
 import lombok.Data;
-import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
 
 @Data
-@Component
 public class SolicitudFormDto implements Serializable {
 
+    private static final long serialVersionUID = -3948955345809935618L;
     private Short tipoIdentificacion;
     private String cedula;
     private String nss;

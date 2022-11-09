@@ -29,24 +29,20 @@ public class SolicitudController extends ViewBaseContext {
     private List<Seguro> segurosSistema;
     private List<Municipio> municipiosSistema;
     private List<Nacionalidad> nacionalidadesSistema;
-    private SolicitudAfiliacion solicitudOut = new SolicitudAfiliacion();
 
     private final CatalogoService catalogoService;
     private final EntidadService entidadService;
-
-    private final SolicitudFormDto solicitudForm;
     private final SolicitudAfiliacionService solicitudAfiliacionService;
 
+    private SolicitudFormDto solicitudForm;
+    private SolicitudAfiliacion solicitudOut;
     private ErrorPageDto errorPageDto;
 
     @Autowired
-    public SolicitudController(CatalogoService catalogoService, SolicitudAfiliacionService solicitudAfiliacionService,
-            EntidadService entidadService, SolicitudFormDto solicitudForm, ErrorPageDto errorPageDto) {
+    public SolicitudController(CatalogoService catalogoService, SolicitudAfiliacionService solicitudAfiliacionService, EntidadService entidadService) {
         this.catalogoService = catalogoService;
-        this.solicitudForm = solicitudForm;
         this.solicitudAfiliacionService = solicitudAfiliacionService;
         this.entidadService = entidadService;
-        this.errorPageDto = errorPageDto;
     }
 
     @GetMapping("/solicitud")
@@ -110,9 +106,9 @@ public class SolicitudController extends ViewBaseContext {
     protected void init() {
         logger.info("entering init method ");
         logger.info("Generando systemInfoDTO");
-        if (this.errorPageDto == null) {
-            this.errorPageDto = new ErrorPageDto();
-        }
+        solicitudForm = new SolicitudFormDto();
+        solicitudOut = new SolicitudAfiliacion();
+        errorPageDto=  new ErrorPageDto();
         systemInfoDTO = new SystemInfoDTO("Solicitudes","Soliciudes realizadas por un afiliado a los servicios de salud (medicamentos, procedimientos,\n" +
                 " medios diagnósticos, pruebas de laboratorio, materiales, terapias, etc.)\n" +
                 " dentro del Plan de Servicios de Salud (PDSS), así como la disponibilidad económica o agotamiento para\n" +

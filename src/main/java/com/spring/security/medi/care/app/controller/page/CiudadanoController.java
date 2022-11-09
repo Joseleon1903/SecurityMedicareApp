@@ -15,30 +15,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Controller
 public class CiudadanoController extends ViewBaseContext {
 
-    private SystemInfoDTO systemInfoDTO;
-
     private final CiudadanoService ciudadanoService;
-
     private List<CiudadanoDto> ciudadanos;
 
-    private Ciudadano detailCiudadano = new Ciudadano();
-
+    private SystemInfoDTO systemInfoDTO;
+    private Ciudadano detailCiudadano;
     private CiudadanoFilterDto ciudadanoFilterDto;
-
     private TablePaginationDto tablePagination;
 
     @Autowired
-    public CiudadanoController(CiudadanoService ciudadanoService, CiudadanoFilterDto ciudadanoFilterDto,
-            TablePaginationDto tablePagination) {
+    public CiudadanoController(CiudadanoService ciudadanoService) {
         this.ciudadanoService = ciudadanoService;
-        this.ciudadanoFilterDto = ciudadanoFilterDto;
-        this.tablePagination = tablePagination;
     }
 
     @GetMapping("/ciudadano")
@@ -72,7 +64,7 @@ public class CiudadanoController extends ViewBaseContext {
     }
 
     @PostMapping("/listado/filter")
-    public String filterCiudadanoPage(@ModelAttribute CiudadanoFilterDto ciudadanoFilterInput, Model model) {
+    public String filterCiudadanoPage(@ModelAttribute CiudadanoFilterDto ciudadanoFilterInput) {
         logger.info("------- entering -----------");
         logger.info("Entering in method filterCiudadanoPage..");
         logger.info("param ciudadanoFilterDto " + ciudadanoFilterDto);
@@ -125,6 +117,9 @@ public class CiudadanoController extends ViewBaseContext {
     protected void init() {
         logger.info("entering init method ");
         logger.info("Generando systemInfoDTO");
+        detailCiudadano = new Ciudadano();
+        ciudadanoFilterDto = new CiudadanoFilterDto();
+        tablePagination = new TablePaginationDto();
         systemInfoDTO = new SystemInfoDTO("Ciudadano","Se considera como ciudadano de un Estado a aquella persona que posee derechos civiles y políticos dentro del territorio y es considerado como tal.", LocalDate.now());
         logger.info("systemInfoDTO: " + systemInfoDTO);
         logger.info("existing init method ");

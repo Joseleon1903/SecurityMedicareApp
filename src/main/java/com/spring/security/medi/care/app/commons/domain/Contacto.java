@@ -40,4 +40,17 @@ public class Contacto implements Serializable {
         this.estado = estado;
     }
 
+    @Override
+    public String toString() {
+        return "Contacto{" +
+                "contactoId=" + contactoId +
+                ", descripcion='" + descripcion + '\'' +
+                ", correoPrimario='" + correoPrimario + '\'' +
+                ", correoAlterno='" + correoAlterno + '\'' +
+                ", posicion='" + posicion + '\'' +
+                ", fechaCreacion=" + fechaCreacion +
+                ", fechaUltimoCambio=" + fechaUltimoCambio +
+                ", estado='" + estado + '\'' +
+                '}';
+    }
 }

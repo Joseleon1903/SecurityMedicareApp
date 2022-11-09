@@ -1,11 +1,13 @@
 package com.spring.security.medi.care.app.controller.dto;
 
 import lombok.Data;
-import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 
 @Data
-@Component
-public class CiudadanoFormDto {
+public class CiudadanoFormDto implements Serializable {
+
+    private static final long serialVersionUID = -5010754159267247701L;
 
     private Long ciudadanoId;
     private String cedula;

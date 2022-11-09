@@ -26,4 +26,13 @@ public class TipoUsuario implements Serializable {
         this.descripcion = descripcion;
         this.estado = estado;
     }
+
+    @Override
+    public String toString() {
+        return "TipoUsuario{" +
+                "tipoUsuarioId=" + tipoUsuarioId +
+                ", descripcion='" + descripcion + '\'' +
+                ", estado='" + estado + '\'' +
+                '}';
+    }
 }

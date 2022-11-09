@@ -23,5 +23,12 @@ public class InstitucionPensionado implements Serializable {
     public InstitucionPensionado() {
     }
 
-
+    @Override
+    public String toString() {
+        return "InstitucionPensionado{" +
+                "institucionPensionadoId=" + institucionPensionadoId +
+                ", descripcion='" + descripcion + '\'' +
+                ", estado='" + estado + '\'' +
+                '}';
+    }
 }

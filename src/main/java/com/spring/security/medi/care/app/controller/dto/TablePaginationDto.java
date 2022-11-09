@@ -1,13 +1,12 @@
 package com.spring.security.medi.care.app.controller.dto;
 
-import org.springframework.stereotype.Component;
-import java.io.Serializable;
 import lombok.Data;
+import java.io.Serializable;
 
 @Data
-@Component
 public class TablePaginationDto implements Serializable{
 
+    private static final long serialVersionUID = -780035502660559259L;
     private int paginationIndex = 0;
 
     private long remainCount= 0;
@@ -17,18 +16,15 @@ public class TablePaginationDto implements Serializable{
         this.remainCount = remainCount;
     }
 
-    public long getRemainCount() {
-        return remainCount;
+    public TablePaginationDto() {
     }
 
     public void setRemainCount(long remainCount) {
-        if(remainCount < 0L && remainCount == 1L ){
+        if(remainCount < 0L || remainCount == 1L ){
             this.remainCount = 0;
         }else {
             this.remainCount = remainCount;
         }
     }
 
-    public TablePaginationDto() {
-    }
 }

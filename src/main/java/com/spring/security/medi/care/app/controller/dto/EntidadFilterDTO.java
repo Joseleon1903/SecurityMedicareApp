@@ -1,12 +1,13 @@
 package com.spring.security.medi.care.app.controller.dto;
 
-import org.springframework.stereotype.Component;
+import lombok.Data;
 import java.io.Serializable;
 
-@Component
+@Data
 public class EntidadFilterDTO implements Serializable {
 
 
+    private static final long serialVersionUID = 3923042551200298956L;
     private String seguroId;
     private String regimenId;
     private String texto;

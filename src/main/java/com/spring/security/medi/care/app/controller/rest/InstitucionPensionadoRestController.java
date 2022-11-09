@@ -2,22 +2,17 @@ package com.spring.security.medi.care.app.controller.rest;
 
 import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.commons.domain.InstitucionPensionado;
-import com.spring.security.medi.care.app.commons.domain.MotivoEstado;
-import com.spring.security.medi.care.app.commons.domain.Seguro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import java.util.List;
 
 @RestController
 @RequestMapping(value="/api/institucion/pensionado", produces=MediaType.APPLICATION_JSON_VALUE)
 public class InstitucionPensionadoRestController {
-
-    private static final Logger logger = LoggerFactory.getLogger(InstitucionPensionadoRestController.class);
 
     private final CatalogoService catalogoService;
 

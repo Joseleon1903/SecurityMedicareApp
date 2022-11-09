@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Controller
 public class CatalogoController extends ViewBaseContext {
@@ -24,9 +23,9 @@ public class CatalogoController extends ViewBaseContext {
 
     private SystemInfoDTO systemInfoDTO;
 
-    private MotivoEstadoFilterDTO motivoFilterDTO;
-    private NacionalidadFilterDTO nacionalidadFilterDTO;
-    private MunicipioFilterDto municipioFilterDto;
+    private MotivoEstadoFilterDTO motivoFilterDTO = new MotivoEstadoFilterDTO();
+    private NacionalidadFilterDTO nacionalidadFilterDTO = new NacionalidadFilterDTO();
+    private MunicipioFilterDto municipioFilterDto= new MunicipioFilterDto();
 
     private TablePaginationDto motivoPaginationDto;
     private TablePaginationDto nacionalidadPaginationDto;
@@ -37,26 +36,11 @@ public class CatalogoController extends ViewBaseContext {
     private NacionalidadPaginatedDto paginatedNacionalidad;
 
     @Autowired
-    public CatalogoController(CatalogoService catalogoService, MotivoEstadoFilterDTO motivoFilterDTO,
-            NacionalidadFilterDTO nacionalidadFilterDTO,
-            MunicipioFilterDto municipioFilterDto, TablePaginationDto motivoMaginationDto,
-            TablePaginationDto nacionalidadMaginationDto,
-            TablePaginationDto municipioMaginationDto) {
-        super();
+    public CatalogoController(CatalogoService catalogoService) {
         this.catalogoService = catalogoService;
-        this.motivoFilterDTO = motivoFilterDTO;
-        this.nacionalidadFilterDTO = nacionalidadFilterDTO;
-        this.municipioFilterDto = municipioFilterDto;
-        this.motivoPaginationDto = motivoMaginationDto;
-        this.nacionalidadPaginationDto = nacionalidadMaginationDto;
-        this.municipioPaginationDto = municipioMaginationDto;
     }
 
-    /***
-     *
-     * @param model
-     * @return
-     */
+
     @RequestMapping("/catalogo")
     public String showCatalogo(@RequestParam(value = "motivoIndexPage", required = false) Integer motivoIndexInput,
             @RequestParam(value = "nacionalidadIndexPage", required = false) Integer nacionalidadIndexInput,
@@ -115,11 +99,9 @@ public class CatalogoController extends ViewBaseContext {
         }
         logger.info("termiando busqueda Nacionalidad");
         logger.info("Terminando busqueda para Nacionalidad..");
-
         // catalogo nacionalidad FIN
 
         // catalogo municipio INICIO
-
         if (municipioIndexInput != null
                 && (this.municipioPaginationDto.getPaginationIndex() + municipioIndexInput) > -1) {
             int result = this.municipioPaginationDto.getPaginationIndex() + municipioIndexInput;
@@ -134,7 +116,7 @@ public class CatalogoController extends ViewBaseContext {
                         municipioFilterDto.getRowCounter());
         municipioPaginationDto.setPaginationIndex(paginatedMunicipio.getPage().getPageIndex());
         logger.info("remain row " + paginatedMunicipio.getPage().getTotalRowCount());
-        nacionalidadPaginationDto.setRemainCount(paginatedMunicipio.getPage().getTotalRowCount()
+        municipioPaginationDto.setRemainCount(paginatedMunicipio.getPage().getTotalRowCount()
                 - (municipioPaginationDto.getPaginationIndex() * municipioFilterDto.getRowCounter()));
         if (paginatedMunicipio.getPage().getTotalRowCount() == 1L) {
             logger.info("SETAEANDO ZERO REGISTRO RESTANTES");
@@ -150,7 +132,6 @@ public class CatalogoController extends ViewBaseContext {
         model.addAttribute("PaginatedNacionalidadBean", paginatedNacionalidad);
         model.addAttribute("PaginatedMotivosBean", paginatedMotivoEstado);
         model.addAttribute("SystemInfoBean", systemInfoDTO);
-
         model.addAttribute("MotivoMaginationBean", motivoPaginationDto);
         model.addAttribute("NacionalidadPaginationBean", nacionalidadPaginationDto);
         model.addAttribute("MunicipioPaginationBean", municipioPaginationDto);
@@ -233,6 +214,9 @@ public class CatalogoController extends ViewBaseContext {
     protected void init() {
         logger.debug("entering init method ");
         logger.debug("Generando systemInfoDTO");
+        motivoPaginationDto = new TablePaginationDto();
+        nacionalidadPaginationDto = new TablePaginationDto();
+        municipioPaginationDto = new TablePaginationDto();
         systemInfoDTO = new SystemInfoDTO("Catalogos","Simplificar el catálogo de servicios únicamente a los servicios previamente acordados entre cliente y proveedor,\n" +
                 " en automático reduce la carga de trabajo al eliminar la opción para tramitar solicitudes indebidas.", LocalDate.now());
         logger.debug("systemInfoDTO: " + systemInfoDTO);

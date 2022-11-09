@@ -16,9 +16,7 @@ import java.util.Locale;
 @RestController
 @RequestMapping(value="/api/nacionalidad")
 public class NacionalidadRestController {
-
-    private static final Logger logger = LoggerFactory.getLogger(NacionalidadRestController.class);
-
+    
     private final CatalogoService catalogoService;
 
     @Autowired

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout_base}">
+      layout:decorate="~{layout/layout_base}" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 
     <title>Gestion Usuario</title>
@@ -66,7 +66,7 @@
                     </div>
                 </div>
 
-                <div class="accordion" id="accordionExample" style="margin-top: 5px;">
+                <div class="accordion" id="accordionExample" style="margin-top: 5px;" sec:authorize="hasAuthority('ADMINISTRADOR')">
 
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingThree">
@@ -191,7 +191,7 @@
 
 <div  layout:fragment="custom-panel">
 
-    <!-- Modal detail ciudadano -->
+    <!-- Modal detail usuario -->
     <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -225,15 +225,15 @@
 
                         <div class="mb-3">
                             <label for="descripcionTipoUsuarioDetail" class="form-label" th:text="#{page.gestion.usuario.column.descripcionTipoUsuario}" >Nombre</label>
-                            <input id="descripcionTipoUsuarioDetail"  type="text" class="form-control" value="FREIDMANT">
+                            <input id="descripcionTipoUsuarioDetail"  type="text" class="form-control" disabled="true" value="FREIDMANT">
                         </div>
                         <div class="mb-3">
                             <label for="contactoIdDetail" class="form-label" th:text="#{page.gestion.usuario.column.contactoId}">Primer Apellido</label>
-                            <input id="contactoIdDetail"  type="text" class="form-control" value="DOINET">
+                            <input id="contactoIdDetail"  type="text" class="form-control" disabled="true" value="DOINET">
                         </div>
                         <div class="mb-3">
                             <label for="descripcionContactoDetail" class="form-label" th:text="#{page.gestion.usuario.column.descripcionContacto}">Segundo Apellido</label>
-                            <input type="text" class="form-control" id="descripcionContactoDetail" value="GODEK">
+                            <input type="text" class="form-control" id="descripcionContactoDetail" disabled="true" value="GODEK">
                         </div>
 
                         <div class="mb-3">
@@ -262,6 +262,11 @@
     </div>
 
 
+</div>
+
+<div layout:fragment="custom-panel">
+
+     <!-- custom panel gos here   -->
 </div>
 <div  layout:fragment="custom-script">
 
