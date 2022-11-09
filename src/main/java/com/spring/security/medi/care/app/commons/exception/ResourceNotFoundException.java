@@ -1,6 +1,6 @@
 package com.spring.security.medi.care.app.commons.exception;
 
-public class ResourceNotFoundException extends Exception{
+public class ResourceNotFoundException extends RuntimeException{
 
     public ResourceNotFoundException(String errorMessage, Throwable err) {
         super(errorMessage, err);

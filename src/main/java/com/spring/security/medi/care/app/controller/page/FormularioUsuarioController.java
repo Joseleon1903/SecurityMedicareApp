@@ -5,7 +5,8 @@ import com.spring.security.medi.care.app.commons.AplicationConstantUtil;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
 import com.spring.security.medi.care.app.commons.domain.*;
 import com.spring.security.medi.care.app.commons.exception.InternalServerException;
-import com.spring.security.medi.care.app.commons.exception.ResourceNotFoundException;
+import com.spring.security.medi.care.app.commons.exception.InvalidFormatException;
+import com.spring.security.medi.care.app.commons.exception.ResourceAlreadyExistException;
 import com.spring.security.medi.care.app.commons.service.SecurityService;
 import com.spring.security.medi.care.app.controller.dto.CreateUserFormData;
 import com.spring.security.medi.care.app.controller.dto.ErrorPageDto;
@@ -144,10 +145,15 @@ public class FormularioUsuarioController extends ViewBaseContext {
         logger.info("Entering in uploadProfilePicture");
         logger.info("param : "+file.getOriginalFilename());
         logger.info("param : "+file.getContentType());
+
+        if(!file.getContentType().contains("png") || !file.getContentType().contains("jpg")){
+            throw new InvalidFormatException("Invalid format file");
+        }
+
         ImagedStored img = null;
         try {
             img = fileService.createImage(file);
-        } catch (ResourceNotFoundException | InternalServerException e) {
+        } catch (ResourceAlreadyExistException | InternalServerException e) {
             logger.info("Error "+e.getMessage());
             logger.error("Internal Server Error", e);
             MotivoEstado mot = catalogoService.buscarMotivoPorId(AplicationConstantUtil.GENERAL_ERROR_INTERNO);

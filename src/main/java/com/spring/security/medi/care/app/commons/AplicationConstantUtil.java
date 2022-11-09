@@ -17,6 +17,8 @@ public class AplicationConstantUtil {
     public static long EXISTE_ACTIVO_CON_IDENTIFCACION = 804;
     public static long PASSWORD_DE_CONFIRMACION_DIFERENTES = 805;
     public static long EXISTEN_DATOS_REQUERIDO_FORMULARIO_USUAARIO = 806;
+    public static long INVALID_UPLOAD_FILE_EXCEPTION = 806;
+
 
     public static long EXISTEN_MOTIVO_ESTADO_SISTEMA = 807;
 

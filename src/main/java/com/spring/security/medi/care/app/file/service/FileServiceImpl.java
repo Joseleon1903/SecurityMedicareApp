@@ -4,6 +4,7 @@ import com.spring.security.medi.care.app.afiliacion.service.SolicitudAfiliacionS
 import com.spring.security.medi.care.app.commons.domain.Attachment;
 import com.spring.security.medi.care.app.commons.domain.ImagedStored;
 import com.spring.security.medi.care.app.commons.exception.InternalServerException;
+import com.spring.security.medi.care.app.commons.exception.ResourceAlreadyExistException;
 import com.spring.security.medi.care.app.commons.exception.ResourceNotFoundException;
 import com.spring.security.medi.care.app.file.repository.AttachmentJpaRepo;
 import com.spring.security.medi.care.app.file.repository.ImagedStoredJpaRepo;
@@ -56,11 +57,13 @@ public class FileServiceImpl implements FileService{
     }
 
     @Override
-    public ImagedStored createImage(MultipartFile file) throws ResourceNotFoundException, InternalServerException {
+    public ImagedStored createImage(MultipartFile file) throws ResourceAlreadyExistException, InternalServerException {
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        ImagedStored entity =imagesDataRepository.findByName(fileName).orElseThrow( ()-> new ResourceNotFoundException("not found file "));
-
+        ImagedStored entity = null;
+        if(imagesDataRepository.findByName(fileName).isPresent()){
+            throw  new ResourceAlreadyExistException("Resource Already Exist");
+        }
         try {
             // Check if the file's name contains invalid characters
             if(fileName.contains("..")) {

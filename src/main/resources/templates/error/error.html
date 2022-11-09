@@ -28,13 +28,14 @@
     <!-- Template Main CSS File -->
     <link th:href="@{assets/css/main.css}" rel="stylesheet">
 </head>
-<body data-aos-easing="ease-in-out" data-aos-duration="1000" data-aos-delay="0">
+<body style="background-color: #0e1d34;">
 
 <!--=============== init Header Section ===============-->
 <div th:insert="fragments/header_page :: header_section"></div>
 <!--=============== End Header Section ===============-->
 
-<main id="main">
+<section class="hero align-items-center" style="height: 750px;">
+    <div class="container">
 
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs">
@@ -45,15 +46,16 @@
                         <h2  th:text="#{page.error.500.text}" >INTERNAL SERVER ERROR</h2>
                         <h2  th:text="#{page.error.subtitle.text}" >CONTACTAR EL ADMINISTRADOR DEL SISTEMA</h2>
                         <div class="alert alert-danger" role="alert">
-                            Unexpected error (type=<span data-text="${error}">Bad</span>, status=<span data-text="${status}">500</span>).
+                            <span th:text="|${ErrorPageBean.codigoError} : |"></span>
+                            <span th:text="${ErrorPageBean.descripcionError}"></span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div><!-- End Breadcrumbs -->
-
-</main><!-- End #main -->
+    </div>
+</section><!-- End #main -->
 
 <!-- init Footer Section -->
 <!--

@@ -3,7 +3,7 @@ package com.spring.security.medi.care.app.controller.rest;
 import com.spring.security.medi.care.app.commons.domain.ImagedStored;
 import com.spring.security.medi.care.app.commons.domain.Usuario;
 import com.spring.security.medi.care.app.commons.exception.InternalServerException;
-import com.spring.security.medi.care.app.commons.exception.ResourceNotFoundException;
+import com.spring.security.medi.care.app.commons.exception.ResourceAlreadyExistException;
 import com.spring.security.medi.care.app.commons.service.SecurityService;
 import com.spring.security.medi.care.app.file.service.FileService;
 import com.spring.security.medi.care.app.usuario.service.UsuarioService;
@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
@@ -88,7 +87,7 @@ public class UsuarioRestController {
         ImagedStored image = null;
         try{
             image =fileService.createImage(myFile);
-        }catch(InternalServerException | ResourceNotFoundException ex){
+        }catch(InternalServerException | ResourceAlreadyExistException ex){
             return new ResponseEntity("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity(image, HttpStatus.OK);
