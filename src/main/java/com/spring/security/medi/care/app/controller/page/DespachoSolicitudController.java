@@ -27,19 +27,16 @@ public class DespachoSolicitudController extends ViewBaseContext {
     private PaginatedSolAfiliacionDto paginatedSolAfiliacionDto;
     private List<SolicitudAfiliacionOutputDto> solicitudList;
     private SolicituFromFilterDto solicituFromFilterDto;
+    private TablePaginationDto tablePagination;
     private List<Seguro> segurosSistema;
 
     private final SolicitudAfiliacionService solicitudAfiliacionService;
     private final CatalogoService catalogoService;
-    private final TablePaginationDto tablePagination;
 
     @Autowired
-    public DespachoSolicitudController(SolicitudAfiliacionService solicitudAfiliacionService,
-            CatalogoService catalogoService, SolicituFromFilterDto solicituFromFilterDto, TablePaginationDto tablePagination) {
+    public DespachoSolicitudController(SolicitudAfiliacionService solicitudAfiliacionService, CatalogoService catalogoService) {
         this.solicitudAfiliacionService = solicitudAfiliacionService;
         this.catalogoService = catalogoService;
-        this.solicituFromFilterDto = solicituFromFilterDto;
-        this.tablePagination = tablePagination;
     }
 
     @GetMapping("/despacho")
@@ -129,6 +126,8 @@ public class DespachoSolicitudController extends ViewBaseContext {
     protected void init() {
         logger.info("entering init method ");
         logger.info("Generando systemInfoDTO");
+        solicituFromFilterDto = new SolicituFromFilterDto();
+        tablePagination = new TablePaginationDto();
         systemInfoDTO = new SystemInfoDTO("Despacho solicitudes","Disfruta de nuestros Planes de Beneficios Humano Sonrisas, procesar tu solicitud de manera exitosa en nuestra pagina web.", LocalDate.now());
         logger.info("systemInfoDTO: " + systemInfoDTO);
         logger.info("existing init method ");

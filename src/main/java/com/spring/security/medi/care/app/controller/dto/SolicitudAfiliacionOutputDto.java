@@ -9,9 +9,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
-@Component
 public class SolicitudAfiliacionOutputDto implements Serializable {
 
+    private static final long serialVersionUID = 3362705426220746481L;
     private Long solicitudId;
     private Long servicioId;
     private Integer loteId;

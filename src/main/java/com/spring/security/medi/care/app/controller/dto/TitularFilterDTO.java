@@ -1,12 +1,13 @@
 package com.spring.security.medi.care.app.controller.dto;
 
-import org.springframework.stereotype.Component;
+import lombok.Data;
 
 import java.io.Serializable;
 
-@Component
+@Data
 public class TitularFilterDTO implements Serializable {
 
+    private static final long serialVersionUID = -5213039614102084959L;
     private String ciudadanoId;
     private String entidadId;
     private String numeroContrato;
@@ -18,46 +19,6 @@ public class TitularFilterDTO implements Serializable {
     }
 
     public TitularFilterDTO() {}
-
-    public String getCiudadanoId() {
-        return ciudadanoId;
-    }
-
-    public void setCiudadanoId(String ciudadanoId) {
-        this.ciudadanoId = ciudadanoId;
-    }
-
-    public String getEntidadId() {
-        return entidadId;
-    }
-
-    public void setEntidadId(String entidadId) {
-        this.entidadId = entidadId;
-    }
-
-    public String getNumeroContrato() {
-        return numeroContrato;
-    }
-
-    public void setNumeroContrato(String numeroContrato) {
-        this.numeroContrato = numeroContrato;
-    }
-
-    public String getTipoPersona() {
-        return tipoPersona;
-    }
-
-    public void setTipoPersona(String tipoPersona) {
-        this.tipoPersona = tipoPersona;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
 
     @Override
     public String toString() {

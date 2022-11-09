@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+      xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout_base_simple}">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Formulario Catalogo</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+
+</head>
+<body id="app" data-aos-easing="ease-in-out" data-aos-duration="1000" data-aos-delay="0">
+
+
+<section layout:fragment="content">
+
+    <section id="contact" class="contact" style="padding: 0px; margin-bottom: 3em;">
+
+        <div class="container aos-init aos-animate" data-aos="fade-up">
+
+            <div class="row gy-4 mt-4">
+
+                <div class="col-lg-4">
+
+                    <img src="https://www.gob.mx/cms/uploads/article/main_image/70618/02-guias_formularios-04.jpg" style="height: 300px; width: 425px;" >
+
+                </div>
+
+                <div class="col-lg-8">
+
+                    <div th:if="${ErrorPageBean.isError}">
+
+                        <div th:replace="fragments/fragment_panel :: panel_section(type='danger',title=|Error :${ErrorPageBean.codigoError}|, content=${ErrorPageBean.descripcionError})"></div>
+                    </div>
+
+                    <h5 class="modal-title" style="margin-bottom: 0.8em;">Motivo Estado Formulario</h5>
+
+                    <form method="post" action="#" th:action="@{/create/motivo_estado}" th:object="${MotivoEstadoFormBean}" role="form" class="php-email-form">
+                       <div class="row">
+                           <div class="col-md-6 form-group">
+                               <input type="text" th:field="*{motivoId}" th:value="${MotivoEstadoFormBean.motivoId}" name="motivoId" class="form-control" id="motivoId" placeholder="MotivoId" required>
+                           </div>
+
+                       </div>
+
+                        <div class="row">
+                            <div class="col-md-6 form-group mt-3 mt-md-0">
+                                <input type="text" th:field="*{descripcion}" th:value="${MotivoEstadoFormBean.descripcion}" class="form-control" name="nss" id="nss" placeholder="descripcion" required >
+                            </div>
+                        </div>
+
+                       <div class="row">
+
+                           <div class="col-md-6 form-group">
+                               <select th:field="*{estado}" th:value="${MotivoEstadoFormBean.estado}" class="form-select" aria-label="Default select example" required>
+                                   <option value="" selected >Seleciona el Estado</option>
+                                   <option value="AC" >Activo</option>
+                                   <option value="IN" >Inactivo</option>
+                               </select>
+                           </div>
+                       </div>
+
+                       <div><button type="submit">Enviar Formulario</button></div>
+                   </form>
+              </div>
+                <!-- End Contact Form -->
+
+            </div>
+
+        </div>
+
+    </section>
+
+</section>
+<!-- End #main -->
+
+<div layout:fragment="custom-panel">
+
+</div>
+
+<div layout:fragment="custom-script">
+
+<!--
+    <script th:src="@{assets/js/ciudadano-script.js}"></script>
+-->
+
+</div>
+
+</body>
+</html>

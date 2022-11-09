@@ -26,4 +26,13 @@ public class Seguro implements Serializable {
     public Seguro(Long seguroId) {
         this.seguroId = seguroId;
     }
+
+    @Override
+    public String toString() {
+        return "Seguro{" +
+                "seguroId=" + seguroId +
+                ", descripcion='" + descripcion + '\'' +
+                ", estado='" + estado + '\'' +
+                '}';
+    }
 }

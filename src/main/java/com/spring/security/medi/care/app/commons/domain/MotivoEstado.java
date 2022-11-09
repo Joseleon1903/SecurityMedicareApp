@@ -27,4 +27,13 @@ public class MotivoEstado implements Serializable {
         this.descripcion = descripcion;
         this.estado = estado;
     }
+
+    @Override
+    public String toString() {
+        return "MotivoEstado{" +
+                "motivoId=" + motivoId +
+                ", descripcion='" + descripcion + '\'' +
+                ", estado='" + estado + '\'' +
+                '}';
+    }
 }

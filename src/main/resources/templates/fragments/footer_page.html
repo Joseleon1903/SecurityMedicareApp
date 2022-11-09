@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 
 
@@ -34,8 +34,8 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h5 class="card-title">Profile Name </h5>
-                                    <p class="card-text">Role name</p>
+                                    <h5 class="card-title" sec:authentication="name">Profile Name </h5>
+                                    <p class="card-text" sec:authentication="principal.authorities">Role name</p>
                                     <p class="card-text"><a th:href="@{gestion/usuario}" class="gestion-usuario-link" >Gestion usuario</a></p>
                                     <p class="card-text"><small>las time login in Hours/minutes 85</small></p>
                                 </div>
@@ -48,11 +48,11 @@
                 <div class="col-lg-2 col-6 footer-links">
                     <h4>Useful Links</h4>
                     <ul>
-                        <li><a th:href="@{/home}">Home</a></li>
-                        <li><a th:href="@{/ciudadano}">Ciudadano</a></li>
-                        <li><a th:href="@{/solicitud}">Solicitudes</a></li>
-                        <li><a th:href="@{/despacho}">Despacho</a></li>
-                        <li><a th:href="@{/catalogo}">Catalogo</a></li>
+                        <li><a th:href="@{/home}" th:text="#{header.page.link.home}">Home</a></li>
+                        <li><a th:href="@{/ciudadano}" th:text="#{header.page.link.ciudadano}">Ciudadano</a></li>
+                        <li><a th:href="@{/solicitud}" th:text="#{header.page.link.solicitud}">Solicitudes</a></li>
+                        <li><a th:href="@{/despacho}" th:text="#{header.page.link.despacho}">Despacho</a></li>
+                        <li><a th:href="@{/catalogo}" th:text="#{header.page.link.catalogo}">Catalogo</a></li>
                     </ul>
                 </div>
 

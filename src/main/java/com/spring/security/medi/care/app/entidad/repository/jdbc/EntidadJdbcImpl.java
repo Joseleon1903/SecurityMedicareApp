@@ -2,8 +2,6 @@ package com.spring.security.medi.care.app.entidad.repository.jdbc;
 
 import com.spring.security.medi.care.app.entidad.repository.EntidadDaoUtil;
 import com.spring.security.medi.care.app.entidad.types.EntidadType;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -12,8 +10,6 @@ import java.util.List;
 
 @Repository
 public class EntidadJdbcImpl {
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final JdbcTemplate jdbcTemplate;
 

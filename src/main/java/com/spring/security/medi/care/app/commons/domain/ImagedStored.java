@@ -35,10 +35,19 @@ public class ImagedStored implements Serializable {
         this.size = size;
     }
 
-    public ImagedStored(String name){
-        this.name = name;
-    }
-
     public ImagedStored(){}
 
+    @Override
+    public String toString() {
+        return "ImagedStored{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", fileDownloadUri='" + fileDownloadUri + '\'' +
+                ", fileViewUri='" + fileViewUri + '\'' +
+                ", fileType='" + fileType + '\'' +
+                ", size=" + size +
+                ", creationDate=" + creationDate +
+                ", updateDate=" + updateDate +
+                '}';
+    }
 }

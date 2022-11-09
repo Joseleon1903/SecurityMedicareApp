@@ -4,6 +4,9 @@ import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.commons.AplicationConstantUtil;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
 import com.spring.security.medi.care.app.commons.domain.*;
+import com.spring.security.medi.care.app.commons.exception.InternalServerException;
+import com.spring.security.medi.care.app.commons.exception.InvalidFormatException;
+import com.spring.security.medi.care.app.commons.exception.ResourceAlreadyExistException;
 import com.spring.security.medi.care.app.commons.service.SecurityService;
 import com.spring.security.medi.care.app.controller.dto.CreateUserFormData;
 import com.spring.security.medi.care.app.controller.dto.ErrorPageDto;
@@ -11,49 +14,49 @@ import com.spring.security.medi.care.app.controller.dto.SystemInfoDTO;
 import com.spring.security.medi.care.app.file.service.FileService;
 import com.spring.security.medi.care.app.usuario.service.TipoUsuarioService;
 import com.spring.security.medi.care.app.usuario.service.UsuarioService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import java.io.IOException;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Controller
 public class FormularioUsuarioController extends ViewBaseContext {
-
-    private static final Logger logger = LoggerFactory.getLogger(GestionUsuarioController.class);
 
     private final UsuarioService usuarioService;
     private final TipoUsuarioService tipoUsuarioService;
     private final CatalogoService catalogoService;
     private final SecurityService securityService;
     private final FileService fileService;
+    private final PasswordEncoder passwordEncoder;
 
     private SystemInfoDTO systemInfoDTO;
     private CreateUserFormData createUserFormData;
+    private ErrorPageDto errorPageBean;
 
     private List<TipoUsuario> listaTipoUsuario;
-    private ErrorPageDto errorPageBean;
 
     private String defaultProfilePicture = "../assets/img/app/unknown-user-Image.png";
 
     @Autowired
     public FormularioUsuarioController(UsuarioService usuarioService, TipoUsuarioService tipoUsuarioService,
-                                       CatalogoService catalogoService,CreateUserFormData createUserFormData,
-                                       SecurityService securityService, FileService fileService) {
+                                       CatalogoService catalogoService,SecurityService securityService, FileService fileService,
+                                       PasswordEncoder passwordEncoder) {
         this.usuarioService = usuarioService;
         this.tipoUsuarioService = tipoUsuarioService;
-        this.createUserFormData = createUserFormData;
         this.catalogoService = catalogoService;
         this.securityService = securityService;
         this.fileService = fileService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/formulario/usuario")
@@ -110,8 +113,9 @@ public class FormularioUsuarioController extends ViewBaseContext {
         cont.setFechaUltimoCambio(LocalDateTime.now());
         cont.setPosicion(createUserFormDataInput.getPosicion());
         cont.setCorreoPrimario(createUserFormDataInput.getCorreoprimario());
-
-        String llaveEncript = securityService.hash256String(createUserFormDataInput.getPassword());
+        logger.info("iniciando encriptacion clave..");
+        String llaveEncript = passwordEncoder.encode(createUserFormDataInput.getPassword());
+        logger.info("terminado encriptacion clave..");
 
         user.setCodigo(createUserFormDataInput.getUsername());
         user.setLlaveEncriptacion(llaveEncript);
@@ -137,15 +141,26 @@ public class FormularioUsuarioController extends ViewBaseContext {
     }
 
     @PostMapping("/upload/picture")
-    public String uploadProfilePicture(@RequestParam("file") MultipartFile file, Model model) throws IOException {
+    public String uploadProfilePicture(@RequestParam("file") MultipartFile file) {
         logger.info("Entering in uploadProfilePicture");
         logger.info("param : "+file.getOriginalFilename());
         logger.info("param : "+file.getContentType());
 
-        ImagedStored img = fileService.createImage(file);
+        if(!file.getContentType().contains("png") || !file.getContentType().contains("jpg")){
+            throw new InvalidFormatException("Invalid format file");
+        }
 
+        ImagedStored img = null;
+        try {
+            img = fileService.createImage(file);
+        } catch (ResourceAlreadyExistException | InternalServerException e) {
+            logger.info("Error "+e.getMessage());
+            logger.error("Internal Server Error", e);
+            MotivoEstado mot = catalogoService.buscarMotivoPorId(AplicationConstantUtil.GENERAL_ERROR_INTERNO);
+            this.errorPageBean = new ErrorPageDto(mot.getMotivoId(), mot.getDescripcion(), true);
+            return "redirect:/formulario/usuario?hasError=true";
+        }
         defaultProfilePicture = img.getFileViewUri();
-
         return "redirect:/formulario/usuario";
     }
 
@@ -162,6 +177,8 @@ public class FormularioUsuarioController extends ViewBaseContext {
     protected void init() {
         logger.info("entering init method ");
         logger.info("Generando systemInfoDTO");
+        createUserFormData = new CreateUserFormData();
+        errorPageBean= new ErrorPageDto();
         systemInfoDTO = new SystemInfoDTO("Registrar Usuario","Regístrate con nosotros, Si te registras con nosotros, estarás recibiendo periódicamente noticias de la comunidad.", LocalDate.now());
         logger.info("systemInfoDTO: " + systemInfoDTO);
         logger.info("existing init method ");

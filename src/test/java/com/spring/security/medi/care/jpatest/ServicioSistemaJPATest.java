@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.TestPropertySource;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import static org.junit.Assert.assertFalse;
@@ -31,7 +32,7 @@ public class ServicioSistemaJPATest extends BaseTest {
     @Test
     public void testSaveServicioSistema() {
         Long id = 0L;
-        id = repository.saveAndFlush(new ServicioSistema(null, "servico test", new Date(), "AC")).getServicioId();
+        id = repository.saveAndFlush(new ServicioSistema(null, "servico test", LocalDate.now(), "AC")).getServicioId();
         Long idInDb = jdbcTemplate.queryForObject("SELECT s.servicio_id FROM Servicio_Sistema s where s.servicio_Id = "+id, Long.class);
         assertNotNull(idInDb);
     }

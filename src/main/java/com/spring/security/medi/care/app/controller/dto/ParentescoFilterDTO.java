@@ -1,11 +1,13 @@
 package com.spring.security.medi.care.app.controller.dto;
 
-import org.springframework.stereotype.Component;
+import lombok.Data;
+
 import java.io.Serializable;
 
-@Component
+@Data
 public class ParentescoFilterDTO implements Serializable {
 
+    private static final long serialVersionUID = -5618315096569578958L;
     private String tipoDependiente;
     private String genero;
     private String rowCounter;
@@ -22,30 +24,6 @@ public class ParentescoFilterDTO implements Serializable {
     }
 
     public ParentescoFilterDTO() {
-    }
-
-    public String getTipoDependiente() {
-        return tipoDependiente;
-    }
-
-    public void setTipoDependiente(String tipoDependiente) {
-        this.tipoDependiente = tipoDependiente;
-    }
-
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
-
-    public String getRowCounter() {
-        return rowCounter;
-    }
-
-    public void setRowCounter(String rowCounter) {
-        this.rowCounter = rowCounter;
     }
 
     @Override

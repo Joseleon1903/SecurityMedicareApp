@@ -41,4 +41,21 @@ public class Entidad implements Serializable {
         this.estado = estado;
         this.municipioId = municipioId;
     }
+
+    @Override
+    public String toString() {
+        return "Entidad{" +
+                "entidadId=" + entidadId +
+                ", tipoEntidadId=" + tipoEntidadId +
+                ", claveEntidad=" + claveEntidad +
+                ", sigla='" + sigla + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", regimenId=" + regimenId +
+                ", participaAfiliacionAut=" + participaAfiliacionAut +
+                ", rnc='" + rnc + '\'' +
+                ", entidadSupervisoraId=" + entidadSupervisoraId +
+                ", estado='" + estado + '\'' +
+                ", municipioId=" + municipioId +
+                '}';
+    }
 }
