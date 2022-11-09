@@ -80,7 +80,7 @@ public class AfiliacionDtoUtil {
 
     /**
      *
-     * @param seguro
+     * @param regimen
      * @return
      */
     public static String convertRegimenId(Integer regimen){

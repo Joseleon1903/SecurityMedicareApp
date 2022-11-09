@@ -5,7 +5,7 @@ CREATE TABLE USUARIO
   CONTACTO_ID                   INT     NOT NULL,
   TIPO_USUARIO_ID               INT     NOT NULL,
   LLAVE_ENCRIPTACION_CLAVE      VARCHAR(150),
-  FECHA_ULTIMO_CAMBIO           DATE,
+  FECHA_ULTIMO_CAMBIO           timestamp,
   ESTADO                        VARCHAR(2)   NOT NULL
 );
 

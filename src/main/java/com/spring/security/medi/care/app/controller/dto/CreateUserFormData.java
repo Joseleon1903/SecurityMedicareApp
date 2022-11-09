@@ -2,15 +2,17 @@ package com.spring.security.medi.care.app.controller.dto;
 
 import com.spring.security.medi.care.app.commons.htmvalidation.NotExistingUser;
 import lombok.Data;
-import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
-@Component
 @Data
 @NotExistingUser
-public class CreateUserFormData {
+public class CreateUserFormData implements Serializable {
+
+
+    private static final long serialVersionUID = -1996032429428489551L;
 
     @NotBlank
     private String username;

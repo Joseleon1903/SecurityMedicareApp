@@ -1,14 +1,8 @@
 package com.spring.security.medi.care.app.entidad.repository;
 
-import com.spring.security.medi.care.app.controller.page.EntidadController;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class EntidadDaoUtil {
 
     private EntidadDaoUtil(){}
-
-    private static final Logger logger = LoggerFactory.getLogger(EntidadController.class);
 
 
     public static String FIND_ALL_ENTIDADES = "SELECT " +
@@ -57,11 +51,6 @@ public class EntidadDaoUtil {
             "              ELSE 0 END) ";
 
     public static String getIconUrl(String descripcion){
-        logger.info("entering in getIconUrl");
-
-        logger.info("param : "+descripcion);
-
-        logger.info("exiting in getIconUrl");
 
         if(descripcion.toUpperCase().contains("universal".toUpperCase())){
             return "/img/ars-universal.png";

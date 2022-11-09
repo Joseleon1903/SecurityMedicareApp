@@ -1,6 +1,9 @@
 package com.spring.security.medi.care.app.controller.rest;
 
 import com.spring.security.medi.care.app.commons.domain.ImagedStored;
+import com.spring.security.medi.care.app.commons.exception.InternalServerException;
+import com.spring.security.medi.care.app.commons.exception.ResourceAlreadyExistException;
+import com.spring.security.medi.care.app.commons.exception.ResourceNotFoundException;
 import com.spring.security.medi.care.app.file.service.FileService;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -27,7 +30,7 @@ public class FileRestController {
     public String uploadFile(@RequestParam("file") MultipartFile file) {
         try {
             imageServiceImpl.createImage(file);
-        }catch(IOException ex){
+        }catch(ResourceAlreadyExistException | InternalServerException ex){
             System.out.println("Error: "+ ex.getMessage());
         }
         return "successifully upload!";
@@ -62,6 +65,5 @@ public class FileRestController {
         List<ImagedStored> listout = imageServiceImpl.findAllImagedStored();
         return ResponseEntity.ok().body(listout);
     }
-
 
 }

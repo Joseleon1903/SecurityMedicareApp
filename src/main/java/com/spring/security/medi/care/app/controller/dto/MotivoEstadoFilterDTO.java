@@ -1,12 +1,14 @@
 package com.spring.security.medi.care.app.controller.dto;
 
 import com.spring.security.medi.care.app.commons.DaoUtil;
-import org.springframework.stereotype.Component;
+import lombok.Data;
+
 import java.io.Serializable;
 
-@Component
+@Data
 public class MotivoEstadoFilterDTO implements Serializable {
 
+    private static final long serialVersionUID = 444640705128450814L;
     private Long motivoId;
     private String descripcion;
     private int rowCounter = DaoUtil.DEFAULT_ROW_COUNT;

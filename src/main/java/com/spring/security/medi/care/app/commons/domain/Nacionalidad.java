@@ -29,4 +29,14 @@ public class Nacionalidad implements Serializable {
         this.paisId = paisId;
         this.estado = estado;
     }
+
+    @Override
+    public String toString() {
+        return "Nacionalidad{" +
+                "nacionalidadId=" + nacionalidadId +
+                ", descripcion='" + descripcion + '\'' +
+                ", paisId='" + paisId + '\'' +
+                ", estado='" + estado + '\'' +
+                '}';
+    }
 }

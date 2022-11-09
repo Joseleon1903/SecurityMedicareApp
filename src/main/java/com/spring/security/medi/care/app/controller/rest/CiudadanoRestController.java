@@ -4,19 +4,16 @@ import com.spring.security.medi.care.app.ciudadano.service.CiudadanoService;
 import com.spring.security.medi.care.app.ciudadano.type.CiudadanoPaginated;
 import com.spring.security.medi.care.app.commons.DaoUtil;
 import com.spring.security.medi.care.app.commons.domain.Ciudadano;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
 @RequestMapping(value= "/api/ciudadano")
 public class CiudadanoRestController {
-
-    private static final Logger logger = LoggerFactory.getLogger(CiudadanoRestController.class);
 
     private final CiudadanoService ciudadanoService;
 
@@ -29,14 +26,14 @@ public class CiudadanoRestController {
     @ResponseBody
     public ResponseEntity<Ciudadano> findById(@PathVariable("ciudadanoId") Long id){
         Ciudadano ciudadano = ciudadanoService.buscarCiudadanoPorCiudadanoId(id);
-        return new ResponseEntity<Ciudadano>(ciudadano, HttpStatus.OK);
+        return new ResponseEntity(ciudadano, HttpStatus.OK);
     }
 
     @GetMapping("/find")
     @ResponseBody
-    public ResponseEntity<List<Ciudadano>> findByIdentifiacacion(@RequestParam(value = "cedula", required = false) String cedula,
+    public ResponseEntity<Ciudadano> findByIdentifiacacion(@RequestParam(value = "cedula", required = false) String cedula,
                                                            @RequestParam(value = "nss",required = false) String nss){
-        List<Ciudadano> ciudadano = ciudadanoService.buscarCiudadanoPorIdentifiacion(cedula, nss);
+        Ciudadano ciudadano = ciudadanoService.buscarCiudadanoPorIdentifiacion(cedula, nss);
         return new ResponseEntity(ciudadano, HttpStatus.OK);
     }
 
@@ -60,7 +57,7 @@ public class CiudadanoRestController {
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity<Void> registerCiudadano(@RequestBody Ciudadano ciudadano){
+    public ResponseEntity<Ciudadano> registerCiudadano(@RequestBody Ciudadano ciudadano){
         Ciudadano ciudOut = ciudadanoService.guardarCiudadano(ciudadano);
         return new ResponseEntity(ciudOut, HttpStatus.CREATED);
     }

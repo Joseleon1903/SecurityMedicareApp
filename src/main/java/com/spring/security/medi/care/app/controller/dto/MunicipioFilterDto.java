@@ -1,11 +1,14 @@
 package com.spring.security.medi.care.app.controller.dto;
 
 import com.spring.security.medi.care.app.commons.DaoUtil;
-import org.springframework.stereotype.Component;
+import lombok.Data;
 
-@Component
-public class MunicipioFilterDto {
+import java.io.Serializable;
 
+@Data
+public class MunicipioFilterDto implements Serializable {
+
+    private static final long serialVersionUID = 3944801580736727929L;
     private String codigoMunicipio;
     private String descripcion;
     private int rowCounter = DaoUtil.DEFAULT_ROW_COUNT;
@@ -17,38 +20,6 @@ public class MunicipioFilterDto {
     }
 
     public MunicipioFilterDto() {
-    }
-
-    public String getCodigoMunicipio() {
-        return codigoMunicipio;
-    }
-
-    public void setCodigoMunicipio(String codigoMunicipio) {
-        this.codigoMunicipio = codigoMunicipio;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public int getRowCounter() {
-        return rowCounter;
-    }
-
-    public void setRowCounter(int rowCounter) {
-        this.rowCounter = rowCounter;
-    }
-
-    public int getPage() {
-        return page;
-    }
-
-    public void setPage(int page) {
-        this.page = page;
     }
 
     @Override

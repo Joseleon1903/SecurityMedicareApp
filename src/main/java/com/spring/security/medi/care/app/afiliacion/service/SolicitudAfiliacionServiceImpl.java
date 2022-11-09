@@ -140,7 +140,7 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
         logger.info(">> Iniciando validaciones ");
         logger.info("A) Nss y cedula de la solicitud y asigna el ciudadano");
 
-       Boolean existeCiudadano = ciudadanoService.buscarCiudadanoPorIdentifiacion(sol.getCedula(), sol.getNss()).isEmpty();
+       Boolean existeCiudadano = (ciudadanoService.buscarCiudadanoPorIdentifiacion(sol.getCedula(), sol.getNss()) != null) ? true : false;
 
         if (existeCiudadano) {
             Long motivo = catalogoService.buscarMotivoPorId(AplicationConstantUtil.NO_EXISTE_IDENTIFICACION_SOLICITUD)
@@ -150,7 +150,7 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
             solicitudAfiliacionJpaRepo.save(sol);
             return;
         }
-        Ciudadano ciudadano = ciudadanoService.buscarCiudadanoPorIdentifiacion(sol.getCedula(), sol.getNss()).get(0);
+        Ciudadano ciudadano = ciudadanoService.buscarCiudadanoPorIdentifiacion(sol.getCedula(), sol.getNss());
         sol.setNombre(ciudadano.getNombre());
         sol.setPrimerApellido(ciudadano.getPrimerApellido());
         sol.setCedula(ciudadano.getCedula());

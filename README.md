@@ -1,5 +1,7 @@
 # SecurityMedicareApp
-Spring Boot Application with thymeleaf.
+The Thymeleaf is an open-source Java library that is licensed under the Apache License 2.0. It is a HTML5/XHTML/XML template engine. 
+It is a server-side Java template engine for both web (servlet-based) and non-web (offline) environments. It is perfect for modern-day HTML5 JVM web development. 
+It provides full integration with Spring Framework.
 
 
 ### run Maven command
@@ -15,7 +17,7 @@ The REST API to the example app is described below.
 
 ### Request
 
-`GET /api/ciudadano/all`
+`GET /api/ciudadano`
 
     curl -i -H 'Accept: application/json' http://localhost:8080/SecurityMedicareApp/api/ciudadano/all
 
@@ -27,34 +29,33 @@ The REST API to the example app is described below.
     Connection: close
     Content-Type: application/json
     [
-      {
-      "ciudadanoId": 1156,
-      "cedula": "02100032850",
-      "nss": 50307232,
-      "nombre": "FREIDMANT",
-      "primerApellido": "DOINET",
-      "segundoApellido": "GODEK",
-      "municipioId": 375,
-      "nacionalidadId": 1,
-      "estranjero": null,
-      "genero": "M",
-      "fechaNacimiento": "+0000-01-05T04:00:00.000+00:00",
-      "estado": "AC"
+    {
+        "ciudadanoId": 21,
+        "cedula": "58963632",
+        "nss": "45454545",
+        "nombre": "johanna",
+        "primerApellido": "carnal",
+        "segundoApellido": "savandija",
+        "municipioId": 17,
+        "nacionalidadId": 8,
+        "genero": "F",
+        "fechaNacimiento": "1997-01-30",
+        "estado": "AC"
     },
     {
-    "ciudadanoId": 21013,
-    "cedula": "40548573330",
-    "nss": 165301437,
-    "nombre": "RAFAEL AMERICO",
-    "primerApellido": "PERTOIS",
-    "segundoApellido": "FILI",
-    "municipioId": 279,
-    "nacionalidadId": 1,
-    "estranjero": null,
-    "genero": "M",
-    "fechaNacimiento": "+0000-03-05T04:00:00.000+00:00",
-    "estado": "AC"
-    }]
+        "ciudadanoId": 23,
+        "cedula": "963289653",
+        "nss": "632541",
+        "nombre": "fred",
+        "primerApellido": "carnal",
+        "segundoApellido": "savandija",
+        "municipioId": 2,
+        "nacionalidadId": 14,
+        "genero": "M",
+        "fechaNacimiento": "2022-09-20",
+        "estado": "AC"
+    }
+    ]
 
 ## Get Ciudadano
 
@@ -62,7 +63,7 @@ The REST API to the example app is described below.
 
 `GET /api/ciudadano/{id}`
     
-    curl -i -H 'Accept: application/json' http://localhost:8080/SecurityMedicareApp/api/ciudadano/1156
+    curl -i -H 'Accept: application/json' http://localhost:8080/SecurityMedicareApp/api/ciudadano/28305
 
 ### Response
 
@@ -72,20 +73,138 @@ The REST API to the example app is described below.
     Connection: close
     Content-Type: application/json
     {
-    "ciudadanoId": 1156,
-    "cedula": "02100032850",
-    "nss": 50307232,
-    "nombre": "FREIDMANT",
-    "primerApellido": "DOINET",
-    "segundoApellido": "GODEK",
-    "municipioId": 375,
+    "ciudadanoId": 28305,
+    "cedula": "40553366369",
+    "nss": "158827236",
+    "nombre": "ROSA DOMINGA",
+    "primerApellido": "ROBART",
+    "segundoApellido": "ROBART",
+    "municipioId": 371,
     "nacionalidadId": 1,
-    "estranjero": null,
     "genero": "M",
-    "fechaNacimiento": "+0000-01-05T04:00:00.000+00:00",
+    "fechaNacimiento": "2022-07-17",
     "estado": "AC"
     }
 
+## Get Find Ciudadano 
+
+### Request
+
+`GET /api/ciudadano/find`
+
+    curl -i -H 'Accept: application/json' http://localhost:8080/SecurityMedicareApp/api/ciudadano/find
+    RequestParam = "cedula", required = false
+    RequestParam = "nss", required = false
+
+### Response
+
+    HTTP/1.1 200 OK
+    Date: Thu, 24 Feb 2011 12:36:30 GMT
+    Status: 200 OK
+    Connection: close
+    Content-Type: application/json
+    {
+    "ciudadanoId": 28305,
+    "cedula": "40553366369",
+    "nss": "158827236",
+    "nombre": "ROSA DOMINGA",
+    "primerApellido": "ROBART",
+    "segundoApellido": "ROBART",
+    "municipioId": 371,
+    "nacionalidadId": 1,
+    "genero": "M",
+    "fechaNacimiento": "2022-07-17",
+    "estado": "AC"
+    }
+
+## Get Find Ciudadano by parameters
+
+### Request
+
+`GET /api/ciudadano/find/parameters`
+
+    curl -i -H 'Accept: application/json' http://localhost:8080/SecurityMedicareApp/api/ciudadano/find/parameters
+    @RequestParam = "tipoIdentificacion", required = false
+    @RequestParam = "texto", required = false
+    @RequestParam = "estado",required = false
+
+### Response
+
+    HTTP/1.1 200 OK
+    Date: Thu, 24 Feb 2011 12:36:30 GMT
+    Status: 200 OK
+    Connection: close
+    Content-Type: application/json
+    {
+    "ciudadanoId": 28305,
+    "cedula": "40553366369",
+    "nss": "158827236",
+    "nombre": "ROSA DOMINGA",
+    "primerApellido": "ROBART",
+    "segundoApellido": "ROBART",
+    "municipioId": 371,
+    "nacionalidadId": 1,
+    "genero": "M",
+    "fechaNacimiento": "2022-07-17",
+    "estado": "AC"
+    }
+
+## Post Ciudadano
+
+### Request
+
+`POST /api/ciudadano`
+
+    curl -i -H 'Accept: application/json' http://localhost:8080/SecurityMedicareApp/api/ciudadano
+### Request Body
+    {
+    "cedula": "40553366369",
+    "nss": "158827236",
+    "nombre": "ROSA DOMINGA",
+    "primerApellido": "ROBART",
+    "segundoApellido": "ROBART",
+    "municipioId": 371,
+    "nacionalidadId": 1,
+    "genero": "M",
+    "fechaNacimiento": "2022-07-17",
+    "estado": "AC"
+    }
+### Response
+
+    HTTP/1.1 200 OK
+    Date: Thu, 24 Feb 2011 12:36:30 GMT
+    Status: 200 OK
+    Connection: close
+    Content-Type: application/json
+    {
+    "ciudadanoId": 28305,
+    "cedula": "40553366369",
+    "nss": "158827236",
+    "nombre": "ROSA DOMINGA",
+    "primerApellido": "ROBART",
+    "segundoApellido": "ROBART",
+    "municipioId": 371,
+    "nacionalidadId": 1,
+    "genero": "M",
+    "fechaNacimiento": "2022-07-17",
+    "estado": "AC"
+    }
+
+## Delete Ciudadano
+
+### Request
+
+`Delete /api/ciudadano/{id}`
+
+    curl -i -H 'Accept: application/json' http://localhost:8080/SecurityMedicareApp/api/ciudadano/12563
+
+### Response
+
+    HTTP/1.1 200 OK
+    Date: Thu, 24 Feb 2011 12:36:30 GMT
+    Status: 200 OK
+    Connection: close
+       
 ## Get Nacionalidad
 
 ### Request

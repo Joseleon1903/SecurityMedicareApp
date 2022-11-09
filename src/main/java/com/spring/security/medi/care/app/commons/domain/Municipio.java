@@ -28,4 +28,15 @@ public class Municipio implements Serializable {
         this.provinciaId = provinciaId;
         this.estado = estado;
     }
+
+    @Override
+    public String toString() {
+        return "Municipio{" +
+                "municipioId=" + municipioId +
+                ", descripcion='" + descripcion + '\'' +
+                ", codigoMunicipio='" + codigoMunicipio + '\'' +
+                ", provinciaId=" + provinciaId +
+                ", estado='" + estado + '\'' +
+                '}';
+    }
 }
