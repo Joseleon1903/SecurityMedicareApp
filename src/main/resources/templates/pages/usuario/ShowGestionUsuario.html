@@ -104,20 +104,21 @@
                 <div class="card" style="width: 15rem; margin: 0.5em;">
                     <img th:src="@{../assets/img/app/img_usuarios_totales.png}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h4 class="card-text">Usuarios Totales <span class="purecounter">10</span></h4>
+                        <h4 class="card-text">Usuarios Totales <span class="purecounter" th:text="${GestionUsuarioStatisticBean.totalUserCount}">10</span></h4>
                     </div>
                 </div><!-- End Stats Item -->
 
                 <div class="card" style="width: 15rem; margin: 0.5em;">
                     <img th:src="@{../assets/img/app/img_usuarios_activos.png}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h4 class="card-text">Usuarios Activos <span class="purecounter">10</span></h4>                    </div>
+                        <h4 class="card-text">Usuarios Activos <span class="purecounter" th:text="${GestionUsuarioStatisticBean.activeUserCount}">10</span></h4>
+                    </div>
                 </div><!-- End Stats Item -->
 
                 <div class="card" style="width: 15rem; margin: 0.5em;">
                     <img th:src="@{../assets/img/app/img_usuarios_inactivos.jpg}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h4 class="card-text">Usuarios Inactivos <span class="purecounter">10</span></h4>
+                        <h4 class="card-text">Usuarios Inactivos <span class="purecounter" th:text="${GestionUsuarioStatisticBean.inactiveUserCount}">10</span></h4>
                     </div>
                 </div><!-- End Stats Item -->
 
@@ -154,7 +155,7 @@
                          <td th:text="${usuario.nombre}">0456325896</td>
                          <td th:text="${usuario.tipoUsuarioId}">01/01/2000</td>
                          <td th:text="${usuario.correoPrimario}" >8965235</td>
-                         <td th:text="${usuario.fechaUltimoCambio}">Mario</td>
+                         <td th:text="${#temporals.format(usuario.fechaUltimoCambio,'dd/MM/yyyy HH:mm')}">Mario</td>
                          <td th:text="${usuario.estado}">1</td>
                         <td>
                              <button type="button"  th:data-text="${usuario.usuarioId}" class="menu-button-solicitud btn btn-warning">
@@ -271,10 +272,6 @@
 
 </div>
 
-<div layout:fragment="custom-panel">
-
-     <!-- custom panel gos here   -->
-</div>
 <div  layout:fragment="custom-script">
 
     <script th:src="@{../assets/js/gestion-usuario-script.js}"></script>

@@ -140,7 +140,7 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
         logger.info(">> Iniciando validaciones ");
         logger.info("A) Nss y cedula de la solicitud y asigna el ciudadano");
 
-       Boolean existeCiudadano = (ciudadanoService.buscarCiudadanoPorIdentifiacion(sol.getCedula(), sol.getNss()) != null) ? true : false;
+       Boolean existeCiudadano = ciudadanoService.buscarCiudadanoPorIdentifiacion(sol.getCedula(), sol.getNss()) == null;
 
         if (existeCiudadano) {
             Long motivo = catalogoService.buscarMotivoPorId(AplicationConstantUtil.NO_EXISTE_IDENTIFICACION_SOLICITUD)

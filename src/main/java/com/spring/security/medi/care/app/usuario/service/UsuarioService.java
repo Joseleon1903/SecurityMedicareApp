@@ -1,6 +1,7 @@
 package com.spring.security.medi.care.app.usuario.service;
 
 import com.spring.security.medi.care.app.commons.domain.Usuario;
+import com.spring.security.medi.care.app.controller.dto.GestionUsuarioStatisticDTO;
 import com.spring.security.medi.care.app.usuario.types.PaginatedUsuario;
 import com.spring.security.medi.care.app.usuario.types.UnipagoUsuario;
 import org.springframework.data.domain.Page;
@@ -27,5 +28,7 @@ public interface UsuarioService {
     Usuario buscarUsuarioPorId(Long id);
 
     PaginatedUsuario buscarUsuariosPorParametros(Long usuarioId, String codigo, String estado, int page, int size );
+
+    GestionUsuarioStatisticDTO getSystemUserStatistic();
 
 }
