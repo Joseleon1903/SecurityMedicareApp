@@ -36,6 +36,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/img/*", "/assets/**",  "/css/**","/img/**").permitAll()
                 .antMatchers("/api/**").permitAll()
                 .antMatchers("/formulario/usuario").permitAll()
+                .antMatchers("/create/usuario").permitAll()
                 .antMatchers("/upload/picture").permitAll()
                 .anyRequest().authenticated()
                 .and()
