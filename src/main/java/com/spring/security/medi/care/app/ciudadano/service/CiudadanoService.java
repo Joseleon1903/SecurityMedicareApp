@@ -10,6 +10,8 @@ public interface CiudadanoService {
 
     List<Ciudadano> buscarTodosCiudadanos();
 
+    List<Ciudadano> buscarTodosCiudadanos(int poage, int size);
+
     CiudadanoPaginated buscarCiudadanosPorParametros(String identificacion, String texto, String estado, int page, int size);
 
     void eliminarCiudadanoId(Long ciudadanoId);

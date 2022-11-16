@@ -41,9 +41,12 @@ public class CiudadanoServiceImpl implements CiudadanoService {
 
     @Override
     public List<Ciudadano> buscarTodosCiudadanos(){
-        Integer pageNo = 0;
-        Integer pageSize = 15;
-        Pageable paging = PageRequest.of(pageNo, pageSize);
+        return ciudadanoJpaRepo.findAll();
+    }
+
+    @Override
+    public List<Ciudadano> buscarTodosCiudadanos(int page, int size){
+        Pageable paging = PageRequest.of(page, size);
         return ciudadanoJpaRepo.findAll(paging).toList();
     }
 

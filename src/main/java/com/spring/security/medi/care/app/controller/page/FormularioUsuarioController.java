@@ -146,7 +146,7 @@ public class FormularioUsuarioController extends ViewBaseContext {
         logger.info("param : "+file.getOriginalFilename());
         logger.info("param : "+file.getContentType());
 
-        if(!file.getContentType().contains("png") || !file.getContentType().contains("jpg")){
+        if(!file.getContentType().contains("png") && !file.getContentType().contains("jpeg")){
             throw new InvalidFormatException("Invalid format file");
         }
 
