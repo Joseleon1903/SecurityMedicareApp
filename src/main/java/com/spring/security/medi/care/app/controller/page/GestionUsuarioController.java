@@ -47,8 +47,9 @@ public class GestionUsuarioController extends ViewBaseContext {
         logger.info("Entering in method GestionUsuarioPage..");
         logger.info("nombre usuario : "+principal.getName());
         usarnametest = principal.getName();
-        Usuario user = usuarioService.buscarUsuariosSistemaporCodigoJpa(usarnametest);
-        this.usuarioInfoDto = new UsuarioInfoDto(user);
+        usuarioService.buscarUsuariosSistemaporCodigoJpa(usarnametest).ifPresent( user ->{
+            this.usuarioInfoDto = new UsuarioInfoDto(user);
+        });
 
         logger.info("validando paginacion");
         if (indexPageInput != null && (this.tablePagination.getPaginationIndex() + indexPageInput) > -1) {
@@ -65,7 +66,9 @@ public class GestionUsuarioController extends ViewBaseContext {
         logger.info("terminando busqueda ususario");
 
         logger.info("iniciando buscar statistic");
-        gestionUsuarioStatisticDTO = usuarioService.getSystemUserStatistic();
+        usuarioService.getSystemUserStatistic().ifPresent( stat ->{
+            this.gestionUsuarioStatisticDTO = stat;
+        });
         logger.info("terminando buscar statistic");
 
         model.addAttribute("PaginatedUsuarioBean", paginatedUsuario);

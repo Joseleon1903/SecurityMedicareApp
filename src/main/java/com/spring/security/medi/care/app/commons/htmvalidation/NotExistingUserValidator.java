@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.util.Optional;
 
 public class NotExistingUserValidator implements ConstraintValidator<NotExistingUser, CreateUserFormData> {
 
@@ -31,9 +32,9 @@ public class NotExistingUserValidator implements ConstraintValidator<NotExisting
         logger.info("Entering in isValid");
         logger.info("createUserFormData : "+createUserFormData);
 
-        Usuario user = usuarioService.buscarUsuariosSistemaporCodigoJpa(createUserFormData.getUsername());
+        Optional<Usuario> user = usuarioService.buscarUsuariosSistemaporCodigoJpa(createUserFormData.getUsername());
 
-        if(user != null  && user.getCodigo().toUpperCase().equals(createUserFormData.getUsername())){
+        if(!user.isPresent()  && user.get().getCodigo().toUpperCase().equals(createUserFormData.getUsername())){
             constraintValidatorContext.disableDefaultConstraintViolation();
             constraintValidatorContext.buildConstraintViolationWithTemplate("{UserAlreadyExisting}").addPropertyNode("correoprimario").addConstraintViolation();
             return false;
@@ -41,7 +42,7 @@ public class NotExistingUserValidator implements ConstraintValidator<NotExisting
 
          user = usuarioService.buscarUsuariosSistemaPorEmailJpa(createUserFormData.getCorreoprimario());
 
-        if(user != null  && user.getCodigo().toUpperCase().equals(createUserFormData.getCorreoprimario())){
+        if(!user.isPresent()  && user.get().getContactoId().getCorreoPrimario().toUpperCase().equals(createUserFormData.getCorreoprimario())){
             constraintValidatorContext.disableDefaultConstraintViolation();
             constraintValidatorContext.buildConstraintViolationWithTemplate("{UserAlreadyExisting}").addPropertyNode("correoprimario").addConstraintViolation();
             return false;

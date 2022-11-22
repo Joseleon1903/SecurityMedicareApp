@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 @RestController
@@ -35,14 +36,14 @@ public class UsuarioRestController {
     @GetMapping("/{id}")
     @ResponseBody
     public ResponseEntity<Usuario> findById(@PathVariable("id") Long id) {
-        Usuario user = usuarioService.buscarUsuarioPorId(id);
+        Optional<Usuario> user = usuarioService.buscarUsuarioPorId(id);
         return new ResponseEntity(user, HttpStatus.OK);
     }
 
     @GetMapping("/code/{codigo}")
     @ResponseBody
     public ResponseEntity<Usuario> findByCode(@PathVariable("codigo") String code) {
-        Usuario user = usuarioService.buscarUsuariosSistemaporCodigoJpa(code);
+        Optional<Usuario> user = usuarioService.buscarUsuariosSistemaporCodigoJpa(code);
         return new ResponseEntity(user, HttpStatus.OK);
     }
 
@@ -67,7 +68,7 @@ public class UsuarioRestController {
     @GetMapping("/find/email")
     @ResponseBody
     public ResponseEntity<Usuario> findUsuarioByParameterEmail(@RequestParam(value = "email") String email){
-        Usuario userEmail = usuarioService.buscarUsuariosSistemaPorEmailJpa(email);
+        Optional<Usuario> userEmail = usuarioService.buscarUsuariosSistemaPorEmailJpa(email);
         return new ResponseEntity(userEmail, HttpStatus.OK);
     }
 

@@ -81,7 +81,7 @@ public class CatalogoServiceTest extends BaseTest {
     public void testBuscarMotivoPorId() {
        // createDefaultDBMotivoEstado();
         Long motivoId = AplicationConstantUtil.EXISTE_SOLICITUD_AC_PARA_CIUDADANO;
-        MotivoEstado motivo = catalogoService.buscarMotivoPorId(motivoId);
+        MotivoEstado motivo = catalogoService.buscarMotivoPorId(motivoId).get();
         assertNotNull(motivo);
     }
 
@@ -90,7 +90,7 @@ public class CatalogoServiceTest extends BaseTest {
     @DisplayName(">>>> DisplayName : testBuscarMotivosTodos  <<<<<")
     public void testBuscarMotivosTodos() {
         createDefaultDBMotivoEstado();
-        List<MotivoEstado> motivo = catalogoService.buscarMotivosTodos();
+        List<MotivoEstado> motivo = catalogoService.buscarMotivosTodos().get();
         assertNotNull(motivo);
     }
 
@@ -99,7 +99,7 @@ public class CatalogoServiceTest extends BaseTest {
     @DisplayName(">>>> DisplayName : testBuscarNacionalidadPorId  <<<<<")
     public void testBuscarNacionalidadPorId() {
         createDefaultDBNacionalidad();
-        Nacionalidad nacionalidad = catalogoService.buscarNacionalidadPorId(1L);
+        Nacionalidad nacionalidad = catalogoService.buscarNacionalidadPorId(1L).get();
         assertNotNull(nacionalidad);
     }
 
@@ -115,7 +115,7 @@ public class CatalogoServiceTest extends BaseTest {
     @DisplayName(">>>> DisplayName : testBuscarMunicipioPorId  <<<<<")
     public void testBuscarMunicipioPorId() {
         createDefaultDBMunicipio();
-        Municipio municipio = catalogoService.buscarMunicipioPorId(10L);
+        Municipio municipio = catalogoService.buscarMunicipioPorId(10L).get();
         assertNotNull(municipio);
 
         Municipio municipioUpdate = municipioJpaRepo.findById(10L).get();
@@ -173,7 +173,7 @@ public class CatalogoServiceTest extends BaseTest {
     @DisplayName(">>>> DisplayName : testBuscarServicioSistemaPorId <<<<<")
     public void testBuscarServicioSistemaPorId() {
         createDefaultDBServicioSistema();
-        ServicioSistema servicio = catalogoService.buscarServicioSistemaPorId(301L);
+        ServicioSistema servicio = catalogoService.buscarServicioSistemaPorId(301L).get();
         assertNotNull(servicio);
     }
 

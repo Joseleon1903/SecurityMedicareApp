@@ -3,10 +3,11 @@ package com.spring.security.medi.care.app.ciudadano.service;
 import com.spring.security.medi.care.app.ciudadano.type.CiudadanoPaginated;
 import com.spring.security.medi.care.app.commons.domain.Ciudadano;
 import java.util.List;
+import java.util.Optional;
 
 public interface CiudadanoService {
 
-    Ciudadano buscarCiudadanoPorCiudadanoId(Long ciudadanoId);
+    Optional<Ciudadano> buscarCiudadanoPorCiudadanoId(Long ciudadanoId);
 
     List<Ciudadano> buscarTodosCiudadanos();
 
@@ -16,7 +17,7 @@ public interface CiudadanoService {
 
     void eliminarCiudadanoId(Long ciudadanoId);
 
-    Ciudadano buscarCiudadanoPorIdentifiacion(String cedula, String nss);
+    Optional<Ciudadano> buscarCiudadanoPorIdentifiacion(String cedula, String nss);
 
     Ciudadano guardarCiudadano(Ciudadano ciudadano);
 

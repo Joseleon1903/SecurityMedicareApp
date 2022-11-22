@@ -18,10 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Spliterator;
-import java.util.Spliterators;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -58,12 +55,12 @@ public class UsuarioServiceImpl implements  UsuarioService{
     }
 
     @Override
-    public Usuario buscarUsuariosSistemaporCodigoJpa(String codigo){
+    public Optional<Usuario> buscarUsuariosSistemaporCodigoJpa(String codigo){
         return usuarioJpaRepo.findByCodigoIgnoreCase(codigo.toUpperCase());
     }
 
     @Override
-    public Usuario buscarUsuariosSistemaPorEmailJpa(String email) {
+    public Optional<Usuario> buscarUsuariosSistemaPorEmailJpa(String email) {
         return usuarioJpaRepo.findByEmail(email.toLowerCase());
 
     }
@@ -79,7 +76,7 @@ public class UsuarioServiceImpl implements  UsuarioService{
     }
 
     @Override
-    public Usuario buscarUsuarioPorId(Long id){
+    public Optional<Usuario> buscarUsuarioPorId(Long id){
         return usuarioJpaRepo.findByUsuarioId(id);
     }
 
@@ -112,7 +109,7 @@ public class UsuarioServiceImpl implements  UsuarioService{
     }
 
     @Override
-    public GestionUsuarioStatisticDTO getSystemUserStatistic() {
+    public Optional<GestionUsuarioStatisticDTO> getSystemUserStatistic() {
         logger.info("Entering in getSystemUserStatistic");
         long total = 0;
         long active = 0;
@@ -124,7 +121,7 @@ public class UsuarioServiceImpl implements  UsuarioService{
         active = list.stream().filter( us -> us.getEstado().equals("AC")).count();
         inactive = list.stream().filter( us -> us.getEstado().equals("IN")).count();
         logger.info("Exiting  getSystemUserStatistic");
-        return new GestionUsuarioStatisticDTO(total, active, inactive);
+        return Optional.of(new GestionUsuarioStatisticDTO(total, active, inactive));
     }
 
 }

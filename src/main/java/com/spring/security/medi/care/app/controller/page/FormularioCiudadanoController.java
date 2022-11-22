@@ -75,7 +75,7 @@ public class FormularioCiudadanoController extends ViewBaseContext {
             if(ciudadanoService.buscarCiudadanoPorIdentifiacion(ciudadanoForm.getCedula(), ciudadanoForm.getNss()) != null){
                 logger.info("Error existe un ciudadano con la misma identificacion");
                 logger.info("ABORT REGISTRATION");
-                MotivoEstado mot = catalogoService.buscarMotivoPorId(AplicationConstantUtil.EXISTE_ACTIVO_CON_IDENTIFCACION);
+                MotivoEstado mot = catalogoService.buscarMotivoPorId(AplicationConstantUtil.EXISTE_ACTIVO_CON_IDENTIFCACION).get();
                 logger.error("Throw motivo : "+ mot);
                 this.errorPageBean = new ErrorPageDto(mot.getMotivoId(), mot.getDescripcion(), true);
                 this.ciudadanoDto = ciudadanoForm;
@@ -88,7 +88,7 @@ public class FormularioCiudadanoController extends ViewBaseContext {
         catch (Exception ex){
             logger.info("Error existe un ciudadano con la misma identificacion");
             logger.error("error no identificado..", ex);
-            MotivoEstado mot = catalogoService.buscarMotivoPorId(AplicationConstantUtil.GENERAL_ERROR_INTERNO);
+            MotivoEstado mot = catalogoService.buscarMotivoPorId(AplicationConstantUtil.GENERAL_ERROR_INTERNO).get();
             this.errorPageBean = new ErrorPageDto(mot.getMotivoId(), mot.getDescripcion(), true);
             this.ciudadanoDto = ciudadanoForm;
             return "redirect:form_ciudadano?hasError=true";
