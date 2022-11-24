@@ -12,6 +12,8 @@ import org.springframework.data.domain.PageRequest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.spring.security.medi.care.app.ciudadano.repository.jpa.CiudadanoJpaRepo;
@@ -35,15 +37,18 @@ public class CiudadanoServiceImpl implements CiudadanoService {
     }
 
     @Override
-    public Ciudadano buscarCiudadanoPorCiudadanoId(Long ciudadanoId){
+    public Optional<Ciudadano> buscarCiudadanoPorCiudadanoId(Long ciudadanoId){
         return ciudadanoJpaRepo.findByCiudadanoId(ciudadanoId);
     }
 
     @Override
     public List<Ciudadano> buscarTodosCiudadanos(){
-        Integer pageNo = 0;
-        Integer pageSize = 15;
-        Pageable paging = PageRequest.of(pageNo, pageSize);
+        return ciudadanoJpaRepo.findAll();
+    }
+
+    @Override
+    public List<Ciudadano> buscarTodosCiudadanos(int page, int size){
+        Pageable paging = PageRequest.of(page, size);
         return ciudadanoJpaRepo.findAll(paging).toList();
     }
 
@@ -68,8 +73,8 @@ public class CiudadanoServiceImpl implements CiudadanoService {
         pageOut.setTotalRowCount(registrosRestante);
         List<CiudadanoDto> ciudadanoDtos = new ArrayList<>();
         for (Ciudadano ciu: listado) {
-            ciudadanoDtos.add(new CiudadanoDto(ciu, catalogoService.buscarNacionalidadPorId(ciu.getNacionalidadId()).getDescripcion(),
-                    catalogoService.buscarMunicipioPorId(ciu.getMunicipioId()).getDescripcion()));
+            ciudadanoDtos.add(new CiudadanoDto(ciu, catalogoService.buscarNacionalidadPorId(ciu.getNacionalidadId()).get().getDescripcion(),
+                    catalogoService.buscarMunicipioPorId(ciu.getMunicipioId()).get().getDescripcion()));
         }
         CiudadanoPaginated paginated = new CiudadanoPaginated(ciudadanoDtos, pageOut);
         return paginated;
@@ -77,14 +82,14 @@ public class CiudadanoServiceImpl implements CiudadanoService {
 
     @Override
     public void eliminarCiudadanoId(Long ciudadanoId){
-        Ciudadano ciu = ciudadanoJpaRepo.findByCiudadanoId(ciudadanoId);
+        Ciudadano ciu = ciudadanoJpaRepo.findByCiudadanoId(ciudadanoId).get();
         if(ciu != null){
             ciudadanoJpaRepo.delete(ciu);
         }
     }
 
     @Override
-    public Ciudadano buscarCiudadanoPorIdentifiacion(String cedula, String nss) {
+    public Optional<Ciudadano> buscarCiudadanoPorIdentifiacion(String cedula, String nss) {
         logger.info("Entering in method buscarCiudadanoPorIdentifiacion");
         logger.info("param : "+cedula );
         logger.info("param : "+nss );

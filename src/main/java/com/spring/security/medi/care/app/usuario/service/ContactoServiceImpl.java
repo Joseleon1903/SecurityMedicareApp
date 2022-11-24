@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -25,7 +26,10 @@ public class ContactoServiceImpl implements ContactoService{
 
     @Override
     public Contacto buscarContactoPorId(Long id) {
-        return contactoJpaRepo.findByContactoId(id);
+        if(contactoJpaRepo.findByContactoId(id).isPresent()){
+            contactoJpaRepo.findByContactoId(id).get();
+        }
+        return new Contacto();
     }
 
     @Override

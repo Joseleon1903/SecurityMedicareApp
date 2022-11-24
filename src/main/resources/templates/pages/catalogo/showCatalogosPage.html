@@ -138,7 +138,7 @@
 
                         <nav aria-label="Page navigation example" style="float:right;">
                             <ul class="pagination">
-                                <li th:if="${MotivoMaginationBean.paginationIndex > 1}" class="page-item"><a class="page-link" th:href="@{/catalogo(motivoIndexPage=-1)}">Previous</a></li>
+                                <li th:if="${MotivoMaginationBean.paginationIndex >= 1}" class="page-item"><a class="page-link" th:href="@{/catalogo(motivoIndexPage=-1)}">Previous</a></li>
                                 <li class="page-item current-page" th:text="'Page '+${MotivoMaginationBean.paginationIndex}" >Previous</li>
                                 <li class="page-item"><a class="page-link" th:href="@{/catalogo(motivoIndexPage=1)}">Next</a></li>
                             </ul>
@@ -216,7 +216,7 @@
 
                         <nav aria-label="Page navigation example" style="float:right;">
                             <ul class="pagination">
-                                <li th:if="${MunicipioPaginationBean.paginationIndex > 0}" class="page-item"><a class="page-link" th:href="@{/catalogo(municipioIndexPage=-1)}">Previous</a></li>
+                                <li th:if="${MunicipioPaginationBean.paginationIndex >= 1}" class="page-item"><a class="page-link" th:href="@{/catalogo(municipioIndexPage=-1)}">Previous</a></li>
                                 <li class="page-item current-page" th:text="'Page '+${MunicipioPaginationBean.paginationIndex}" >Previous</li>
                                 <li class="page-item"><a class="page-link" th:href="@{/catalogo(municipioIndexPage=1)}">Next</a></li>
                             </ul>
@@ -288,7 +288,7 @@
 
                         <nav aria-label="Page navigation example" style="float:right;">
                             <ul class="pagination">
-                                <li th:if="${NacionalidadPaginationBean.paginationIndex > 0}" class="page-item"><a class="page-link" th:href="@{/catalogo(nacionalidadIndexPage=-1)}">Previous</a></li>
+                                <li th:if="${NacionalidadPaginationBean.paginationIndex >= 1}" class="page-item"><a class="page-link" th:href="@{/catalogo(nacionalidadIndexPage=-1)}">Previous</a></li>
                                 <li class="page-item current-page" th:text="'Page '+${NacionalidadPaginationBean.paginationIndex}" >Previous</li>
                                 <li class="page-item"><a class="page-link" th:href="@{/catalogo(nacionalidadIndexPage=1)}">Next</a></li>
                             </ul>

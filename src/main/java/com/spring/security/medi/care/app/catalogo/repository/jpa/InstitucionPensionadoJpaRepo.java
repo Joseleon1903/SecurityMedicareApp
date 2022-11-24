@@ -6,10 +6,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Transactional(readOnly=true)
 public interface InstitucionPensionadoJpaRepo extends JpaRepository<InstitucionPensionado, Long>{
 
     @Query("select i from InstitucionPensionado i order by i.institucionPensionadoId asc")
-    List<InstitucionPensionado> findAllInstitucionPensionados();
+    Optional<List<InstitucionPensionado>> findAllInstitucionPensionados();
 }

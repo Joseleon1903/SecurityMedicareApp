@@ -8,14 +8,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Transactional(readOnly=true)
 public interface MotivoEstadoJpaRepo extends JpaRepository<MotivoEstado, Long>{
 
-    MotivoEstado findByMotivoId(Long motivoId);
+    Optional<MotivoEstado> findByMotivoId(Long motivoId);
 
     @Query("select m from MotivoEstado m order by m.motivoId asc")
-    List<MotivoEstado> findAllMotivos();
+    Optional<List<MotivoEstado>> findAllMotivos();
 
     @Query("select m from MotivoEstado m where (:motivoId is null or m.motivoId = :motivoId) and (:descripcion is null or m.descripcion like :descripcion) order by m.motivoId asc")
     Page<MotivoEstado> findMotivosByParameters(Long motivoId, String descripcion, Pageable paging);

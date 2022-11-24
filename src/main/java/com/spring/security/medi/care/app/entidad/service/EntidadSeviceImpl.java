@@ -61,14 +61,14 @@ public class EntidadSeviceImpl implements EntidadService{
         int entidadSize = entidades.size();
         logger.info("entidadSize: "+entidadSize );
         if(entidadSize == 0){
-            return entidadJpaRepo.findById(1006L).get();
+            return entidadJpaRepo.findById(3027L).get();
         }
         Random rand =  new Random();
         int indiceR = rand.nextInt(entidadSize);
         logger.info("Indice random : "+Math.abs(indiceR) );
         Entidad ent = entidades.get(Math.abs(indiceR));
         if(ent == null){
-            return entidadJpaRepo.findById(1006L).get();
+            return entidadJpaRepo.findById(3027L).get();
         }
         return ent;
     }

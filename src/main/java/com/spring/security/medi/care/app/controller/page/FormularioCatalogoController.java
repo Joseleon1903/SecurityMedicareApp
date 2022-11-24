@@ -54,7 +54,7 @@ public class FormularioCatalogoController extends ViewBaseContext {
         if (bindingResult.hasErrors()) {
             logger.info("bindingResult.hasErrors Error procesando formulario");
             logger.info("FieldError: " +bindingResult.getTarget().toString());
-            MotivoEstado mot = catalogoService.buscarMotivoPorId(AplicationConstantUtil.EXISTEN_MOTIVO_ESTADO_SISTEMA);
+            MotivoEstado mot = catalogoService.buscarMotivoPorId(AplicationConstantUtil.EXISTEN_MOTIVO_ESTADO_SISTEMA).get();
             this.errorPageBean = new ErrorPageDto(mot.getMotivoId(), mot.getDescripcion(), true);
             this.motivoEstadoFormDTO = motivoEstadoFormDTOInput;
             return "redirect:/form_catalogo?hasError=true";

@@ -25,16 +25,14 @@ public class CiudadanoRestController {
     @GetMapping("/{ciudadanoId}")
     @ResponseBody
     public ResponseEntity<Ciudadano> findById(@PathVariable("ciudadanoId") Long id){
-        Ciudadano ciudadano = ciudadanoService.buscarCiudadanoPorCiudadanoId(id);
-        return new ResponseEntity(ciudadano, HttpStatus.OK);
+        return new ResponseEntity(ciudadanoService.buscarCiudadanoPorCiudadanoId(id), HttpStatus.OK);
     }
 
     @GetMapping("/find")
     @ResponseBody
     public ResponseEntity<Ciudadano> findByIdentifiacacion(@RequestParam(value = "cedula", required = false) String cedula,
                                                            @RequestParam(value = "nss",required = false) String nss){
-        Ciudadano ciudadano = ciudadanoService.buscarCiudadanoPorIdentifiacion(cedula, nss);
-        return new ResponseEntity(ciudadano, HttpStatus.OK);
+        return new ResponseEntity(ciudadanoService.buscarCiudadanoPorIdentifiacion(cedula, nss), HttpStatus.OK);
     }
 
     @GetMapping("/find/parameters")

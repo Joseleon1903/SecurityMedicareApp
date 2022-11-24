@@ -15,6 +15,7 @@ public class UsuarioInfoDto implements Serializable {
     private String tipoUsuario;
     private String correoprimario;
     private long timeLogin;
+    private String profilePicUrl;
 
     public UsuarioInfoDto(String name, String estado, String tipoUsuario, String correoprimario, long timeLogin) {
         this.name = name;
@@ -31,6 +32,7 @@ public class UsuarioInfoDto implements Serializable {
         this.correoprimario = usuario.getContactoId().getCorreoPrimario();
         long diferencia= Duration.between(LocalDateTime.now(), usuario.getFechaUltimoCambio()).toMinutes();
         this.timeLogin =Math.abs(diferencia);
+        this.profilePicUrl = usuario.getProfilePicture();
     }
 
     public UsuarioInfoDto() {

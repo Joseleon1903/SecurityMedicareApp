@@ -8,11 +8,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Transactional(readOnly=true)
 public interface NacionalidadJpaRepo extends JpaRepository<Nacionalidad, Long>{
 
-    Nacionalidad findByNacionalidadId(Long motivoId);
+    Optional<Nacionalidad> findByNacionalidadId(Long motivoId);
 
     List<Nacionalidad> findAll();
 

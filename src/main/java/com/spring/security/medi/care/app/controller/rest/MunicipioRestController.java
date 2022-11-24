@@ -24,8 +24,7 @@ public class MunicipioRestController {
     @GetMapping("/{id}")
     @ResponseBody
     public ResponseEntity<Municipio> findById(@PathVariable("id") Long id){
-        Municipio municipio = catalogoService.buscarMunicipioPorId(id);
-        return new ResponseEntity(municipio, HttpStatus.OK);
+        return new ResponseEntity(catalogoService.buscarMunicipioPorId(id), HttpStatus.OK);
     }
 
     @GetMapping

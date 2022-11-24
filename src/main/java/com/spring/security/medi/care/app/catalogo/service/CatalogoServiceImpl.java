@@ -17,11 +17,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.swing.text.html.Option;
 
 @Service
 @Transactional
@@ -86,20 +89,20 @@ public class CatalogoServiceImpl implements CatalogoService {
     }
 
     @Override
-    public MotivoEstado buscarMotivoPorId(Long id) {
+    public Optional<MotivoEstado> buscarMotivoPorId(Long id) {
         logger.info("Entering in buscarPorId");
         logger.info("param id: " + id);
         return motivoEstadoJpaRepo.findByMotivoId(id);
     }
 
     @Override
-    public List<MotivoEstado> buscarMotivosTodos() {
+    public Optional<List<MotivoEstado>> buscarMotivosTodos() {
         logger.info("Entering in buscarTodos");
         return motivoEstadoJpaRepo.findAllMotivos();
     }
 
     @Override
-    public Nacionalidad buscarNacionalidadPorId(Long id) {
+    public Optional<Nacionalidad> buscarNacionalidadPorId(Long id) {
         logger.info("Entering in buscarNacionalidadPorId");
         logger.info("param id: " + id);
         return nacionalidadJpaRepo.findByNacionalidadId(id);
@@ -113,7 +116,7 @@ public class CatalogoServiceImpl implements CatalogoService {
     }
 
     @Override
-    public Municipio buscarMunicipioPorId(Long id) {
+    public Optional<Municipio> buscarMunicipioPorId(Long id) {
         logger.info("Entering in buscarMunicipioPorId");
         return municipioJpaRepo.findByMunicipioId(id);
     }
@@ -177,21 +180,22 @@ public class CatalogoServiceImpl implements CatalogoService {
     }
 
     @Override
-    public Seguro buscarSegurosSistemaPorId(Long id) {
+    public Optional<Seguro> buscarSegurosSistemaPorId(Long id) {
         logger.info("Entering in buscarSegurosSistema");
         return seguroJpaRepo.findBySeguroId(id);
     }
 
     @Override
-    public List<InstitucionPensionado> buscarInstitucionPensionadoTodas(){
+    public Optional<List<InstitucionPensionado>> buscarInstitucionPensionadoTodas(){
         logger.info("Entering in buscarInstitucionPensionadoTodas");
-        return institucionPensionadoJpaRepo.findAllInstitucionPensionados();
+        return institucionPensionadoJpaRepo.findAllInstitucionPensionados().isPresent() ? institucionPensionadoJpaRepo.findAllInstitucionPensionados() :
+                Optional.empty();
     }
 
     @Override
-    public InstitucionPensionado buscarPorInstitucionPensionadoId(Long id){
+    public Optional<InstitucionPensionado> buscarPorInstitucionPensionadoId(Long id){
         logger.info("Entering in buscarPorInstitucionPensionadoId");
-        return institucionPensionadoJpaRepo.findById(id).get();
+        return institucionPensionadoJpaRepo.findById(id);
     }
 
     @Override
@@ -200,8 +204,8 @@ public class CatalogoServiceImpl implements CatalogoService {
     }
 
     @Override
-    public ServicioSistema buscarServicioSistemaPorId(Long id){
-        return servicioSistemaJpaRepo.findById(id).get();
+    public Optional<ServicioSistema> buscarServicioSistemaPorId(Long id){
+        return servicioSistemaJpaRepo.findById(id);
     }
 
     @Override

@@ -28,15 +28,13 @@ public class MotivoEstadoRestController {
     @GetMapping("/{id}")
     @ResponseBody
     public ResponseEntity<MotivoEstado> findById(@PathVariable("id") Long id){
-        MotivoEstado motivo = catalogoService.buscarMotivoPorId(id);
-        return new ResponseEntity(motivo, HttpStatus.OK);
+        return new ResponseEntity(catalogoService.buscarMotivoPorId(id), HttpStatus.OK);
     }
 
     @GetMapping
     @ResponseBody
     public ResponseEntity<List<MotivoEstado>> findAll(){
-        List<MotivoEstado> motivosList = catalogoService.buscarMotivosTodos();
-        return new ResponseEntity(motivosList, HttpStatus.OK);
+        return new ResponseEntity(catalogoService.buscarMotivosTodos(), HttpStatus.OK);
     }
 
     @PutMapping
