@@ -23,8 +23,7 @@ public class SeguroRestController {
     @GetMapping("/{id}")
     @ResponseBody
     public ResponseEntity<Seguro> findById(@PathVariable("id") Long id) {
-        Seguro seguroOut = catalogoService.buscarSegurosSistemaPorId(id);
-        return new ResponseEntity(seguroOut, HttpStatus.OK);
+        return new ResponseEntity(catalogoService.buscarSegurosSistemaPorId(id), HttpStatus.OK);
     }
 
     @GetMapping

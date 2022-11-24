@@ -2,8 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 
-
-
 </head>
 <body>
 <div th:fragment="footer_section">
@@ -37,7 +35,6 @@
                                     <h5 class="card-title" sec:authentication="name">Profile Name </h5>
                                     <p class="card-text" sec:authentication="principal.authorities">Role name</p>
                                     <p class="card-text"><a th:href="@{gestion/usuario}" class="gestion-usuario-link" >Gestion usuario</a></p>
-                                    <p class="card-text"><small>las time login in Hours/minutes 85</small></p>
                                 </div>
                             </div>
                         </div>
@@ -75,9 +72,6 @@
         <div class="container mt-4">
             <div class="copyright">
                 © Copyright <strong><span>Security Medicare App</span></strong>. All Rights Reserved
-            </div>
-            <div class="credits">
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
             </div>
         </div>
 

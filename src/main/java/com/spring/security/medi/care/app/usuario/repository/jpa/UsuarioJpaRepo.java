@@ -7,17 +7,19 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Transactional(readOnly=true)
 public interface UsuarioJpaRepo extends PagingAndSortingRepository<Usuario, Long>{
 
-    Usuario findByUsuarioId(Long id);
+    Optional<Usuario> findByUsuarioId(Long id);
 
     @Query("select us from Usuario us where (:usuarioId is null or :usuarioId = us.usuarioId) and (:codigo is null or :codigo like us.codigo) and (:estado is null or :estado like us.estado) order by us.usuarioId asc")
     Page<Usuario> findByParameters(Long usuarioId, String codigo, String estado, Pageable paging);
 
-    Usuario findByCodigoIgnoreCase(String codigo);
+    Optional<Usuario> findByCodigoIgnoreCase(String codigo);
 
     @Query("select us from Usuario us where :email like us.contactoId.correoPrimario ")
-    Usuario findByEmail(String email);
+    Optional<Usuario> findByEmail(String email);
 
 }

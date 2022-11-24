@@ -5,11 +5,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Transactional(readOnly=true)
 public interface ContactoJpaRepo extends JpaRepository<Contacto, Long>{
 
-    Contacto findByContactoId(Long contactoId);
+    Optional<Contacto> findByContactoId(Long contactoId);
 
     List<Contacto> findAll();
 }

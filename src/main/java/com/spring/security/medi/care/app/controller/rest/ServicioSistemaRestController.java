@@ -23,8 +23,7 @@ public class ServicioSistemaRestController {
     @GetMapping("/{id}")
     @ResponseBody
     public ResponseEntity<ServicioSistema> findById(@PathVariable("id") Long id) {
-        ServicioSistema servicio = catalogoService.buscarServicioSistemaPorId(id);
-        return new ResponseEntity(servicio, HttpStatus.OK);
+        return new ResponseEntity(catalogoService.buscarServicioSistemaPorId(id), HttpStatus.OK);
     }
 
     @GetMapping

@@ -25,6 +25,7 @@ $( ".menu-button-solicitud.btn.btn-warning" ).on( "click", function( event ) {
          var correoPrimario = msg['contactoId'].correoPrimario;
          var posicion = msg['contactoId'].posicion;
          var estado = msg['estado'];
+         console.log('get variable from response.. ');
 
          $("#usuarioIdDetail").val(usuarioId);
          $("#codigoDetail").val(codigo);
@@ -36,7 +37,11 @@ $( ".menu-button-solicitud.btn.btn-warning" ).on( "click", function( event ) {
          $("#posicionDetail").val(posicion);
          $("#estadoDetail").val(estado);
 
+         console.log('set value to view form.. ');
+
+
          $("#profileUrlDetail").attr("src",profileUrl);
+         console.log('set profile picture Ok');
 
          jQuery('#detail-modal-buttom').click();
     });

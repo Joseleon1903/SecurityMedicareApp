@@ -70,11 +70,11 @@ public class SolicitudController extends ViewBaseContext {
         logger.info("Entering in method formSolicituAfiPage..");
         logger.info("Param : " + solicitudForm);
         SolicitudAfiliacion solicitudIn = new SolicitudAfiliacion();
-        ServicioSistema servicioEntity = catalogoService.buscarServicioSistemaPorId(AplicationConstantUtil.SERVICIO_PANTALLA_SOLICITUD_AFILIACION);
+        ServicioSistema servicioEntity = catalogoService.buscarServicioSistemaPorId(AplicationConstantUtil.SERVICIO_PANTALLA_SOLICITUD_AFILIACION).get();
         solicitudIn.setServicioId(servicioEntity);
         solicitudIn.setLoteId(AplicationConstantUtil.generateLoteId());
         solicitudIn.setEntidadId(entidadService.asignarAutomaticamenteEntidad(solicitudForm.getRegimenId()));
-        Seguro seguroEntity = catalogoService.buscarSegurosSistemaPorId(solicitudForm.getSeguroId());
+        Seguro seguroEntity = catalogoService.buscarSegurosSistemaPorId(solicitudForm.getSeguroId()).get();
         solicitudIn.setSeguroId(seguroEntity);
         solicitudIn.setRegimenId(solicitudForm.getRegimenId());
         solicitudIn.setTipoAfiliado(solicitudForm.getTipoAfiliado());

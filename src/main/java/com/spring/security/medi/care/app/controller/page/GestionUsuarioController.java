@@ -3,6 +3,7 @@ package com.spring.security.medi.care.app.controller.page;
 import com.spring.security.medi.care.app.commons.DaoUtil;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
 import com.spring.security.medi.care.app.commons.domain.Usuario;
+import com.spring.security.medi.care.app.controller.dto.GestionUsuarioStatisticDTO;
 import com.spring.security.medi.care.app.controller.dto.SystemInfoDTO;
 import com.spring.security.medi.care.app.controller.dto.TablePaginationDto;
 import com.spring.security.medi.care.app.controller.dto.UsuarioInfoDto;
@@ -28,6 +29,8 @@ public class GestionUsuarioController extends ViewBaseContext {
     private PaginatedUsuario paginatedUsuario;
     private UsuarioInfoDto usuarioInfoDto;
     private TablePaginationDto tablePagination;
+    private GestionUsuarioStatisticDTO gestionUsuarioStatisticDTO;
+
 
     private String usarnametest= "Administrador";
     private String defaultProfilePicture = "../assets/img/app/unknown-user-Image.png";
@@ -44,8 +47,9 @@ public class GestionUsuarioController extends ViewBaseContext {
         logger.info("Entering in method GestionUsuarioPage..");
         logger.info("nombre usuario : "+principal.getName());
         usarnametest = principal.getName();
-        Usuario user = usuarioService.buscarUsuariosSistemaporCodigoJpa(usarnametest);
-        this.usuarioInfoDto = new UsuarioInfoDto(user);
+        usuarioService.buscarUsuariosSistemaporCodigoJpa(usarnametest).ifPresent( user ->{
+            this.usuarioInfoDto = new UsuarioInfoDto(user);
+        });
 
         logger.info("validando paginacion");
         if (indexPageInput != null && (this.tablePagination.getPaginationIndex() + indexPageInput) > -1) {
@@ -61,10 +65,18 @@ public class GestionUsuarioController extends ViewBaseContext {
         this.tablePagination.setRemainCount(paginatedUsuario.getPagination().getTotalRowCount());
         logger.info("terminando busqueda ususario");
 
+        logger.info("iniciando buscar statistic");
+        usuarioService.getSystemUserStatistic().ifPresent( stat ->{
+            this.gestionUsuarioStatisticDTO = stat;
+        });
+        logger.info("terminando buscar statistic");
+
         model.addAttribute("PaginatedUsuarioBean", paginatedUsuario);
         model.addAttribute("TablePaginationBean", tablePagination);
         model.addAttribute("SystemInfoBean", systemInfoDTO);
         model.addAttribute("UsuarioBean", usuarioInfoDto);
+        model.addAttribute("GestionUsuarioStatisticBean", gestionUsuarioStatisticDTO);
+
         return "pages/usuario/ShowGestionUsuario";
     }
 

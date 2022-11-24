@@ -5,14 +5,15 @@ import com.spring.security.medi.care.app.catalogo.dto.MunicipioPaginatedDto;
 import com.spring.security.medi.care.app.catalogo.dto.NacionalidadPaginatedDto;
 import com.spring.security.medi.care.app.commons.domain.*;
 import java.util.List;
+import java.util.Optional;
 
 public interface CatalogoService {
 
 
     //   Metodos para el catalogo de Motivo Estado
-    MotivoEstado buscarMotivoPorId(Long id);
+    Optional<MotivoEstado> buscarMotivoPorId(Long id);
 
-    List<MotivoEstado> buscarMotivosTodos();
+    Optional<List<MotivoEstado>> buscarMotivosTodos();
 
     List<MotivoEstado> buscarCatalogoMotivoEstadooPorParametros(Long motivoId, String descripcion, int rowCount);
 
@@ -22,7 +23,7 @@ public interface CatalogoService {
 
 
     //   Metodos para el catalogo de Nacionalidad
-    Nacionalidad buscarNacionalidadPorId(Long id);
+    Optional<Nacionalidad> buscarNacionalidadPorId(Long id);
 
     List<Nacionalidad> buscarNacionalidadTodos();
 
@@ -32,7 +33,7 @@ public interface CatalogoService {
 
 
     //   Metodos para el catalogo de Municipio
-    Municipio buscarMunicipioPorId(Long id);
+    Optional<Municipio> buscarMunicipioPorId(Long id);
 
     List<Municipio> buscarMunicipiosTodos();
 
@@ -44,15 +45,15 @@ public interface CatalogoService {
 
     List<Seguro> buscarSegurosSistema();
 
-    Seguro buscarSegurosSistemaPorId(Long id);
+    Optional<Seguro> buscarSegurosSistemaPorId(Long id);
 
     Seguro guardarSeguroSistema(Seguro seguro);
 
     //   Metodos para el catalogo de InsitutcionPensionado
 
-    List<InstitucionPensionado> buscarInstitucionPensionadoTodas();
+    Optional<List<InstitucionPensionado>> buscarInstitucionPensionadoTodas();
 
-    InstitucionPensionado buscarPorInstitucionPensionadoId(Long id);
+    Optional<InstitucionPensionado> buscarPorInstitucionPensionadoId(Long id);
 
     InstitucionPensionado guardarInstitucionPensionado(InstitucionPensionado intitucionPensionado);
 
@@ -60,7 +61,7 @@ public interface CatalogoService {
 
     List<ServicioSistema> buscarServiciosSistemas();
 
-    ServicioSistema buscarServicioSistemaPorId(Long id);
+    Optional<ServicioSistema> buscarServicioSistemaPorId(Long id);
 
     ServicioSistema registrarServicioSistema(ServicioSistema servicioSistema);
 }

@@ -87,7 +87,7 @@ public class FormularioUsuarioController extends ViewBaseContext {
         if(!createUserFormDataInput.getPassword().equals(createUserFormDataInput.getConfirmPassword())){
             logger.info("Error PASSWORD_DE_CONFIRMACION_DIFERENTES");
             logger.info("ABORT REGISTRATION");
-            MotivoEstado mot = catalogoService.buscarMotivoPorId(AplicationConstantUtil.PASSWORD_DE_CONFIRMACION_DIFERENTES);
+            MotivoEstado mot = catalogoService.buscarMotivoPorId(AplicationConstantUtil.PASSWORD_DE_CONFIRMACION_DIFERENTES).get();
             this.errorPageBean = new ErrorPageDto(mot.getMotivoId(), mot.getDescripcion(), true);
             this.createUserFormData = createUserFormDataInput;
             return "redirect:/formulario/usuario?hasError=true";
@@ -97,7 +97,7 @@ public class FormularioUsuarioController extends ViewBaseContext {
                 || createUserFormDataInput.getTipoUsuarioId().equals(0L) || bindingResult.hasErrors()){
             logger.info("Error EXISTEN_DATOS_REQUERIDO_FORMULARIO_USUAARIO");
             logger.info("ABORT REGISTRATION");
-            MotivoEstado mot = catalogoService.buscarMotivoPorId(AplicationConstantUtil.EXISTEN_DATOS_REQUERIDO_FORMULARIO_USUAARIO);
+            MotivoEstado mot = catalogoService.buscarMotivoPorId(AplicationConstantUtil.EXISTEN_DATOS_REQUERIDO_FORMULARIO_USUAARIO).get();
             this.errorPageBean = new ErrorPageDto(mot.getMotivoId(), mot.getDescripcion(), true);
             this.createUserFormData = createUserFormDataInput;
             return "redirect:/formulario/usuario?hasError=true";
@@ -131,7 +131,7 @@ public class FormularioUsuarioController extends ViewBaseContext {
         }catch (Exception exception){
             logger.info("Error "+exception.getMessage());
             logger.error("Internal Server Error", exception);
-            MotivoEstado mot = catalogoService.buscarMotivoPorId(AplicationConstantUtil.GENERAL_ERROR_INTERNO);
+            MotivoEstado mot = catalogoService.buscarMotivoPorId(AplicationConstantUtil.GENERAL_ERROR_INTERNO).get();
             this.errorPageBean = new ErrorPageDto(mot.getMotivoId(), mot.getDescripcion(), true);
             this.createUserFormData = createUserFormDataInput;
             return "redirect:/formulario/usuario?hasError=true";
@@ -146,7 +146,7 @@ public class FormularioUsuarioController extends ViewBaseContext {
         logger.info("param : "+file.getOriginalFilename());
         logger.info("param : "+file.getContentType());
 
-        if(!file.getContentType().contains("png") || !file.getContentType().contains("jpg")){
+        if(!file.getContentType().contains("png") && !file.getContentType().contains("jpeg")){
             throw new InvalidFormatException("Invalid format file");
         }
 
@@ -156,7 +156,7 @@ public class FormularioUsuarioController extends ViewBaseContext {
         } catch (ResourceAlreadyExistException | InternalServerException e) {
             logger.info("Error "+e.getMessage());
             logger.error("Internal Server Error", e);
-            MotivoEstado mot = catalogoService.buscarMotivoPorId(AplicationConstantUtil.GENERAL_ERROR_INTERNO);
+            MotivoEstado mot = catalogoService.buscarMotivoPorId(AplicationConstantUtil.GENERAL_ERROR_INTERNO).get();
             this.errorPageBean = new ErrorPageDto(mot.getMotivoId(), mot.getDescripcion(), true);
             return "redirect:/formulario/usuario?hasError=true";
         }

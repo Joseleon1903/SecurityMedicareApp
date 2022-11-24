@@ -27,7 +27,7 @@ public class GeneralErrorController {
         logger.info("Entering in method showPage..");
 
         logger.info("ErrorCode: "+ errorCode);
-        MotivoEstado mot = catalogoService.buscarMotivoPorId(errorCode);
+        MotivoEstado mot = catalogoService.buscarMotivoPorId(errorCode).get();
         logger.info("MotivoEstado: "+ mot);
         model.addAttribute("ErrorPageBean", new ErrorPageDto(mot.getMotivoId(), mot.getDescripcion(), true));
 

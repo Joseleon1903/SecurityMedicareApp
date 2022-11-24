@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -103,8 +104,10 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
         SolicitudAfiliacion sol = solicitudAfiliacionJpaRepo.findById(id).get();
         logger.info("returning :" + sol);
         String nombreEntidad = entidadService.buscarEntidadPorId(sol.getEntidadId().getEntidadId()).getDescripcion();
-        Ciudadano ciu = ciudadanoService.buscarCiudadanoPorCiudadanoId(sol.getCiudadanoId());
-        MotivoEstado mot = catalogoService.buscarMotivoPorId(sol.getMotivoId());
+        Ciudadano ciu = ciudadanoService.buscarCiudadanoPorCiudadanoId(sol.getCiudadanoId()).isPresent() ?
+                ciudadanoService.buscarCiudadanoPorCiudadanoId(sol.getCiudadanoId()).get(): null;
+        MotivoEstado mot = catalogoService.buscarMotivoPorId(sol.getMotivoId()).isPresent() ?
+                catalogoService.buscarMotivoPorId(sol.getMotivoId()).get() : null;
         String descmotivo = null;
         if (mot != null) {
             descmotivo = mot.getMotivoId() + ":" + mot.getDescripcion();
@@ -117,7 +120,7 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
         String institucionpensionado = "";
 
         if(sol.getInstitucionPensionadoId() != null){
-            institucionpensionado = catalogoService.buscarPorInstitucionPensionadoId(sol.getInstitucionPensionadoId()).getDescripcion();
+            institucionpensionado = catalogoService.buscarPorInstitucionPensionadoId(sol.getInstitucionPensionadoId()).get().getDescripcion();
         }
         return new DetalleSolicitudAfiliacionDto(sol, nombreEntidad, segundoApellido, institucionpensionado,
                 descmotivo);
@@ -140,17 +143,17 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
         logger.info(">> Iniciando validaciones ");
         logger.info("A) Nss y cedula de la solicitud y asigna el ciudadano");
 
-       Boolean existeCiudadano = (ciudadanoService.buscarCiudadanoPorIdentifiacion(sol.getCedula(), sol.getNss()) != null) ? true : false;
+       Boolean existeCiudadano = ciudadanoService.buscarCiudadanoPorIdentifiacion(sol.getCedula(), sol.getNss()) == null;
 
         if (existeCiudadano) {
-            Long motivo = catalogoService.buscarMotivoPorId(AplicationConstantUtil.NO_EXISTE_IDENTIFICACION_SOLICITUD)
+            Long motivo = catalogoService.buscarMotivoPorId(AplicationConstantUtil.NO_EXISTE_IDENTIFICACION_SOLICITUD).get()
                     .getMotivoId();
             sol.setMotivoId(motivo);
             sol.setEstado(AfiliacionDtoUtil.C_ESTADO_RE);
             solicitudAfiliacionJpaRepo.save(sol);
             return;
         }
-        Ciudadano ciudadano = ciudadanoService.buscarCiudadanoPorIdentifiacion(sol.getCedula(), sol.getNss());
+        Ciudadano ciudadano = ciudadanoService.buscarCiudadanoPorIdentifiacion(sol.getCedula(), sol.getNss()).get();
         sol.setNombre(ciudadano.getNombre());
         sol.setPrimerApellido(ciudadano.getPrimerApellido());
         sol.setCedula(ciudadano.getCedula());
@@ -173,7 +176,7 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
         logger.info("Entering in agregarMotivoSolicitudAfiliacion");
         logger.info("Param motivoId: "+motivoId);
 
-        MotivoEstado mot = catalogoService.buscarMotivoPorId(motivoId);
+        MotivoEstado mot = catalogoService.buscarMotivoPorId(motivoId).get();
 
         SolicitudAfiliacion sol = solicitudAfiliacionJpaRepo.findById(solicitudId).get();
 
@@ -186,7 +189,7 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
     @Override
     public Long asignarAutoInstitucionPensionadiSolicitud(){
         logger.info("Entering in asignarAutoInstitucionPensionadiSolicitud");
-        List<InstitucionPensionado> institucionList = catalogoService.buscarInstitucionPensionadoTodas();
+        List<InstitucionPensionado> institucionList = catalogoService.buscarInstitucionPensionadoTodas().get();
 
         int size = institucionList.size();
 

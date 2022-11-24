@@ -83,7 +83,7 @@ public class CiudadanoController extends ViewBaseContext {
         logger.info("param detalle ciudadanoId = " + ciudadanoId);
 
         logger.info("buscando ciudadanos ...");
-        detailCiudadano = ciudadanoService.buscarCiudadanoPorCiudadanoId(ciudadanoId);
+        detailCiudadano = ciudadanoService.buscarCiudadanoPorCiudadanoId(ciudadanoId).get();
         logger.info("terminando buscando ciudadanos:" + detailCiudadano);
 
         model.addAttribute("CiudadanosList", ciudadanos);

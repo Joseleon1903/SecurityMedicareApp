@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value="/api/institucion/pensionado", produces=MediaType.APPLICATION_JSON_VALUE)
@@ -24,15 +25,13 @@ public class InstitucionPensionadoRestController {
     @GetMapping("/{id}")
     @ResponseBody
     public ResponseEntity<InstitucionPensionado> findById(@PathVariable("id") Long id){
-        InstitucionPensionado institucionPensionado = catalogoService.buscarPorInstitucionPensionadoId(id);
-        return new ResponseEntity(institucionPensionado, HttpStatus.OK);
+        return new ResponseEntity(catalogoService.buscarPorInstitucionPensionadoId(id), HttpStatus.OK);
     }
 
     @GetMapping
     @ResponseBody
-    public ResponseEntity<List<InstitucionPensionado>> findAll(){
-        List<InstitucionPensionado> institucionPensionadoList = catalogoService.buscarInstitucionPensionadoTodas();
-        return new ResponseEntity(institucionPensionadoList, HttpStatus.OK);
+    public ResponseEntity<List<InstitucionPensionado>>findAll(){
+        return new ResponseEntity(catalogoService.buscarInstitucionPensionadoTodas(), HttpStatus.OK);
     }
 
     @PostMapping
