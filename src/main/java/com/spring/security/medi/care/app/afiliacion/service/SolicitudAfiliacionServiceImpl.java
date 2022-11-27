@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
 
@@ -133,7 +134,7 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
         SolicitudAfiliacion sol = solicitudAfiliacionJpaRepo.findById(solicitudId).get();
 
         //validando estado solicitud
-        if(sol.getEstado() == AplicationConstantUtil.ESTADO_PE){
+        if(Objects.equals(sol.getEstado(), AplicationConstantUtil.ESTADO_PE)){
             logger.info("solicitud no en estado permitido para ser proceada");
             return;
         }
@@ -141,9 +142,9 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
         // TODO validacion ciudadano por NSS y cedula validar que exista un ciudadano
         // con Nss y cedula de la solicitud y asigna el ciudadano
         logger.info(">> Iniciando validaciones ");
-        logger.info("A) Nss y cedula de la solicitud y asigna el ciudadano");
+        logger.info(" Nss y cedula de la solicitud y asigna el ciudadano");
 
-       Boolean existeCiudadano = ciudadanoService.buscarCiudadanoPorIdentifiacion(sol.getCedula(), sol.getNss()) == null;
+       Boolean existeCiudadano = !ciudadanoService.buscarCiudadanoPorIdentifiacion(sol.getCedula(), sol.getNss()).isPresent();
 
         if (existeCiudadano) {
             Long motivo = catalogoService.buscarMotivoPorId(AplicationConstantUtil.NO_EXISTE_IDENTIFICACION_SOLICITUD).get()
@@ -175,14 +176,10 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
     public void agregarMotivoSolicitudAfiliacion(Long solicitudId , Long motivoId){
         logger.info("Entering in agregarMotivoSolicitudAfiliacion");
         logger.info("Param motivoId: "+motivoId);
-
         MotivoEstado mot = catalogoService.buscarMotivoPorId(motivoId).get();
-
         SolicitudAfiliacion sol = solicitudAfiliacionJpaRepo.findById(solicitudId).get();
-
         sol.setMotivoId(mot.getMotivoId());
         sol.setEstado(AfiliacionDtoUtil.C_ESTADO_RE);
-
         solicitudAfiliacionJpaRepo.save(sol);
     }
 
@@ -190,9 +187,7 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
     public Long asignarAutoInstitucionPensionadiSolicitud(){
         logger.info("Entering in asignarAutoInstitucionPensionadiSolicitud");
         List<InstitucionPensionado> institucionList = catalogoService.buscarInstitucionPensionadoTodas().get();
-
         int size = institucionList.size();
-
         Random rand =  new Random();
         int indiceR = rand.nextInt(size);
         logger.info("Indice random : "+Math.abs(indiceR) );

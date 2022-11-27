@@ -6,19 +6,28 @@ import com.spring.security.medi.care.app.ciudadano.type.CiudadanoPaginated;
 import com.spring.security.medi.care.app.commons.DaoUtil;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
 import com.spring.security.medi.care.app.commons.domain.Ciudadano;
+import com.spring.security.medi.care.app.commons.service.ApplicationMessageUtil;
 import com.spring.security.medi.care.app.controller.dto.CiudadanoFilterDto;
 import com.spring.security.medi.care.app.controller.dto.SystemInfoDTO;
 import com.spring.security.medi.care.app.controller.dto.TablePaginationDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.WebProperties;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.LocaleResolver;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.List;
 
 @Controller
 public class CiudadanoController extends ViewBaseContext {
+
+    private final MessageSource messageSource;
+    private final LocaleResolver localeResolver;
+    public ApplicationMessageUtil applicationMessageUtil;
 
     private final CiudadanoService ciudadanoService;
     private List<CiudadanoDto> ciudadanos;
@@ -29,14 +38,19 @@ public class CiudadanoController extends ViewBaseContext {
     private TablePaginationDto tablePagination;
 
     @Autowired
-    public CiudadanoController(CiudadanoService ciudadanoService) {
+    public CiudadanoController(CiudadanoService ciudadanoService, MessageSource messageSource, LocaleResolver localeResolver) {
         this.ciudadanoService = ciudadanoService;
+        this.messageSource = messageSource;
+        this.localeResolver = localeResolver;
     }
 
     @GetMapping("/ciudadano")
-    public String showPage(@RequestParam(value = "indexPage", required = false) Integer indexPageInput, Model model) {
+    public String showPage(@RequestParam(value = "indexPage", required = false) Integer indexPageInput, Model model, HttpServletRequest request) {
         logger.info("------- entering -----------");
         logger.info("Entering in method showPage..");
+        applicationMessageUtil =  new ApplicationMessageUtil(messageSource,localeResolver, request );
+        systemInfoDTO = new SystemInfoDTO(applicationMessageUtil.getMessage("page.controller.ciudadano.list.title"),
+                applicationMessageUtil.getMessage("page.controller.ciudadano.list.sub.title"), LocalDate.now());
         logger.info("param: ciudadanoFilterDto " + ciudadanoFilterDto);
         if (indexPageInput != null && (this.tablePagination.getPaginationIndex() + indexPageInput) > -1) {
             int result = this.tablePagination.getPaginationIndex() + indexPageInput;
@@ -120,7 +134,6 @@ public class CiudadanoController extends ViewBaseContext {
         detailCiudadano = new Ciudadano();
         ciudadanoFilterDto = new CiudadanoFilterDto();
         tablePagination = new TablePaginationDto();
-        systemInfoDTO = new SystemInfoDTO("Ciudadano","Se considera como ciudadano de un Estado a aquella persona que posee derechos civiles y políticos dentro del territorio y es considerado como tal.", LocalDate.now());
         logger.info("systemInfoDTO: " + systemInfoDTO);
         logger.info("existing init method ");
     }

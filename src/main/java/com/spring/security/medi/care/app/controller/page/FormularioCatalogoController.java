@@ -4,10 +4,12 @@ import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.commons.AplicationConstantUtil;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
 import com.spring.security.medi.care.app.commons.domain.MotivoEstado;
+import com.spring.security.medi.care.app.commons.service.ApplicationMessageUtil;
 import com.spring.security.medi.care.app.controller.dto.ErrorPageDto;
 import com.spring.security.medi.care.app.controller.dto.MotivoEstadoFormDTO;
 import com.spring.security.medi.care.app.controller.dto.SystemInfoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,12 +17,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.LocaleResolver;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.time.LocalDate;
 
 @Controller
 public class FormularioCatalogoController extends ViewBaseContext {
+
+    private final MessageSource messageSource;
+    private final LocaleResolver localeResolver;
+    public ApplicationMessageUtil applicationMessageUtil;
 
     private final CatalogoService catalogoService;
 
@@ -29,14 +37,22 @@ public class FormularioCatalogoController extends ViewBaseContext {
     private SystemInfoDTO systemInfoDTO;
 
     @Autowired
-    public FormularioCatalogoController(CatalogoService catalogoService) {
+    public FormularioCatalogoController(CatalogoService catalogoService,MessageSource messageSource,
+                                        LocaleResolver localeResolver) {
         this.catalogoService = catalogoService;
+        this.messageSource= messageSource;
+        this.localeResolver = localeResolver;
     }
 
     @GetMapping("/form_catalogo")
-    public String showPage(@RequestParam(value = "hasError" ,  required = false) Boolean hasError, Model model) {
+    public String showPage(@RequestParam(value = "hasError" ,  required = false) Boolean hasError, Model model, HttpServletRequest request) {
         logger.info("------- entering -----------");
         logger.info("Entering in method showPage:{/formulario/catalogo}");
+
+        applicationMessageUtil =  new ApplicationMessageUtil(messageSource,localeResolver, request );
+        systemInfoDTO = new SystemInfoDTO(applicationMessageUtil.getMessage("page.controller.catalogo.form.title"),
+                applicationMessageUtil.getMessage("page.controller.catalogo.form.sub.title"), LocalDate.now());
+
         logger.info("Entering validation error : "+ hasError);
 
         validateError(hasError, model);
