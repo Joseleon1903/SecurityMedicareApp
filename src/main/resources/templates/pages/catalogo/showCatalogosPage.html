@@ -86,8 +86,8 @@
             <div class="row gy-4">
 
                 <div class="section-header">
-                    <span>Catalogo Motivo Estado</span>
-                    <h2>Catalogo Motivo Estado</h2>
+                    <span  th:text="#{label.motivo.estado.titulo}">Catalogo Motivo Estado</span>
+                    <h2  th:text="#{label.motivo.estado.titulo}">Catalogo Motivo Estado</h2>
                 </div>
 
                 <div class="col-lg-3 card">
@@ -95,12 +95,12 @@
 
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="motivo-input" th:field="*{motivoId}" th:value="${MotivoFilterDtoBean.motivoId}" placeholder="Motivo id">
-                            <label for="motivo-input">Motivo Id</label>
+                            <label for="motivo-input" th:text="#{page.motivo.estado.column.motivoId}">Motivo Id</label>
                         </div>
 
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="descripcion-motivo-input" th:field="*{descripcion}" th:value="${MotivoFilterDtoBean.descripcion}" placeholder="Descripcion">
-                            <label for="descripcion-motivo-input">Descripcion</label>
+                            <label for="descripcion-motivo-input" th:text="#{page.motivo.estado.column.descripcion}">Descripcion</label>
                         </div>
                         <button type="submit" class="btn btn-primary" th:text="#{page.generar.column.buscar}" >Submit</button>
                     </form>
@@ -160,21 +160,21 @@
             <div class="row gy-4">
 
                 <div class="section-header">
-                    <span>Catalogo Municipio</span>
-                    <h2>Catalogo Municipio</h2>
+                    <span th:text="#{label.municipio.titulo}">Catalogo Municipio</span>
+                    <h2 th:text="#{label.municipio.titulo}">Catalogo Municipio</h2>
                 </div>
 
                 <div class="col-lg-3 card">
                     <form method="post" action="#" th:action="@{/municipio/filter}" th:object="${MunicipioFilterDtoBean}" class="form-catalogo-filter" id="form-municipio-filter">
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="municipioCodigo-input" th:field="*{codigoMunicipio}" th:value="${MunicipioFilterDtoBean.codigoMunicipio}" placeholder="Codigo municipio">
-                            <label for="municipioCodigo-input">Codigo municipio</label>
+                            <input type="text" class="form-control" id="municipioCodigo-input" th:field="*{codigoMunicipio}" th:value="${MunicipioFilterDtoBean.codigoMunicipio}" th:placeholder="#{page.municipio.column.codigoMunicipio}">
+                            <label for="municipioCodigo-input" th:text="#{page.municipio.column.codigoMunicipio}">Codigo municipio</label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="descripcion-municipio-input" th:field="*{descripcion}" th:value="${MunicipioFilterDtoBean.descripcion}" placeholder="Descripción">
-                            <label for="descripcion-municipio-input">Descripción</label>
+                            <input type="text" class="form-control" id="descripcion-municipio-input" th:field="*{descripcion}" th:value="${MunicipioFilterDtoBean.descripcion}" th:placeholder="#{page.municipio.column.descripcion}">
+                            <label for="descripcion-municipio-input" th:text="#{page.municipio.column.descripcion}">Descripción</label>
                         </div>
                         <button type="submit" class="btn btn-primary" th:text="#{page.generar.column.buscar}" >Submit</button>
                     </form>
@@ -238,8 +238,8 @@
             <div class="row gy-4">
 
                 <div class="section-header">
-                    <span>Catalogo Nacionalidad</span>
-                    <h2>Catalogo Nacionalidad</h2>
+                    <span th:text="#{label.nacionalidad.titulo}">Catalogo Nacionalidad</span>
+                    <h2 th:text="#{label.nacionalidad.titulo}">Catalogo Nacionalidad</h2>
                 </div>
 
                 <div class="col-lg-3 card">
@@ -247,7 +247,7 @@
 
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="paisId-input" th:field="*{paisId}" th:value="${NacionalidadFilterDTOBean.paisId}" placeholder="Pais Id">
-                            <label for="paisId-input">Pais Id</label>
+                            <label for="paisId-input" th:text="#{page.nacionalidad.column.paisId}">Pais Id</label>
                         </div>
 
                         <button type="submit" class="btn btn-primary" th:text="#{page.generar.column.buscar}" >Submit</button>

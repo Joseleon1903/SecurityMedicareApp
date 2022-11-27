@@ -9,22 +9,30 @@ import com.spring.security.medi.care.app.commons.domain.Ciudadano;
 import com.spring.security.medi.care.app.commons.domain.MotivoEstado;
 import com.spring.security.medi.care.app.commons.domain.Municipio;
 import com.spring.security.medi.care.app.commons.domain.Nacionalidad;
+import com.spring.security.medi.care.app.commons.service.ApplicationMessageUtil;
 import com.spring.security.medi.care.app.controller.dto.CiudadanoFormDto;
 import com.spring.security.medi.care.app.controller.dto.ErrorPageDto;
 import com.spring.security.medi.care.app.controller.dto.SystemInfoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.LocaleResolver;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.List;
 
 @Controller
 public class FormularioCiudadanoController extends ViewBaseContext {
+
+    private final MessageSource messageSource;
+    private final LocaleResolver localeResolver;
+    public ApplicationMessageUtil applicationMessageUtil;
 
     private List<Nacionalidad> listaNacionalidad;
     private List<Municipio> listaMunicipio;
@@ -37,14 +45,23 @@ public class FormularioCiudadanoController extends ViewBaseContext {
     private ErrorPageDto errorPageBean;
 
     @Autowired
-    public FormularioCiudadanoController(CatalogoService catalogoService, CiudadanoService ciudadanoService) {
+    public FormularioCiudadanoController(CatalogoService catalogoService, CiudadanoService ciudadanoService, MessageSource messageSource,
+                                         LocaleResolver localeResolver) {
         this.catalogoService = catalogoService;
         this.ciudadanoService = ciudadanoService;
+        this.messageSource = messageSource;
+        this.localeResolver = localeResolver;
     }
 
     @GetMapping("/form_ciudadano")
-    public String show( @RequestParam(value = "hasError" ,  required = false) Boolean hasError,  Model model) {
+    public String show( @RequestParam(value = "hasError" ,  required = false) Boolean hasError,  Model model,
+                        HttpServletRequest request) {
         logger.info("entering  in show formulario ciudadano");
+
+        applicationMessageUtil =  new ApplicationMessageUtil(messageSource,localeResolver, request );
+        systemInfoDTO = new SystemInfoDTO(applicationMessageUtil.getMessage("page.controller.form.ciudadano.list.title"),
+                applicationMessageUtil.getMessage("page.controller.form.ciudadano.list.sub.title"), LocalDate.now());
+
         cargarCatalogoNacionalidad();
         cargarCatalogoMunicipio();
         logger.info("Entering validation error : "+ hasError);
