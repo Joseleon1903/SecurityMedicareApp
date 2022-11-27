@@ -5,19 +5,27 @@ import com.spring.security.medi.care.app.catalogo.dto.MunicipioPaginatedDto;
 import com.spring.security.medi.care.app.catalogo.dto.NacionalidadPaginatedDto;
 import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
+import com.spring.security.medi.care.app.commons.service.ApplicationMessageUtil;
 import com.spring.security.medi.care.app.controller.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.LocaleResolver;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 
 @Controller
 public class CatalogoController extends ViewBaseContext {
+
+    private final MessageSource messageSource;
+    private final LocaleResolver localeResolver;
+    public ApplicationMessageUtil applicationMessageUtil;
 
     private final CatalogoService catalogoService;
 
@@ -36,17 +44,22 @@ public class CatalogoController extends ViewBaseContext {
     private NacionalidadPaginatedDto paginatedNacionalidad;
 
     @Autowired
-    public CatalogoController(CatalogoService catalogoService) {
+    public CatalogoController(CatalogoService catalogoService, MessageSource messageSource,LocaleResolver localeResolver ) {
+        this.messageSource = messageSource;
+        this.localeResolver = localeResolver;
         this.catalogoService = catalogoService;
     }
-
 
     @RequestMapping("/catalogo")
     public String showCatalogo(@RequestParam(value = "motivoIndexPage", required = false) Integer motivoIndexInput,
             @RequestParam(value = "nacionalidadIndexPage", required = false) Integer nacionalidadIndexInput,
             @RequestParam(value = "municipioIndexPage", required = false) Integer municipioIndexInput,
-            Model model) {
+            Model model, HttpServletRequest request) {
         logger.info("entering  in show showCatalogo");
+
+        applicationMessageUtil =  new ApplicationMessageUtil(messageSource,localeResolver, request );
+        systemInfoDTO = new SystemInfoDTO(applicationMessageUtil.getMessage("page.controller.catalogo.list.title"),
+                applicationMessageUtil.getMessage("page.controller.catalogo.list.sub.title"), LocalDate.now());
 
         logger.info("filter parameters : " + motivoFilterDTO);
         logger.info("filter parameters : " + nacionalidadFilterDTO);

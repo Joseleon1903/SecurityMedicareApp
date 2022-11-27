@@ -40,29 +40,29 @@
                     <form method="post" action="#" th:action="@{/inscription}" th:object="${CiudadanoBean}" role="form" class="php-email-form">
                         <div class="row">
                             <div class="col-md-6 form-group">
-                                <input type="text" th:field="*{cedula}" th:value="${CiudadanoBean.cedula}" name="cedula" class="form-control" id="cedula" placeholder="Cedula" required>
+                                <input type="text" th:field="*{cedula}" th:value="${CiudadanoBean.cedula}" name="cedula" class="form-control" id="cedula" th:placeholder="#{formulario.creacion.ciudadano.cedula}" required>
                             </div>
                             <div class="col-md-6 form-group mt-3 mt-md-0">
-                                <input type="text" th:field="*{nss}" th:value="${CiudadanoBean.nss}" class="form-control" name="nss" id="nss" placeholder="Nss">
+                                <input type="text" th:field="*{nss}" th:value="${CiudadanoBean.nss}" class="form-control" name="nss" id="nss" th:placeholder="#{formulario.creacion.ciudadano.nss}">
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 form-group">
-                                <input type="text" th:field="*{nombre}" th:value="${CiudadanoBean.nombre}" name="nombre" class="form-control" id="nombre" placeholder="Nombre" required>
+                                <input type="text" th:field="*{nombre}" th:value="${CiudadanoBean.nombre}" name="nombre" class="form-control" id="nombre" th:placeholder="#{formulario.creacion.ciudadano.nombre}" required>
                             </div>
                             <div class="col-md-6 form-group mt-3 mt-md-0">
-                                <input type="text" th:field="*{primerApellido}" th:value="${CiudadanoBean.primerApellido}" class="form-control" name="primerApellido" id="primerApellido" placeholder="Primer Apellido" required>
+                                <input type="text" th:field="*{primerApellido}" th:value="${CiudadanoBean.primerApellido}" class="form-control" name="primerApellido" id="primerApellido" th:placeholder="#{formulario.creacion.ciudadano.primer.apellido}" required>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 form-group">
-                                <input type="text" th:field="*{segundoApellido}" th:value="${CiudadanoBean.segundoApellido}" name="segundoApellido" class="form-control" id="segundo Apellido" placeholder="Segundo Apellido" required>
+                                <input type="text" th:field="*{segundoApellido}" th:value="${CiudadanoBean.segundoApellido}" name="segundoApellido" class="form-control" id="segundo Apellido" th:placeholder="#{formulario.creacion.ciudadano.segundo.apellido}" required>
                             </div>
                             <div class="col-md-6 form-group">
                                 <select th:field="*{nacionalidad}" th:value="${CiudadanoBean.nacionalidad}" class="form-select" aria-label="Default select example">
-                                    <option value="0" selected th:text="#{page.select.solicitud.datos.titular.nacionalidad}">Open this select menu</option>
+                                    <option value="0" selected th:text="#{formulario.creacion.ciudadano.nacionalidad}">Open this select menu</option>
                                     <option th:each="nacion : ${ListadoNacionalidadBean}" th:value="${nacion.nacionalidadId}" th:text="${nacion.descripcion}" value="1">Madre</option>
                                 </select>
                             </div>
@@ -71,14 +71,14 @@
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <select th:field="*{municipio}" th:value="${CiudadanoBean.municipio}" class="form-select" aria-label="Default select example" required>
-                                    <option value="0" selected >Seleciona un municipio</option>
+                                    <option value="0" selected th:text="#{formulario.creacion.ciudadano.municipio}">Seleciona un municipio</option>
                                     <option th:each="municipio : ${ListadoMunicipioBean}" th:value="${municipio.municipioId}" th:text="${municipio.descripcion}" ></option>
                                 </select>
                             </div>
 
                             <div class="col-md-6 form-group">
                                 <select th:field="*{genero}" th:value="${CiudadanoBean.genero}" class="form-select" aria-label="Default select example" required>
-                                    <option value="0" selected >Seleciona el Genero</option>
+                                    <option value="0" selected th:text="#{formulario.creacion.ciudadano.genero}">Seleciona el Genero</option>
                                     <option value="M" >Masculino</option>
                                     <option value="F" >Femenino</option>
                                 </select>
@@ -88,7 +88,7 @@
 
                         <div class="row">
                             <div class="col-md-2 form-group">
-                                <label class="form-label">Fecha nacimiento</label>
+                                <label class="form-label" th:text="#{formulario.creacion.ciudadano.fecha.nacimiento}">Fecha nacimiento</label>
                             </div>
 
                             <div class="col-md-6 form-group">

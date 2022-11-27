@@ -104,7 +104,7 @@
                             <div class="mb-3">
                                 <label class="form-label" th:text="#{formulario.creacion.usuario.posicion}">Email address</label>
                                 <select  class="form-select" aria-label="Default select example" th:field="*{posicion}" th:value="${CreateUserFormBean.posicion}" required>
-                                    <option value="0" selected >Seleciona una posicion</option>
+                                    <option value="0" selected th:text="#{formulario.creacion.usuario.position.detail}">Seleciona una posicion</option>
                                     <option value="JUNIOR DESARROLLADOR" >JR. DESARROLLADOR</option>
                                     <option value="SENIOR DESARROLLADOR" >SN. DESARROLLADOR</option>
                                     <option value="ANALISTA DE REQUERIMIENTO" >ANALISTA DE REQUERIMIENTO</option>
@@ -124,7 +124,7 @@
                             <div class="mb-3">
                                 <label class="form-label" th:text="#{formulario.creacion.usuario.tipoUsuarioId}">Email address</label>
                                 <select  class="form-select" aria-label="Default select example" th:field="*{tipoUsuarioId}" th:value="${CreateUserFormBean.tipoUsuarioId}" required>
-                                    <option value="0" selected >Seleciona una rol</option>
+                                    <option value="0" selected th:text="#{formulario.creacion.usuario.rol.detail}">Seleciona una rol</option>
                                     <option th:each="tipoUsuario : ${TipoUsuarioListBean}" th:value="${tipoUsuario.tipoUsuarioId}" th:text="${tipoUsuario.descripcion}" ></option>
                                 </select>
                                 <div class="form-text" th:text="#{formulario.creacion.usuario.posicion.detail}">We'll never share your email with anyone else.</div>

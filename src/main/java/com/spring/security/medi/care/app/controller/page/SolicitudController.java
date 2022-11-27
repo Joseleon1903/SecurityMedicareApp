@@ -5,17 +5,21 @@ import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.commons.AplicationConstantUtil;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
 import com.spring.security.medi.care.app.commons.domain.*;
+import com.spring.security.medi.care.app.commons.service.ApplicationMessageUtil;
 import com.spring.security.medi.care.app.controller.dto.ErrorPageDto;
 import com.spring.security.medi.care.app.controller.dto.SolicitudFormDto;
 import com.spring.security.medi.care.app.controller.dto.SystemInfoDTO;
 import com.spring.security.medi.care.app.entidad.service.EntidadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.LocaleResolver;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -23,6 +27,10 @@ import java.util.List;
 
 @Controller
 public class SolicitudController extends ViewBaseContext {
+
+    private final MessageSource messageSource;
+    private final LocaleResolver localeResolver;
+    public ApplicationMessageUtil applicationMessageUtil;
 
     private SystemInfoDTO systemInfoDTO;
 
@@ -39,16 +47,24 @@ public class SolicitudController extends ViewBaseContext {
     private ErrorPageDto errorPageDto;
 
     @Autowired
-    public SolicitudController(CatalogoService catalogoService, SolicitudAfiliacionService solicitudAfiliacionService, EntidadService entidadService) {
+    public SolicitudController(CatalogoService catalogoService, SolicitudAfiliacionService solicitudAfiliacionService, EntidadService entidadService,
+                               MessageSource messageSource, LocaleResolver localeResolver) {
         this.catalogoService = catalogoService;
         this.solicitudAfiliacionService = solicitudAfiliacionService;
         this.entidadService = entidadService;
+        this.messageSource = messageSource;
+        this.localeResolver = localeResolver;
     }
 
     @GetMapping("/solicitud")
-    public String solicituPage(Model model) {
+    public String solicituPage(Model model, HttpServletRequest request) {
         logger.info("------- entering -----------");
         logger.info("Entering in method solicituPage..");
+
+        applicationMessageUtil =  new ApplicationMessageUtil(messageSource,localeResolver, request );
+        systemInfoDTO = new SystemInfoDTO(applicationMessageUtil.getMessage("page.controller.solicitudes.list.title"),
+                applicationMessageUtil.getMessage("page.controller.solicitudes.list.sub.title"), LocalDate.now());
+
         cargarCatalogoSeguro();
         cargarCatalogoMunicipio();
         cargarCatalogoParentesco();

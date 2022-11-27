@@ -7,6 +7,7 @@ import com.spring.security.medi.care.app.commons.domain.*;
 import com.spring.security.medi.care.app.commons.exception.InternalServerException;
 import com.spring.security.medi.care.app.commons.exception.InvalidFormatException;
 import com.spring.security.medi.care.app.commons.exception.ResourceAlreadyExistException;
+import com.spring.security.medi.care.app.commons.service.ApplicationMessageUtil;
 import com.spring.security.medi.care.app.commons.service.SecurityService;
 import com.spring.security.medi.care.app.controller.dto.CreateUserFormData;
 import com.spring.security.medi.care.app.controller.dto.ErrorPageDto;
@@ -15,6 +16,7 @@ import com.spring.security.medi.care.app.file.service.FileService;
 import com.spring.security.medi.care.app.usuario.service.TipoUsuarioService;
 import com.spring.security.medi.care.app.usuario.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,13 +26,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.LocaleResolver;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
 public class FormularioUsuarioController extends ViewBaseContext {
+
+    private final MessageSource messageSource;
+    private final LocaleResolver localeResolver;
+    public ApplicationMessageUtil applicationMessageUtil;
 
     private final UsuarioService usuarioService;
     private final TipoUsuarioService tipoUsuarioService;
@@ -50,19 +58,26 @@ public class FormularioUsuarioController extends ViewBaseContext {
     @Autowired
     public FormularioUsuarioController(UsuarioService usuarioService, TipoUsuarioService tipoUsuarioService,
                                        CatalogoService catalogoService,SecurityService securityService, FileService fileService,
-                                       PasswordEncoder passwordEncoder) {
+                                       PasswordEncoder passwordEncoder, MessageSource messageSource,LocaleResolver localeResolver) {
         this.usuarioService = usuarioService;
         this.tipoUsuarioService = tipoUsuarioService;
         this.catalogoService = catalogoService;
         this.securityService = securityService;
         this.fileService = fileService;
         this.passwordEncoder = passwordEncoder;
+        this.messageSource = messageSource;
+        this.localeResolver = localeResolver;
     }
 
     @GetMapping("/formulario/usuario")
-    public String showPage(@RequestParam(value = "hasError" ,  required = false) Boolean hasError, Model model) {
+    public String showPage(@RequestParam(value = "hasError" ,  required = false) Boolean hasError, Model model, HttpServletRequest request) {
         logger.info("------- entering -----------");
         logger.info("Entering in method showPage:{/formulario/usuario}");
+
+        applicationMessageUtil =  new ApplicationMessageUtil(messageSource,localeResolver, request );
+        systemInfoDTO = new SystemInfoDTO(applicationMessageUtil.getMessage("page.controller.form.usuario.create.title"),
+                applicationMessageUtil.getMessage("page.controller.form.usuario.create.sub.title"), LocalDate.now());
+
         logger.info("Entering validation error : "+ hasError);
 
         listaTipoUsuario = tipoUsuarioService.buscarTodosTipoUsuario();
@@ -167,7 +182,6 @@ public class FormularioUsuarioController extends ViewBaseContext {
     private void validateError(Boolean hasError, Model model ){
         if(hasError == null || !hasError){
             model.addAttribute("ErrorPageBean", new ErrorPageDto());
-//            this.createUserFormData.clear();
         }else{
             model.addAttribute("ErrorPageBean",this.errorPageBean );
         }

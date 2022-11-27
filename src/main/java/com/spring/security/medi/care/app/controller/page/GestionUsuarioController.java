@@ -3,6 +3,7 @@ package com.spring.security.medi.care.app.controller.page;
 import com.spring.security.medi.care.app.commons.DaoUtil;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
 import com.spring.security.medi.care.app.commons.domain.Usuario;
+import com.spring.security.medi.care.app.commons.service.ApplicationMessageUtil;
 import com.spring.security.medi.care.app.controller.dto.GestionUsuarioStatisticDTO;
 import com.spring.security.medi.care.app.controller.dto.SystemInfoDTO;
 import com.spring.security.medi.care.app.controller.dto.TablePaginationDto;
@@ -10,19 +11,26 @@ import com.spring.security.medi.care.app.controller.dto.UsuarioInfoDto;
 import com.spring.security.medi.care.app.usuario.service.UsuarioService;
 import com.spring.security.medi.care.app.usuario.types.PaginatedUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.time.LocalDate;
 
 @Controller
 public class GestionUsuarioController extends ViewBaseContext {
+
+    private final MessageSource messageSource;
+    private final LocaleResolver localeResolver;
+    public ApplicationMessageUtil applicationMessageUtil;
 
     private final UsuarioService usuarioService;
     private SystemInfoDTO systemInfoDTO;
@@ -37,14 +45,23 @@ public class GestionUsuarioController extends ViewBaseContext {
 
 
     @Autowired
-    public GestionUsuarioController(UsuarioService usuarioService){
+    public GestionUsuarioController(UsuarioService usuarioService, MessageSource messageSource,
+                                    LocaleResolver localeResolver){
         this.usuarioService = usuarioService;
+        this.messageSource = messageSource;
+        this.localeResolver = localeResolver;
     }
 
     @RequestMapping("/gestion/usuario")
-    public String GestionUsuarioPage(@RequestParam(value = "indexPage", required = false) Integer indexPageInput, Model model, Principal principal){
+    public String GestionUsuarioPage(@RequestParam(value = "indexPage", required = false) Integer indexPageInput,
+                                     Model model, Principal principal, HttpServletRequest request){
         logger.info("------- entering -----------");
         logger.info("Entering in method GestionUsuarioPage..");
+
+        applicationMessageUtil =  new ApplicationMessageUtil(messageSource,localeResolver, request );
+        systemInfoDTO = new SystemInfoDTO(applicationMessageUtil.getMessage("page.controller.usuario.gestion.title"),
+                applicationMessageUtil.getMessage("page.controller.usuario.gestion.sub.title"), LocalDate.now());
+
         logger.info("nombre usuario : "+principal.getName());
         usarnametest = principal.getName();
         usuarioService.buscarUsuariosSistemaporCodigoJpa(usarnametest).ifPresent( user ->{

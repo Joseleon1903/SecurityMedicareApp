@@ -7,20 +7,28 @@ import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.commons.DaoUtil;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
 import com.spring.security.medi.care.app.commons.domain.Seguro;
+import com.spring.security.medi.care.app.commons.service.ApplicationMessageUtil;
 import com.spring.security.medi.care.app.controller.dto.SolicituFromFilterDto;
 import com.spring.security.medi.care.app.controller.dto.SolicitudAfiliacionOutputDto;
 import com.spring.security.medi.care.app.controller.dto.SystemInfoDTO;
 import com.spring.security.medi.care.app.controller.dto.TablePaginationDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.LocaleResolver;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.List;
 
 @Controller
 public class DespachoSolicitudController extends ViewBaseContext {
+
+    private final MessageSource messageSource;
+    private final LocaleResolver localeResolver;
+    public ApplicationMessageUtil applicationMessageUtil;
 
     private SystemInfoDTO systemInfoDTO;
 
@@ -34,15 +42,22 @@ public class DespachoSolicitudController extends ViewBaseContext {
     private final CatalogoService catalogoService;
 
     @Autowired
-    public DespachoSolicitudController(SolicitudAfiliacionService solicitudAfiliacionService, CatalogoService catalogoService) {
+    public DespachoSolicitudController(SolicitudAfiliacionService solicitudAfiliacionService, CatalogoService catalogoService,
+                                       MessageSource messageSource,LocaleResolver localeResolver ) {
         this.solicitudAfiliacionService = solicitudAfiliacionService;
         this.catalogoService = catalogoService;
+        this.messageSource = messageSource;
+        this.localeResolver = localeResolver;
     }
 
     @GetMapping("/despacho")
-    public String showPage(@RequestParam(value = "indexPage", required = false) Integer indexPageInput, Model model) {
+    public String showPage(@RequestParam(value = "indexPage", required = false) Integer indexPageInput, Model model, HttpServletRequest request) {
         logger.info("------- entering -----------");
         logger.info("Entering in method showPage:{/despacho}");
+
+        applicationMessageUtil =  new ApplicationMessageUtil(messageSource,localeResolver, request );
+        systemInfoDTO = new SystemInfoDTO(applicationMessageUtil.getMessage("page.controller.despacho.list.title"),
+                applicationMessageUtil.getMessage("page.controller.despacho.list.sub.title"), LocalDate.now());
 
         logger.info("validando paginacion");
         if (indexPageInput != null && (this.tablePagination.getPaginationIndex() + indexPageInput) > -1) {
