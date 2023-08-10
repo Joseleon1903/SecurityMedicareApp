@@ -53,6 +53,7 @@ public class FormularioCiudadanoController extends ViewBaseContext {
         this.localeResolver = localeResolver;
     }
 
+
     @GetMapping("/formCiudadano")
     public String show( @RequestParam(value = "hasError" ,  required = false) Boolean hasError,  Model model,
                         HttpServletRequest request) {
