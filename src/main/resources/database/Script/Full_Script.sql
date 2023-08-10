@@ -1,4 +1,12 @@
 --****************************
+-- DATABASE MEDICARE_DATABASE
+--***************************
+
+CREATE DATABASE "medicare_database" WITH TEMPLATE = template0 ENCODING = 'UTF8';
+
+GRANT ALL PRIVILEGES ON DATABASE medicare_database TO postgres;
+
+--****************************
 -- TABLE MOTIVO_ESTADO
 --***************************
 CREATE TABLE MOTIVO_ESTADO
@@ -15,6 +23,26 @@ COMMENT ON COLUMN MOTIVO_ESTADO.DESCRIPCION IS 'Descripcion del motivo';
 COMMENT ON COLUMN MOTIVO_ESTADO.ESTADO  IS 'Estado del codigo de motivo. Posibles valores: AC = Activo, IN = Inactivo';
 
 ALTER TABLE MOTIVO_ESTADO ADD CONSTRAINT MOTIVO_ESTADO_ESTADO_CK CHECK (ESTADO IN ('AC', 'IN'));
+
+--****************************
+-- TABLE SERVICIO_SISTEMA
+--***************************
+CREATE TABLE SERVICIO_SISTEMA
+(
+  SERVICIO_ID        SERIAL PRIMARY KEY,
+  DESCRIPCION        VARCHAR(250) NOT NULL,
+  FECHA_CREACION     DATE NOT NULL,
+  ESTADO             VARCHAR(2)   NOT NULL
+);
+
+COMMENT ON TABLE SERVICIO_SISTEMA IS 'Catalogo de servicios de entidades asociadas al Sistema';
+
+COMMENT ON COLUMN SERVICIO_SISTEMA.SERVICIO_ID IS 'Codigo que identifica el servicio sistema';
+COMMENT ON COLUMN SERVICIO_SISTEMA.DESCRIPCION IS 'Descripcion del servicio sistema';
+COMMENT ON COLUMN SERVICIO_SISTEMA.FECHA_CREACION IS 'Fecha creacion del registro con el servicio sistema.';
+COMMENT ON COLUMN SERVICIO_SISTEMA.ESTADO IS 'Estado del servicio. Posibles valores: AC = Activo, IN = Inactivo';
+
+ALTER TABLE SERVICIO_SISTEMA ADD CONSTRAINT SERVICIO_SISTEMA_ESTADO_CK CHECK (ESTADO in ('AC', 'IN'));
 
 --****************************
 -- TABLE MUNICIPIO
@@ -116,7 +144,6 @@ CREATE TABLE TIPO_USUARIO
 (
   TIPO_USUARIO_ID  SERIAL PRIMARY KEY,
   DESCRIPCION      VARCHAR(150) NOT NULL,
-  TIPO_PERSONA     INT     NOT NULL,
   ESTADO           VARCHAR(2)   NOT NULL
 );
 
@@ -124,11 +151,9 @@ COMMENT ON TABLE TIPO_USUARIO IS 'Código único que identifica el tipo de conta
 
 COMMENT ON COLUMN TIPO_USUARIO.TIPO_USUARIO_ID IS 'Código único que identifica el tipo de usuario';
 COMMENT ON COLUMN TIPO_USUARIO.DESCRIPCION IS 'Descripción del tipo de usuario';
-COMMENT ON COLUMN TIPO_USUARIO.TIPO_PERSONA IS 'Tipo Persona a la cual pertenece el Tipo de Usuario. Posibles valores: 1-Fisica, 2-Moral';
 COMMENT ON COLUMN TIPO_USUARIO.ESTADO IS 'Estado del tipo de contacto. Posibles valores: AC = Activo, IN = Inactivo';
 
 ALTER TABLE TIPO_USUARIO ADD CONSTRAINT TIPO_USUARIO_ESTADO_CK CHECK (ESTADO in ('AC', 'IN'));
-ALTER TABLE TIPO_USUARIO ADD CONSTRAINT TIPO_USUARIO_TIPO_PERSONA_CK CHECK (TIPO_PERSONA in (1, 2));
 
 
 --****************************
@@ -142,11 +167,10 @@ CREATE TABLE ENTIDAD
   SIGLA                        	VARCHAR(10),
   DESCRIPCION                  	VARCHAR(150) NOT NULL,
   REGIMEN_ID                   	INT,
-  PARTICIPA_AFILIACION_AUT     	INT     NOT NULL,
   RNC                          	VARCHAR(9),
   ENTIDAD_SUPERVISORA_ID       	INT,
   ESTADO                       	VARCHAR(2)   NOT NULL,
-  MUNICIPIO_ID                 	INT
+  PARTICIPA_AFILIACION_AUT      BOOL  DEFAULT FALSE NOT NULL
 );
 
 
@@ -162,7 +186,6 @@ COMMENT ON COLUMN ENTIDAD.PARTICIPA_AFILIACION_AUT IS 'Indicador que determina s
 COMMENT ON COLUMN ENTIDAD.RNC IS 'RNC que identifica la entidad';
 COMMENT ON COLUMN ENTIDAD.ENTIDAD_SUPERVISORA_ID IS 'Codigo que identifica la Entidad supervisora en el sistema';
 COMMENT ON COLUMN ENTIDAD.ESTADO IS 'Estado de la Entidad. Posibles valores: AC = Activo, IN = Inactivo';
-COMMENT ON COLUMN ENTIDAD.MUNICIPIO_ID IS 'Codigo con el que se identifica el municipio en el catalogo de municipio';
 
 ALTER TABLE ENTIDAD ADD CONSTRAINT ENTIDAD_TIPO_ENTIDAD_FK FOREIGN KEY (TIPO_ENTIDAD_ID) REFERENCES TIPO_ENTIDAD(TIPO_ENTIDAD_ID);
 ALTER TABLE ENTIDAD ADD CONSTRAINT ESTADO_ENTIDAD_CK CHECK (ESTADO in ('AC', 'IN'));
@@ -180,7 +203,6 @@ CREATE TABLE CIUDADANO
   SEGUNDO_APELLIDO              VARCHAR(40),
   MUNICIPIO_ID                  INT,
   NACIONALIDAD_ID               INT,
-  EXTRANJERO                    BOOL  NOT NULL,
   FECHA_NACIMIENTO              DATE         NOT NULL,
   GENERO                        VARCHAR(1)  NOT NULL,
   ESTADO                        VARCHAR(2)  NOT NULL
@@ -196,7 +218,6 @@ COMMENT ON COLUMN CIUDADANO.PRIMER_APELLIDO  IS 'Primer Apellido del Ciudadano';
 COMMENT ON COLUMN CIUDADANO.SEGUNDO_APELLIDO  IS 'Segundo Apellido del Ciudadano';
 COMMENT ON COLUMN CIUDADANO.MUNICIPIO_ID  IS 'Codigo con el que se identifica el municipio del ciudadano';
 COMMENT ON COLUMN CIUDADANO.NACIONALIDAD_ID  IS 'Codigo que identifica la nacionalidad del ciudadano';
-COMMENT ON COLUMN CIUDADANO.EXTRANJERO IS 'Indica si el ciudadano tiene una codula que cumple con el formato establecido para ciudadanos extranjeros o no. Posibles valores 0=No, 1=Si';
 COMMENT ON COLUMN CIUDADANO.FECHA_NACIMIENTO  IS 'Fecha de nacimiento del ciudadano';
 COMMENT ON COLUMN CIUDADANO.GENERO  IS 'Gonero del Ciudadano. Posibles valores: M = Masculino, F = Femenino';
 COMMENT ON COLUMN CIUDADANO.ESTADO IS 'Estado del ciudadano. Posibles valores: AC = Activo, IN = Inactivo';
@@ -212,64 +233,44 @@ ALTER TABLE CIUDADANO ADD CONSTRAINT CIUDADANO_ESTADO_CK CHECK (ESTADO IN ('AC',
 CREATE TABLE CONTACTO
 (
   CONTACTO_ID                  SERIAL PRIMARY KEY,
-  TIPO_PERSONA                 INT     NOT NULL,
-  ENTIDAD_ID                   INT     NOT NULL,
-  CIUDADANO_ID                 INT,
   DESCRIPCION                  VARCHAR(150),
-  CORREO_CORPORATIVO           VARCHAR(128) NOT NULL,
+  CORREO_PRIMARIO              VARCHAR(128) NOT NULL,
   CORREO_ALTERNO               VARCHAR(128),
   POSICION                     VARCHAR(60),
   FECHA_CREACION               DATE          NOT NULL,
-  FECHA_ULTIMO_CAMBIO          DATE,
-  TIENE_HIJOS                  bool     DEFAULT false NOT NULL,
+  FECHA_ULTIMO_CAMBIO          timestamp,
   ESTADO                       VARCHAR(2)   NOT NULL
 );
 
 COMMENT ON TABLE CONTACTO IS 'Repositorio que almacena los contactos del sistema.';
 
 COMMENT ON COLUMN CONTACTO.CONTACTO_ID IS 'Código que identifica el contacto';
-COMMENT ON COLUMN CONTACTO.TIPO_PERSONA IS 'Código que identifica el tipo de persona asociado al contacto. Posibles valores: 1=Física, 2=Moral, 3=Notificación.';
-COMMENT ON COLUMN CONTACTO.ENTIDAD_ID IS 'Entidad a la que pertenece el contacto';
-COMMENT ON COLUMN CONTACTO.CIUDADANO_ID IS 'Código del ciudadano asociado a la cuenta';
 COMMENT ON COLUMN CONTACTO.DESCRIPCION IS 'Descripción del contacto aplicable cuando el tipo de persona sea 3-Notificación';
-COMMENT ON COLUMN CONTACTO.CORREO_CORPORATIVO IS 'correo corporativo del usuario';
+COMMENT ON COLUMN CONTACTO.CORREO_PRIMARIO IS 'correo principal del usuario';
 COMMENT ON COLUMN CONTACTO.CORREO_ALTERNO IS 'Correo alterno del contacto';
 COMMENT ON COLUMN CONTACTO.POSICION IS 'Posición del contacto';
 COMMENT ON COLUMN CONTACTO.FECHA_CREACION IS 'Fecha en la que se creó el contacto';
 COMMENT ON COLUMN CONTACTO.FECHA_ULTIMO_CAMBIO IS 'Fecha en la que se realizó el último cambio';
-COMMENT ON COLUMN CONTACTO.TIENE_HIJOS IS 'Indicador que dice si el contacto tiene hijos o no. Posibles valores 0=No, 1=Si';
 COMMENT ON COLUMN CONTACTO.ESTADO IS 'Estado en el que se encuentra el contacto. Posibles valores: AC = Activo, IN = Inactivo';
 
-ALTER TABLE CONTACTO ADD CONSTRAINT CONTACTO_TIPO_PERSONA_CK CHECK (TIPO_PERSONA IN (1, 2, 3));
-ALTER TABLE CONTACTO ADD CONSTRAINT CONTACTO_ENTIDAD_FK FOREIGN KEY (ENTIDAD_ID) REFERENCES ENTIDAD(ENTIDAD_ID);
-ALTER TABLE CONTACTO ADD CONSTRAINT CONTACTO_CIUDADANO_FK FOREIGN KEY (CIUDADANO_ID) REFERENCES CIUDADANO(CIUDADANO_ID);
-
 ALTER TABLE CONTACTO ADD CONSTRAINT CONTACTO_ESTADO_CK CHECK (ESTADO IN ('AC', 'IN'));
-
 --****************************
 -- TABLE USUARIO
 --***************************
-
-CREATE TABLE USUARIO
-(
-  USUARIO_ID                    SERIAL PRIMARY KEY,
-  CODIGO                        VARCHAR(30)  NOT NULL,
-  CONTACTO_ID                   INT     NOT NULL,
-  TIPO_USUARIO_ID               INT     NOT NULL,
-  LLAVE_ENCRIPTACION_CLAVE      VARCHAR(150),
-  FECHA_ULTIMO_CAMBIO           DATE,
-  ESTADO                        VARCHAR(2)   NOT NULL
+CREATE TABLE public.usuario (
+	usuario_id int8 NOT NULL,
+	codigo varchar(255) NULL,
+	estado varchar(255) NULL,
+	fecha_ultimo_cambio timestamp NULL,
+	llave_encriptacion varchar(255) NULL,
+	profile_picture varchar(255) NULL,
+	contacto_id int8 NULL,
+	tipo_usuario_id int8 NULL,
+	CONSTRAINT usuario_pkey PRIMARY KEY (usuario_id)
 );
 
-COMMENT ON TABLE USUARIO IS 'Catálogo de usuarios del sistema';
 
-COMMENT ON COLUMN USUARIO.USUARIO_ID IS 'Número secuencial que identifica el usuario';
-COMMENT ON COLUMN USUARIO.CODIGO IS 'Código del usuario';
-COMMENT ON COLUMN USUARIO.CONTACTO_ID IS 'Código que identifica al contacto asociado al usuario';
-COMMENT ON COLUMN USUARIO.TIPO_USUARIO_ID IS 'Código único que identifica el tipo de usuario';
-COMMENT ON COLUMN USUARIO.LLAVE_ENCRIPTACION_CLAVE IS 'Caracteres utlizado para la encriptacion de la clave del usuario';
-COMMENT ON COLUMN USUARIO.FECHA_ULTIMO_CAMBIO IS 'Fecha ultimo cambio en el registro';
-COMMENT ON COLUMN USUARIO.ESTADO IS 'Estado del usuario. Posibles valores: AC = Activo, IN = Inactivo';
+-- public.usuario foreign keys
 
 ALTER TABLE USUARIO ADD CONSTRAINT USUARIO_CONTACTO_FK FOREIGN KEY (CONTACTO_ID) REFERENCES CONTACTO(CONTACTO_ID);
 ALTER TABLE USUARIO ADD CONSTRAINT USUARIO_TIPO_USUARIO_FK FOREIGN KEY (TIPO_USUARIO_ID) REFERENCES TIPO_USUARIO(TIPO_USUARIO_ID);
@@ -278,6 +279,7 @@ ALTER TABLE USUARIO ADD CONSTRAINT USUARIO_ESTADO_CK CHECK (ESTADO IN ('AC', 'IN
 --******************************
 -- TABLE SOLICITUD_AFILIACION
 --*****************************
+
 CREATE TABLE solicitud_afiliacion (
 	solicitud_id serial4 NOT NULL,
 	servicio_id int4 NOT NULL,
@@ -287,6 +289,9 @@ CREATE TABLE solicitud_afiliacion (
 	regimen_id int4 NOT NULL,
 	tipo_afiliado varchar(1) NOT NULL,
 	tipo_identificacion_id int4 NOT NULL,
+	cedula varchar(25) NULL,
+	nss varchar(25) NULL,
+	cedula_titular varchar(25) NULL,
 	nombre varchar(50) NOT NULL,
 	primer_apellido varchar(40) NOT NULL,
 	automatica bool NOT NULL,
@@ -296,8 +301,9 @@ CREATE TABLE solicitud_afiliacion (
 	fecha_recepcion date NOT NULL,
 	municipio_id int4 NULL,
 	ciudadano_id int4 NULL,
+	nacionalidad_id int4 NULL,
+	motivo_id int4 NULL,
 	fecha_ultimo_cambio date NOT NULL,
-	servivio_id int4 NULL,
 	CONSTRAINT sol_afiliacion_tipo_afi_ck CHECK (((tipo_afiliado)::text = ANY ((ARRAY['D'::character varying, 'T'::character varying])::text[]))),
 	CONSTRAINT solicitud_afiliacion_estado_ck CHECK (((estado)::text = ANY ((ARRAY['OK'::character varying, 'PE'::character varying, 'RE'::character varying])::text[]))),
 	CONSTRAINT solicitud_afiliacion_pkey PRIMARY KEY (solicitud_id)
@@ -308,6 +314,24 @@ CREATE TABLE solicitud_afiliacion (
 
 ALTER TABLE public.solicitud_afiliacion ADD CONSTRAINT sol_afiliacion_ciudadano_fk FOREIGN KEY (ciudadano_id) REFERENCES public.ciudadano(ciudadano_id);
 ALTER TABLE public.solicitud_afiliacion ADD CONSTRAINT sol_afiliacion_entidad_fk FOREIGN KEY (entidad_id) REFERENCES public.entidad(entidad_id);
+ALTER TABLE public.solicitud_afiliacion ADD CONSTRAINT sol_afiliacion_nacionalidad_fk FOREIGN KEY (nacionalidad_id) REFERENCES public.nacionalidad(nacionalidad_id);
 ALTER TABLE public.solicitud_afiliacion ADD CONSTRAINT sol_afiliacion_instt_pen_fk FOREIGN KEY (institucion_pensionado_id) REFERENCES public.institucion_pensionado(institucion_pensionado_id);
 ALTER TABLE public.solicitud_afiliacion ADD CONSTRAINT sol_afiliacion_municipio_fk FOREIGN KEY (municipio_id) REFERENCES public.municipio(municipio_id);
 ALTER TABLE public.solicitud_afiliacion ADD CONSTRAINT solicitud_afiliacion_seguro_fk FOREIGN KEY (seguro_id) REFERENCES public.seguro(seguro_id);
+ALTER TABLE public.solicitud_afiliacion ADD CONSTRAINT solicitud_afiliacion_motivo_fk FOREIGN KEY (motivo_id) REFERENCES public.motivo_estado(motivo_id);
+ALTER TABLE public.solicitud_afiliacion ADD CONSTRAINT solicitud_afiliacion_servicio_sistema_fk FOREIGN KEY (servicio_id) REFERENCES public.servicio_sistema(servicio_id);
+
+--******************************
+-- TABLE IMAGED_STORED
+--*****************************
+CREATE TABLE imaged_stored (
+	id int8 NOT NULL GENERATED BY DEFAULT AS IDENTITY( INCREMENT BY 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1 CACHE 1 NO CYCLE),
+	creation_date timestamp NULL,
+	file_download_uri varchar(255) NULL,
+	file_type varchar(255) NULL,
+	file_view_uri varchar(255) NULL,
+	"name" varchar(255) NULL,
+	"size" int8 NOT NULL,
+	update_date timestamp NULL,
+	CONSTRAINT imaged_stored_pkey PRIMARY KEY (id)
+);

@@ -28,10 +28,6 @@ drop table if exists SEGURO;
 
 drop table if exists attachment;
 
-drop table if exists grado_consanguinidad;
-
 drop table if exists imaged_stored;
-
-drop table if exists parentesco;
 
 drop table if exists servicio_sistema;
