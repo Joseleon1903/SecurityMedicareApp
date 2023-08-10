@@ -53,7 +53,8 @@ public class FormularioCiudadanoController extends ViewBaseContext {
         this.localeResolver = localeResolver;
     }
 
-    @GetMapping("/form_ciudadano")
+
+    @GetMapping("/formCiudadano")
     public String show( @RequestParam(value = "hasError" ,  required = false) Boolean hasError,  Model model,
                         HttpServletRequest request) {
         logger.info("entering  in show formulario ciudadano");
@@ -73,7 +74,7 @@ public class FormularioCiudadanoController extends ViewBaseContext {
 
         logger.info("Return the view to use for rendering the response");
         // Return the view to use for rendering the response
-        return "/pages/ciudadano/formularioCiudadanoPage";
+        return "pages/ciudadano/formularioCiudadanoPage";
     }
 
     @PostMapping("/inscription")

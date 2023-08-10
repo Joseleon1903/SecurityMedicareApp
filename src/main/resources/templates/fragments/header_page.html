@@ -20,7 +20,7 @@
                     <li sec:authorize="hasAuthority('ADMINISTRADOR') or hasAuthority('PORTAL WEB') or hasAuthority('PORTAL Y SERVICIOS WEB')" class="dropdown"><a href="#"><span th:text="#{header.page.link.ciudadano}">Ciudadano</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                         <ul>
                             <li><a th:href="@{/ciudadano}" class="active" th:text="#{header.page.link.list}">Listado</a></li>
-                            <li><a th:href="@{/form_ciudadano}" th:text="#{header.page.link.form}">Formulario</a></li>
+                            <li><a th:href="@{/formCiudadano}" th:text="#{header.page.link.form}">Formulario</a></li>
                         </ul>
                     </li>
                     <li sec:authorize="hasAuthority('ADMINISTRADOR') or hasAuthority('PORTAL WEB') or hasAuthority('PORTAL Y SERVICIOS WEB')" class="dropdown"><a href="#"><span th:text="#{header.page.link.catalogo}">Catalogos</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>

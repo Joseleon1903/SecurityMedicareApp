@@ -81,6 +81,8 @@ public class FormularioUsuarioController extends ViewBaseContext {
         logger.info("Entering validation error : "+ hasError);
 
         listaTipoUsuario = tipoUsuarioService.buscarTodosTipoUsuario();
+        logger.info("listaTipoUsuario "+ listaTipoUsuario);
+
 
         validateError(hasError, model);
 
