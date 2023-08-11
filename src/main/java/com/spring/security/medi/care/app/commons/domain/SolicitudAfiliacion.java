@@ -14,16 +14,16 @@ public class SolicitudAfiliacion implements Serializable {
     @GeneratedValue
     private Long solicitudId;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "servicio_id", referencedColumnName = "servicioId")
     private ServicioSistema servicioId;
     private Integer loteId;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "entidad_id", referencedColumnName = "entidadId")
     private Entidad entidadId;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "seguro_id", referencedColumnName = "seguroId")
     private Seguro seguroId;
     private Integer regimenId;

@@ -133,12 +133,6 @@ public class SolicitudAfiliacionServiceImpl implements SolicitudAfiliacionServic
         logger.info("param solicitudId : "+solicitudId);
         SolicitudAfiliacion sol = solicitudAfiliacionJpaRepo.findById(solicitudId).get();
 
-        //validando estado solicitud
-        if(Objects.equals(sol.getEstado(), AplicationConstantUtil.ESTADO_PE)){
-            logger.info("solicitud no en estado permitido para ser proceada");
-            return;
-        }
-
         // TODO validacion ciudadano por NSS y cedula validar que exista un ciudadano
         // con Nss y cedula de la solicitud y asigna el ciudadano
         logger.info(">> Iniciando validaciones ");
