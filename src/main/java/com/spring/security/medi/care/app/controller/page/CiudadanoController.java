@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.LocaleResolver;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -45,9 +46,14 @@ public class CiudadanoController extends ViewBaseContext {
     }
 
     @GetMapping("/ciudadano")
-    public String showPage(@RequestParam(value = "indexPage", required = false) Integer indexPageInput, Model model, HttpServletRequest request) {
+    public String showPage(@RequestParam(value = "indexPage", required = false) Integer indexPageInput, Model model, HttpServletRequest request, Principal principal) {
         logger.info("------- entering -----------");
         logger.info("Entering in method showPage..");
+        request.getSession().getAttributeNames().asIterator().forEachRemaining( att ->{
+            logger.info("getAttributeName :"+att);
+            logger.info("getAttributeValue :"+request.getSession().getAttribute(att));
+
+        });
         applicationMessageUtil =  new ApplicationMessageUtil(messageSource,localeResolver, request );
         systemInfoDTO = new SystemInfoDTO(applicationMessageUtil.getMessage("page.controller.ciudadano.list.title"),
                 applicationMessageUtil.getMessage("page.controller.ciudadano.list.sub.title"), LocalDate.now());
