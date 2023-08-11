@@ -7,6 +7,8 @@ public class ApplicationUtil {
 
     private ApplicationUtil(){}
 
+    public static String DEFAULT_PROFILE_IMAGE= "https://jedeleon-demo-s3.s3.us-east-2.amazonaws.com/public/medicareApp/unknown-user-Image.png";
+
     /**
      *  return true if String is null or is empty
      * 

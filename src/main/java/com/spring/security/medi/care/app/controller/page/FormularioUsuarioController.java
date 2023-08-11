@@ -2,6 +2,7 @@ package com.spring.security.medi.care.app.controller.page;
 
 import com.spring.security.medi.care.app.catalogo.service.CatalogoService;
 import com.spring.security.medi.care.app.commons.AplicationConstantUtil;
+import com.spring.security.medi.care.app.commons.ApplicationUtil;
 import com.spring.security.medi.care.app.commons.ViewBaseContext;
 import com.spring.security.medi.care.app.commons.domain.*;
 import com.spring.security.medi.care.app.commons.exception.InternalServerException;
@@ -53,7 +54,7 @@ public class FormularioUsuarioController extends ViewBaseContext {
 
     private List<TipoUsuario> listaTipoUsuario;
 
-    private String defaultProfilePicture = "../assets/img/app/unknown-user-Image.png";
+    private String defaultProfilePicture = ApplicationUtil.DEFAULT_PROFILE_IMAGE;
 
     @Autowired
     public FormularioUsuarioController(UsuarioService usuarioService, TipoUsuarioService tipoUsuarioService,
@@ -153,7 +154,7 @@ public class FormularioUsuarioController extends ViewBaseContext {
             this.createUserFormData = createUserFormDataInput;
             return "redirect:/formulario/usuario?hasError=true";
         }
-        this.defaultProfilePicture = "../assets/img/app/unknown-user-Image.png";
+        this.defaultProfilePicture = ApplicationUtil.DEFAULT_PROFILE_IMAGE;
         return "redirect:/gestion/usuario";
     }
 

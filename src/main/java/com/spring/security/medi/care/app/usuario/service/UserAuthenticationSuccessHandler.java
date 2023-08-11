@@ -38,6 +38,8 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
         Optional<Usuario> user = usuarioService.buscarUsuariosSistemaporCodigoJpa(authentication.getName());
         user.get().setFechaUltimoCambio(LocalDateTime.now());
         usuarioService.saveOrUpdateUser(user.get());
+        logger.info("add profile image to the session..");
+        request.getSession().setAttribute("profileUrl",user.get().getProfilePicture());
         response.sendRedirect(request.getContextPath());
     }
 }
